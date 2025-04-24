@@ -1,0 +1,75 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update
+
+# Media files will be stored in the repo under images/uploads
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "portfolio" # Used in routes, e.g., /admin/collections/portfolio
+    label: "Portfolio Images" # Used in the UI
+    folder: "_portfolio" # The folder where images are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Caption", name: "caption", widget: "string", required: false}
+      - {label: "Type", name: "type", widget: "select", options: ["horizontal", "vertical", "square"], default: "horizontal"}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Order", name: "order", widget: "number", default: 999, required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+
+  - name: "transmission" # Used in routes, e.g., /admin/collections/transmission
+    label: "Transmission Magazine" # Used in the UI
+    folder: "_transmission" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "issue-{{slug}}" # Filename template, e.g., issue-01-transition.md
+    fields: # The fields for each document
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Issue Number", name: "issue", widget: "string"}
+      - {label: "Cover Image", name: "cover", widget: "image"}
+      - {label: "Issuu Embed URL", name: "issuuEmbed", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Order", name: "order", widget: "number", default: 999, required: false}
+
+  - name: "video" # Used in routes, e.g., /admin/collections/video
+    label: "Videos" # Used in the UI
+    folder: "_video" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., the-overland-devil-in-me.md
+    fields: # The fields for each document
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Vimeo ID", name: "vimeoId", widget: "string"}
+      - {label: "Thumbnail", name: "thumbnail", widget: "image", required: false}
+      - {label: "Description", name: "description", widget: "markdown", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Order", name: "order", widget: "number", default: 999, required: false}
+  
+  - name: "landscapes" # Used in routes, e.g., /admin/collections/landscapes
+    label: "Landscape Galleries" # Used in the UI
+    folder: "_landscapes" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template
+    fields: # The fields for each document
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Cover Image", name: "cover", widget: "image"}
+      - {label: "Images", name: "images", widget: "list", field: {label: Image, name: image, widget: image}}
+      - {label: "Description", name: "description", widget: "markdown", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Order", name: "order", widget: "number", default: 999, required: false}
+
+  - name: "pages" # Used in routes, e.g., /admin/collections/pages
+    label: "Pages" # Used in the UI
+    files:
+      - label: "Info Page"
+        name: "info"
+        file: "_data/info.json"
+        fields:
+          - {label: "Title", name: "title", widget: "string", default: "Info"}
+          - {label: "Bio", name: "bio", widget: "markdown"}
+          - {label: "Contact Email", name: "email", widget: "string", required: false}
+          - {label: "Instagram", name: "instagram", widget: "string", required: false}
+          - {label: "Twitter", name: "twitter", widget: "string", required: false}
