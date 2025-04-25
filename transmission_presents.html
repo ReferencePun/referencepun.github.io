@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transmission Magazine - Dylan Forsberg</title>
+    <title>Transmission Presents - Dylan Forsberg</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap">
     <style>
@@ -48,8 +48,13 @@
             height: auto;
             display: block;
         }
+        
+        .centered-magazine {
+            margin: 0 auto;
+            max-width: 350px;
+        }
 
-        /* Section divider and title styles */
+        /* Dividers and sections */
         .section-divider {
             width: 100%;
             height: 1px;
@@ -64,28 +69,11 @@
             margin-bottom: 20px;
         }
 
-        .view-more {
+        .page-title {
             text-align: center;
-            font-size: 1.3rem;
-            display: block;
-            margin: 20px 0 60px;
-        }
-
-        /* Press quotes styles */
-        .press-section {
-            max-width: 800px;
-            margin: 40px auto;
-            text-align: center;
-        }
-
-        .press-quote {
-            font-style: italic;
-            margin: 20px 0 5px;
-            font-size: 1.2rem;
-        }
-
-        .quote-source {
-            margin-bottom: 30px;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin: 40px 0;
         }
 
         /* Magazine modal */
@@ -209,7 +197,7 @@
             <nav>
                 <ul class="nav-menu">
                     <li><a href="index.html">Portfolio</a></li>
-                    <li><a href="transmission.html" class="active">Transmission Magazine</a></li>
+                    <li><a href="transmission.html">Transmission Magazine</a></li>
                     <li><a href="video.html">Video</a></li>
                     <li><a href="landscapes.html">Landscapes</a></li>
                     <li><a href="writing.html">Writing</a></li>
@@ -229,59 +217,49 @@
     </header>
 
     <main>
-        <!-- Magazines Display -->
+        <h1 class="page-title">Transmission Presents</h1>
+        
+        <!-- Top row with 4 magazines -->
         <div class="magazines-row">
-            <!-- Issue 01 -->
+            <!-- Magazine 1 -->
             <div class="magazine-column">
-                <h2 class="magazine-title">Issue 01: Transition</h2>
-                <div class="magazine-cover" onclick="openMagazine('https://online.fliphtml5.com/odkjz/sztl/')">
-                    <img src="images/transmission/issue01-cover.jpg" alt="Transmission Issue 01: Transition">
+                <h2 class="magazine-title">Showcase: Volume 1</h2>
+                <div class="magazine-cover" onclick="openMagazine('https://online.fliphtml5.com/odkjz/eihk/')">
+                    <img src="images/transmission/showcase-vol1.jpg" alt="Transmission Showcase: Volume 1">
                 </div>
             </div>
 
-            <!-- Issue 02 -->
+            <!-- Magazine 2 -->
             <div class="magazine-column">
-                <h2 class="magazine-title">Issue 02: Transparency</h2>
-                <div class="magazine-cover" onclick="openMagazine('https://online.fliphtml5.com/odkjz/drjt/')">
-                    <img src="images/transmission/issue02-cover.jpg" alt="Transmission Issue 02: Transparency">
+                <h2 class="magazine-title">Showcase: Volume 2</h2>
+                <div class="magazine-cover" onclick="openMagazine('https://online.fliphtml5.com/odkjz/inek/')">
+                    <img src="images/transmission/showcase-vol2.jpg" alt="Transmission Showcase: Volume 2">
                 </div>
             </div>
 
-            <!-- Issue 03 -->
+            <!-- Magazine 3 -->
             <div class="magazine-column">
-                <h2 class="magazine-title">Issue 03: Transform</h2>
-                <div class="magazine-cover" onclick="openMagazine('https://online.fliphtml5.com/odkjz/ageg/')">
-                    <img src="images/transmission/issue03-cover.jpg" alt="Transmission Issue 03: Transform">
+                <h2 class="magazine-title">Presents: Edition 1</h2>
+                <div class="magazine-cover" onclick="openMagazine('https://online.fliphtml5.com/odkjz/gciq/')">
+                    <img src="images/transmission/presents-ed1.jpg" alt="Transmission Presents: Edition 1">
                 </div>
             </div>
 
-            <!-- Issue 03-04 -->
+            <!-- Magazine 4 -->
             <div class="magazine-column">
-                <h2 class="magazine-title">Issue 03-04: Intermission</h2>
-                <div class="magazine-cover" onclick="openMagazine('https://online.fliphtml5.com/odkjz/bchq/')">
-                    <img src="images/transmission/issue0304-cover.jpg" alt="Transmission Issue 03-04: Intermission">
+                <h2 class="magazine-title">Presents: Edition 2</h2>
+                <div class="magazine-cover" onclick="openMagazine('https://online.fliphtml5.com/odkjz/wtcx/')">
+                    <img src="images/transmission/presents-ed2.jpg" alt="Transmission Presents: Edition 2">
                 </div>
             </div>
         </div>
-
-        <!-- Transmission Presents Section -->
-        <div class="section-divider"></div>
-        <h2 class="section-title">Transmission Presents</h2>
-        <a href="transmission-presents.html" class="view-more">(View More Issues)</a>
-
-        <!-- Press Section -->
-        <div class="section-divider"></div>
-        <h2 class="section-title">Press:</h2>
         
-        <div class="press-section">
-            <p class="press-quote">"Eclectic and intelligent."</p>
-            <p class="press-quote">"One of the most exciting publications of the moment."</p>
-            <p class="quote-source">-Models.com</p>
-            
-            <p class="press-quote">"A cornucopia of color."</p>
-            <p class="quote-source">-i-D</p>
-            
-            <p class="press-quote">"The enduring appeal of the "real" in life as in art."</p>
+        <!-- Bottom magazine centered -->
+        <div class="centered-magazine">
+            <h2 class="magazine-title">Presents: Edition 3</h2>
+            <div class="magazine-cover" onclick="openMagazine('https://online.fliphtml5.com/odkjz/jvpp/')">
+                <img src="images/transmission/presents-ed3.jpg" alt="Transmission Presents: Edition 3">
+            </div>
         </div>
 
         <!-- Magazine Modal with navigation controls -->
@@ -290,6 +268,17 @@
                 <button class="close-button" onclick="closeModal()">&times;</button>
                 <div class="embed-container" id="embed-container">
                     <!-- Embed will be loaded here -->
+                    
+                    <!-- Navigation overlay -->
+                    <div class="navigation-overlay" id="nav-overlay">
+                        <div class="nav-buttons">
+                            <button class="nav-btn" onclick="prevPage()">&larr;</button>
+                            <button class="nav-btn" onclick="nextPage()">&rarr;</button>
+                        </div>
+                        <div class="nav-instructions">
+                            Use arrows to navigate pages or press ← → keys
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -311,7 +300,7 @@
             const modal = document.getElementById('magazine-modal');
             const embedContainer = document.getElementById('embed-container');
             
-            // Create the iframe with navigation overlay
+            // Create the iframe
             embedContainer.innerHTML = `
                 <iframe 
                     src="${embedUrl}" 
