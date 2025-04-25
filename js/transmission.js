@@ -78,13 +78,14 @@ function openMagazineLightbox(embedSrc) {
     // Create iframe for the embed
     embedContainer.innerHTML = `
         <iframe 
-            src="${embedSrc}" 
-            style="width:100%; height:100%;" 
+            src="${embedUrl}" 
             seamless="seamless" 
             scrolling="no" 
             frameborder="0" 
             allowtransparency="true" 
-            allowfullscreen="true">
+            allowfullscreen="true"
+            webkitallowfullscreen="true"
+            mozallowfullscreen="true">
         </iframe>
     `;
     
