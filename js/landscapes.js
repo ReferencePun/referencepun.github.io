@@ -7,22 +7,22 @@
 const landscapeCategories = {
     'old': [
         {
-            src: 'images/landscapes/old/image1.jpg',
+            src: 'images/landscapes/old/033_3Al',
             alt: 'Old Landscape 1',
             caption: 'Old Landscape'
         },
         {
-            src: 'images/landscapes/old/image2.jpg',
+            src: 'images/landscapes/old/00830016albw.jpg',
             alt: 'Old Landscape 2',
             caption: 'Old Landscape'
         },
         {
-            src: 'images/landscapes/old/image3.jpg',
+            src: 'images/landscapes/old/R002-002al2fix.jpg',
             alt: 'Old Landscape 3',
             caption: 'Old Landscape'
         },
         {
-            src: 'images/landscapes/old/image4.jpg',
+            src: 'images/landscapes/old/20090006.jpeg',
             alt: 'Old Landscape 4',
             caption: 'Old Landscape'
         }
