@@ -6,6 +6,141 @@
     <title>Transmission Magazine - Dylan Forsberg</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap">
+    <style>
+        /* Inline styles to ensure layout works correctly */
+        .magazines-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem auto;
+            max-width: 1400px;
+        }
+        
+        .magazine {
+            flex: 0 0 auto;
+            width: calc(25% - 2rem);
+            min-width: 250px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .magazine-title {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .magazine-cover {
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .magazine-cover:hover {
+            transform: translateY(-5px);
+        }
+        
+        .magazine-cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 400;
+            margin: 4rem 0 2rem;
+        }
+        
+        .view-more-link {
+            display: block;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 1rem 0 4rem;
+        }
+        
+        .press-section {
+            max-width: 800px;
+            margin: 4rem auto;
+            text-align: center;
+        }
+        
+        .press-quote {
+            font-style: italic;
+            margin: 1.5rem 0 0.5rem;
+        }
+        
+        .quote-source {
+            margin-bottom: 2rem;
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: #eee;
+            margin: 4rem auto;
+            width: 80%;
+        }
+        
+        /* Lightbox styles */
+        .magazine-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+        }
+        
+        .magazine-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            background-color: #fff;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .magazine {
+                width: calc(33.333% - 2rem);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .magazine {
+                width: calc(50% - 2rem);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .magazine {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -42,86 +177,68 @@
     </header>
 
     <main>
-        <!-- Magazine Grid - Main Issues -->
-        <div class="magazine-grid">
-            <!-- Magazine Issue 01 -->
-            <div class="magazine-issue">
-                <h3>Issue 01: Transition</h3>
-                <div class="magazine-cover">
+        <!-- Main magazine display section -->
+        <div class="magazines-container">
+            <!-- Issue 01 -->
+            <div class="magazine">
+                <h2 class="magazine-title">Issue 01: Transition</h2>
+                <a href="#" class="magazine-cover" data-embed="https://online.fliphtml5.com/odkjz/sztl/">
                     <img src="images/transmission/issue01-cover.jpg" alt="Transmission Issue 01: Transition">
-                    <div class="view-button">Click to view</div>
-                </div>
-                <div class="magazine-embed" style="display: none;">
-                    <iframe style="width:100%;height:500px" src="https://online.fliphtml5.com/odkjz/sztl/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
-                </div>
+                </a>
             </div>
             
-            <!-- Magazine Issue 02 -->
-            <div class="magazine-issue">
-                <h3>Issue 02: Transparency</h3>
-                <div class="magazine-cover">
+            <!-- Issue 02 -->
+            <div class="magazine">
+                <h2 class="magazine-title">Issue 02: Transparency</h2>
+                <a href="#" class="magazine-cover" data-embed="https://online.fliphtml5.com/odkjz/drjt/">
                     <img src="images/transmission/issue02-cover.jpg" alt="Transmission Issue 02: Transparency">
-                    <div class="view-button">Click to view</div>
-                </div>
-                <div class="magazine-embed" style="display: none;">
-                    <iframe style="width:100%;height:500px" src="https://online.fliphtml5.com/odkjz/drjt/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
-                </div>
+                </a>
             </div>
             
-            <!-- Magazine Issue 03 -->
-            <div class="magazine-issue">
-                <h3>Issue 03: Transform</h3>
-                <div class="magazine-cover">
+            <!-- Issue 03 -->
+            <div class="magazine">
+                <h2 class="magazine-title">Issue 03: Transform</h2>
+                <a href="#" class="magazine-cover" data-embed="https://online.fliphtml5.com/odkjz/ageg/">
                     <img src="images/transmission/issue03-cover.jpg" alt="Transmission Issue 03: Transform">
-                    <div class="view-button">Click to view</div>
-                </div>
-                <div class="magazine-embed" style="display: none;">
-                    <iframe style="width:100%;height:500px" src="https://online.fliphtml5.com/odkjz/ageg/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
-                </div>
+                </a>
             </div>
             
-            <!-- Magazine Issue 03-04 -->
-            <div class="magazine-issue">
-                <h3>Issue 03-04: Intermission</h3>
-                <div class="magazine-cover">
+            <!-- Issue 03-04 -->
+            <div class="magazine">
+                <h2 class="magazine-title">Issue 03-04: Intermission</h2>
+                <a href="#" class="magazine-cover" data-embed="https://online.fliphtml5.com/odkjz/bchq/">
                     <img src="images/transmission/issue0304-cover.jpg" alt="Transmission Issue 03-04: Intermission">
-                    <div class="view-button">Click to view</div>
-                </div>
-                <div class="magazine-embed" style="display: none;">
-                    <iframe style="width:100%;height:500px" src="https://online.fliphtml5.com/odkjz/bchq/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
-                </div>
+                </a>
             </div>
         </div>
         
-        <!-- Transmission Presents Section -->
-        <div class="section-divider"></div>
+        <div class="divider"></div>
+        
+        <!-- Transmission Presents section -->
         <h2 class="section-title">Transmission Presents</h2>
-        <div class="centered-link">
-            <a href="#" class="view-more">(View More Issues)</a>
-        </div>
+        <a href="#" class="view-more-link">(View More Issues)</a>
         
-        <!-- Press Section -->
-        <div class="section-divider"></div>
-        <h2 class="section-title">Press:</h2>
+        <div class="divider"></div>
         
-        <div class="press-quotes">
-            <blockquote>"Eclectic and intelligent."</blockquote>
-            <blockquote>"One of the most exciting publications of the moment."</blockquote>
+        <!-- Press section -->
+        <div class="press-section">
+            <h2 class="section-title">Press:</h2>
+            
+            <p class="press-quote">"Eclectic and intelligent."</p>
+            <p class="press-quote">"One of the most exciting publications of the moment."</p>
             <p class="quote-source">-Models.com</p>
             
-            <blockquote>"A cornucopia of color."</blockquote>
+            <p class="press-quote">"A cornucopia of color."</p>
             <p class="quote-source">-i-D</p>
             
-            <blockquote>"The enduring appeal of the "real" in life as in art."</blockquote>
+            <p class="press-quote">"The enduring appeal of the "real" in life as in art."</p>
         </div>
         
-        <!-- Magazine Lightbox for FlipHTML5 Embed -->
-        <div class="magazine-lightbox" id="magazine-lightbox">
-            <div class="lightbox-content">
-                <button class="close-lightbox">&times;</button>
-                <div class="magazine-embed-container" id="magazine-embed-container">
-                    <!-- Embed will be loaded here via JavaScript -->
-                </div>
+        <!-- Magazine modal for viewing -->
+        <div class="magazine-modal" id="magazine-modal">
+            <div class="modal-content">
+                <button class="close-modal">&times;</button>
+                <div id="magazine-embed"></div>
             </div>
         </div>
     </main>
@@ -130,7 +247,80 @@
         <p>&copy; <span id="current-year"></span> Dylan Forsberg. All rights reserved.</p>
     </footer>
 
-    <script src="js/main.js"></script>
-    <script src="js/transmission.js"></script>
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const nav = document.querySelector('nav');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                nav.classList.toggle('active');
+                this.classList.toggle('active');
+            });
+        }
+        
+        // Magazine modal functionality
+        const magazineCovers = document.querySelectorAll('.magazine-cover');
+        const modal = document.getElementById('magazine-modal');
+        const magazineEmbed = document.getElementById('magazine-embed');
+        const closeModal = document.querySelector('.close-modal');
+        
+        // Open modal when clicking on a magazine cover
+        magazineCovers.forEach(cover => {
+            cover.addEventListener('click', function(e) {
+                e.preventDefault();
+                const embedUrl = this.getAttribute('data-embed');
+                
+                // Create iframe for embedding
+                magazineEmbed.innerHTML = `
+                    <iframe 
+                        style="width:100%;height:100%;" 
+                        src="${embedUrl}" 
+                        seamless="seamless" 
+                        scrolling="no" 
+                        frameborder="0" 
+                        allowtransparency="true" 
+                        allowfullscreen="true">
+                    </iframe>
+                `;
+                
+                // Show modal
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close modal
+        if (closeModal) {
+            closeModal.addEventListener('click', function() {
+                modal.classList.remove('active');
+                magazineEmbed.innerHTML = '';
+                document.body.style.overflow = '';
+            });
+        }
+        
+        // Close modal when clicking outside content
+        if (modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    magazineEmbed.innerHTML = '';
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+        
+        // Close modal with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                magazineEmbed.innerHTML = '';
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
 </body>
 </html>
