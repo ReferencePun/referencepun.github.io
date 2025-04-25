@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan Forsberg - Photographer</title>
+    <title>Video - Dylan Forsberg</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap">
 </head>
@@ -21,9 +21,9 @@
             
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="active">Portfolio</a></li>
+                    <li><a href="index.html">Portfolio</a></li>
                     <li><a href="transmission.html">Transmission Magazine</a></li>
-                    <li><a href="video.html">Video</a></li>
+                    <li><a href="video.html" class="active">Video</a></li>
                     <li><a href="landscapes.html">Landscapes</a></li>
                     <li><a href="writing.html">Writing</a></li>
                     <li><a href="info.html">Info</a></li>
@@ -42,18 +42,53 @@
     </header>
 
     <main>
-        <div class="portfolio-grid" id="portfolio-grid">
-            <!-- Portfolio images will be loaded dynamically by JavaScript -->
+        <h1 class="page-title">Video</h1>
+        
+        <!-- Video Container 1 -->
+        <div class="video-container">
+            <h2>The Overland - Devil in Me</h2>
+            <div class="video-wrapper">
+                <!-- Replace 12345678 with your actual Vimeo video ID -->
+                <iframe src="https://player.vimeo.com/video/12345678" 
+                        width="640" height="360" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen></iframe>
+            </div>
+            <div class="video-description">
+                <p>A journey through the landscapes of Western America.</p>
+            </div>
         </div>
         
-        <!-- Lightbox for viewing images -->
-        <div class="lightbox" id="lightbox">
-            <div class="lightbox-content">
-                <button class="close-lightbox">&times;</button>
-                <img src="" alt="" id="lightbox-img">
-                <div class="lightbox-caption" id="lightbox-caption"></div>
-                <button class="lightbox-prev">&#10094;</button>
-                <button class="lightbox-next">&#10095;</button>
+        <!-- Video Container 2 -->
+        <div class="video-container">
+            <h2>Echoes of Light</h2>
+            <div class="video-wrapper">
+                <!-- Replace 87654321 with your actual Vimeo video ID -->
+                <iframe src="https://player.vimeo.com/video/87654321" 
+                        width="640" height="360" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen></iframe>
+            </div>
+            <div class="video-description">
+                <p>A visual exploration of light and shadow in urban environments.</p>
+            </div>
+        </div>
+        
+        <!-- Video Container 3 -->
+        <div class="video-container">
+            <h2>Seasons Change</h2>
+            <div class="video-wrapper">
+                <!-- Replace 56781234 with your actual Vimeo video ID -->
+                <iframe src="https://player.vimeo.com/video/56781234" 
+                        width="640" height="360" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen></iframe>
+            </div>
+            <div class="video-description">
+                <p>A time-lapse journey through the four seasons in rural landscapes.</p>
             </div>
         </div>
     </main>
@@ -63,6 +98,5 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/portfolio.js"></script>
 </body>
 </html>

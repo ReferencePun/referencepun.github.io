@@ -45,14 +45,50 @@
         <h1 class="page-title">Transmission</h1>
         
         <div class="magazine-grid" id="magazine-grid">
-            <!-- Magazines will be loaded dynamically -->
+            <!-- Magazine Issue 01 -->
+            <div class="magazine-issue">
+                <div class="magazine-cover">
+                    <img src="images/transmission/issue01-cover.jpg" alt="Transmission Issue 01: Transition">
+                    <div class="view-button">Click to view</div>
+                </div>
+                <h3>Issue 01: Transition</h3>
+            </div>
+            
+            <!-- Magazine Issue 02 -->
+            <div class="magazine-issue">
+                <div class="magazine-cover">
+                    <img src="images/transmission/issue02-cover.jpg" alt="Transmission Issue 02: Transparency">
+                    <div class="view-button">Click to view</div>
+                </div>
+                <h3>Issue 02: Transparency</h3>
+            </div>
+            
+            <!-- Magazine Issue 03 -->
+            <div class="magazine-issue">
+                <div class="magazine-cover">
+                    <img src="images/transmission/issue03-cover.jpg" alt="Transmission Issue 03: Transform">
+                    <div class="view-button">Click to view</div>
+                </div>
+                <h3>Issue 03: Transform</h3>
+            </div>
+            
+            <!-- Magazine Issue 03-04 -->
+            <div class="magazine-issue">
+                <div class="magazine-cover">
+                    <img src="images/transmission/issue0304-cover.jpg" alt="Transmission Issue 03-04: Intermission">
+                    <div class="view-button">Click to view</div>
+                </div>
+                <h3>Issue 03-04: Intermission</h3>
+            </div>
         </div>
         
-        <!-- Magazine viewer modal -->
+        <!-- Magazine Modal for Issuu Embed -->
         <div class="magazine-modal" id="magazine-modal">
             <div class="magazine-modal-content">
                 <button class="close-modal">&times;</button>
-                <iframe src="" id="magazine-iframe" allowfullscreen></iframe>
+                <div class="issuu-embed" id="issuu-embed">
+                    <!-- This is where the Issuu embed will be inserted via JavaScript -->
+                </div>
             </div>
         </div>
     </main>

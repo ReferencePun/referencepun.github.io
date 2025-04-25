@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dylan Forsberg - Photographer</title>
+    <title>Landscapes - Dylan Forsberg</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap">
 </head>
@@ -21,10 +21,10 @@
             
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="index.html" class="active">Portfolio</a></li>
+                    <li><a href="index.html">Portfolio</a></li>
                     <li><a href="transmission.html">Transmission Magazine</a></li>
                     <li><a href="video.html">Video</a></li>
-                    <li><a href="landscapes.html">Landscapes</a></li>
+                    <li><a href="landscapes.html" class="active">Landscapes</a></li>
                     <li><a href="writing.html">Writing</a></li>
                     <li><a href="info.html">Info</a></li>
                 </ul>
@@ -42,8 +42,53 @@
     </header>
 
     <main>
-        <div class="portfolio-grid" id="portfolio-grid">
-            <!-- Portfolio images will be loaded dynamically by JavaScript -->
+        <h1 class="page-title">Landscapes</h1>
+        
+        <div class="landscape-categories">
+            <!-- Category 1 -->
+            <div class="landscape-category">
+                <a href="#" class="category-link" data-category="mountains">
+                    <div class="category-thumbnail">
+                        <img src="images/landscapes/mountains/thumbnail.jpg" alt="Mountains">
+                        <h3>Mountains</h3>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Category 2 -->
+            <div class="landscape-category">
+                <a href="#" class="category-link" data-category="water">
+                    <div class="category-thumbnail">
+                        <img src="images/landscapes/water/thumbnail.jpg" alt="Water">
+                        <h3>Water</h3>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Category 3 -->
+            <div class="landscape-category">
+                <a href="#" class="category-link" data-category="forest">
+                    <div class="category-thumbnail">
+                        <img src="images/landscapes/forest/thumbnail.jpg" alt="Forest">
+                        <h3>Forest</h3>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Category 4 -->
+            <div class="landscape-category">
+                <a href="#" class="category-link" data-category="desert">
+                    <div class="category-thumbnail">
+                        <img src="images/landscapes/desert/thumbnail.jpg" alt="Desert">
+                        <h3>Desert</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Landscape Gallery -->
+        <div class="landscape-gallery" id="landscape-gallery">
+            <!-- Images will be loaded here via JavaScript based on selected category -->
         </div>
         
         <!-- Lightbox for viewing images -->
@@ -63,6 +108,6 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/portfolio.js"></script>
+    <script src="js/landscapes.js"></script>
 </body>
 </html>
