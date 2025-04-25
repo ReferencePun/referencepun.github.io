@@ -1,78 +1,93 @@
-/**
+import os
+import json
+
+def create_landscapes_js():
+    # Base directory for landscapes
+    base_dir = 'images/landscapes'
+    
+    # Categories to include
+    categories = ['old', 'flowers', 'new']
+    
+    # Dictionary to hold all image data
+    landscape_categories = {}
+    
+    # Loop through each category
+    for category in categories:
+        category_path = os.path.join(base_dir, category)
+        
+        # Skip if directory doesn't exist
+        if not os.path.exists(category_path):
+            print(f"Warning: Directory {category_path} not found. Creating empty category.")
+            landscape_categories[category] = []
+            continue
+        
+        # List all image files in the directory
+        image_files = [f for f in os.listdir(category_path) 
+                      if f.lower().endswith(('.jpg', '.jpeg', '.png', '.gif')) 
+                      and not f.startswith('.')]
+        
+        # Sort files to ensure consistent order
+        image_files.sort()
+        
+        # Create image data for each file
+        category_images = []
+        for i, filename in enumerate(image_files):
+            # Skip thumbnail.jpg for use as category thumbnail
+            if filename == 'thumbnail.jpg':
+                continue
+                
+            image_data = {
+                'src': f'images/landscapes/{category}/{filename}',
+                'alt': f'{category.capitalize()} Landscape {i+1}',
+                'caption': f'{category.capitalize()} Landscape'
+            }
+            category_images.append(image_data)
+        
+        # Add images to category
+        landscape_categories[category] = category_images
+    
+    # Create JavaScript code
+    js_code = """/**
  * Landscapes page JavaScript
  * Handles category selection and gallery display
+ * Auto-generated from actual image files
  */
 
-// Landscape image categories and data - updated to match new directories
+// Landscape image categories and data
 const landscapeCategories = {
-    'old': [
-        {
-            src: 'images/landscapes/old/image1.jpg',
-            alt: 'Old Landscape 1',
-            caption: 'Old Landscape'
-        },
-        {
-            src: 'images/landscapes/old/image2.jpg',
-            alt: 'Old Landscape 2',
-            caption: 'Old Landscape'
-        },
-        {
-            src: 'images/landscapes/old/image3.jpg',
-            alt: 'Old Landscape 3',
-            caption: 'Old Landscape'
-        },
-        {
-            src: 'images/landscapes/old/image4.jpg',
-            alt: 'Old Landscape 4',
-            caption: 'Old Landscape'
-        }
-    ],
-    'flowers': [
-        {
-            src: 'images/landscapes/flowers/image1.jpg',
-            alt: 'Flowers 1',
-            caption: 'Flower Study'
-        },
-        {
-            src: 'images/landscapes/flowers/image2.jpg',
-            alt: 'Flowers 2',
-            caption: 'Flower Study'
-        },
-        {
-            src: 'images/landscapes/flowers/image3.jpg',
-            alt: 'Flowers 3',
-            caption: 'Flower Study'
-        },
-        {
-            src: 'images/landscapes/flowers/image4.jpg',
-            alt: 'Flowers 4',
-            caption: 'Flower Study'
-        }
-    ],
-    'new': [
-        {
-            src: 'images/landscapes/new/image1.jpg',
-            alt: 'New Landscape 1',
-            caption: 'New Landscape'
-        },
-        {
-            src: 'images/landscapes/new/image2.jpg',
-            alt: 'New Landscape 2',
-            caption: 'New Landscape'
-        },
-        {
-            src: 'images/landscapes/new/image3.jpg',
-            alt: 'New Landscape 3',
-            caption: 'New Landscape'
-        },
-        {
-            src: 'images/landscapes/new/image4.jpg',
-            alt: 'New Landscape 4',
-            caption: 'New Landscape'
-        }
-    ]
-};
-
+"""
+    
+    # Add each category of images
+    for i, (category, images) in enumerate(landscape_categories.items()):
+        js_code += f"    '{category}': [\n"
+        
+        # Add each image in the category
+        for j, image in enumerate(images):
+            js_code += f"        {{\n"
+            js_code += f"            src: '{image['src']}',\n"
+            js_code += f"            alt: '{image['alt']}',\n"
+            js_code += f"            caption: '{image['caption']}'\n"
+            js_code += f"        }}"
+            
+            # Add comma if not the last image
+            if j < len(images) - 1:
+                js_code += ","
+                
+            js_code += "\n"
+        
+        js_code += "    ]"
+        
+        # Add comma if not the last category
+        if i < len(landscape_categories) - 1:
+            js_code += ","
+            
+        js_code += "\n"
+    
+    # Close the categories object
+    js_code += "};\n\n"
+    
+    # Add the rest of the landscapes.js file's content
+    js_code += """
 // Track current category and lightbox state
 let currentCategory = null;
 let currentLightboxIndex = 0;
@@ -281,3 +296,17 @@ function navigateLightbox(direction) {
     // Open lightbox with new index
     openLightbox(newIndex);
 }
+"""
+    
+    # Write the JavaScript file
+    with open('js/landscapes.js', 'w') as f:
+        f.write(js_code)
+    
+    print(f"Generated landscapes.js with {sum(len(images) for images in landscape_categories.values())} images across {len(categories)} categories.")
+
+if __name__ == "__main__":
+    # Check if directory structure exists
+    if not os.path.exists('js'):
+        os.makedirs('js')
+        
+    create_landscapes_js()
