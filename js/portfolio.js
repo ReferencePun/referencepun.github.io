@@ -7,7 +7,7 @@
 const portfolioImages = [
     {
         src: 'images/portfolio/FH200006_2l1ahp2.jpg',
-        alt: 'Portrait 1',
+        alt: 'Portrait Test',
         caption: 'Portrait Study',
         type: 'vertical'
     },
