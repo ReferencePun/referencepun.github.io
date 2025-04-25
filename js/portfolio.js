@@ -6,55 +6,55 @@
 // Portfolio images data - replace with your actual images
 const portfolioImages = [
     {
-        src: 'images/portfolio/portrait1.jpg',
+        src: 'images/portfolio/FH200006_2l1ahp2.jpg',
         alt: 'Portrait 1',
         caption: 'Portrait Study',
         type: 'vertical'
     },
     {
-        src: 'images/portfolio/portrait2.jpg',
+        src: 'images/portfolio/F1060142.jpg',
         alt: 'Portrait 2',
         caption: 'Portrait Study',
         type: 'vertical'
     },
     {
-        src: 'images/portfolio/portrait3.jpg',
+        src: 'images/portfolio/F1010033l.jpg',
         alt: 'Portrait 3',
         caption: 'Portrait Study',
         type: 'horizontal'
     },
     {
-        src: 'images/portfolio/portrait4.jpg',
+        src: 'images/portfolio/000078000020lfix.jpg',
         alt: 'Portrait 4',
         caption: 'Portrait Study',
         type: 'square'
     },
     {
-        src: 'images/portfolio/portrait5.jpg',
+        src: 'images/portfolio/F1030015_2B2.jpg',
         alt: 'Portrait 5',
         caption: 'Portrait Study',
         type: 'vertical'
     },
     {
-        src: 'images/portfolio/portrait6.jpg',
+        src: 'images/portfolio/F1030027.jpg',
         alt: 'Portrait 6',
         caption: 'Portrait Study',
         type: 'horizontal'
     },
     {
-        src: 'images/portfolio/portrait7.jpg',
+        src: 'images/portfolio/F1040012fix1.jpg',
         alt: 'Portrait 7',
         caption: 'Portrait Study',
         type: 'square'
     },
     {
-        src: 'images/portfolio/portrait8.jpg',
+        src: 'images/portfolio/F1040208.jpg',
         alt: 'Portrait 8',
         caption: 'Portrait Study',
         type: 'horizontal'
     },
     {
-        src: 'images/portfolio/portrait9.jpg',
+        src: 'images/portfolio/FH100009l0lhp2.jpg',
         alt: 'Portrait 9',
         caption: 'Portrait Study',
         type: 'vertical'
