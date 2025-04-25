@@ -1,129 +1,115 @@
 /**
  * Transmission Magazine page JavaScript
- * Handles magazine modal and Issuu embed functionality
+ * Handles magazine viewing functionality with FlipHTML5 embeds
  */
 
-// Magazine issues data
-const magazineIssues = [
-    {
-        id: '01',
-        title: 'Transition',
-        cover: 'images/transmission/issue01-cover.jpg',
-        issuuEmbed: 'https://e.issuu.com/embed.html#XXXX' // Replace with your actual Issuu embed code
-    },
-    {
-        id: '02',
-        title: 'Transparency',
-        cover: 'images/transmission/issue02-cover.jpg',
-        issuuEmbed: 'https://e.issuu.com/embed.html#YYYY' // Replace with your actual Issuu embed code
-    },
-    {
-        id: '03',
-        title: 'Transform',
-        cover: 'images/transmission/issue03-cover.jpg',
-        issuuEmbed: 'https://e.issuu.com/embed.html#ZZZZ' // Replace with your actual Issuu embed code
-    },
-    {
-        id: '03-04',
-        title: 'Intermission',
-        cover: 'images/transmission/issue0304-cover.jpg',
-        issuuEmbed: 'https://e.issuu.com/embed.html#AAAA' // Replace with your actual Issuu embed code
-    }
-];
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Add click events to magazine covers
+    // Initialize magazine covers click events
     initMagazineCovers();
     
-    // Set up modal close button
-    initMagazineModal();
+    // Set up lightbox close functionality
+    initLightbox();
 });
 
 /**
- * Initialize click events for magazine covers
+ * Initialize magazine covers click events
  */
 function initMagazineCovers() {
-    const magazineIssueElements = document.querySelectorAll('.magazine-issue');
+    const magazineCovers = document.querySelectorAll('.magazine-cover');
     
-    magazineIssueElements.forEach((issueElement, index) => {
-        issueElement.addEventListener('click', function() {
-            openMagazine(index);
+    magazineCovers.forEach(cover => {
+        cover.addEventListener('click', function() {
+            // Get the parent magazine issue element
+            const magazineIssue = this.closest('.magazine-issue');
+            
+            // Get the embed iframe from the magazine issue
+            const embedIframe = magazineIssue.querySelector('.magazine-embed iframe');
+            
+            if (embedIframe) {
+                // Get the src attribute of the iframe
+                const embedSrc = embedIframe.getAttribute('src');
+                
+                // Open the magazine in the lightbox
+                openMagazineLightbox(embedSrc);
+            }
         });
     });
 }
 
 /**
- * Initialize magazine modal functionality
+ * Initialize lightbox functionality
  */
-function initMagazineModal() {
-    const modal = document.getElementById('magazine-modal');
-    const closeBtn = document.querySelector('.close-modal');
+function initLightbox() {
+    const lightbox = document.getElementById('magazine-lightbox');
+    const closeBtn = document.querySelector('.close-lightbox');
     
-    if (closeBtn && modal) {
+    if (closeBtn && lightbox) {
         // Close button click
         closeBtn.addEventListener('click', function() {
-            closeModal();
+            closeLightbox();
         });
         
-        // Close modal when clicking outside content
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeModal();
+        // Close lightbox when clicking outside content
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
             }
         });
         
         // Keyboard navigation - ESC to close
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeModal();
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
             }
         });
     }
 }
 
 /**
- * Opens the magazine modal with the specified issue
- * @param {number} index - Index of the magazine issue to display
+ * Opens the magazine lightbox with the specified embed URL
+ * @param {string} embedSrc - The source URL for the embed iframe
  */
-function openMagazine(index) {
-    const modal = document.getElementById('magazine-modal');
-    const issuuEmbed = document.getElementById('issuu-embed');
+function openMagazineLightbox(embedSrc) {
+    const lightbox = document.getElementById('magazine-lightbox');
+    const embedContainer = document.getElementById('magazine-embed-container');
     
-    if (!modal || !issuuEmbed) return;
+    if (!lightbox || !embedContainer) return;
     
-    // Get magazine data
-    const magazine = magazineIssues[index];
-    
-    // Create iframe for Issuu embed
-    issuuEmbed.innerHTML = `
-        <iframe src="${magazine.issuuEmbed}" 
-                style="width:100%; height:100%;" 
-                frameborder="0" 
-                allowfullscreen></iframe>
+    // Create iframe for the embed
+    embedContainer.innerHTML = `
+        <iframe 
+            src="${embedSrc}" 
+            style="width:100%; height:100%;" 
+            seamless="seamless" 
+            scrolling="no" 
+            frameborder="0" 
+            allowtransparency="true" 
+            allowfullscreen="true">
+        </iframe>
     `;
     
-    // Show modal
-    modal.classList.add('active');
+    // Show lightbox
+    lightbox.classList.add('active');
     
     // Prevent body scrolling
     document.body.style.overflow = 'hidden';
 }
 
 /**
- * Closes the magazine modal
+ * Closes the magazine lightbox
  */
-function closeModal() {
-    const modal = document.getElementById('magazine-modal');
-    const issuuEmbed = document.getElementById('issuu-embed');
+function closeLightbox() {
+    const lightbox = document.getElementById('magazine-lightbox');
+    const embedContainer = document.getElementById('magazine-embed-container');
     
-    if (!modal) return;
+    if (!lightbox) return;
     
-    // Hide modal
-    modal.classList.remove('active');
+    // Hide lightbox
+    lightbox.classList.remove('active');
     
-    // Clear embed content
-    if (issuuEmbed) {
-        issuuEmbed.innerHTML = '';
+    // Clear embed content (to stop any audio/video)
+    if (embedContainer) {
+        embedContainer.innerHTML = '';
     }
     
     // Allow body scrolling
