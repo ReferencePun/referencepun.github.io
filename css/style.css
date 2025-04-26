@@ -1174,8 +1174,7 @@ footer {
     }
     
     .social-icons {
-        margin-left: auto;
-        order: 2;
+        display: none;
     }
     
     .portfolio-grid {
