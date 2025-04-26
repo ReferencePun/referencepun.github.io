@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Opens a magazine in a modal
+ * Opens a magazine in a modal with consistent styling
  */
 function openMagazine(embedUrl) {
     console.log('Opening magazine:', embedUrl);
@@ -33,20 +33,28 @@ function openMagazine(embedUrl) {
     const modal = document.getElementById('magazine-modal');
     const embedContainer = document.getElementById('embed-container');
     
-    if (!modal) {
-        console.error('Magazine modal not found');
+    if (!modal || !embedContainer) {
+        console.error('Magazine modal elements not found');
         return;
     }
     
-    if (!embedContainer) {
-        console.error('Embed container not found');
-        return;
+    // Modify URL to use clean mode and hide toolbar
+    let enhancedUrl = embedUrl;
+    
+    // Add parameters if they don't already exist
+    if (!enhancedUrl.includes('?')) {
+        enhancedUrl += '?';
+    } else {
+        enhancedUrl += '&';
     }
     
-    // Create the iframe
+    // Add clean parameters to match the first screenshot
+    enhancedUrl += 'view=simple&toolbar=0&navpane=0&embedded=true&ui=custom';
+    
+    // Create the iframe with customized settings
     embedContainer.innerHTML = `
         <iframe 
-            src="${embedUrl}" 
+            src="${enhancedUrl}" 
             seamless="seamless" 
             scrolling="no" 
             frameborder="0" 

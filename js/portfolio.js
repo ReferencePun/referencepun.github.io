@@ -1,5 +1,6 @@
 /**
- * Portfolio page JavaScript with masonry layout
+ * Portfolio page JavaScript
+ * Handles image loading, grid layout, and lightbox functionality
  */
 
 // Portfolio images data - replace with your actual images
@@ -74,6 +75,23 @@ document.addEventListener('DOMContentLoaded', function() {
         // Setup lightbox
         initLightbox();
     }
+    
+    // Setup mobile menu toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const nav = document.querySelector('nav');
+    
+    if (mobileMenu && nav) {
+        mobileMenu.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+    }
+    
+    // Set current year in footer
+    const currentYearSpan = document.getElementById('current-year');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
 });
 
 /**
@@ -91,7 +109,7 @@ function loadPortfolioImages() {
         portfolioGrid.appendChild(imageElement);
     });
     
-    // Apply masonry layout after images are loaded
+    // Apply masonry layout
     applyMasonryLayout();
 }
 
@@ -140,6 +158,8 @@ function createImageElement(image, index) {
 function applyMasonryLayout() {
     const grid = document.getElementById('portfolio-grid');
     const items = document.querySelectorAll('.portfolio-item');
+    
+    if (!grid || items.length === 0) return;
     
     // Reset any previous styles
     items.forEach(item => {
