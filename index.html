@@ -6,6 +6,72 @@
     <title>Dylan Forsberg - Photographer</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap">
+    <style>
+        /* Inline styles to override without modifying original CSS file */
+        .portfolio-item img {
+            width: 100%;
+            height: auto !important; 
+            object-fit: contain !important;
+            transition: transform 0.5s ease;
+            max-height: 500px;
+        }
+        
+        .portfolio-grid {
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: auto !important;
+            gap: 2rem;
+        }
+        
+        .portfolio-item.horizontal {
+            grid-column: span 6;
+        }
+        
+        .portfolio-item.vertical {
+            grid-column: span 4;
+            grid-row: auto;
+        }
+        
+        .portfolio-item.square {
+            grid-column: span 3;
+        }
+        
+        .portfolio-item {
+            padding: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .portfolio-item.horizontal {
+                grid-column: span 6;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            
+            .portfolio-item.horizontal {
+                grid-column: span 6;
+            }
+            
+            .portfolio-item.vertical, .portfolio-item.square {
+                grid-column: span 3;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .portfolio-item.horizontal,
+            .portfolio-item.vertical,
+            .portfolio-item.square {
+                grid-column: span 2;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -59,10 +125,276 @@
     </main>
 
     <footer>
-        <p>&copy; <span id="current-year"></span> Dylan Forsberg. All rights reserved.</p>
+        <p>&copy; <span id="current-year">2025</span> Dylan Forsberg. All rights reserved.</p>
+        <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
     </footer>
 
     <script src="js/main.js"></script>
-    <script src="js/portfolio.js"></script>
+    <script>
+        // Portfolio images data (your existing data)
+        const portfolioImages = [
+            {
+                src: 'images/portfolio/FH200006_2l1ahp2.jpg',
+                alt: 'Portrait Test',
+                caption: 'Portrait Study',
+                type: 'vertical'
+            },
+            {
+                src: 'images/portfolio/F1060142.jpg',
+                alt: 'Portrait 2',
+                caption: 'Portrait Study',
+                type: 'vertical'
+            },
+            {
+                src: 'images/portfolio/F1010033l.jpg',
+                alt: 'Portrait 3',
+                caption: 'Portrait Study',
+                type: 'horizontal'
+            },
+            {
+                src: 'images/portfolio/000078000020lfix.jpg',
+                alt: 'Portrait 4',
+                caption: 'Portrait Study',
+                type: 'square'
+            },
+            {
+                src: 'images/portfolio/F1030015_2B2.jpg',
+                alt: 'Portrait 5',
+                caption: 'Portrait Study',
+                type: 'vertical'
+            },
+            {
+                src: 'images/portfolio/F1030027.jpg',
+                alt: 'Portrait 6',
+                caption: 'Portrait Study',
+                type: 'horizontal'
+            },
+            {
+                src: 'images/portfolio/F1040012fix1.jpg',
+                alt: 'Portrait 7',
+                caption: 'Portrait Study',
+                type: 'square'
+            },
+            {
+                src: 'images/portfolio/F1040208.jpg',
+                alt: 'Portrait 8',
+                caption: 'Portrait Study',
+                type: 'horizontal'
+            },
+            {
+                src: 'images/portfolio/FH100009l0lhp2.jpg',
+                alt: 'Portrait 9',
+                caption: 'Portrait Study',
+                type: 'vertical'
+            }
+        ];
+
+        // Track lightbox state
+        let currentLightboxIndex = 0;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            
+            if (portfolioGrid) {
+                // Load portfolio images
+                loadPortfolioImages();
+                
+                // Setup lightbox
+                initLightbox();
+            }
+            
+            // Setup mobile menu toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const nav = document.querySelector('nav');
+            
+            if (mobileMenu && nav) {
+                mobileMenu.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    nav.classList.toggle('active');
+                });
+            }
+        });
+
+        /**
+         * Loads portfolio images into the grid
+         */
+        function loadPortfolioImages() {
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            
+            // Clear any existing items
+            portfolioGrid.innerHTML = '';
+            
+            // Add images to the grid
+            portfolioImages.forEach((image, index) => {
+                const imageElement = createImageElement(image, index);
+                portfolioGrid.appendChild(imageElement);
+            });
+        }
+
+        /**
+         * Creates a portfolio item element with improved orientation detection
+         */
+        function createImageElement(image, index) {
+            // Create portfolio item container
+            const item = document.createElement('div');
+            item.className = `portfolio-item ${image.type}`;
+            item.dataset.index = index;
+            
+            // Create image element
+            const img = document.createElement('img');
+            img.src = image.src;
+            img.alt = image.alt;
+            
+            // Create caption element
+            const caption = document.createElement('div');
+            caption.className = 'caption';
+            caption.textContent = image.caption;
+            
+            // Add click event for lightbox
+            item.addEventListener('click', function() {
+                openLightbox(index);
+            });
+            
+            // Append elements to item
+            item.appendChild(img);
+            item.appendChild(caption);
+            
+            // Detect actual image orientation once loaded to apply correct class
+            img.onload = function() {
+                // Get natural dimensions
+                const width = this.naturalWidth;
+                const height = this.naturalHeight;
+                
+                // Determine orientation
+                let orientation;
+                if (width > height * 1.2) {
+                    orientation = 'horizontal';
+                } else if (height > width * 1.2) {
+                    orientation = 'vertical';
+                } else {
+                    orientation = 'square';
+                }
+                
+                // Remove all orientation classes and add the correct one
+                item.classList.remove('horizontal', 'vertical', 'square');
+                item.classList.add(orientation);
+            };
+            
+            return item;
+        }
+
+        /**
+         * Initializes the lightbox functionality
+         */
+        function initLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const closeBtn = document.querySelector('.close-lightbox');
+            const prevBtn = document.querySelector('.lightbox-prev');
+            const nextBtn = document.querySelector('.lightbox-next');
+            
+            // Close lightbox when clicked outside of content
+            if (lightbox) {
+                lightbox.addEventListener('click', function(e) {
+                    if (e.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
+            
+            // Close button click
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeLightbox);
+            }
+            
+            // Previous button click
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navigateLightbox('prev');
+                });
+            }
+            
+            // Next button click
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    navigateLightbox('next');
+                });
+            }
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateLightbox('prev');
+                } else if (e.key === 'ArrowRight') {
+                    navigateLightbox('next');
+                }
+            });
+        }
+
+        /**
+         * Opens the lightbox with the specified image
+         */
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            if (!lightbox || !lightboxImg || !lightboxCaption) return;
+            
+            // Set current index
+            currentLightboxIndex = index;
+            
+            // Get image data
+            const image = portfolioImages[index];
+            
+            // Set image and caption
+            lightboxImg.src = image.src;
+            lightboxImg.alt = image.alt;
+            lightboxCaption.textContent = image.caption;
+            
+            // Show lightbox
+            lightbox.classList.add('active');
+            
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
+        }
+
+        /**
+         * Closes the lightbox
+         */
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            
+            if (!lightbox) return;
+            
+            // Hide lightbox
+            lightbox.classList.remove('active');
+            
+            // Allow body scrolling
+            document.body.style.overflow = '';
+        }
+
+        /**
+         * Navigates to the previous or next image in the lightbox
+         */
+        function navigateLightbox(direction) {
+            // Calculate new index
+            let newIndex;
+            
+            if (direction === 'prev') {
+                newIndex = (currentLightboxIndex - 1 + portfolioImages.length) % portfolioImages.length;
+            } else {
+                newIndex = (currentLightboxIndex + 1) % portfolioImages.length;
+            }
+            
+            // Open lightbox with new index
+            openLightbox(newIndex);
+        }
+    </script>
 </body>
 </html>

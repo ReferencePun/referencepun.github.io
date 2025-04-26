@@ -126,8 +126,19 @@ function createImageElement(image, index) {
     
     // Detect actual image orientation once loaded to apply correct class
     img.onload = function() {
-        const orientation = this.naturalWidth > this.naturalHeight ? 'horizontal' : 
-                          this.naturalWidth < this.naturalHeight ? 'vertical' : 'square';
+        // Get natural dimensions
+        const width = this.naturalWidth;
+        const height = this.naturalHeight;
+        
+        // Determine orientation
+        let orientation;
+        if (width > height * 1.2) {
+            orientation = 'horizontal';
+        } else if (height > width * 1.2) {
+            orientation = 'vertical';
+        } else {
+            orientation = 'square';
+        }
         
         // Remove all orientation classes and add the correct one
         item.classList.remove('horizontal', 'vertical', 'square');
