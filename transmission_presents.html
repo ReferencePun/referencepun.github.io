@@ -6,196 +6,6 @@
     <title>Transmission Presents - Dylan Forsberg</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap">
-    <style>
-        /* Magazine grid with fixed layout */
-        .magazines-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin: 0 auto;
-            max-width: 1200px;
-            padding: 20px;
-        }
-
-        .magazine-column {
-            flex: 1;
-            min-width: 250px;
-            max-width: 350px;
-            margin-bottom: 40px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .magazine-title {
-            margin-bottom: 15px;
-            font-weight: 400;
-            font-size: 1.2rem;
-            height: 3em; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .magazine-cover {
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: block;
-            flex-grow: 1;
-        }
-
-        .magazine-cover:hover {
-            transform: translateY(-5px);
-        }
-
-        .magazine-cover img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-        
-        .centered-magazine {
-            margin: 2rem auto;
-            max-width: 350px;
-            text-align: center;
-        }
-
-        .centered-magazine .magazine-title {
-            margin-bottom: 15px;
-            font-weight: 400;
-            font-size: 1.2rem;
-            height: 3em; /* Match the height of other titles */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .centered-magazine .magazine-cover {
-            /* These properties ensure similar display characteristics */
-            height: 0;
-            padding-bottom: 133%; /* This creates a consistent aspect ratio like the others */
-            position: relative;
-            overflow: hidden;
-        }
-
-        .centered-magazine .magazine-cover img {
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Dividers and sections */
-        .section-divider {
-            width: 100%;
-            height: 1px;
-            background-color: #eee;
-            margin: 60px auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 400;
-            margin-bottom: 20px;
-        }
-
-        .page-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 400;
-            margin: 40px 0;
-        }
-
-        /* Magazine modal */
-        #magazine-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-        }
-
-        .modal-content {
-            position: relative;
-            margin: 5% auto;
-            width: 90%;
-            height: 85%;
-            background-color: #fff;
-        }
-
-        .close-button {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            font-size: 30px;
-            color: #fff;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        .embed-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        .embed-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* Navigation controls overlay */
-        .navigation-overlay {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            padding: 10px;
-            z-index: 10;
-        }
-        
-        .nav-instructions {
-            background-color: rgba(255,255,255,0.8);
-            padding: 5px 15px;
-            border-radius: 20px;
-            display: inline-block;
-            font-size: 14px;
-            color: #333;
-            margin-top: 10px;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 1100px) {
-            .magazines-row {
-                max-width: 800px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .magazines-row {
-                max-width: 500px;
-            }
-            .magazine-column {
-                max-width: 100%;
-            }
-            .magazine-title {
-                height: auto;
-                min-height: 3em;
-            }
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -264,7 +74,7 @@
             <!-- Magazine 4 -->
             <div class="magazine-column">
                 <h2 class="magazine-title">A Year in a Day with Lindsey Wixson</h2>
-                <div class="magazine-cover" onclick="openMagazine('pdfs/Presents Lindsey Wixson.pdf')">
+                <div class="magazine-cover" onclick="openMagazine('pdfs/07 Presents Lindsey Wixson.pdf')">
                     <img src="images/thumbnails/07 Presents Lindsey Wixson.jpg" alt="Transmission Presents: A Year in a Day with Lindsey Wixson">
                 </div>
             </div>
@@ -293,8 +103,6 @@
         <p>&copy; <span id="current-year"></span> Dylan Forsberg. All rights reserved.</p>
     </footer>
 
-    <!-- Include JavaScript -->
-    <script src="js/magazine.js"></script>
     <!-- PDF.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <!-- Custom PDF viewer -->
