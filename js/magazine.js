@@ -38,18 +38,12 @@ function openMagazine(embedUrl) {
         return;
     }
     
-    // Modify URL to use clean mode and hide toolbar
-    let enhancedUrl = embedUrl;
+    // Create a consistent URL format for all magazines
+    // Parse the base URL without query parameters
+    let baseUrl = embedUrl.split('?')[0];
     
-    // Add parameters if they don't already exist
-    if (!enhancedUrl.includes('?')) {
-        enhancedUrl += '?';
-    } else {
-        enhancedUrl += '&';
-    }
-    
-    // Add clean parameters to match the first screenshot
-    enhancedUrl += 'view=simple&toolbar=0&navpane=0&embedded=true&ui=custom';
+    // Apply consistent parameters for all magazines to ensure they display the same way
+    let enhancedUrl = `${baseUrl}?view=simple&toolbar=0&navpane=0&embedded=true&ui=custom`;
     
     // Create the iframe with customized settings
     embedContainer.innerHTML = `
@@ -66,7 +60,7 @@ function openMagazine(embedUrl) {
         </iframe>
         <div class="navigation-overlay" id="nav-overlay">
             <div class="nav-instructions">
-                Use FlipHTML5 controls or <a href="${embedUrl}" target="_blank" style="color: blue; text-decoration: underline;">open in a new window</a>
+                Use FlipHTML5 controls or <a href="${baseUrl}" target="_blank" style="color: blue; text-decoration: underline;">open in a new window</a>
             </div>
         </div>
     `;

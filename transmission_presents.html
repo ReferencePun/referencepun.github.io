@@ -66,12 +66,17 @@
             margin-bottom: 15px;
             font-weight: 400;
             font-size: 1.2rem;
+            height: 3em; /* Match the height of other titles */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* Remove the max-height constraint to match others */
         .centered-magazine .magazine-cover img {
             width: 100%;
             height: auto;
-            max-height: 466px;
+            /* max-height: 466px; - Removed this line */
             object-fit: cover;
         }
 
