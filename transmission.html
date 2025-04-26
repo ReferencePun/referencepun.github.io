@@ -151,31 +151,6 @@
             color: #333;
             margin-top: 10px;
         }
-        
-        .nav-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 10px;
-        }
-        
-        .nav-btn {
-            background-color: rgba(255,255,255,0.8);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        
-        .nav-btn:hover {
-            background-color: rgba(255,255,255,1);
-        }
 
         /* Responsive adjustments */
         @media (max-width: 1100px) {
@@ -267,7 +242,7 @@
         <!-- Transmission Presents Section -->
         <div class="section-divider"></div>
         <h2 class="section-title">Transmission Presents</h2>
-        <a href="transmission_presents.html" class="view-more">(View More Issues)</a>
+        <a href="transmission-presents.html" class="view-more">(View More Issues)</a>
 
         <!-- Press Section -->
         <div class="section-divider"></div>
@@ -311,158 +286,6 @@
         <p>&copy; <span id="current-year"></span> Dylan Forsberg. All rights reserved.</p>
     </footer>
 
-    <script>
-        // Set current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // Magazine Modal Functions
-        function openMagazine(embedUrl) {
-            const modal = document.getElementById('magazine-modal');
-            const embedContainer = document.getElementById('embed-container');
-            
-            // Create the iframe with modified URL for direct navigation control
-            // Adding parameters to allow for external control if the platform supports it
-            const enhancedUrl = new URL(embedUrl);
-            enhancedUrl.searchParams.append('allowExternalNavigation', 'true');
-            
-            embedContainer.innerHTML = `
-                <iframe 
-                    src="${enhancedUrl.toString()}" 
-                    seamless="seamless" 
-                    scrolling="no" 
-                    frameborder="0" 
-                    allowtransparency="true" 
-                    allowfullscreen="true"
-                    webkitallowfullscreen="true"
-                    mozallowfullscreen="true"
-                    id="magazine-iframe">
-                </iframe>
-                <div class="navigation-overlay" id="nav-overlay">
-                    <div class="nav-buttons">
-                        <button class="nav-btn" id="prev-btn">&larr;</button>
-                        <button class="nav-btn" id="next-btn">&rarr;</button>
-                    </div>
-                    <div class="nav-instructions">
-                        Use arrows to navigate or open in a <a href="${embedUrl}" target="_blank" style="color: blue; text-decoration: underline;">new window</a>
-                    </div>
-                </div>
-            `;
-            
-            // Display the modal
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-            
-            // Better approach for navigation - using direct iframe interaction after it's loaded
-            const iframe = document.getElementById('magazine-iframe');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            
-            // First method: Try window.postMessage for communication
-            if (prevBtn) {
-                prevBtn.addEventListener('click', function() {
-                    navigateMagazine('prev');
-                });
-            }
-            
-            if (nextBtn) {
-                nextBtn.addEventListener('click', function() {
-                    navigateMagazine('next');
-                });
-            }
-            
-            // Set up keyboard navigation
-            window.addEventListener('keydown', handleKeyNavigation);
-        }
-        
-        function navigateMagazine(direction) {
-            const iframe = document.getElementById('magazine-iframe');
-            if (!iframe) return;
-            
-            // Method 1: Try postMessage
-            iframe.contentWindow.postMessage({
-                action: 'navigate',
-                direction: direction
-            }, '*');
-            
-            // Method 2: Try to access the FlipBook API if it exists
-            try {
-                const flipBook = iframe.contentWindow.FlipBook;
-                if (flipBook && typeof flipBook.turnPage === 'function') {
-                    direction === 'next' ? flipBook.turnPage(1) : flipBook.turnPage(-1);
-                    return;
-                }
-            } catch (e) {
-                console.log('Could not access FlipBook API directly');
-            }
-            
-            // Method 3: Try to simulate arrow key events in the iframe
-            try {
-                iframe.contentWindow.focus();
-                const keyCode = direction === 'next' ? 39 : 37; // right or left arrow
-                const keyEvent = new KeyboardEvent('keydown', {
-                    bubbles: true,
-                    cancelable: true,
-                    keyCode: keyCode
-                });
-                iframe.contentDocument.dispatchEvent(keyEvent);
-            } catch (e) {
-                console.log('Could not dispatch key events to iframe');
-            }
-            
-            // Method 4: As a fallback, offer direct link to open in new window
-            console.log('Navigation may require opening in a new window for full control');
-        }
-        
-        function closeModal() {
-            const modal = document.getElementById('magazine-modal');
-            const embedContainer = document.getElementById('embed-container');
-            
-            // Hide the modal
-            modal.style.display = 'none';
-            
-            // Clear the embed (stops any audio/video)
-            embedContainer.innerHTML = '';
-            
-            // Re-enable scrolling
-            document.body.style.overflow = 'auto';
-            
-            // Remove key navigation event listener
-            window.removeEventListener('keydown', handleKeyNavigation);
-        }
-        
-        // Handle keyboard navigation
-        function handleKeyNavigation(event) {
-            if (event.key === 'ArrowLeft' || event.key === 'Left') {
-                navigateMagazine('prev');
-                event.preventDefault();
-            } else if (event.key === 'ArrowRight' || event.key === 'Right') {
-                navigateMagazine('next');
-                event.preventDefault();
-            } else if (event.key === 'Escape') {
-                closeModal();
-            }
-        }
-        
-        // Close modal when clicking outside content
-        window.onclick = function(event) {
-            const modal = document.getElementById('magazine-modal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-        
-        // Mobile menu toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.getElementById('mobile-menu');
-            const nav = document.querySelector('nav');
-            
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    nav.classList.toggle('active');
-                    this.classList.toggle('active');
-                });
-            }
-        });
-    </script>
+    <script src="js/magazine.js"></script>
 </body>
 </html>

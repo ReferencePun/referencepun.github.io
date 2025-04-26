@@ -1,81 +1,38 @@
 /**
- * Transmission Magazine page JavaScript
- * Handles magazine viewing functionality with FlipHTML5 embeds
+ * Transmission Magazine functionality
+ * Handles magazine viewing with FlipHTML5 embeds
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize magazine covers click events
-    initMagazineCovers();
+    // Set current year in footer if present
+    const yearElement = document.getElementById('current-year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
     
-    // Set up lightbox close functionality
-    initLightbox();
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu');
+    const nav = document.querySelector('nav');
+    
+    if (mobileMenuBtn && nav) {
+        mobileMenuBtn.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    }
 });
 
 /**
- * Initialize magazine covers click events
+ * Opens a magazine in a modal with the specified embed URL
+ * @param {string} embedUrl - The source URL for the embed iframe
  */
-function initMagazineCovers() {
-    const magazineCovers = document.querySelectorAll('.magazine-cover');
+function openMagazine(embedUrl) {
+    const modal = document.getElementById('magazine-modal');
+    const embedContainer = document.getElementById('embed-container');
     
-    magazineCovers.forEach(cover => {
-        cover.addEventListener('click', function() {
-            // Get the parent magazine issue element
-            const magazineIssue = this.closest('.magazine-issue');
-            
-            // Get the embed iframe from the magazine issue
-            const embedIframe = magazineIssue.querySelector('.magazine-embed iframe');
-            
-            if (embedIframe) {
-                // Get the src attribute of the iframe
-                const embedSrc = embedIframe.getAttribute('src');
-                
-                // Open the magazine in the lightbox
-                openMagazineLightbox(embedSrc);
-            }
-        });
-    });
-}
-
-/**
- * Initialize lightbox functionality
- */
-function initLightbox() {
-    const lightbox = document.getElementById('magazine-lightbox');
-    const closeBtn = document.querySelector('.close-lightbox');
+    if (!modal || !embedContainer) return;
     
-    if (closeBtn && lightbox) {
-        // Close button click
-        closeBtn.addEventListener('click', function() {
-            closeLightbox();
-        });
-        
-        // Close lightbox when clicking outside content
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-        
-        // Keyboard navigation - ESC to close
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                closeLightbox();
-            }
-        });
-    }
-}
-
-/**
- * Opens the magazine lightbox with the specified embed URL
- * @param {string} embedSrc - The source URL for the embed iframe
- */
-function openMagazineLightbox(embedSrc) {
-    const lightbox = document.getElementById('magazine-lightbox');
-    const embedContainer = document.getElementById('magazine-embed-container');
-    
-    if (!lightbox || !embedContainer) return;
-    
-    // Create iframe for the embed
+    // Create the iframe with a direct link option
     embedContainer.innerHTML = `
         <iframe 
             src="${embedUrl}" 
@@ -85,34 +42,62 @@ function openMagazineLightbox(embedSrc) {
             allowtransparency="true" 
             allowfullscreen="true"
             webkitallowfullscreen="true"
-            mozallowfullscreen="true">
+            mozallowfullscreen="true"
+            id="magazine-iframe">
         </iframe>
+        <div class="navigation-overlay" id="nav-overlay">
+            <div class="nav-instructions">
+                Use FlipHTML5 controls or <a href="${embedUrl}" target="_blank" style="color: blue; text-decoration: underline;">open in a new window</a>
+            </div>
+        </div>
     `;
     
-    // Show lightbox
-    lightbox.classList.add('active');
+    // Display the modal
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
     
-    // Prevent body scrolling
-    document.body.style.overflow = 'hidden';
+    // Add keyboard navigation for closing the modal
+    window.addEventListener('keydown', handleKeyNavigation);
 }
 
 /**
- * Closes the magazine lightbox
+ * Handle keyboard navigation
+ * @param {KeyboardEvent} event - The keyboard event
  */
-function closeLightbox() {
-    const lightbox = document.getElementById('magazine-lightbox');
-    const embedContainer = document.getElementById('magazine-embed-container');
+function handleKeyNavigation(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+}
+
+/**
+ * Closes the magazine modal
+ */
+function closeModal() {
+    const modal = document.getElementById('magazine-modal');
+    const embedContainer = document.getElementById('embed-container');
     
-    if (!lightbox) return;
+    if (!modal) return;
     
-    // Hide lightbox
-    lightbox.classList.remove('active');
+    // Hide the modal
+    modal.style.display = 'none';
     
-    // Clear embed content (to stop any audio/video)
+    // Clear the embed (stops any audio/video)
     if (embedContainer) {
         embedContainer.innerHTML = '';
     }
     
-    // Allow body scrolling
-    document.body.style.overflow = '';
+    // Re-enable scrolling
+    document.body.style.overflow = 'auto';
+    
+    // Remove event listener
+    window.removeEventListener('keydown', handleKeyNavigation);
 }
+
+// Close modal when clicking outside content
+window.onclick = function(event) {
+    const modal = document.getElementById('magazine-modal');
+    if (event.target == modal) {
+        closeModal();
+    }
+};
