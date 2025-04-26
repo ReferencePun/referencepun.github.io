@@ -143,24 +143,23 @@ This is a simplified masonry layout that uses CSS columns instead of grid.
 It's more reliable across browsers and doesn't require complex JavaScript calculations.
 */
 
-/* Portfolio container using CSS columns for masonry layout */
+/* Larger column-based masonry portfolio grid */
 .portfolio-grid {
-    column-count: 4; /* Show 4 columns on desktop */
-    column-gap: 15px;
+    column-count: 3; /* Reduced from 4 to 3 columns for larger images */
+    column-gap: 20px; /* Slightly increased gap between columns */
     width: 100%;
     max-width: 1800px;
     margin: 0 auto 3rem;
-    padding: 0 15px;
+    padding: 0 20px; /* Add padding for breathing room */
 }
 
-/* Each portfolio item takes up one column spot */
 .portfolio-item {
-    break-inside: avoid; /* Prevent items from breaking across columns */
-    margin-bottom: 15px; /* Space between items */
+    break-inside: avoid;
+    margin-bottom: 20px; /* Increased spacing between items */
     position: relative;
     overflow: hidden;
-    border-radius: 3px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 4px; /* Slightly more rounded corners */
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
     transition: transform 0.3s ease;
     background-color: #fff;
     display: block;
@@ -215,21 +214,21 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     transform: translateY(0);
 }
 
-/* Responsive adjustments */
-@media (max-width: 1200px) {
+/* Responsive adjustments for larger images */
+@media (max-width: 1400px) {
     .portfolio-grid {
-        column-count: 3; /* 3 columns on medium screens */
+        column-count: 2; /* 2 columns on medium-large screens */
     }
 }
 
 @media (max-width: 768px) {
     .portfolio-grid {
-        column-count: 2; /* 2 columns on tablets */
-        column-gap: 10px;
+        column-count: 1; /* Single column on tablets for even larger images */
+        column-gap: 0;
     }
     
     .portfolio-item {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 }
 
