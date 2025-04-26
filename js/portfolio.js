@@ -153,7 +153,7 @@ function createImageElement(image, index) {
 }
 
 /**
- * Applies the masonry layout to the portfolio grid
+ * Applies an improved masonry layout to the portfolio grid
  */
 function applyMasonryLayout() {
     const grid = document.getElementById('portfolio-grid');
@@ -166,13 +166,81 @@ function applyMasonryLayout() {
         item.style.gridRowEnd = '';
     });
     
+    // Calculate optimal image sizing
+    const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    
+    // Use smaller row height for more precise layout
+    const rowHeight = 8; // Reduced from 10px for finer control
+    
     // Apply the masonry layout
     items.forEach(item => {
+        // Get actual height after the browser has rendered it
         const height = item.getBoundingClientRect().height;
-        const rowSpan = Math.ceil(height / 10); // 10px is our grid-auto-rows value
+        const rowSpan = Math.ceil(height / rowHeight);
+        
+        // Apply the calculated row span
         item.style.gridRowEnd = `span ${rowSpan}`;
+        
+        // Remove any marginal white space
+        item.style.marginBottom = '0';
     });
 }
+
+/**
+ * Creates a portfolio item element with improved sizing
+ */
+function createImageElement(image, index) {
+    // Create portfolio item container
+    const item = document.createElement('div');
+    item.className = `portfolio-item ${image.type}`;
+    item.dataset.index = index;
+    
+    // Create image element
+    const img = document.createElement('img');
+    img.src = image.src;
+    img.alt = image.alt;
+    
+    // Create caption element
+    const caption = document.createElement('div');
+    caption.className = 'caption';
+    caption.textContent = image.caption;
+    
+    // Add click event for lightbox
+    item.addEventListener('click', function() {
+        openLightbox(index);
+    });
+    
+    // Append elements to item
+    item.appendChild(img);
+    item.appendChild(caption);
+    
+    // When image loads, update the masonry layout
+    img.onload = function() {
+        // Recalculate layout each time an image loads
+        applyMasonryLayout();
+    };
+    
+    return item;
+}
+
+// Run masonry layout on various events to ensure it works well
+document.addEventListener('DOMContentLoaded', function() {
+    // Apply initial layout
+    setTimeout(applyMasonryLayout, 100);
+});
+
+window.addEventListener('load', function() {
+    // Apply again after all resources are loaded
+    applyMasonryLayout();
+    // And once more after a small delay to catch any late loads
+    setTimeout(applyMasonryLayout, 500);
+});
+
+window.addEventListener('resize', function() {
+    // Debounce resize events
+    clearTimeout(window.resizeTimer);
+    window.resizeTimer = setTimeout(applyMasonryLayout, 200);
+});
 
 /**
  * Initializes the lightbox functionality
