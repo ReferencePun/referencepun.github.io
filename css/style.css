@@ -158,7 +158,7 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     margin-bottom: 20px; /* Increased spacing between items */
     position: relative;
     overflow: hidden;
-    border-radius: 2px;
+    border-radius: 0px; /* Rounded corners */
     box-shadow: 0 3px 10px rgba(0,0,0,0.12);
     transition: transform 0.3s ease;
     background-color: #fff;
@@ -484,6 +484,152 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     width: 100%;
     height: 100%;
     border: none;
+}
+
+/* PDF Viewer Styles */
+.pdf-viewer-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    font-family: 'Cormorant Garamond', Times, serif;
+}
+
+.pdf-controls {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.pdf-nav-btn {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.pdf-nav-btn:hover {
+    background: #f9f9f9;
+}
+
+.pdf-page-info {
+    margin: 0 15px;
+}
+
+.pdf-zoom-controls {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.pdf-zoom-btn {
+    background: none;
+    border: 1px solid #ddd;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.pdf-zoom-btn:hover {
+    background: #f9f9f9;
+}
+
+.pdf-canvas-container {
+    flex-grow: 1;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+#pdf-canvas {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background-color: white;
+}
+
+.pdf-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.pdf-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 25px;
+    background: rgba(255,0,0,0.1);
+    color: #d00;
+    border-radius: 4px;
+    border: 1px solid rgba(255,0,0,0.2);
+}
+
+/* Make sure images and title heights are consistent */
+.magazine-column, .centered-magazine {
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.magazine-title {
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.magazine-cover {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: block;
+    position: relative;
+    padding-bottom: 133%; /* Creates a consistent aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.magazine-cover img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.centered-magazine .magazine-cover {
+    /* Same styling as magazine-column covers */
+    padding-bottom: 133%;
+    height: 0;
+}
+
+.centered-magazine .magazine-cover img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Video page styles */

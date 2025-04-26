@@ -25,10 +25,35 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Opens a magazine in a modal with consistent styling
+ * Opens a magazine in a modal using PDF.js
  */
-function openMagazine(embedUrl) {
-    console.log('Opening magazine:', embedUrl);
+function openMagazine(magazinePath) {
+    console.log('Opening magazine:', magazinePath);
+    
+    // Get the magazine name from the path (for FlipHTML5 URLs)
+    let pdfName = '';
+    
+    // Handle different input types (FlipHTML5 URL vs direct PDF path)
+    if (magazinePath.includes('fliphtml5.com')) {
+        // Extract magazine name from FlipHTML5 URL
+        const urlParts = magazinePath.split('/');
+        const lastPart = urlParts[urlParts.length - 2] || 'magazine';
+        
+        // Map to corresponding PDF file based on naming convention in your folder
+        // This mapping depends on your file organization
+        if (lastPart === 'sztl') pdfName = 'pdfs/01 Issue 01 Transition.pdf';
+        else if (lastPart === 'drjt') pdfName = 'pdfs/02 Issue 02 Transparency.pdf';
+        else if (lastPart === 'eihk') pdfName = 'pdfs/03 FNT Photojournalism.pdf';
+        else if (lastPart === 'ageg') pdfName = 'pdfs/04 Issue 03 Transform.pdf';
+        else if (lastPart === 'gciq') pdfName = 'pdfs/05 Presents New Faces.pdf';
+        else if (lastPart === 'inek') pdfName = 'pdfs/06 Presents Cote_Ciel Lookbook.pdf';
+        else if (lastPart === 'wtcx') pdfName = 'pdfs/07 Presents Lindsey Wixson.pdf';
+        else if (lastPart === 'jvpp') pdfName = 'pdfs/08 Showcase Le Cam Romain.pdf';
+        else if (lastPart === 'bchq') pdfName = 'pdfs/09 Issue 03-04 Intermission.pdf';
+    } else {
+        // Direct PDF path
+        pdfName = magazinePath;
+    }
     
     const modal = document.getElementById('magazine-modal');
     const embedContainer = document.getElementById('embed-container');
@@ -38,29 +63,26 @@ function openMagazine(embedUrl) {
         return;
     }
     
-    // Create a consistent URL format for all magazines
-    // Parse the base URL without query parameters
-    let baseUrl = embedUrl.split('?')[0];
-    
-    // Apply consistent parameters for all magazines to ensure they display the same way
-    let enhancedUrl = `${baseUrl}?view=simple&toolbar=0&navpane=0&embedded=true&ui=custom`;
-    
-    // Create the iframe with customized settings
+    // Create PDF viewer UI
     embedContainer.innerHTML = `
-        <iframe 
-            src="${enhancedUrl}" 
-            seamless="seamless" 
-            scrolling="no" 
-            frameborder="0" 
-            allowtransparency="true" 
-            allowfullscreen="true"
-            webkitallowfullscreen="true"
-            mozallowfullscreen="true"
-            id="magazine-iframe">
-        </iframe>
-        <div class="navigation-overlay" id="nav-overlay">
-            <div class="nav-instructions">
-                Use FlipHTML5 controls or <a href="${baseUrl}" target="_blank" style="color: blue; text-decoration: underline;">open in a new window</a>
+        <div class="pdf-viewer-container">
+            <div id="pdf-loading" class="pdf-loading">Loading...</div>
+            <div id="pdf-error" class="pdf-error" style="display: none;"></div>
+            
+            <div class="pdf-controls">
+                <button id="prev-page" class="pdf-nav-btn">&lt; Previous</button>
+                <span class="pdf-page-info">Page <span id="current-page">1</span> of <span id="page-count">-</span></span>
+                <button id="next-page" class="pdf-nav-btn">Next &gt;</button>
+                
+                <div class="pdf-zoom-controls">
+                    <button id="zoom-out" class="pdf-zoom-btn">-</button>
+                    <span>Zoom</span>
+                    <button id="zoom-in" class="pdf-zoom-btn">+</button>
+                </div>
+            </div>
+            
+            <div class="pdf-canvas-container">
+                <canvas id="pdf-canvas"></canvas>
             </div>
         </div>
     `;
@@ -68,6 +90,17 @@ function openMagazine(embedUrl) {
     // Display the modal
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden'; // Prevent scrolling
+    
+    // Initialize PDF viewer with the PDF path
+    if (typeof initPdfViewer === 'function') {
+        // Small delay to ensure the DOM is ready
+        setTimeout(() => {
+            initPdfViewer(pdfName);
+        }, 100);
+    } else {
+        console.error('PDF viewer not initialized - make sure pdf-viewer.js is loaded');
+        embedContainer.innerHTML = '<div class="pdf-error">PDF viewer not available</div>';
+    }
     
     // Add keyboard navigation for closing the modal
     window.addEventListener('keydown', handleKeyNavigation);
