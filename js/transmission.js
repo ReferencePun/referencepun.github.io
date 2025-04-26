@@ -1,15 +1,12 @@
 /**
  * Transmission Magazine functionality
- * Handles magazine viewing with FlipHTML5 embeds
  */
 
-// Log to confirm script is loaded
-console.log('Magazine JavaScript loaded successfully');
-
+// Set current year in footer
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM fully loaded and parsed');
+    console.log('Magazine script loaded');
     
-    // Set current year in footer if present
+    // Update year in footer
     const yearElement = document.getElementById('current-year');
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
@@ -25,64 +22,28 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.toggle('active');
         });
     }
-    
-    // Initialize click events for magazine covers
-    initMagazineCovers();
 });
 
 /**
- * Initialize click events for magazine covers
- */
-function initMagazineCovers() {
-    console.log('Initializing magazine covers');
-    
-    // Get all magazine covers with onclick attribute
-    const magazineCovers = document.querySelectorAll('.magazine-cover');
-    console.log(`Found ${magazineCovers.length} magazine covers`);
-    
-    // Add event listeners to each cover
-    magazineCovers.forEach(cover => {
-        cover.addEventListener('click', function(event) {
-            // Prevent the default action
-            event.preventDefault();
-            
-            // Get the URL from the onclick attribute or data attribute
-            const embedUrl = this.getAttribute('data-url') || this.onclick?.toString().match(/'(https:\/\/[^']+)'/)?.[1];
-            
-            if (embedUrl) {
-                console.log(`Opening magazine: ${embedUrl}`);
-                openMagazine(embedUrl);
-            } else {
-                console.error('No URL found for this magazine cover');
-            }
-        });
-        
-        // Remove the inline onclick to prevent double execution
-        cover.removeAttribute('onclick');
-    });
-}
-
-/**
- * Opens a magazine in a modal with the specified embed URL
- * @param {string} embedUrl - The source URL for the embed iframe
+ * Opens a magazine in a modal
  */
 function openMagazine(embedUrl) {
-    console.log(`openMagazine called with URL: ${embedUrl}`);
+    console.log('Opening magazine:', embedUrl);
     
     const modal = document.getElementById('magazine-modal');
     const embedContainer = document.getElementById('embed-container');
     
-    if (!modal || !embedContainer) {
-        console.error('Modal or embed container not found:', {
-            modalExists: !!modal,
-            containerExists: !!embedContainer
-        });
+    if (!modal) {
+        console.error('Magazine modal not found');
         return;
     }
     
-    console.log('Creating iframe content');
+    if (!embedContainer) {
+        console.error('Embed container not found');
+        return;
+    }
     
-    // Create the iframe with a direct link option
+    // Create the iframe
     embedContainer.innerHTML = `
         <iframe 
             src="${embedUrl}" 
@@ -112,7 +73,6 @@ function openMagazine(embedUrl) {
 
 /**
  * Handle keyboard navigation
- * @param {KeyboardEvent} event - The keyboard event
  */
 function handleKeyNavigation(event) {
     if (event.key === 'Escape') {
@@ -137,7 +97,7 @@ function closeModal() {
     // Hide the modal
     modal.style.display = 'none';
     
-    // Clear the embed (stops any audio/video)
+    // Clear the embed
     if (embedContainer) {
         embedContainer.innerHTML = '';
     }
@@ -149,10 +109,10 @@ function closeModal() {
     window.removeEventListener('keydown', handleKeyNavigation);
 }
 
-// Close modal when clicking outside content
+// Global click handler to close modal when clicking outside
 window.onclick = function(event) {
     const modal = document.getElementById('magazine-modal');
-    if (event.target == modal) {
+    if (event.target === modal) {
         closeModal();
     }
 };

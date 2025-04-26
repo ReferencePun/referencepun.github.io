@@ -138,62 +138,78 @@ main {
     letter-spacing: 1px;
 }
 
-/* Portfolio grid styles with responsive CSS Grid */
+/* Masonry layout styles */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: minmax(200px, auto);
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: 10px;
+    grid-gap: 15px;
 }
 
 .portfolio-item {
     position: relative;
     overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    background-color: #fff;
 }
 
-/* Default image styling */
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
 .portfolio-item img {
     width: 100%;
-    height: auto; /* Changed from 100% to auto */
-    object-fit: contain; /* Changed from cover to contain */
+    height: auto;
+    display: block;
     transition: transform 0.5s ease;
-    max-height: 500px; /* Added to limit maximum height */
 }
 
-/* Optional: Add some padding for better spacing */
-.portfolio-item {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
+.portfolio-item:hover img {
+    transform: scale(1.02);
+}
+
+.portfolio-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio-item:hover::after {
+    opacity: 1;
+}
+
+.portfolio-item .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(100%);
     transition: transform 0.3s ease;
-    padding: 5px; /* Added padding */
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
-/* Optional: Adjust portfolio grid gap for better spacing */
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: auto; /* Changed from minmax(200px, auto) to auto */
-    gap: 2rem; /* Increased from 1.5rem */
-    margin-bottom: 3rem;
+.portfolio-item:hover .caption {
+    transform: translateY(0);
 }
 
-/* If you want smaller images overall, you can adjust column spans */
-.portfolio-item.horizontal {
-    grid-column: span 6; /* Changed from span 8 to span 6 */
-}
-
-.portfolio-item.vertical {
-    grid-column: span 4; /* Keep as is */
-    grid-row: auto; /* Changed from span 2 to auto */
-}
-
+/* Remove type-specific styling since we're letting masonry handle layout */
+.portfolio-item.horizontal,
+.portfolio-item.vertical,
 .portfolio-item.square {
-    grid-column: span 3; /* Changed from span 4 to span 3 */
-    aspect-ratio: 1 / 1;
+    grid-column: auto;
+    grid-row: auto;
 }
 
 /* Image hover effects */

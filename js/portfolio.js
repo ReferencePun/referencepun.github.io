@@ -1,6 +1,5 @@
 /**
- * Portfolio page JavaScript
- * Handles image loading, grid layout, and lightbox functionality
+ * Portfolio page JavaScript with masonry layout
  */
 
 // Portfolio images data - replace with your actual images
@@ -91,6 +90,9 @@ function loadPortfolioImages() {
         const imageElement = createImageElement(image, index);
         portfolioGrid.appendChild(imageElement);
     });
+    
+    // Apply masonry layout after images are loaded
+    applyMasonryLayout();
 }
 
 /**
@@ -124,28 +126,32 @@ function createImageElement(image, index) {
     item.appendChild(img);
     item.appendChild(caption);
     
-    // Detect actual image orientation once loaded to apply correct class
+    // When image loads, update the masonry layout
     img.onload = function() {
-        // Get natural dimensions
-        const width = this.naturalWidth;
-        const height = this.naturalHeight;
-        
-        // Determine orientation
-        let orientation;
-        if (width > height * 1.2) {
-            orientation = 'horizontal';
-        } else if (height > width * 1.2) {
-            orientation = 'vertical';
-        } else {
-            orientation = 'square';
-        }
-        
-        // Remove all orientation classes and add the correct one
-        item.classList.remove('horizontal', 'vertical', 'square');
-        item.classList.add(orientation);
+        applyMasonryLayout();
     };
     
     return item;
+}
+
+/**
+ * Applies the masonry layout to the portfolio grid
+ */
+function applyMasonryLayout() {
+    const grid = document.getElementById('portfolio-grid');
+    const items = document.querySelectorAll('.portfolio-item');
+    
+    // Reset any previous styles
+    items.forEach(item => {
+        item.style.gridRowEnd = '';
+    });
+    
+    // Apply the masonry layout
+    items.forEach(item => {
+        const height = item.getBoundingClientRect().height;
+        const rowSpan = Math.ceil(height / 10); // 10px is our grid-auto-rows value
+        item.style.gridRowEnd = `span ${rowSpan}`;
+    });
 }
 
 /**
@@ -189,7 +195,7 @@ function initLightbox() {
     
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
-        if (!lightbox.classList.contains('active')) return;
+        if (!lightbox || !lightbox.classList.contains('active')) return;
         
         if (e.key === 'Escape') {
             closeLightbox();
@@ -262,3 +268,9 @@ function navigateLightbox(direction) {
     // Open lightbox with new index
     openLightbox(newIndex);
 }
+
+// Handle window resize
+window.addEventListener('resize', applyMasonryLayout);
+
+// Apply masonry layout when all images are loaded
+window.addEventListener('load', applyMasonryLayout);
