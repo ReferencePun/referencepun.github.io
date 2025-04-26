@@ -15,9 +15,32 @@ body {
     flex-direction: column;
 }
 
+/* General link styling */
 a {
+    text-decoration: underline; /* Add underline */
+    color: #0066cc; /* Standard link blue color */
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #004499; /* Darker blue on hover */
+}
+
+/* Keep header navigation links clean */
+.nav-menu a, .logo a, .social-icons a {
     text-decoration: none;
     color: inherit;
+}
+
+/* Style links in video descriptions */
+.video-description a {
+    color: #0066cc;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.video-description a:hover {
+    color: #004499;
 }
 
 img {
@@ -884,6 +907,22 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
 .video-description {
     margin-top: 1rem;
     font-size: 1.1rem;
+}
+
+.full-width-video {
+    position: relative;
+    width: 100%;
+    max-width: 1600px; /* Increased from 1200px */
+    padding-top: 56.25%; /* Maintains 16:9 aspect ratio */
+    margin: 0 auto;
+}
+
+.full-width-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 /* Landscapes page styles */
