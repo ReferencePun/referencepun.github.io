@@ -43,6 +43,7 @@
             transition: transform 0.3s ease;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             display: block;
+            flex-grow: 1;
         }
 
         .magazine-cover:hover {
@@ -72,11 +73,9 @@
             justify-content: center;
         }
 
-        /* Remove the max-height constraint to match others */
         .centered-magazine .magazine-cover img {
             width: 100%;
             height: auto;
-            /* max-height: 466px; - Removed this line */
             object-fit: cover;
         }
 
