@@ -268,17 +268,6 @@
                 <button class="close-button" onclick="closeModal()">&times;</button>
                 <div class="embed-container" id="embed-container">
                     <!-- Embed will be loaded here -->
-                    
-                    <!-- Navigation overlay -->
-                    <div class="navigation-overlay" id="nav-overlay">
-                        <div class="nav-buttons">
-                            <button class="nav-btn" onclick="prevPage()">&larr;</button>
-                            <button class="nav-btn" onclick="nextPage()">&rarr;</button>
-                        </div>
-                        <div class="nav-instructions">
-                            Use arrows to navigate pages or press ← → keys
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -292,18 +281,19 @@
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // Current iframe reference to control page navigation
-        let currentIframe = null;
-        
         // Magazine Modal Functions
         function openMagazine(embedUrl) {
             const modal = document.getElementById('magazine-modal');
             const embedContainer = document.getElementById('embed-container');
             
-            // Create the iframe
+            // Create the iframe with modified URL for direct navigation control
+            // Adding parameters to allow for external control if the platform supports it
+            const enhancedUrl = new URL(embedUrl);
+            enhancedUrl.searchParams.append('allowExternalNavigation', 'true');
+            
             embedContainer.innerHTML = `
                 <iframe 
-                    src="${embedUrl}" 
+                    src="${enhancedUrl.toString()}" 
                     seamless="seamless" 
                     scrolling="no" 
                     frameborder="0" 
@@ -315,24 +305,76 @@
                 </iframe>
                 <div class="navigation-overlay" id="nav-overlay">
                     <div class="nav-buttons">
-                        <button class="nav-btn" onclick="prevPage()">&larr;</button>
-                        <button class="nav-btn" onclick="nextPage()">&rarr;</button>
+                        <button class="nav-btn" id="prev-btn">&larr;</button>
+                        <button class="nav-btn" id="next-btn">&rarr;</button>
                     </div>
                     <div class="nav-instructions">
-                        Use arrows to navigate pages or press ← → keys
+                        Use arrows to navigate or open in a <a href="${embedUrl}" target="_blank" style="color: blue; text-decoration: underline;">new window</a>
                     </div>
                 </div>
             `;
-            
-            // Store reference to the iframe for navigation
-            currentIframe = document.getElementById('magazine-iframe');
             
             // Display the modal
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden'; // Prevent scrolling
             
-            // Set up key navigation for the iframe
+            // Better approach for navigation - using direct iframe interaction after it's loaded
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    navigateMagazine('prev');
+                });
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    navigateMagazine('next');
+                });
+            }
+            
+            // Set up keyboard navigation
             window.addEventListener('keydown', handleKeyNavigation);
+        }
+        
+        function navigateMagazine(direction) {
+            const iframe = document.getElementById('magazine-iframe');
+            if (!iframe) return;
+            
+            // Method 1: Try postMessage
+            iframe.contentWindow.postMessage({
+                action: 'navigate',
+                direction: direction
+            }, '*');
+            
+            // Method 2: Try to access the FlipBook API if it exists
+            try {
+                const flipBook = iframe.contentWindow.FlipBook;
+                if (flipBook && typeof flipBook.turnPage === 'function') {
+                    direction === 'next' ? flipBook.turnPage(1) : flipBook.turnPage(-1);
+                    return;
+                }
+            } catch (e) {
+                console.log('Could not access FlipBook API directly');
+            }
+            
+            // Method 3: Try to simulate arrow key events in the iframe
+            try {
+                iframe.contentWindow.focus();
+                const keyCode = direction === 'next' ? 39 : 37; // right or left arrow
+                const keyEvent = new KeyboardEvent('keydown', {
+                    bubbles: true,
+                    cancelable: true,
+                    keyCode: keyCode
+                });
+                iframe.contentDocument.dispatchEvent(keyEvent);
+            } catch (e) {
+                console.log('Could not dispatch key events to iframe');
+            }
+            
+            // Method 4: As a fallback, offer direct link to open in new window
+            console.log('Navigation may require opening in a new window for full control');
         }
         
         function closeModal() {
@@ -350,55 +392,18 @@
             
             // Remove key navigation event listener
             window.removeEventListener('keydown', handleKeyNavigation);
-            
-            // Clear iframe reference
-            currentIframe = null;
-        }
-        
-        // Navigate to previous page
-        function prevPage() {
-            simulateArrowKey('ArrowLeft');
-        }
-        
-        // Navigate to next page
-        function nextPage() {
-            simulateArrowKey('ArrowRight');
-        }
-        
-        // Simulate arrow key press in the iframe
-        function simulateArrowKey(key) {
-            if (currentIframe) {
-                // Focus the iframe first
-                currentIframe.focus();
-                
-                // Then simulate key press
-                const keyEvent = new KeyboardEvent('keydown', {
-                    key: key,
-                    code: key,
-                    keyCode: key === 'ArrowLeft' ? 37 : 39,
-                    bubbles: true,
-                    cancelable: true
-                });
-                
-                // Dispatch to the iframe
-                currentIframe.contentWindow.document.dispatchEvent(keyEvent);
-                
-                // Alternative: use postMessage to communicate with the iframe
-                currentIframe.contentWindow.postMessage({
-                    action: 'navigate',
-                    direction: key === 'ArrowLeft' ? 'prev' : 'next'
-                }, '*');
-            }
         }
         
         // Handle keyboard navigation
         function handleKeyNavigation(event) {
-            if (event.key === 'ArrowLeft') {
-                prevPage();
+            if (event.key === 'ArrowLeft' || event.key === 'Left') {
+                navigateMagazine('prev');
                 event.preventDefault();
-            } else if (event.key === 'ArrowRight') {
-                nextPage();
+            } else if (event.key === 'ArrowRight' || event.key === 'Right') {
+                navigateMagazine('next');
                 event.preventDefault();
+            } else if (event.key === 'Escape') {
+                closeModal();
             }
         }
         
@@ -409,13 +414,6 @@
                 closeModal();
             }
         }
-        
-        // Close modal with escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
         
         // Mobile menu toggle
         document.addEventListener('DOMContentLoaded', function() {
