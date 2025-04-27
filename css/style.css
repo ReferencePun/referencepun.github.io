@@ -17,13 +17,13 @@ body {
 
 /* General link styling */
 a {
-    text-decoration: underline; /* Add underline */
-    color: #0066cc; /* Standard link blue color */
+    text-decoration: underline;
+    color: #0066cc;
     transition: color 0.2s ease;
 }
 
 a:hover {
-    color: #004499; /* Darker blue on hover */
+    color: #004499;
 }
 
 /* Keep header navigation links clean */
@@ -151,6 +151,7 @@ main {
     margin: 0 auto;
     padding: 2rem;
     flex-grow: 1;
+    width: 95%; /* Take up more screen space */
 }
 
 .page-title {
@@ -161,50 +162,60 @@ main {
     letter-spacing: 1px;
 }
 
-/* 
-This is a simplified masonry layout that uses CSS columns instead of grid.
-It's more reliable across browsers and doesn't require complex JavaScript calculations.
-*/
-
-/* Larger column-based masonry portfolio grid */
+/* Portfolio-grid */
 .portfolio-grid {
-    column-count: 3; /* Reduced from 4 to 3 columns for larger images */
-    column-gap: 20px; /* Slightly increased gap between columns */
-    width: 100%;
+    display: grid;
+    /* Define the grid with consistent row heights */
+    grid-template-columns: repeat(3, 1fr);
+    /* Create a consistent grid where 2 rows = 1 tall image */
+    grid-auto-rows: minmax(15vw, auto);
+    grid-gap: 20px;
     max-width: 1800px;
     margin: 0 auto 3rem;
-    padding: 0 20px; /* Add padding for breathing room */
-}
-
-.portfolio-item {
-    break-inside: avoid;
-    margin-bottom: 20px; /* Increased spacing between items */
+    padding: 0 0px;
+  }
+  
+  .portfolio-item {
     position: relative;
     overflow: hidden;
-    border-radius: 0px; /* Rounded corners */
+    border-radius: 0px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.12);
     transition: transform 0.3s ease;
     background-color: #fff;
-    display: block;
-}
-
-.portfolio-item:hover {
+  }
+  
+  /* Make horizontal images fit one row */
+  .portfolio-item.horizontal {
+    grid-row: span 1;
+  }
+  
+  /* Make vertical images span two rows exactly */
+  .portfolio-item.vertical {
+    grid-row: span 2;
+  }
+  
+  /* Make square images span approximately 1.5 rows */
+  .portfolio-item.square {
+    grid-row: span 1.5;
+  }
+  
+  .portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures images maintain aspect ratio while filling container */
+  }
+  
+  .portfolio-item:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.portfolio-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s ease;
-}
-
-.portfolio-item:hover img {
+  }
+  
+  /* Keep the hover effects from your original CSS */
+  .portfolio-item:hover img {
     transform: scale(1.02);
-}
-
-.portfolio-item::after {
+  }
+  
+  .portfolio-item::after {
     content: '';
     position: absolute;
     top: 0;
@@ -214,13 +225,13 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     background: rgba(0, 0, 0, 0.05);
     opacity: 0;
     transition: opacity 0.3s ease;
-}
-
-.portfolio-item:hover::after {
+  }
+  
+  .portfolio-item:hover::after {
     opacity: 1;
-}
-
-.portfolio-item .caption {
+  }
+  
+  .portfolio-item .caption {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -231,35 +242,41 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     transition: transform 0.3s ease;
     font-size: 0.9rem;
     font-weight: 400;
-}
-
-.portfolio-item:hover .caption {
+  }
+  
+  .portfolio-item:hover .caption {
     transform: translateY(0);
-}
-
-/* Responsive adjustments for larger images */
-@media (max-width: 1400px) {
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1400px) {
     .portfolio-grid {
-        column-count: 2; /* 2 columns on medium-large screens */
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: minmax(20vw, auto);
     }
-}
-
-@media (max-width: 768px) {
+  }
+  
+  @media (max-width: 768px) {
     .portfolio-grid {
-        column-count: 1; /* Single column on tablets for even larger images */
-        column-gap: 0;
+      grid-template-columns: 1fr;
+      grid-auto-rows: minmax(30vw, auto);
     }
     
-    .portfolio-item {
-        margin-bottom: 20px;
+    .portfolio-item.horizontal, 
+    .portfolio-item.vertical,
+    .portfolio-item.square {
+      grid-column: span 1;
     }
-}
-
-@media (max-width: 480px) {
-    .portfolio-grid {
-        column-count: 1; /* Single column on phones */
+    
+    /* On mobile maintain some distinction in image heights */
+    .portfolio-item.horizontal {
+      grid-row: span 1;
     }
-}
+    
+    .portfolio-item.vertical {
+      grid-row: span 1.5;
+    }
+  }
 
 /* Lightbox styles */
 .lightbox {
@@ -344,13 +361,28 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
 }
 
 /* Transmission Magazine page styles */
-
-/* Make sure magazine grid items display side by side */
+/* Magazine grid layout */
 .magazine-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin: 3rem 1rem;
+}
+
+.magazines-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem auto;
+}
+
+.magazine-column, .centered-magazine {
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
 /* Magazine issue styles */
@@ -371,17 +403,36 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     transform: translateY(-5px);
 }
 
+.magazine-title {
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .magazine-cover {
-    position: relative;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    overflow: hidden;
     cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: block;
+    position: relative;
+    padding-bottom: 133%;
+    height: 0;
+    overflow: hidden;
+}
+
+.magazine-cover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 .magazine-cover img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    transition: transform 0.5s ease;
+    height: 100%;
+    object-fit: cover;
 }
 
 .magazine-issue:hover .magazine-cover img {
@@ -456,7 +507,7 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     margin-bottom: 2.5rem;
 }
 
-/* Magazine lightbox styles */
+/* Magazine lightbox and modal styles */
 .magazine-lightbox {
     display: none;
     position: fixed;
@@ -509,7 +560,7 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     border: none;
 }
 
-/* Modal styles */
+/* PDF Viewer Modal */
 #magazine-modal {
     display: none;
     position: fixed;
@@ -568,29 +619,46 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e0e0e0;
+    background-color: #e8e8e8;
     padding: 20px;
+    height: calc(100% - 60px); /* Fixed height */
 }
 
-#pdf-canvas {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    background-color: white;
+/* Page container for double-page view */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Gap between pages */
+    width: 100%;
+    height: 100%;
     max-height: 100%;
+}
+
+/* Canvas styling */
+#pdf-canvas, #second-pdf-canvas {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border-radius: 2px;
+    background-color: white;
+    max-height: 100%; /* Limit height to container */
 }
 
 /* Controls */
 .pdf-controls {
-    height: 50px;
+    height: auto;
+    min-height: 50px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    padding: 0 20px;
+    padding: 10px 20px;
     background-color: #ffffff;
     border-top: 1px solid #e0e0e0;
+    gap: 5px;
 }
 
 .nav-button {
-    background: none;
+    background: linear-gradient(to bottom, #ffffff, #f5f5f5);
     border: 1px solid #ccc;
     border-radius: 3px;
     padding: 5px 15px;
@@ -601,7 +669,7 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
 }
 
 .nav-button:hover {
-    background-color: #f0f0f0;
+    background: linear-gradient(to bottom, #f5f5f5, #e9e9e9);
 }
 
 .nav-button:disabled {
@@ -614,14 +682,38 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     font-family: 'Cormorant Garamond', Times, serif;
 }
 
+/* View controls */
+.view-controls {
+    display: flex;
+    margin: 0 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.view-button {
+    background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', Times, serif;
+    transition: all 0.2s ease;
+}
+
+.view-button:hover {
+    background: linear-gradient(to bottom, #f5f5f5, #e9e9e9);
+}
+
+/* Zoom controls */
 .zoom-controls {
-    margin-left: auto;
     display: flex;
     align-items: center;
+    margin-left: auto;
 }
 
 .zoom-button {
-    background: none;
+    background: linear-gradient(to bottom, #ffffff, #f5f5f5);
     border: 1px solid #ccc;
     width: 30px;
     height: 30px;
@@ -629,6 +721,13 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     cursor: pointer;
     margin: 0 5px;
     font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zoom-button:hover {
+    background: linear-gradient(to bottom, #f5f5f5, #e9e9e9);
 }
 
 /* Loading and error indicators */
@@ -679,112 +778,24 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
     font-family: 'Cormorant Garamond', Times, serif;
 }
 
-/* Magazine covers still need consistent appearance */
-.magazine-cover {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: block;
-    position: relative;
-    padding-bottom: 133%;
-    height: 0;
-    overflow: hidden;
+/* Fullscreen mode */
+.modal-content:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    border-radius: 0;
 }
 
-.magazine-cover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+.modal-content:fullscreen .pdf-container {
+    height: calc(100vh - 80px);
 }
 
-.magazine-cover img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .modal-content {
-        width: 95%;
-        margin: 20px auto;
-        height: 90%;
-    }
-    
-    .pdf-controls {
-        flex-wrap: wrap;
-        height: auto;
-        padding: 10px;
-    }
-    
-    .zoom-controls {
-        margin-left: 0;
-        margin-top: 10px;
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .page-info {
-        font-size: 14px;
-    }
-    
-    .nav-button {
-        padding: 5px 10px;
-        font-size: 14px;
-    }
-}
-
-/* Make sure images and title heights are consistent */
-.magazine-column, .centered-magazine {
-    flex: 1;
-    min-width: 250px;
-    max-width: 350px;
-    margin-bottom: 40px;
-    text-align: center;
-}
-
-.magazine-title {
-    height: 3em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.magazine-cover {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: block;
-    position: relative;
-    padding-bottom: 133%; /* Creates a consistent aspect ratio */
-    height: 0;
-    overflow: hidden;
-}
-
-.magazine-cover img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.centered-magazine .magazine-cover {
-    /* Same styling as magazine-column covers */
-    padding-bottom: 133%;
-    height: 0;
-}
-
-.centered-magazine .magazine-cover img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.modal-content:fullscreen .close-button {
+    top: 20px;
+    right: 20px;
+    color: white;
 }
 
 /* Video page styles */
@@ -822,9 +833,9 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
 /* Larger video containers */
 .large-video {
     position: relative;
-    width: 95%;
-    max-width: 1600px; /* Increased from 1200px */
-    padding-top: 56.25%; /* Maintains 16:9 aspect ratio */
+    width: 100%;
+    max-width: 1600px;
+    padding-top: 56.25%;
     margin: 0 auto;
 }
 
@@ -840,25 +851,8 @@ It's more reliable across browsers and doesn't require complex JavaScript calcul
 .video-section {
     margin: 4rem 0;
     width: 100%;
-    max-width: 1800px; /* Very wide maximum */
+    max-width: 1800px;
     margin: 0 auto;
-}
-
-/* Make main container wider for videos */
-main {
-    max-width: 1800px; /* Increased from original value */
-    width: 95%; /* Take up more screen space */
-}
-
-/* Link styling */
-.video-description a {
-    color: #0066cc;
-    text-decoration: underline;
-    font-weight: 500;
-}
-
-.video-description a:hover {
-    color: #004499;
 }
 
 /* Landscapes page styles */
@@ -867,96 +861,170 @@ main {
     justify-content: space-between;
     gap: 2rem;
     margin-bottom: 3rem;
+    flex-wrap: wrap;
 }
 
 .landscape-category {
     flex: 1;
+    min-width: 200px;
     max-width: 33%;
 }
 
 .category-thumbnail {
     cursor: pointer;
     transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
 }
 
 .category-thumbnail:hover {
     transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 .category-thumbnail img {
     width: 100%;
-    height: 250px;
+    height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.category-thumbnail:hover img {
+    transform: scale(1.05);
 }
 
 .category-thumbnail h3 {
     text-align: center;
     margin-top: 1rem;
+    padding-bottom: 0.5rem;
 }
 
+/* Updated grid-based layout for the landscape gallery - replace existing .landscape-gallery */
 .landscape-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(15vw, auto);
+    grid-gap: 20px;
+    max-width: 1800px;
+    margin: 2rem auto;
+    padding: 0 0px;
 }
 
-/* Writing page styles */
-.writing-container {
-    max-width: 800px;
-    margin: 0 auto;
+/* Portfolio item styles for landscape gallery */
+.landscape-gallery .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease;
+    background-color: #fff;
 }
 
-.writing-entry {
-    margin-bottom: 4rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #eee;
+/* Make horizontal images fit one row */
+.landscape-gallery .portfolio-item.horizontal {
+    grid-row: span 1;
 }
 
-.writing-entry:last-child {
-    border-bottom: none;
+/* Make vertical images span two rows exactly */
+.landscape-gallery .portfolio-item.vertical {
+    grid-row: span 2;
 }
 
-.writing-entry h2 {
-    font-size: 1.8rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
+/* Make square images span approximately 1.5 rows */
+.landscape-gallery .portfolio-item.square {
+    grid-row: span 1.5;
 }
 
-.writing-meta {
-    margin-bottom: 1.5rem;
+.landscape-gallery .portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images maintain aspect ratio while filling container */
+    transition: transform 0.5s ease;
+}
+
+.landscape-gallery .portfolio-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.landscape-gallery .portfolio-item:hover img {
+    transform: scale(1.02);
+}
+
+.landscape-gallery .portfolio-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.landscape-gallery .portfolio-item:hover::after {
+    opacity: 1;
+}
+
+.landscape-gallery .portfolio-item .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
     font-size: 0.9rem;
-    color: #777;
+    font-weight: 400;
 }
 
-.writing-date {
-    margin-right: 1rem;
+.landscape-gallery .portfolio-item:hover .caption {
+    transform: translateY(0);
 }
 
-.writing-category {
-    padding: 0.2rem 0.5rem;
-    background-color: #f5f5f5;
-    border-radius: 3px;
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+    .landscape-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(20vw, auto);
+    }
+    
+    .landscape-category {
+        max-width: 45%;
+    }
 }
 
-.writing-content p {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-
-.read-more {
-    margin-top: 1.5rem;
-}
-
-.read-more a {
-    color: #555;
-    border-bottom: 1px solid #ddd;
-    transition: all 0.3s ease;
-}
-
-.read-more a:hover {
-    color: #000;
-    border-color: #999;
+@media (max-width: 768px) {
+    .landscape-categories {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .landscape-category {
+        max-width: 100%;
+    }
+    
+    .landscape-gallery {
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(30vw, auto);
+    }
+    
+    .landscape-gallery .portfolio-item.horizontal, 
+    .landscape-gallery .portfolio-item.vertical,
+    .landscape-gallery .portfolio-item.square {
+        grid-column: span 1;
+    }
+    
+    /* On mobile maintain some distinction in image heights */
+    .landscape-gallery .portfolio-item.horizontal {
+        grid-row: span 1;
+    }
+    
+    .landscape-gallery .portfolio-item.vertical {
+        grid-row: span 1.5;
+    }
 }
 
 /* Article page styles */
@@ -1081,6 +1149,12 @@ footer {
 }
 
 /* Responsive styles */
+@media (max-width: 1400px) {
+    .portfolio-grid {
+        column-count: 2;
+    }
+}
+
 @media (max-width: 1200px) {
     .portfolio-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -1153,8 +1227,12 @@ footer {
     }
     
     .portfolio-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        grid-gap: 10px;
+        column-count: 1;
+        column-gap: 0;
+    }
+    
+    .portfolio-item {
+        margin-bottom: 20px;
     }
     
     .magazine-grid {
@@ -1177,6 +1255,34 @@ footer {
     
     .landscape-category {
         max-width: 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+        height: 90%;
+    }
+    
+    .pdf-controls {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px;
+    }
+    
+    .zoom-controls {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .page-info {
+        font-size: 14px;
+    }
+    
+    .nav-button {
+        padding: 5px 10px;
+        font-size: 14px;
     }
 }
 

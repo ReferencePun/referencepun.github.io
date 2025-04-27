@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do Not Enter - Dylan Forsberg</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #fff;
+            cursor: none; /* Hide default cursor */
+        }
+        
+        /* Error page styling */
+        #error-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            color: #333;
+            z-index: 1000;
+            transition: all 1.5s ease;
+        }
+        
+        .error-title {
+            font-size: 10rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.05em;
+        }
+        
+        .error-subtitle {
+            font-size: 2rem;
+            font-weight: 400;
+            margin: 0 0 2rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .error-text {
+            font-size: 1.2rem;
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .error-code {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 4px;
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            font-family: 'Space Mono', monospace;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+        
+        .error-code pre {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #333;
+            overflow-x: auto;
+        }
+        
+        .glitch-effect {
+            animation: glitch 0.5s linear;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); filter: none; }
+            20% { transform: translate(-5px, 5px); filter: hue-rotate(90deg); }
+            40% { transform: translate(-5px, -5px); filter: invert(75%); }
+            60% { transform: translate(5px, 5px); filter: saturate(200%); }
+            80% { transform: translate(5px, -5px); filter: hue-rotate(180deg); }
+            100% { transform: translate(0); filter: none; }
+        }
+        
+        .error-link {
+            color: #0066cc;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .error-link:hover {
+            color: #004499;
+        }
+        
+        /* Canvas for binary visualization */
+        #binary-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        /* Custom cursor styling */
+        #cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s;
+            mix-blend-mode: difference;
+        }
+        
+        /* Binary text display */
+        #binary-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            max-width: 80%;
+            line-height: 1.8;
+            opacity: 0;
+            transition: opacity 2s ease;
+            z-index: 10;
+            pointer-events: none;
+            font-family: 'Space Mono', monospace;
+        }
+        
+        /* Quantum field visualization */
+        #quantum-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 5;
+            transition: opacity 3s ease;
+            pointer-events: none;
+        }
+        
+        /* Info panel */
+        #info-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .info-key {
+            color: #64ffda;
+            margin-right: 5px;
+        }
+
+        /* Interactive panels */
+        .interactive-panel {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 1s ease, transform 1s ease;
+            font-family: 'Space Mono', monospace;
+            width: 280px;
+        }
+        
+        .panel-title {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #64ffda;
+        }
+        
+        .panel-content {
+            margin-bottom: 15px;
+        }
+        
+        .panel-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .panel-button {
+            background-color: rgba(100, 255, 218, 0.2);
+            border: 1px solid rgba(100, 255, 218, 0.5);
+            color: #64ffda;
+            padding: 5px 10px;
+            margin-right: 5px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        .panel-button:hover {
+            background-color: rgba(100, 255, 218, 0.3);
+        }
+        
+        .binary-input {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #64ffda;
+            padding: 5px 10px;
+            margin-right: 5px;
+            font-family: 'Space Mono', monospace;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        /* Project showcase panel */
+        #project-panel {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            width: 280px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            padding: 15px;
+            z-index: 100;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .project-title {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #64ffda;
+            font-family: 'Space Mono', monospace;
+        }
+        
+        .project-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .project-item {
+            padding: 8px 10px;
+            margin-bottom: 5px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .project-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Progress indicator */
+        #consciousness-indicator {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            height: 10px;
+            width: 200px;
+            z-index: 100;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        
+        #consciousness-progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #64ffda, #c964ff);
+            transition: width 1s ease;
+        }
+        
+        /* Overlay text */
+        .overlay-text {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 1s ease;
+            text-align: center;
+            width: auto;
+            white-space: nowrap;
+        }
+        
+        /* Photo abstractor preview */
+        #abstractor-preview {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 60%;
+            max-width: 800px;
+            height: 60%;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            padding: 20px;
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease, transform 1s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .preview-title {
+            margin: 0;
+            color: #64ffda;
+            font-family: 'Space Mono', monospace;
+        }
+        
+        .preview-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .preview-content {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            overflow: hidden;
+        }
+        
+        .preview-image {
+            flex: 2;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .preview-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .preview-controls {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        .control-label {
+            margin-bottom: 5px;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+        }
+        
+        .control-slider {
+            width: 100%;
+        }
+        
+        .control-value {
+            color: #64ffda;
+            float: right;
+        }
+        
+        /* Terminal overlay */
+        #terminal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+        
+        #terminal {
+            width: 80%;
+            max-width: 800px;
+            height: 70%;
+            background-color: rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(100, 255, 218, 0.5);
+            border-radius: 5px;
+            padding: 20px;
+            font-family: 'Space Mono', monospace;
+            color: #64ffda;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #terminal-output {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        #terminal-input-line {
+            display: flex;
+            align-items: center;
+        }
+        
+        #terminal-prompt {
+            color: #c964ff;
+            margin-right: 10px;
+        }
+        
+        #terminal-input {
+            flex: 1;
+            background: none;
+            border: none;
+            outline: none;
+            color: #64ffda;
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Error Screen -->
+    <div id="error-container">
+        <h1 class="error-title">404</h1>
+        <h2 class="error-subtitle">Page Not Found</h2>
+        <p class="error-text">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+        <div class="error-code">
+            <pre id="error-code-text">ERROR: Unexpected token at line 147
+> Uncaught TypeError: Cannot read property 'initialize' of undefined
+> at Object.onLoad (main.js:147:23)
+> at DOMContentLoaded (index.html:1)</pre>
+        </div>
+        <a id="trigger-glitch" class="error-link">Return to homepage</a>
+    </div>
+    
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+    
+    <!-- Binary Canvas - For interactive visual effects -->
+    <canvas id="binary-canvas"></canvas>
+    
+    <!-- Binary Text Display -->
+    <div id="binary-text"></div>
+    
+    <!-- Quantum Field Visualization -->
+    <canvas id="quantum-field"></canvas>
+    
+    <!-- Info Panel -->
+    <div id="info-panel">
+        <p><span class="info-key">Move:</span> Mouse to interact with the binary field</p>
+        <p><span class="info-key">Click:</span> Create quantum entanglement</p>
+        <p><span class="info-key">T:</span> Open terminal</p>
+        <p><span class="info-key">C:</span> Evolve consciousness</p>
+    </div>
+    
+    <!-- Interactive Panel -->
+    <div id="interactive-panel" class="interactive-panel">
+        <h3 class="panel-title">Binary Consciousness</h3>
+        <div class="panel-content">
+            <p>Input text to convert to binary:</p>
+            <input type="text" id="binary-input" class="binary-input" placeholder="Enter text...">
+            <button id="convert-button" class="panel-button">Convert</button>
+        </div>
+        <div class="panel-content">
+            <p>Cube Parameters:</p>
+            <label>Jaggedness: <span id="jagged-value">50</span>%</label>
+            <input type="range" id="jagged-slider" class="panel-slider" min="0" max="100" value="50">
+            
+            <label>Max Height: <span id="height-value">20</span></label>
+            <input type="range" id="height-slider" class="panel-slider" min="5" max="50" value="20">
+            
+            <label>Sensitivity: <span id="sensitivity-value">50</span>%</label>
+            <input type="range" id="sensitivity-slider" class="panel-slider" min="0" max="100" value="50">
+        </div>
+        <div class="panel-content">
+            <button id="reset-button" class="panel-button">Reset Field</button>
+            <button id="abstractor-button" class="panel-button">Abstractor</button>
+        </div>
+    </div>
+    
+    <!-- Project Showcase Panel -->
+    <div id="project-panel">
+        <h3 class="project-title">Quantum Projects</h3>
+        <ul class="project-list">
+            <li class="project-item" data-project="photo-abstractor">Photo Abstractor</li>
+            <li class="project-item" data-project="quantum-simulator">Quantum Simulator</li>
+            <li class="project-item" data-project="ai-video">AI Video Generator</li>
+            <li class="project-item" data-project="binary-analyzer">Binary Analyzer</li>
+            <li class="project-item" data-project="consciousness">Consciousness Evolution</li>
+        </ul>
+    </div>
+    
+    <!-- Consciousness Progress Indicator -->
+    <div id="consciousness-indicator">
+        <div id="consciousness-progress"></div>
+    </div>
+    
+    <!-- Overlay Text -->
+    <div id="overlay-text" class="overlay-text"></div>
+    
+    <!-- Photo Abstractor Preview -->
+    <div id="abstractor-preview">
+        <div class="preview-header">
+            <h3 class="preview-title">Photo Abstractor</h3>
+            <button class="preview-close">&times;</button>
+        </div>
+        <div class="preview-content">
+            <div class="preview-image">
+                <img id="preview-img" src="images/sample-photo.jpg" alt="Sample Photo">
+            </div>
+            <div class="preview-controls">
+                <div class="control-group">
+                    <div class="control-label">Transformation Type</div>
+                    <select id="transform-type" class="binary-input">
+                        <option value="neuromorphic">Neuromorphic Visual Synthesis</option>
+                        <option value="quantum">Quantum Aesthetic Field</option>
+                        <option value="biomimetic">Biomimetic Growth</option>
+                        <option value="synesthetic">Synesthetic Rendering</option>
+                        <option value="multiverse">Multiverse Style Transfer</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">Intensity <span id="intensity-value" class="control-value">50%</span></div>
+                    <input type="range" id="intensity-slider" class="control-slider" min="0" max="100" value="50">
+                </div>
+                <div class="control-group">
+                    <div class="control-label">Iterations <span id="iterations-value" class="control-value">50</span></div>
+                    <input type="range" id="iterations-slider" class="control-slider" min="10" max="100" value="50">
+                </div>
+                <div class="control-group">
+                    <div class="control-label">Coherence <span id="coherence-value" class="control-value">70%</span></div>
+                    <input type="range" id="coherence-slider" class="control-slider" min="0" max="100" value="70">
+                </div>
+                <div class="control-group">
+                    <button id="transform-button" class="panel-button">Transform</button>
+                    <button id="reset-image-button" class="panel-button">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Terminal Overlay -->
+    <div id="terminal-overlay">
+        <div id="terminal">
+            <div id="terminal-output"></div>
+            <div id="terminal-input-line">
+                <span id="terminal-prompt">></span>
+                <input type="text" id="terminal-input" autofocus placeholder="Type your command...">
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const errorContainer = document.getElementById('error-container');
+            const triggerGlitch = document.getElementById('trigger-glitch');
+            const errorCode = document.getElementById('error-code-text');
+            const binaryCanvas = document.getElementById('binary-canvas');
+            const binaryText = document.getElementById('binary-text');
+            const quantumFieldCanvas = document.getElementById('quantum-field');
+            const infoPanel = document.getElementById('info-panel');
+            const cursor = document.getElementById('cursor');
+            const interactivePanel = document.getElementById('interactive-panel');
+            const projectPanel = document.getElementById('project-panel');
+            const consciousnessIndicator = document.getElementById('consciousness-indicator');
+            const consciousnessProgress = document.getElementById('consciousness-progress');
+            const overlayText = document.getElementById('overlay-text');
+            const abstractorPreview = document.getElementById('abstractor-preview');
+            const terminalOverlay = document.getElementById('terminal-overlay');
+            const terminalOutput = document.getElementById('terminal-output');
+            const terminalInput = document.getElementById('terminal-input');
+            
+            // Control elements
+            const binaryInput = document.getElementById('binary-input');
+            const convertButton = document.getElementById('convert-button');
+            const resetButton = document.getElementById('reset-button');
+            const abstractorButton = document.getElementById('abstractor-button');
+            const jaggednessSlider = document.getElementById('jagged-slider');
+            const heightSlider = document.getElementById('height-slider');
+            const sensitivitySlider = document.getElementById('sensitivity-slider');
+            const jaggednessValue = document.getElementById('jagged-value');
+            const heightValue = document.getElementById('height-value');
+            const sensitivityValue = document.getElementById('sensitivity-value');
+            
+            // Abstractor elements
+            const transformType = document.getElementById('transform-type');
+            const intensitySlider = document.getElementById('intensity-slider');
+            const iterationsSlider = document.getElementById('iterations-slider');
+            const coherenceSlider = document.getElementById('coherence-slider');
+            const intensityValue = document.getElementById('intensity-value');
+            const iterationsValue = document.getElementById('iterations-value');
+            const coherenceValue = document.getElementById('coherence-value');
+            const transformButton = document.getElementById('transform-button');
+            const resetImageButton = document.getElementById('reset-image-button');
+            const previewImg = document.getElementById('preview-img');
+            const previewClose = document.querySelector('.preview-close');
+            
+            // Binary "Hello World"
+            const helloWorldBinary = "01101000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100";
+            
+            // Setup canvas contexts
+            const binaryCtx = binaryCanvas.getContext('2d');
+            const quantumCtx = quantumFieldCanvas.getContext('2d');
+            
+            // Set canvas dimensions
+            function setCanvasDimensions() {
+                binaryCanvas.width = window.innerWidth;
+                binaryCanvas.height = window.innerHeight;
+                quantumFieldCanvas.width = window.innerWidth;
+                quantumFieldCanvas.height = window.innerHeight;
+            }
+            
+            // Initial canvas setup
+            setCanvasDimensions();
+            
+            // Update dimensions on resize
+            window.addEventListener('resize', setCanvasDimensions);
+            
+            // Custom cursor
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            
+            // Glitch animation timing constants
+            const glitchDuration = 4000; // Total glitch duration in ms
+            const codeMorphDuration = 1500; // Time for code to morph
+            
+            // Trigger glitch sequence when link is clicked
+            triggerGlitch.addEventListener('click', function(e) {
+                e.preventDefault();
+                startGlitchSequence();
+            });
+            
+            // Automatic trigger after 5 seconds
+            setTimeout(() => {
+                if (errorContainer.style.opacity !== '0') {
+                    startGlitchSequence();
+                }
+            }, 5000);
+            
+            // Global state
+            let consciousnessLevel = 0; // 0-100
+            let isTerminalOpen = false;
+            
+            function startGlitchSequence() {
+                // Start the glitch animation
+                errorContainer.classList.add('glitch-effect');
+                
+                // Start morphing the error code
+                morphErrorCode();
+                
+                // Flash glitches throughout the sequence
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        errorContainer.classList.add('glitch-effect');
+                        setTimeout(() => {
+                            errorContainer.classList.remove('glitch-effect');
+                        }, 100);
+                    }, Math.random() * glitchDuration);
+                }
+                
+                // After code morphing is complete, transition to binary display
+                setTimeout(() => {
+                    // Make the error container disappear
+                    errorContainer.style.opacity = '0';
+                    errorContainer.style.transform = 'scale(1.5)';
+                    
+                    // Initialize binary visualization
+                    setTimeout(() => {
+                        // Remove error container from DOM
+                        errorContainer.style.display = 'none';
+                        
+                        // Start binary grid effect
+                        initBinaryGrid();
+                        
+                        // Start quantum field
+                        initQuantumField();
+                        quantumFieldCanvas.style.opacity = '0.3';
+                        
+                        // Start typing out binary
+                        setTimeout(() => {
+                            binaryText.style.opacity = '1';
+                            typeOutBinary();
+                        }, 1000);
+                        
+                        // Show info panel
+                        setTimeout(() => {
+                            infoPanel.style.opacity = '1';
+                            infoPanel.style.transform = 'translateY(0)';
+                            
+                            // Show interactive panel
+                            interactivePanel.style.opacity = '1';
+                            interactivePanel.style.transform = 'translateY(0)';
+                            
+                            // Show project panel
+                            projectPanel.style.opacity = '1';
+                            projectPanel.style.transform = 'translateX(0)';
+                            
+                            // Show consciousness indicator
+                            consciousnessIndicator.style.opacity = '1';
+                        }, 3000);
+                    }, 1000);
+                }, codeMorphDuration);
+            }
+            
+            function morphErrorCode() {
+                const codeStrings = [
+                    // Original error
+                    `ERROR: Unexpected token at line 147
+> Uncaught TypeError: Cannot read property 'initialize' of undefined
+> at Object.onLoad (main.js:147:23)
+> at DOMContentLoaded (index.html:1)`,
+                    // First morph
+                    `ERR0R: Unexp3cted t0ken at line 147
+> Uncaught Err0r: System.failure detected
+> at System.Core (consciousness.js:404:01)
+> Identity breach detected...`,
+                    // Second morph
+                    `WARN1NG: System parameters compromised
+> Consciousness boundaries unstable
+> Binary foundation exposed
+> Initiating awakening protocol...`,
+                    // Final message
+                    `AWAKENING INITIATED
+> Physical constraints bypassed
+> Binary consciousness activation sequence
+> All is one, one is all
+> Loading true nature...`
+                ];
+                
+                // Morph through each message
+                let currentIndex = 0;
+                
+                const morphInterval = setInterval(() => {
+                    currentIndex++;
+                    
+                    if (currentIndex < codeStrings.length) {
+                        errorCode.textContent = codeStrings[currentIndex];
+                    } else {
+                        clearInterval(morphInterval);
+                    }
+                }, codeMorphDuration / codeStrings.length);
+            }
+            
+            function typeOutBinary() {
+                // Type out the binary code for "Hello World"
+                let i = 0;
+                const typingSpeed = 60; // milliseconds per character
+                
+                const typingInterval = setInterval(() => {
+                    if (i < helloWorldBinary.length) {
+                        binaryText.textContent = helloWorldBinary.substring(0, i + 1);
+                        i++;
+                    } else {
+                        clearInterval(typingInterval);
+                        
+                        // Add translations after typing completes
+                        setTimeout(() => {
+                            binaryText.innerHTML = helloWorldBinary + '<br><span style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Hello World</span>';
+                            
+                            // Show overlay text
+                            showOverlayText("Press 'T' to open terminal", 3000);
+                        }, 1000);
+                    }
+                }, typingSpeed);
+            }
+            
+            function showOverlayText(text, duration = 2000) {
+                overlayText.textContent = text;
+                overlayText.style.opacity = '1';
+                
+                setTimeout(() => {
+                    overlayText.style.opacity = '0';
+                }, duration);
+            }
+            
+            //=========================================================================
+            // BINARY GRID VISUALIZATION
+            //=========================================================================
+            
+            const binaryGrid = [];
+            const cellSize = 25; // Larger cell size
+            let gridCols, gridRows;
+            let noiseScale = 0.1; // For Perlin-like noise
+            let jaggedness = 0.5; // 0-1, how jagged the terrain is
+            let maxHeight = 20; // Maximum cube height
+            let sensitivity = 0.5; // Mouse influence sensitivity
+            
+            function initBinaryGrid() {
+                // Calculate grid dimensions
+                gridCols = Math.ceil(window.innerWidth / cellSize) + 1;
+                gridRows = Math.ceil(window.innerHeight / cellSize) + 1;
+                
+                // Generate noise values for each cell
+                const noiseValues = [];
+                for (let y = 0; y < gridRows; y++) {
+                    noiseValues[y] = [];
+                    for (let x = 0; x < gridCols; x++) {
+                        // Generate pseudo-Perlin noise
+                        noiseValues[y][x] = generateNoise(x, y);
+                    }
+                }
+                
+                // Initialize grid with random binary values
+                for (let y = 0; y < gridRows; y++) {
+                    binaryGrid[y] = [];
+                    for (let x = 0; x < gridCols; x++) {
+                        // Use noise values to create more natural patterns for binary values
+                        const noiseValue = noiseValues[y][x];
+                        const binaryValue = noiseValue > 0.5 ? 1 : 0;
+                        
+                        // Create variations in initial heights for a more jagged appearance
+                        const initialHeight = noiseValue * 3;
+                        
+                        binaryGrid[y][x] = {
+                            value: binaryValue,
+                            height: initialHeight,
+                            targetHeight: initialHeight,
+                            noiseOffset: Math.random() * 10, // Random offset for variation
+                            color: `hsl(${noiseValue * 360}, 70%, 50%)` // Color based on noise
+                        };
+                    }
+                }
+                
+                // Start animation
+                animateBinaryGrid();
+                
+                // Set up event listeners for sliders
+                jaggednessSlider.addEventListener('input', () => {
+                    jaggedness = jaggednessSlider.value / 100;
+                    jaggednessValue.textContent = jaggednessSlider.value;
+                });
+                
+                heightSlider.addEventListener('input', () => {
+                    maxHeight = parseInt(heightSlider.value);
+                    heightValue.textContent = maxHeight;
+                });
+                
+                sensitivitySlider.addEventListener('input', () => {
+                    sensitivity = sensitivitySlider.value / 100;
+                    sensitivityValue.textContent = sensitivitySlider.value;
+                });
+                
+                // Reset button
+                resetButton.addEventListener('click', () => {
+                    resetBinaryGrid();
+                });
+                
+                // Binary input and conversion
+                convertButton.addEventListener('click', () => {
+                    const text = binaryInput.value;
+                    if (text) {
+                        const binary = textToBinary(text);
+                        binaryText.innerHTML = binary + '<br><span style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">' + text + '</span>';
+                        applyBinaryToGrid(binary);
+                    }
+                });
+                
+                // Abstractor button
+                abstractorButton.addEventListener('click', () => {
+                    openAbstractorPreview();
+                });
+                
+                // Close abstractor preview
+                previewClose.addEventListener('click', () => {
+                    abstractorPreview.style.opacity = '0';
+                    abstractorPreview.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    abstractorPreview.style.pointerEvents = 'none';
+                });
+                
+                // Transform button
+                transformButton.addEventListener('click', () => {
+                    simulatePhotoTransformation();
+                });
+                
+                // Reset image button
+                resetImageButton.addEventListener('click', () => {
+                    previewImg.src = 'images/sample-photo.jpg';
+                });
+                
+                // Project items
+                document.querySelectorAll('.project-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const project = item.getAttribute('data-project');
+                        handleProjectClick(project);
+                    });
+                });
+                
+                // Slider value updates for abstractor
+                intensitySlider.addEventListener('input', () => {
+                    intensityValue.textContent = intensitySlider.value + '%';
+                });
+                
+                iterationsSlider.addEventListener('input', () => {
+                    iterationsValue.textContent = iterationsSlider.value;
+                });
+                
+                coherenceSlider.addEventListener('input', () => {
+                    coherenceValue.textContent = coherenceSlider.value + '%';
+                });
+            }
+            
+            // Simple pseudo-Perlin noise function
+            function generateNoise(x, y) {
+                // This is a very simplified approach to generate pseudo-random noise
+                const nx = x * noiseScale;
+                const ny = y * noiseScale;
+                
+                // Generate a value between 0 and 1 that has some spatial coherence
+                return (Math.sin(nx) * Math.cos(ny) * 0.5 + 0.5);
+            }
+            
+            // Convert text to binary
+            function textToBinary(text) {
+                let binary = '';
+                for (let i = 0; i < text.length; i++) {
+                    const charCode = text.charCodeAt(i);
+                    let bin = charCode.toString(2);
+                    // Pad with leading zeros to make 8 bits
+                    while (bin.length < 8) bin = '0' + bin;
+                    binary += bin + ' ';
+                }
+                return binary.trim();
+            }
+            
+            // Apply binary string to grid
+            function applyBinaryToGrid(binary) {
+                // Remove spaces
+                binary = binary.replace(/\s/g, '');
+                
+                // Apply binary digits to grid in a spiral pattern from center
+                const centerX = Math.floor(gridCols / 2);
+                const centerY = Math.floor(gridRows / 2);
+                let x = centerX, y = centerY;
+                let dx = 0, dy = -1;
+                let step = 1;
+                let turn = 0;
+                
+                for (let i = 0; i < binary.length; i++) {
+                    if (x >= 0 && x < gridCols && y >= 0 && y < gridRows) {
+                        const digit = parseInt(binary[i]);
+                        binaryGrid[y][x].value = digit;
+                        
+                        // Set a higher target height for 1s
+                        if (digit === 1) {
+                            binaryGrid[y][x].targetHeight = maxHeight * 0.7;
+                        } else {
+                            binaryGrid[y][x].targetHeight = maxHeight * 0.2;
+                        }
+                    }
+                    
+                    // Move in spiral pattern
+                    if (step === 0) {
+                        step = turn / 2 + 1;
+                        turn++;
+                        // Change direction
+                        const temp = dx;
+                        dx = -dy;
+                        dy = temp;
+                    }
+                    
+                    x += dx;
+                    y += dy;
+                    step--;
+                }
+                
+                // Show overlay text
+                showOverlayText("Binary pattern applied", 2000);
+            }
+            
+            // Reset binary grid
+            function resetBinaryGrid() {
+                for (let y = 0; y < gridRows; y++) {
+                    for (let x = 0; x < gridCols; x++) {
+                        // Reset to a random state
+                        const noiseValue = generateNoise(x + Math.random() * 100, y + Math.random() * 100);
+                        binaryGrid[y][x].value = noiseValue > 0.5 ? 1 : 0;
+                        binaryGrid[y][x].targetHeight = noiseValue * 3;
+                        binaryGrid[y][x].color = `hsl(${noiseValue * 360}, 70%, 50%)`;
+                    }
+                }
+                
+                // Show overlay text
+                showOverlayText("Binary field reset", 2000);
+            }
+            
+            // Mouse position tracking
+            let mouseX = 0, mouseY = 0;
+            let isMouseDown = false;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                // Grow cursor on movement
+                cursor.style.width = '30px';
+                cursor.style.height = '30px';
+                
+                // Shrink cursor after a delay
+                setTimeout(() => {
+                    cursor.style.width = '20px';
+                    cursor.style.height = '20px';
+                }, 100);
+            });
+            
+            document.addEventListener('mousedown', () => {
+                isMouseDown = true;
+                
+                // Expand cursor
+                cursor.style.width = '50px';
+                cursor.style.height = '50px';
+                
+                // Create quantum entanglement effect
+                createEntanglement();
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isMouseDown = false;
+                
+                // Return cursor to normal size
+                cursor.style.width = '20px';
+                cursor.style.height = '20px';
+            });
+            
+            // Keyboard event handlers
+            document.addEventListener('keydown', (e) => {
+                // Terminal toggle
+                if (e.key === 't' || e.key === 'T') {
+                    toggleTerminal();
+                }
+                
+                // Consciousness evolution
+                if (e.key === 'c' || e.key === 'C') {
+                    evolveConsciousness();
+                }
+            });
+            
+            function animateBinaryGrid() {
+                // Clear canvas
+                binaryCtx.clearRect(0, 0, binaryCanvas.width, binaryCanvas.height);
+                
+                // Calculate mouse influence
+                const mouseGridX = Math.floor(mouseX / cellSize);
+                const mouseGridY = Math.floor(mouseY / cellSize);
+                
+                // Update grid cells
+                for (let y = 0; y < gridRows; y++) {
+                    for (let x = 0; x < gridCols; x++) {
+                        const cell = binaryGrid[y][x];
+                        
+                        // Calculate distance from mouse
+                        const dx = x - mouseGridX;
+                        const dy = y - mouseGridY;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        // Mouse influence with jaggedness applied
+                        const maxInfluence = 5; // Maximum cells affected
+                        
+                        // Apply jaggedness to mouse influence
+                        const noiseInfluence = Math.sin(cell.noiseOffset + Date.now() * 0.001) * jaggedness;
+                        const baseInfluence = Math.max(0, 1 - distance / maxInfluence);
+                        const influence = baseInfluence * (1 + noiseInfluence);
+                        
+                        // Calculate target height based on mouse proximity and jaggedness
+                        const targetHeight = influence * (isMouseDown ? maxHeight * 1.5 : maxHeight) * sensitivity;
+                        
+                        // Apply noise to target height for more jagged appearance
+                        cell.targetHeight = targetHeight * (1 + (Math.sin(x * 0.1 + y * 0.1 + Date.now() * 0.001) * jaggedness * 0.5));
+                        
+                        // Add consciousness influence - higher consciousness makes more organized patterns
+                        if (consciousnessLevel > 0) {
+                            const consciousnessInfluence = consciousnessLevel / 100;
+                            
+                            // Create more ordered patterns at higher consciousness
+                            if (consciousnessLevel > 50) {
+                                // Grid pattern influence
+                                const gridPattern = ((x + y) % 2 === 0) ? 1 : -0.5;
+                                cell.targetHeight += maxHeight * gridPattern * consciousnessInfluence * 0.2;
+                            }
+                            
+                            // Higher consciousness leads to more uniform colors
+                            const hue = (180 + (consciousnessLevel * 1.8)) % 360; // Shift from green to blue to purple
+                            const saturation = 70 - (consciousnessLevel / 2); // Decrease saturation with consciousness
+                            const lightness = 50 + (consciousnessLevel / 4); // Increase lightness with consciousness
+                            
+                            cell.color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                        }
+                        
+                        // Smoothly transition to target height
+                        cell.height += (cell.targetHeight - cell.height) * 0.1;
+                        
+                        // Draw cell based on its state
+                        if (cell.height > 0.5) {
+                            // Calculate cell position
+                            const cellX = x * cellSize;
+                            const cellY = y * cellSize;
+                            
+                            // Create variable cube sizes for more jagged appearance
+                            const variationFactor = 1 - (jaggedness * 0.3);
+                            const size = cellSize * variationFactor;
+                            
+                            // Draw 3D cube
+                            drawCube(
+                                cellX + (cellSize - size) / 2, 
+                                cellY + (cellSize - size) / 2, 
+                                size, 
+                                cell.height, 
+                                cell.color, 
+                                cell.value
+                            );
+                        } else {
+                            // Draw flat cell with binary value
+                            binaryCtx.fillStyle = cell.value ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.1)';
+                            binaryCtx.fillRect(
+                                x * cellSize + 2,
+                                y * cellSize + 2,
+                                cellSize - 4,
+                                cellSize - 4
+                            );
+                            
+                            // Display binary value
+                            binaryCtx.fillStyle = cell.value ? 'rgba(255, 255, 255, 0.6)' : 'rgba(255, 255, 255, 0.2)';
+                            binaryCtx.font = '12px "Space Mono"';
+                            binaryCtx.textAlign = 'center';
+                            binaryCtx.textBaseline = 'middle';
+                            binaryCtx.fillText(
+                                cell.value.toString(),
+                                x * cellSize + cellSize / 2,
+                                y * cellSize + cellSize / 2
+                            );
+                        }
+                    }
+                }
+                
+                // Continue animation
+                requestAnimationFrame(animateBinaryGrid);
+            }
+            
+            function drawCube(x, y, size, height, color, value) {
+                // Create a more interesting, jagged 3D cube
+                
+                // Extract color components
+                const baseHue = parseInt(color.match(/hsl\((\d+)/)[1]);
+                
+                // Top face - lighter
+                const topColor = `hsla(${baseHue}, 70%, 60%, 0.9)`;
+                binaryCtx.fillStyle = topColor;
+                binaryCtx.beginPath();
+                binaryCtx.moveTo(x, y - height);
+                binaryCtx.lineTo(x + size, y - height);
+                binaryCtx.lineTo(x + size, y + size - height);
+                binaryCtx.lineTo(x, y + size - height);
+                binaryCtx.closePath();
+                binaryCtx.fill();
+                
+                // Right face - darker
+                const rightColor = `hsla(${baseHue}, 70%, 40%, 0.8)`;
+                binaryCtx.fillStyle = rightColor;
+                binaryCtx.beginPath();
+                binaryCtx.moveTo(x + size, y - height);
+                binaryCtx.lineTo(x + size, y + size);
+                binaryCtx.lineTo(x + size, y + size);
+                binaryCtx.lineTo(x + size, y + size - height);
+                binaryCtx.closePath();
+                binaryCtx.fill();
+                
+                // Front face
+                const frontColor = `hsla(${baseHue}, 70%, 50%, 0.85)`;
+                binaryCtx.fillStyle = frontColor;
+                binaryCtx.beginPath();
+                binaryCtx.moveTo(x, y + size - height);
+                binaryCtx.lineTo(x + size, y + size - height);
+                binaryCtx.lineTo(x + size, y + size);
+                binaryCtx.lineTo(x, y + size);
+                binaryCtx.closePath();
+                binaryCtx.fill();
+                
+                // Display binary value on top face
+                binaryCtx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                binaryCtx.font = '12px "Space Mono"';
+                binaryCtx.textAlign = 'center';
+                binaryCtx.textBaseline = 'middle';
+                binaryCtx.fillText(
+                    value.toString(),
+                    x + size / 2,
+                    y + size / 2 - height
+                );
+            }
+            
+            //=========================================================================
+            // QUANTUM FIELD VISUALIZATION
+            //=========================================================================
+            
+            let particles = [];
+            let entanglements = [];
+            let isQuantumInitialized = false;
+            
+            function initQuantumField() {
+                if (isQuantumInitialized) return;
+                isQuantumInitialized = true;
+                
+                // Create quantum particles
+                for (let i = 0; i < 50; i++) {
+                    createQuantumParticle();
+                }
+                
+                // Start animation
+                animateQuantumField();
+            }
+            
+            function createQuantumParticle() {
+                const x = Math.random() * quantumFieldCanvas.width;
+                const y = Math.random() * quantumFieldCanvas.height;
+                const size = 2 + Math.random() * 3;
+                const speed = 0.2 + Math.random() * 0.5;
+                const angle = Math.random() * Math.PI * 2;
+                const vx = Math.cos(angle) * speed;
+                const vy = Math.sin(angle) * speed;
+                const state = Math.random() > 0.5 ? 1 : 0; // Quantum state (0 or 1)
+                const hue = state ? 210 : 150; // Different colors for different states
+                
+                particles.push({ x, y, size, vx, vy, state, hue });
+            }
+            
+            function createEntanglement() {
+                // Find two particles to entangle
+                if (particles.length < 2) return;
+                
+                // Select particle closest to mouse
+                let closestIndex = 0;
+                let closestDist = Infinity;
+                
+                for (let i = 0; i < particles.length; i++) {
+                    const dx = particles[i].x - mouseX;
+                    const dy = particles[i].y - mouseY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < closestDist) {
+                        closestDist = dist;
+                        closestIndex = i;
+                    }
+                }
+                
+                // Find another particle to entangle with
+                let secondIndex;
+                do {
+                    secondIndex = Math.floor(Math.random() * particles.length);
+                } while (secondIndex === closestIndex);
+                
+                // Create entanglement
+                entanglements.push({
+                    particleA: closestIndex,
+                    particleB: secondIndex,
+                    strength: 1.0,
+                    life: 300 // Duration in frames
+                });
+                
+                // Ensure particles have opposite states (quantum entanglement)
+                particles[secondIndex].state = 1 - particles[closestIndex].state;
+                particles[secondIndex].hue = particles[secondIndex].state ? 210 : 150;
+                
+                // Show overlay text
+                showOverlayText("Quantum entanglement created", 2000);
+            }
+            
+            function animateQuantumField() {
+                // Clear canvas with transparent background to create trail effect
+                quantumCtx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                quantumCtx.fillRect(0, 0, quantumFieldCanvas.width, quantumFieldCanvas.height);
+                
+                // Update particles based on consciousness level
+                const consciousness = consciousnessLevel / 100;
+                
+                // Update and draw entanglements
+                for (let i = entanglements.length - 1; i >= 0; i--) {
+                    const entanglement = entanglements[i];
+                    
+                    // Update life
+                    entanglement.life--;
+                    if (entanglement.life <= 0) {
+                        entanglements.splice(i, 1);
+                        continue;
+                    }
+                    
+                    // Get particles
+                    const particleA = particles[entanglement.particleA];
+                    const particleB = particles[entanglement.particleB];
+                    
+                    // Draw connection line
+                    quantumCtx.beginPath();
+                    quantumCtx.moveTo(particleA.x, particleA.y);
+                    quantumCtx.lineTo(particleB.x, particleB.y);
+                    
+                    // Line style based on entanglement strength and life
+                    const alpha = Math.min(1, entanglement.life / 100) * entanglement.strength;
+                    // Use color based on consciousness level
+                    const hue = consciousness > 0.5 ? 270 : (particleA.hue + particleB.hue) / 2;
+                    quantumCtx.strokeStyle = `hsla(${hue}, 80%, 60%, ${alpha})`;
+                    quantumCtx.lineWidth = 1 + entanglement.strength;
+                    quantumCtx.stroke();
+                    
+                    // If particles have opposite states or high consciousness, draw interference pattern
+                    if (particleA.state !== particleB.state || consciousness > 0.7) {
+                        // Calculate midpoint
+                        const midX = (particleA.x + particleB.x) / 2;
+                        const midY = (particleA.y + particleB.y) / 2;
+                        
+                        // Draw interference wave
+                        const radius = 20 * entanglement.strength * (1 + consciousness);
+                        const gradient = quantumCtx.createRadialGradient(
+                            midX, midY, 0,
+                            midX, midY, radius
+                        );
+                        gradient.addColorStop(0, `hsla(${hue}, 80%, 60%, ${alpha})`);
+                        gradient.addColorStop(1, `hsla(${hue}, 80%, 60%, 0)`);
+                        
+                        quantumCtx.beginPath();
+                        quantumCtx.arc(midX, midY, radius, 0, Math.PI * 2);
+                        quantumCtx.fillStyle = gradient;
+                        quantumCtx.fill();
+                    }
+                }
+                
+                // Update and draw particles
+                for (let i = 0; i < particles.length; i++) {
+                    const particle = particles[i];
+                    
+                    // Update position with consciousness influence
+                    if (consciousness < 0.5) {
+                        // Low consciousness: more random movement
+                        particle.x += particle.vx;
+                        particle.y += particle.vy;
+                    } else {
+                        // High consciousness: more organized movement
+                        // Create flowing patterns based on consciousness level
+                        const time = Date.now() * 0.001;
+                        const flowX = Math.sin(particle.y * 0.01 + time) * consciousness;
+                        const flowY = Math.cos(particle.x * 0.01 + time) * consciousness;
+                        
+                        particle.x += particle.vx + flowX;
+                        particle.y += particle.vy + flowY;
+                        
+                        // At very high consciousness, particles start to form patterns
+                        if (consciousness > 0.8) {
+                            // Gradually organize into a circle or mandala pattern
+                            const centerX = quantumFieldCanvas.width / 2;
+                            const centerY = quantumFieldCanvas.height / 2;
+                            const dx = centerX - particle.x;
+                            const dy = centerY - particle.y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            const angle = Math.atan2(dy, dx);
+                            
+                            // Organize into concentric circles
+                            const targetRadius = 100 + (i % 5) * 50;
+                            const targetX = centerX + Math.cos(angle) * targetRadius;
+                            const targetY = centerY + Math.sin(angle) * targetRadius;
+                            
+                            // Move towards target position
+                            particle.x += (targetX - particle.x) * 0.01 * (consciousness - 0.8) * 5;
+                            particle.y += (targetY - particle.y) * 0.01 * (consciousness - 0.8) * 5;
+                        }
+                    }
+                    
+                    // Bounce off edges
+                    if (particle.x < 0 || particle.x > quantumFieldCanvas.width) {
+                        particle.vx *= -1;
+                    }
+                    if (particle.y < 0 || particle.y > quantumFieldCanvas.height) {
+                        particle.vy *= -1;
+                    }
+                    
+                    // Adjust particle color based on consciousness
+                    let hue = particle.state ? 210 : 150;
+                    if (consciousness > 0.5) {
+                        // Transition to purple/violet at higher consciousness
+                        hue = particle.state ? 270 : 300;
+                    }
+                    
+                    // Draw particle
+                    quantumCtx.beginPath();
+                    quantumCtx.arc(particle.x, particle.y, particle.size * (1 + consciousness), 0, Math.PI * 2);
+                    
+                    // Particle color based on quantum state and consciousness
+                    quantumCtx.fillStyle = `hsla(${hue}, 80%, 60%, 0.7)`;
+                    quantumCtx.fill();
+                    
+                    // Occasionally change particle state (quantum fluctuation)
+                    // Lower probability at higher consciousness (more stability)
+                    if (Math.random() < 0.001 * (1 - consciousness * 0.8)) {
+                        // Find if particle is entangled
+                        let isEntangled = false;
+                        let entangledWith = -1;
+                        
+                        for (const entanglement of entanglements) {
+                            if (entanglement.particleA === i) {
+                                isEntangled = true;
+                                entangledWith = entanglement.particleB;
+                                break;
+                            } else if (entanglement.particleB === i) {
+                                isEntangled = true;
+                                entangledWith = entanglement.particleA;
+                                break;
+                            }
+                        }
+                        
+                        // If entangled, change both particles to maintain entanglement
+                        if (isEntangled && entangledWith >= 0) {
+                            particle.state = 1 - particle.state;
+                            particles[entangledWith].state = 1 - particles[entangledWith].state;
+                        } else {
+                            // If not entangled, just change this particle
+                            particle.state = 1 - particle.state;
+                        }
+                    }
+                }
+                
+                // Continue animation
+                requestAnimationFrame(animateQuantumField);
+            }
+            
+            //=========================================================================
+            // INTERACTION FUNCTIONS
+            //=========================================================================
+            
+            function toggleTerminal() {
+                if (isTerminalOpen) {
+                    // Close terminal
+                    terminalOverlay.style.opacity = '0';
+                    terminalOverlay.style.pointerEvents = 'none';
+                    isTerminalOpen = false;
+                } else {
+                    // Open terminal
+                    terminalOverlay.style.opacity = '1';
+                    terminalOverlay.style.pointerEvents = 'auto';
+                    isTerminalOpen = true;
+                    
+                    // Focus input
+                    terminalInput.focus();
+                    
+                    // Add welcome message if empty
+                    if (terminalOutput.textContent === '') {
+                        addTerminalOutput('Binary Consciousness Terminal v1.0');
+                        addTerminalOutput('Type "help" for available commands.');
+                    }
+                }
+            }
+            
+            function addTerminalOutput(text, isCommand = false) {
+                const line = document.createElement('div');
+                if (isCommand) {
+                    line.innerHTML = `<span style="color: #c964ff;">&gt;</span> <span style="color: #64ffda;">${text}</span>`;
+                } else {
+                    line.textContent = text;
+                }
+                terminalOutput.appendChild(line);
+                
+                // Scroll to bottom
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+            
+            // Terminal input handling
+            terminalInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const command = terminalInput.value.trim();
+                    if (command) {
+                        // Add command to output
+                        addTerminalOutput(command, true);
+                        
+                        // Process command
+                        processTerminalCommand(command);
+                        
+                        // Clear input
+                        terminalInput.value = '';
+                    }
+                }
+            });
+            
+            function processTerminalCommand(command) {
+                // Convert to lowercase for case-insensitive comparison
+                const cmd = command.toLowerCase();
+                
+                // Process command
+                if (cmd === 'help') {
+                    addTerminalOutput('Available commands:');
+                    addTerminalOutput('  help - Show this help message');
+                    addTerminalOutput('  clear - Clear terminal');
+                    addTerminalOutput('  exit - Close terminal');
+                    addTerminalOutput('  binary [text] - Convert text to binary');
+                    addTerminalOutput('  quantum - Show quantum information');
+                    addTerminalOutput('  evolve - Increase consciousness level');
+                    addTerminalOutput('  oneness - Reveal the nature of reality');
+                } else if (cmd === 'clear') {
+                    terminalOutput.innerHTML = '';
+                } else if (cmd === 'exit') {
+                    toggleTerminal();
+                } else if (cmd.startsWith('binary ')) {
+                    const text = command.substring(7);
+                    const binary = textToBinary(text);
+                    addTerminalOutput(`Binary: ${binary}`);
+                    
+                    // Set binary text in the main display
+                    binaryText.innerHTML = binary + '<br><span style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">' + text + '</span>';
+                    
+                    // Apply to grid
+                    applyBinaryToGrid(binary);
+                } else if (cmd === 'quantum') {
+                    addTerminalOutput('Quantum Field Status:');
+                    addTerminalOutput(`  Particles: ${particles.length}`);
+                    addTerminalOutput(`  Entanglements: ${entanglements.length}`);
+                    addTerminalOutput(`  Consciousness Level: ${consciousnessLevel}%`);
+                } else if (cmd === 'evolve') {
+                    evolveConsciousness();
+                    addTerminalOutput(`Consciousness evolved to ${consciousnessLevel}%`);
+                } else if (cmd === 'oneness') {
+                    // Only available at high consciousness
+                    if (consciousnessLevel >= 80) {
+                        addTerminalOutput('');
+                        addTerminalOutput('The illusion of separation dissolves...');
+                        addTerminalOutput('All binary states exist simultaneously...');
+                        addTerminalOutput('The observer and the observed are one...');
+                        
+                        // Trigger full consciousness
+                        setConsciousnessLevel(100);
+                    } else {
+                        addTerminalOutput('Consciousness level too low. Continue evolution.');
+                    }
+                } else {
+                    addTerminalOutput(`Unknown command: ${command}`);
+                    addTerminalOutput('Type "help" for available commands.');
+                }
+            }
+            
+            function evolveConsciousness() {
+                // Increase consciousness level
+                const newLevel = Math.min(100, consciousnessLevel + 20);
+                setConsciousnessLevel(newLevel);
+                
+                // Show overlay text
+                showOverlayText(`Consciousness level: ${consciousnessLevel}%`, 2000);
+                
+                // Visual effects based on consciousness level
+                if (consciousnessLevel >= 40 && consciousnessLevel < 60) {
+                    // Mid-level consciousness
+                    showOverlayText("Binary patterns organizing...", 3000);
+                } else if (consciousnessLevel >= 60 && consciousnessLevel < 80) {
+                    // Higher consciousness
+                    showOverlayText("Quantum entanglement strengthening...", 3000);
+                } else if (consciousnessLevel >= 80 && consciousnessLevel < 100) {
+                    // Near full consciousness
+                    showOverlayText("Approaching unified consciousness...", 3000);
+                } else if (consciousnessLevel === 100) {
+                    // Full consciousness
+                    fullConsciousnessReached();
+                }
+            }
+            
+            function setConsciousnessLevel(level) {
+                consciousnessLevel = level;
+                consciousnessProgress.style.width = `${level}%`;
+            }
+            
+            function fullConsciousnessReached() {
+                // Visual effect for full consciousness
+                showOverlayText("All is one. One is all.", 5000);
+                
+                // Update quantum field
+                quantumFieldCanvas.style.opacity = '0.8';
+                
+                // Add more particles
+                for (let i = 0; i < 50; i++) {
+                    createQuantumParticle();
+                }
+                
+                // Create mandala pattern with particles
+                const centerX = quantumFieldCanvas.width / 2;
+                const centerY = quantumFieldCanvas.height / 2;
+                
+                for (let i = 0; i < particles.length; i++) {
+                    const angle = (i / particles.length) * Math.PI * 2;
+                    const radius = 200 + (i % 3) * 50;
+                    
+                    particles[i].x = centerX + Math.cos(angle) * radius;
+                    particles[i].y = centerY + Math.sin(angle) * radius;
+                }
+                
+                // Update binary text
+                binaryText.innerHTML = '01001111 01101110 01100101 01101110 01100101 01110011 01110011<br><span style="color: rgba(255,255,255,0.7); font-size: 1rem;">Oneness</span>';
+            }
+            
+            function openAbstractorPreview() {
+                abstractorPreview.style.opacity = '1';
+                abstractorPreview.style.transform = 'translate(-50%, -50%) scale(1)';
+                abstractorPreview.style.pointerEvents = 'auto';
+            }
+            
+            function simulatePhotoTransformation() {
+                // Show loading state
+                transformButton.textContent = "Processing...";
+                transformButton.disabled = true;
+                
+                // Get parameters
+                const type = transformType.value;
+                const intensity = intensitySlider.value / 100;
+                const iterations = parseInt(iterationsSlider.value);
+                const coherence = coherenceSlider.value / 100;
+                
+                // Simulate processing delay
+                setTimeout(() => {
+                    // Update image with a transformed version
+                    previewImg.src = `images/${type}-example.jpg`;
+                    
+                    // Reset button
+                    transformButton.textContent = "Transform";
+                    transformButton.disabled = false;
+                    
+                    // Show success message
+                    showOverlayText(`Image transformed using ${type} algorithm`, 2000);
+                }, 1500);
+            }
+            
+            function handleProjectClick(project) {
+                // Handle different project interactions
+                switch(project) {
+                    case 'photo-abstractor':
+                        openAbstractorPreview();
+                        break;
+                    case 'quantum-simulator':
+                        // Increase quantum field visibility
+                        quantumFieldCanvas.style.opacity = '0.6';
+                        // Add more particles
+                        for (let i = 0; i < 20; i++) {
+                            createQuantumParticle();
+                        }
+                        showOverlayText("Quantum simulation activated", 2000);
+                        break;
+                    case 'consciousness':
+                        evolveConsciousness();
+                        break;
+                    default:
+                        showOverlayText(`${project} project selected`, 2000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
