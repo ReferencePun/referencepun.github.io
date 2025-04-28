@@ -475,7 +475,7 @@ h3.page-title:not(:first-of-type) {
     width: 100%;
     height: 1px;
     background-color: #eee;
-    margin: 1rem 0 1rem;
+    margin: 2rem 0 0rem;
 }
 
 .section-title {
