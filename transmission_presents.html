@@ -18,7 +18,7 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
-            
+
             <nav>
                 <ul class="nav-menu">
                     <li><a href="portfolio.html">Portfolio</a></li>
@@ -42,62 +42,69 @@
     </header>
 
     <main>
-        <h3 class="page-title text-base leading-tight">Transmission Presents</h3>
-
+        <!-- Simple text instead of heading -->
+        <div style="text-align: center; font-size: 1.5rem; font-weight: 300;">
+            Transmission Presents
+        </div>
+        <br>
         
-        <!-- Top row with 4 magazines -->
-        <div class="magazines-row">
+        <!-- Responsive magazine grid -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; width: 100%;">
             <!-- Magazine 1 -->
-            <div class="magazine-column">
-                <h2 class="magazine-title">FNT</h2>
-                <div class="magazine-cover" onclick="openMagazine('pdfs/03 FNT Photojournalism.pdf')">
-                    <img src="images/thumbnails/03 FNT Photojournalism.jpg" alt="Transmission Presents: FNT">
+            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
+                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">FNT</div>
+                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/03 FNT Photojournalism.pdf')">
+                    <img src="images/thumbnails/03 FNT Photojournalism.jpg" alt="Transmission Presents: FNT" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
 
             <!-- Magazine 2 -->
-            <div class="magazine-column">
-                <h2 class="magazine-title">Côte & Ciel</h2>
-                <div class="magazine-cover" onclick="openMagazine('pdfs/06 Presents Cote_Ciel Lookbook.pdf')">
-                    <img src="images/thumbnails/06 Presents Cote_Ciel Lookbook.jpg" alt="Transmission Presents: Côte & Ciel">
+            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
+                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Côte & Ciel</div>
+                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/06 Presents Cote_Ciel Lookbook.pdf')">
+                    <img src="images/thumbnails/06 Presents Cote_Ciel Lookbook.jpg" alt="Transmission Presents: Côte & Ciel" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
 
             <!-- Magazine 3 -->
-            <div class="magazine-column">
-                <h2 class="magazine-title">The SS16 New Faces Issue</h2>
-                <div class="magazine-cover" onclick="openMagazine('pdfs/05 Presents New Faces.pdf')">
-                    <img src="images/thumbnails/05 Presents New Faces.jpg" alt="Transmission Presents: The SS16 New Faces Issue">
+            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
+                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">The SS16 New Faces Issue</div>
+                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/05 Presents New Faces.pdf')">
+                    <img src="images/thumbnails/05 Presents New Faces.jpg" alt="Transmission Presents: The SS16 New Faces Issue" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
 
             <!-- Magazine 4 -->
-            <div class="magazine-column">
-                <h2 class="magazine-title">A Year in a Day with Lindsey Wixson</h2>
-                <div class="magazine-cover" onclick="openMagazine('pdfs/07 Presents Lindsey Wixson.pdf')">
-                    <img src="images/thumbnails/07 Presents Lindsey Wixson.jpg" alt="Transmission Presents: A Year in a Day with Lindsey Wixson">
+            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
+                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">A Year in a Day with Lindsey Wixson</div>
+                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/07 Presents Lindsey Wixson.pdf')">
+                    <img src="images/thumbnails/07 Presents Lindsey Wixson.jpg" alt="Transmission Presents: A Year in a Day with Lindsey Wixson" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
         </div>
 
-        <h3 class="page-title text-base leading-tight">Transmission Showcase</h3>
-
-        <!-- Bottom magazine centered -->
-        <div class="magazines-row">
-            <div class="magazine-column">
-                <h2 class="magazine-title">Le Cam Romain</h2>
-                <div class="magazine-cover" onclick="openMagazine('pdfs/08 Showcase Le Cam Romain.pdf')">
-                    <img src="images/thumbnails/08 Showcase Le Cam Romain.jpg" alt="Transmission Showcase: Le Cam Romain">
+        <!-- Simple text instead of heading -->
+        <div style="text-align: center; font-size: 1.5rem; font-weight: 300;">
+            Transmission Showcase
+        </div>
+        <br>
+        
+        <!-- Center the single magazine -->
+        <div style="display: flex; justify-content: center; width: 100%;">
+            <div style="flex: 0 1 300px; margin: 0 10px; text-align: center;">
+                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Le Cam Romain</div>
+                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/08 Showcase Le Cam Romain.pdf')">
+                    <img src="images/thumbnails/08 Showcase Le Cam Romain.jpg" alt="Transmission Showcase: Le Cam Romain" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
         </div>
-
+        
         <!-- Magazine Modal -->
         <div id="magazine-modal"></div>
     </main>
 
     <footer>
-        <p>&copy; <span id="current-year"></span> Dylan Forsberg. All rights reserved.</p>
+        <p>&copy; <span id="current-year">2025</span> Dylan Forsberg. All rights reserved.</p>
     </footer>
 
     <!-- PDF.js Library -->

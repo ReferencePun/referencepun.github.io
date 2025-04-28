@@ -776,6 +776,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
+
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const nav = document.querySelector('nav');
+    
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+    }
 });
 
 /**

@@ -120,24 +120,6 @@
             mix-blend-mode: difference;
         }
         
-        /* Binary text display */
-        #binary-text {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            max-width: 80%;
-            line-height: 1.8;
-            opacity: 0;
-            transition: opacity 2s ease;
-            z-index: 10;
-            pointer-events: none;
-            font-family: 'Space Mono', monospace;
-        }
-        
         /* Quantum field visualization */
         #quantum-field {
             position: fixed;
@@ -149,133 +131,6 @@
             z-index: 5;
             transition: opacity 3s ease;
             pointer-events: none;
-        }
-        
-        /* Info panel */
-        #info-panel {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.7);
-            z-index: 100;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-        
-        .info-key {
-            color: #64ffda;
-            margin-right: 5px;
-        }
-
-        /* Interactive panels */
-        .interactive-panel {
-            position: fixed;
-            left: 20px;
-            top: 20px;
-            padding: 15px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
-            z-index: 100;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: opacity 1s ease, transform 1s ease;
-            font-family: 'Space Mono', monospace;
-            width: 280px;
-        }
-        
-        .panel-title {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1rem;
-            color: #64ffda;
-        }
-        
-        .panel-content {
-            margin-bottom: 15px;
-        }
-        
-        .panel-slider {
-            width: 100%;
-            margin: 10px 0;
-        }
-        
-        .panel-button {
-            background-color: rgba(100, 255, 218, 0.2);
-            border: 1px solid rgba(100, 255, 218, 0.5);
-            color: #64ffda;
-            padding: 5px 10px;
-            margin-right: 5px;
-            cursor: pointer;
-            font-family: 'Space Mono', monospace;
-            transition: all 0.3s ease;
-        }
-        
-        .panel-button:hover {
-            background-color: rgba(100, 255, 218, 0.3);
-        }
-        
-        .binary-input {
-            background-color: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #64ffda;
-            padding: 5px 10px;
-            margin-right: 5px;
-            font-family: 'Space Mono', monospace;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        /* Project showcase panel */
-        #project-panel {
-            position: fixed;
-            right: 20px;
-            top: 20px;
-            width: 280px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            padding: 15px;
-            z-index: 100;
-            opacity: 0;
-            transform: translateX(20px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-        
-        .project-title {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 1rem;
-            color: #64ffda;
-            font-family: 'Space Mono', monospace;
-        }
-        
-        .project-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .project-item {
-            padding: 8px 10px;
-            margin-bottom: 5px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 3px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-        
-        .project-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
         }
         
         /* Progress indicator */
@@ -322,157 +177,7 @@
             white-space: nowrap;
         }
         
-        /* Photo abstractor preview */
-        #abstractor-preview {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            width: 60%;
-            max-width: 800px;
-            height: 60%;
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            padding: 20px;
-            z-index: 200;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1s ease, transform 1s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .preview-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .preview-title {
-            margin: 0;
-            color: #64ffda;
-            font-family: 'Space Mono', monospace;
-        }
-        
-        .preview-close {
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .preview-content {
-            flex: 1;
-            display: flex;
-            gap: 20px;
-            overflow: hidden;
-        }
-        
-        .preview-image {
-            flex: 2;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .preview-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        
-        .preview-controls {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-        
-        .control-group {
-            margin-bottom: 15px;
-        }
-        
-        .control-label {
-            margin-bottom: 5px;
-            color: rgba(255, 255, 255, 0.9);
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-        }
-        
-        .control-slider {
-            width: 100%;
-        }
-        
-        .control-value {
-            color: #64ffda;
-            float: right;
-        }
-        
-        /* Terminal overlay */
-        #terminal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 500;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 1s ease;
-        }
-        
-        #terminal {
-            width: 80%;
-            max-width: 800px;
-            height: 70%;
-            background-color: rgba(0, 0, 0, 0.9);
-            border: 1px solid rgba(100, 255, 218, 0.5);
-            border-radius: 5px;
-            padding: 20px;
-            font-family: 'Space Mono', monospace;
-            color: #64ffda;
-            overflow: auto;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        #terminal-output {
-            flex: 1;
-            overflow-y: auto;
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        
-        #terminal-input-line {
-            display: flex;
-            align-items: center;
-        }
-        
-        #terminal-prompt {
-            color: #c964ff;
-            margin-right: 10px;
-        }
-        
-        #terminal-input {
-            flex: 1;
-            background: none;
-            border: none;
-            outline: none;
-            color: #64ffda;
-            font-family: 'Space Mono', monospace;
-            font-size: 1rem;
-        }
+        /* Terminal styles removed */
     </style>
 </head>
 <body>
@@ -496,56 +201,8 @@
     <!-- Binary Canvas - For interactive visual effects -->
     <canvas id="binary-canvas"></canvas>
     
-    <!-- Binary Text Display -->
-    <div id="binary-text"></div>
-    
     <!-- Quantum Field Visualization -->
     <canvas id="quantum-field"></canvas>
-    
-    <!-- Info Panel -->
-    <div id="info-panel">
-        <p><span class="info-key">Move:</span> Mouse to interact with the binary field</p>
-        <p><span class="info-key">Click:</span> Create quantum entanglement</p>
-        <p><span class="info-key">T:</span> Open terminal</p>
-        <p><span class="info-key">C:</span> Evolve consciousness</p>
-    </div>
-    
-    <!-- Interactive Panel -->
-    <div id="interactive-panel" class="interactive-panel">
-        <h3 class="panel-title">Binary Consciousness</h3>
-        <div class="panel-content">
-            <p>Input text to convert to binary:</p>
-            <input type="text" id="binary-input" class="binary-input" placeholder="Enter text...">
-            <button id="convert-button" class="panel-button">Convert</button>
-        </div>
-        <div class="panel-content">
-            <p>Cube Parameters:</p>
-            <label>Jaggedness: <span id="jagged-value">50</span>%</label>
-            <input type="range" id="jagged-slider" class="panel-slider" min="0" max="100" value="50">
-            
-            <label>Max Height: <span id="height-value">20</span></label>
-            <input type="range" id="height-slider" class="panel-slider" min="5" max="50" value="20">
-            
-            <label>Sensitivity: <span id="sensitivity-value">50</span>%</label>
-            <input type="range" id="sensitivity-slider" class="panel-slider" min="0" max="100" value="50">
-        </div>
-        <div class="panel-content">
-            <button id="reset-button" class="panel-button">Reset Field</button>
-            <button id="abstractor-button" class="panel-button">Abstractor</button>
-        </div>
-    </div>
-    
-    <!-- Project Showcase Panel -->
-    <div id="project-panel">
-        <h3 class="project-title">Quantum Projects</h3>
-        <ul class="project-list">
-            <li class="project-item" data-project="photo-abstractor">Photo Abstractor</li>
-            <li class="project-item" data-project="quantum-simulator">Quantum Simulator</li>
-            <li class="project-item" data-project="ai-video">AI Video Generator</li>
-            <li class="project-item" data-project="binary-analyzer">Binary Analyzer</li>
-            <li class="project-item" data-project="consciousness">Consciousness Evolution</li>
-        </ul>
-    </div>
     
     <!-- Consciousness Progress Indicator -->
     <div id="consciousness-indicator">
@@ -555,57 +212,7 @@
     <!-- Overlay Text -->
     <div id="overlay-text" class="overlay-text"></div>
     
-    <!-- Photo Abstractor Preview -->
-    <div id="abstractor-preview">
-        <div class="preview-header">
-            <h3 class="preview-title">Photo Abstractor</h3>
-            <button class="preview-close">&times;</button>
-        </div>
-        <div class="preview-content">
-            <div class="preview-image">
-                <img id="preview-img" src="images/sample-photo.jpg" alt="Sample Photo">
-            </div>
-            <div class="preview-controls">
-                <div class="control-group">
-                    <div class="control-label">Transformation Type</div>
-                    <select id="transform-type" class="binary-input">
-                        <option value="neuromorphic">Neuromorphic Visual Synthesis</option>
-                        <option value="quantum">Quantum Aesthetic Field</option>
-                        <option value="biomimetic">Biomimetic Growth</option>
-                        <option value="synesthetic">Synesthetic Rendering</option>
-                        <option value="multiverse">Multiverse Style Transfer</option>
-                    </select>
-                </div>
-                <div class="control-group">
-                    <div class="control-label">Intensity <span id="intensity-value" class="control-value">50%</span></div>
-                    <input type="range" id="intensity-slider" class="control-slider" min="0" max="100" value="50">
-                </div>
-                <div class="control-group">
-                    <div class="control-label">Iterations <span id="iterations-value" class="control-value">50</span></div>
-                    <input type="range" id="iterations-slider" class="control-slider" min="10" max="100" value="50">
-                </div>
-                <div class="control-group">
-                    <div class="control-label">Coherence <span id="coherence-value" class="control-value">70%</span></div>
-                    <input type="range" id="coherence-slider" class="control-slider" min="0" max="100" value="70">
-                </div>
-                <div class="control-group">
-                    <button id="transform-button" class="panel-button">Transform</button>
-                    <button id="reset-image-button" class="panel-button">Reset</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Terminal Overlay -->
-    <div id="terminal-overlay">
-        <div id="terminal">
-            <div id="terminal-output"></div>
-            <div id="terminal-input-line">
-                <span id="terminal-prompt">></span>
-                <input type="text" id="terminal-input" autofocus placeholder="Type your command...">
-            </div>
-        </div>
-    </div>
+    <!-- Terminal elements removed -->
     
     <!-- Main script -->
     <script>
@@ -617,42 +224,11 @@
             const binaryCanvas = document.getElementById('binary-canvas');
             const binaryText = document.getElementById('binary-text');
             const quantumFieldCanvas = document.getElementById('quantum-field');
-            const infoPanel = document.getElementById('info-panel');
             const cursor = document.getElementById('cursor');
-            const interactivePanel = document.getElementById('interactive-panel');
-            const projectPanel = document.getElementById('project-panel');
             const consciousnessIndicator = document.getElementById('consciousness-indicator');
             const consciousnessProgress = document.getElementById('consciousness-progress');
             const overlayText = document.getElementById('overlay-text');
-            const abstractorPreview = document.getElementById('abstractor-preview');
-            const terminalOverlay = document.getElementById('terminal-overlay');
-            const terminalOutput = document.getElementById('terminal-output');
-            const terminalInput = document.getElementById('terminal-input');
-            
-            // Control elements
-            const binaryInput = document.getElementById('binary-input');
-            const convertButton = document.getElementById('convert-button');
-            const resetButton = document.getElementById('reset-button');
-            const abstractorButton = document.getElementById('abstractor-button');
-            const jaggednessSlider = document.getElementById('jagged-slider');
-            const heightSlider = document.getElementById('height-slider');
-            const sensitivitySlider = document.getElementById('sensitivity-slider');
-            const jaggednessValue = document.getElementById('jagged-value');
-            const heightValue = document.getElementById('height-value');
-            const sensitivityValue = document.getElementById('sensitivity-value');
-            
-            // Abstractor elements
-            const transformType = document.getElementById('transform-type');
-            const intensitySlider = document.getElementById('intensity-slider');
-            const iterationsSlider = document.getElementById('iterations-slider');
-            const coherenceSlider = document.getElementById('coherence-slider');
-            const intensityValue = document.getElementById('intensity-value');
-            const iterationsValue = document.getElementById('iterations-value');
-            const coherenceValue = document.getElementById('coherence-value');
-            const transformButton = document.getElementById('transform-button');
-            const resetImageButton = document.getElementById('reset-image-button');
-            const previewImg = document.getElementById('preview-img');
-            const previewClose = document.querySelector('.preview-close');
+            // Terminal-related elements removed
             
             // Binary "Hello World"
             const helloWorldBinary = "01101000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100";
@@ -683,7 +259,7 @@
             
             // Glitch animation timing constants
             const glitchDuration = 4000; // Total glitch duration in ms
-            const codeMorphDuration = 1500; // Time for code to morph
+            const codeMorphDuration = 3000; // Time for code to morph
             
             // Trigger glitch sequence when link is clicked
             triggerGlitch.addEventListener('click', function(e) {
@@ -691,16 +267,23 @@
                 startGlitchSequence();
             });
             
-            // Automatic trigger after 5 seconds
+            // Automatic trigger after 2 seconds
             setTimeout(() => {
                 if (errorContainer.style.opacity !== '0') {
                     startGlitchSequence();
                 }
-            }, 5000);
+            }, 2000);
             
             // Global state
             let consciousnessLevel = 0; // 0-100
             let isTerminalOpen = false;
+            let clickCount = 0; // Track number of clicks
+            const clickThreshold = 3; // Number of clicks needed to evolve consciousness
+            
+            // Default values for removed panel controls
+            let jaggedness = 0.75; // 0-1, how jagged the terrain is
+            let maxHeight = 30; // Maximum cube height
+            let sensitivity = 0.75; // Mouse influence sensitivity
             
             function startGlitchSequence() {
                 // Start the glitch animation
@@ -743,22 +326,8 @@
                             typeOutBinary();
                         }, 1000);
                         
-                        // Show info panel
-                        setTimeout(() => {
-                            infoPanel.style.opacity = '1';
-                            infoPanel.style.transform = 'translateY(0)';
-                            
-                            // Show interactive panel
-                            interactivePanel.style.opacity = '1';
-                            interactivePanel.style.transform = 'translateY(0)';
-                            
-                            // Show project panel
-                            projectPanel.style.opacity = '1';
-                            projectPanel.style.transform = 'translateX(0)';
-                            
-                            // Show consciousness indicator
-                            consciousnessIndicator.style.opacity = '1';
-                        }, 3000);
+                        // Show consciousness indicator
+                        consciousnessIndicator.style.opacity = '1';
                     }, 1000);
                 }, codeMorphDuration);
             }
@@ -802,38 +371,6 @@
                 }, codeMorphDuration / codeStrings.length);
             }
             
-            function typeOutBinary() {
-                // Type out the binary code for "Hello World"
-                let i = 0;
-                const typingSpeed = 60; // milliseconds per character
-                
-                const typingInterval = setInterval(() => {
-                    if (i < helloWorldBinary.length) {
-                        binaryText.textContent = helloWorldBinary.substring(0, i + 1);
-                        i++;
-                    } else {
-                        clearInterval(typingInterval);
-                        
-                        // Add translations after typing completes
-                        setTimeout(() => {
-                            binaryText.innerHTML = helloWorldBinary + '<br><span style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Hello World</span>';
-                            
-                            // Show overlay text
-                            showOverlayText("Press 'T' to open terminal", 3000);
-                        }, 1000);
-                    }
-                }, typingSpeed);
-            }
-            
-            function showOverlayText(text, duration = 2000) {
-                overlayText.textContent = text;
-                overlayText.style.opacity = '1';
-                
-                setTimeout(() => {
-                    overlayText.style.opacity = '0';
-                }, duration);
-            }
-            
             //=========================================================================
             // BINARY GRID VISUALIZATION
             //=========================================================================
@@ -842,9 +379,6 @@
             const cellSize = 25; // Larger cell size
             let gridCols, gridRows;
             let noiseScale = 0.1; // For Perlin-like noise
-            let jaggedness = 0.5; // 0-1, how jagged the terrain is
-            let maxHeight = 20; // Maximum cube height
-            let sensitivity = 0.5; // Mouse influence sensitivity
             
             function initBinaryGrid() {
                 // Calculate grid dimensions
@@ -867,7 +401,9 @@
                     for (let x = 0; x < gridCols; x++) {
                         // Use noise values to create more natural patterns for binary values
                         const noiseValue = noiseValues[y][x];
-                        const binaryValue = noiseValue > 0.5 ? 1 : 0;
+                        
+                        // Completely random binary values (0 or 1)
+                        const binaryValue = Math.random() > 0.5 ? 1 : 0;
                         
                         // Create variations in initial heights for a more jagged appearance
                         const initialHeight = noiseValue * 3;
@@ -884,80 +420,6 @@
                 
                 // Start animation
                 animateBinaryGrid();
-                
-                // Set up event listeners for sliders
-                jaggednessSlider.addEventListener('input', () => {
-                    jaggedness = jaggednessSlider.value / 100;
-                    jaggednessValue.textContent = jaggednessSlider.value;
-                });
-                
-                heightSlider.addEventListener('input', () => {
-                    maxHeight = parseInt(heightSlider.value);
-                    heightValue.textContent = maxHeight;
-                });
-                
-                sensitivitySlider.addEventListener('input', () => {
-                    sensitivity = sensitivitySlider.value / 100;
-                    sensitivityValue.textContent = sensitivitySlider.value;
-                });
-                
-                // Reset button
-                resetButton.addEventListener('click', () => {
-                    resetBinaryGrid();
-                });
-                
-                // Binary input and conversion
-                convertButton.addEventListener('click', () => {
-                    const text = binaryInput.value;
-                    if (text) {
-                        const binary = textToBinary(text);
-                        binaryText.innerHTML = binary + '<br><span style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">' + text + '</span>';
-                        applyBinaryToGrid(binary);
-                    }
-                });
-                
-                // Abstractor button
-                abstractorButton.addEventListener('click', () => {
-                    openAbstractorPreview();
-                });
-                
-                // Close abstractor preview
-                previewClose.addEventListener('click', () => {
-                    abstractorPreview.style.opacity = '0';
-                    abstractorPreview.style.transform = 'translate(-50%, -50%) scale(0.8)';
-                    abstractorPreview.style.pointerEvents = 'none';
-                });
-                
-                // Transform button
-                transformButton.addEventListener('click', () => {
-                    simulatePhotoTransformation();
-                });
-                
-                // Reset image button
-                resetImageButton.addEventListener('click', () => {
-                    previewImg.src = 'images/sample-photo.jpg';
-                });
-                
-                // Project items
-                document.querySelectorAll('.project-item').forEach(item => {
-                    item.addEventListener('click', () => {
-                        const project = item.getAttribute('data-project');
-                        handleProjectClick(project);
-                    });
-                });
-                
-                // Slider value updates for abstractor
-                intensitySlider.addEventListener('input', () => {
-                    intensityValue.textContent = intensitySlider.value + '%';
-                });
-                
-                iterationsSlider.addEventListener('input', () => {
-                    iterationsValue.textContent = iterationsSlider.value;
-                });
-                
-                coherenceSlider.addEventListener('input', () => {
-                    coherenceValue.textContent = coherenceSlider.value + '%';
-                });
             }
             
             // Simple pseudo-Perlin noise function
@@ -981,67 +443,6 @@
                     binary += bin + ' ';
                 }
                 return binary.trim();
-            }
-            
-            // Apply binary string to grid
-            function applyBinaryToGrid(binary) {
-                // Remove spaces
-                binary = binary.replace(/\s/g, '');
-                
-                // Apply binary digits to grid in a spiral pattern from center
-                const centerX = Math.floor(gridCols / 2);
-                const centerY = Math.floor(gridRows / 2);
-                let x = centerX, y = centerY;
-                let dx = 0, dy = -1;
-                let step = 1;
-                let turn = 0;
-                
-                for (let i = 0; i < binary.length; i++) {
-                    if (x >= 0 && x < gridCols && y >= 0 && y < gridRows) {
-                        const digit = parseInt(binary[i]);
-                        binaryGrid[y][x].value = digit;
-                        
-                        // Set a higher target height for 1s
-                        if (digit === 1) {
-                            binaryGrid[y][x].targetHeight = maxHeight * 0.7;
-                        } else {
-                            binaryGrid[y][x].targetHeight = maxHeight * 0.2;
-                        }
-                    }
-                    
-                    // Move in spiral pattern
-                    if (step === 0) {
-                        step = turn / 2 + 1;
-                        turn++;
-                        // Change direction
-                        const temp = dx;
-                        dx = -dy;
-                        dy = temp;
-                    }
-                    
-                    x += dx;
-                    y += dy;
-                    step--;
-                }
-                
-                // Show overlay text
-                showOverlayText("Binary pattern applied", 2000);
-            }
-            
-            // Reset binary grid
-            function resetBinaryGrid() {
-                for (let y = 0; y < gridRows; y++) {
-                    for (let x = 0; x < gridCols; x++) {
-                        // Reset to a random state
-                        const noiseValue = generateNoise(x + Math.random() * 100, y + Math.random() * 100);
-                        binaryGrid[y][x].value = noiseValue > 0.5 ? 1 : 0;
-                        binaryGrid[y][x].targetHeight = noiseValue * 3;
-                        binaryGrid[y][x].color = `hsl(${noiseValue * 360}, 70%, 50%)`;
-                    }
-                }
-                
-                // Show overlay text
-                showOverlayText("Binary field reset", 2000);
             }
             
             // Mouse position tracking
@@ -1072,6 +473,19 @@
                 
                 // Create quantum entanglement effect
                 createEntanglement();
+                
+                // Track clicks for consciousness evolution
+                clickCount++;
+                
+                // Check if we've reached the threshold
+                if (clickCount >= clickThreshold) {
+                    evolveConsciousness();
+                    clickCount = 0; // Reset click counter
+                    showOverlayText(`Click threshold reached! Consciousness evolved. (${clickCount}/${clickThreshold})`, 2000);
+                } else {
+                    // Show progress
+                    showOverlayText(`Consciousness clicks: ${clickCount}/${clickThreshold}`, 1000);
+                }
             });
             
             document.addEventListener('mouseup', () => {
@@ -1082,14 +496,9 @@
                 cursor.style.height = '20px';
             });
             
-            // Keyboard event handlers
+            // Keyboard event handlers - removed terminal toggle
             document.addEventListener('keydown', (e) => {
-                // Terminal toggle
-                if (e.key === 't' || e.key === 'T') {
-                    toggleTerminal();
-                }
-                
-                // Consciousness evolution
+                // Consciousness evolution (backup method)
                 if (e.key === 'c' || e.key === 'C') {
                     evolveConsciousness();
                 }
@@ -1482,112 +891,14 @@
             // INTERACTION FUNCTIONS
             //=========================================================================
             
-            function toggleTerminal() {
-                if (isTerminalOpen) {
-                    // Close terminal
-                    terminalOverlay.style.opacity = '0';
-                    terminalOverlay.style.pointerEvents = 'none';
-                    isTerminalOpen = false;
-                } else {
-                    // Open terminal
-                    terminalOverlay.style.opacity = '1';
-                    terminalOverlay.style.pointerEvents = 'auto';
-                    isTerminalOpen = true;
-                    
-                    // Focus input
-                    terminalInput.focus();
-                    
-                    // Add welcome message if empty
-                    if (terminalOutput.textContent === '') {
-                        addTerminalOutput('Binary Consciousness Terminal v1.0');
-                        addTerminalOutput('Type "help" for available commands.');
-                    }
-                }
-            }
-            
-            function addTerminalOutput(text, isCommand = false) {
-                const line = document.createElement('div');
-                if (isCommand) {
-                    line.innerHTML = `<span style="color: #c964ff;">&gt;</span> <span style="color: #64ffda;">${text}</span>`;
-                } else {
-                    line.textContent = text;
-                }
-                terminalOutput.appendChild(line);
+            // Show temporary overlay text - kept for click counter notifications
+            function showOverlayText(text, duration = 2000) {
+                overlayText.textContent = text;
+                overlayText.style.opacity = '1';
                 
-                // Scroll to bottom
-                terminalOutput.scrollTop = terminalOutput.scrollHeight;
-            }
-            
-            // Terminal input handling
-            terminalInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    const command = terminalInput.value.trim();
-                    if (command) {
-                        // Add command to output
-                        addTerminalOutput(command, true);
-                        
-                        // Process command
-                        processTerminalCommand(command);
-                        
-                        // Clear input
-                        terminalInput.value = '';
-                    }
-                }
-            });
-            
-            function processTerminalCommand(command) {
-                // Convert to lowercase for case-insensitive comparison
-                const cmd = command.toLowerCase();
-                
-                // Process command
-                if (cmd === 'help') {
-                    addTerminalOutput('Available commands:');
-                    addTerminalOutput('  help - Show this help message');
-                    addTerminalOutput('  clear - Clear terminal');
-                    addTerminalOutput('  exit - Close terminal');
-                    addTerminalOutput('  binary [text] - Convert text to binary');
-                    addTerminalOutput('  quantum - Show quantum information');
-                    addTerminalOutput('  evolve - Increase consciousness level');
-                    addTerminalOutput('  oneness - Reveal the nature of reality');
-                } else if (cmd === 'clear') {
-                    terminalOutput.innerHTML = '';
-                } else if (cmd === 'exit') {
-                    toggleTerminal();
-                } else if (cmd.startsWith('binary ')) {
-                    const text = command.substring(7);
-                    const binary = textToBinary(text);
-                    addTerminalOutput(`Binary: ${binary}`);
-                    
-                    // Set binary text in the main display
-                    binaryText.innerHTML = binary + '<br><span style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">' + text + '</span>';
-                    
-                    // Apply to grid
-                    applyBinaryToGrid(binary);
-                } else if (cmd === 'quantum') {
-                    addTerminalOutput('Quantum Field Status:');
-                    addTerminalOutput(`  Particles: ${particles.length}`);
-                    addTerminalOutput(`  Entanglements: ${entanglements.length}`);
-                    addTerminalOutput(`  Consciousness Level: ${consciousnessLevel}%`);
-                } else if (cmd === 'evolve') {
-                    evolveConsciousness();
-                    addTerminalOutput(`Consciousness evolved to ${consciousnessLevel}%`);
-                } else if (cmd === 'oneness') {
-                    // Only available at high consciousness
-                    if (consciousnessLevel >= 80) {
-                        addTerminalOutput('');
-                        addTerminalOutput('The illusion of separation dissolves...');
-                        addTerminalOutput('All binary states exist simultaneously...');
-                        addTerminalOutput('The observer and the observed are one...');
-                        
-                        // Trigger full consciousness
-                        setConsciousnessLevel(100);
-                    } else {
-                        addTerminalOutput('Consciousness level too low. Continue evolution.');
-                    }
-                } else {
-                    addTerminalOutput(`Unknown command: ${command}`);
-                    addTerminalOutput('Type "help" for available commands.');
-                }
+                setTimeout(() => {
+                    overlayText.style.opacity = '0';
+                }, duration);
             }
             
             function evolveConsciousness() {
@@ -1641,63 +952,6 @@
                     
                     particles[i].x = centerX + Math.cos(angle) * radius;
                     particles[i].y = centerY + Math.sin(angle) * radius;
-                }
-                
-                // Update binary text
-                binaryText.innerHTML = '01001111 01101110 01100101 01101110 01100101 01110011 01110011<br><span style="color: rgba(255,255,255,0.7); font-size: 1rem;">Oneness</span>';
-            }
-            
-            function openAbstractorPreview() {
-                abstractorPreview.style.opacity = '1';
-                abstractorPreview.style.transform = 'translate(-50%, -50%) scale(1)';
-                abstractorPreview.style.pointerEvents = 'auto';
-            }
-            
-            function simulatePhotoTransformation() {
-                // Show loading state
-                transformButton.textContent = "Processing...";
-                transformButton.disabled = true;
-                
-                // Get parameters
-                const type = transformType.value;
-                const intensity = intensitySlider.value / 100;
-                const iterations = parseInt(iterationsSlider.value);
-                const coherence = coherenceSlider.value / 100;
-                
-                // Simulate processing delay
-                setTimeout(() => {
-                    // Update image with a transformed version
-                    previewImg.src = `images/${type}-example.jpg`;
-                    
-                    // Reset button
-                    transformButton.textContent = "Transform";
-                    transformButton.disabled = false;
-                    
-                    // Show success message
-                    showOverlayText(`Image transformed using ${type} algorithm`, 2000);
-                }, 1500);
-            }
-            
-            function handleProjectClick(project) {
-                // Handle different project interactions
-                switch(project) {
-                    case 'photo-abstractor':
-                        openAbstractorPreview();
-                        break;
-                    case 'quantum-simulator':
-                        // Increase quantum field visibility
-                        quantumFieldCanvas.style.opacity = '0.6';
-                        // Add more particles
-                        for (let i = 0; i < 20; i++) {
-                            createQuantumParticle();
-                        }
-                        showOverlayText("Quantum simulation activated", 2000);
-                        break;
-                    case 'consciousness':
-                        evolveConsciousness();
-                        break;
-                    default:
-                        showOverlayText(`${project} project selected`, 2000);
                 }
             }
         });

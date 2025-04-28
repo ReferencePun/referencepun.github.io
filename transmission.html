@@ -42,84 +42,94 @@
     </header>
 
     <main>
-        <!-- Magazines Display -->
-        <div class="magazines-row">
+        <!-- Simple text heading instead of traditional heading -->
+        <div style="text-align: center; font-size: 1.5rem; font-weight: 300;">
+            Transmission Magazine
+        </div>
+        <br>
+        
+        <!-- Responsive magazine grid -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; width: 100%;">
             <!-- Issue 01 -->
-            <div class="magazine-column">
-                <h2 class="magazine-title">Issue 01: Transition</h2>
-                <div class="magazine-cover" onclick="openMagazine('pdfs/01 Issue 01 Transition.pdf')">
-                    <img src="images/thumbnails/01 Issue 01 Transition.jpg" alt="Transmission Issue 01: Transition">
+            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
+                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Issue 01: Transition</div>
+                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/01 Issue 01 Transition.pdf')">
+                    <img src="images/thumbnails/01 Issue 01 Transition.jpg" alt="Transmission Issue 01: Transition" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
 
             <!-- Issue 02 -->
-            <div class="magazine-column">
-                <h2 class="magazine-title">Issue 02: Transparency</h2>
-                <div class="magazine-cover" onclick="openMagazine('pdfs/02 Issue 02 Transparency.pdf')">
-                    <img src="images/thumbnails/02 Issue 02 Transparency.jpg" alt="Transmission Issue 02: Transparency">
+            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
+                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Issue 02: Transparency</div>
+                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0;" onclick="openMagazine('pdfs/02 Issue 02 Transparency.pdf')">
+                    <img src="images/thumbnails/02 Issue 02 Transparency.jpg" alt="Transmission Issue 02: Transparency" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
 
             <!-- Issue 03 -->
-            <div class="magazine-column">
-                <h2 class="magazine-title">Issue 03: Transform</h2>
-                <div class="magazine-cover" onclick="openMagazine('pdfs/04 Issue 03 Transform.pdf')">
-                    <img src="images/thumbnails/04 Issue 03 Transform.jpg" alt="Transmission Issue 03: Transform">
+            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
+                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Issue 03: Transform</div>
+                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/04 Issue 03 Transform.pdf')">
+                    <img src="images/thumbnails/04 Issue 03 Transform.jpg" alt="Transmission Issue 03: Transform" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
 
             <!-- Issue 03-04 -->
-            <div class="magazine-column">
-                <h2 class="magazine-title">Issue 03-04: Intermission</h2>
-                <div class="magazine-cover" onclick="openMagazine('pdfs/09 Issue 03-04 Intermission.pdf')">
-                    <img src="images/thumbnails/09 Issue 03-04 Intermission.jpg" alt="Transmission Issue 03-04: Intermission">
+            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
+                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Issue 03-04: Intermission</div>
+                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/09 Issue 03-04 Intermission.pdf')">
+                    <img src="images/thumbnails/09 Issue 03-04 Intermission.jpg" alt="Transmission Issue 03-04: Intermission" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
         </div>
 
-        <!-- Magazine Modal -->
-        <div id="magazine-modal"></div>
+        <div class="section-divider"></div>
 
         <!-- Transmission Presents Section -->
-        <div style="text-align: center;">
-            <div class="section-divider"></div>
-            <h2 class="section-title">Transmission Presents</h2>
-            <a href="transmission_presents.html" class="view-more">(View More Issues)</a>
-        </div>
-
-        <!-- Press Section -->
-        <div class="section-divider"></div>
-        <h2 class="section-title">Press:</h2>
-        
-        <div style="text-align: center;">
-            <div class="press-section">
-                <p class="press-quote">"Eclectic and intelligent."</p>
-                <p class="press-quote">"One of the most exciting publications of the moment."</p>
-                <p class="quote-source">-Models.com</p>
-                
-                <p class="press-quote">"A cornucopia of color."</p>
-                <p class="quote-source">-i-D</p>
-                
-                <p class="press-quote">"The enduring appeal of the "real" in life as in art."</p>
-                <p class="quote-source">-Dazed & Confused</p>
-
-                <p class="press-quote">"Personal, intimate, and refreshingly direct."</p>
-                <p class="press-quote">"Continues to grow into something much larger than just the brainchild of a single powerful mind."</p>
-                <p class="quote-source">-The Last Magazine</p>
-
-                <p class="press-quote">"Careful to convey a sense of sensitivity."</p>
-                <p class="press-quote">"[The] work has a real analogue, retro tinge that breathes a lot of personality. There is a lot of natural beauty, highlighted with natural light."</p>
-                <p class="quote-source">-Kitsuné</p>
-
-                <p class="press-quote">"[The] raw approach to photography and writing will assure you that there are actually new voices out there [that] aint afraid to say shit."</p>
-                <p class="quote-source">-OAK</p>
+        <div style="text-align: center; font-size: 1.5rem; font-weight: 300;">
+            Transmission Presents
+            <div style="font-size: 1.5rem;">
+                <a href="transmission_presents.html">View More Issues</a>
             </div>
         </div>
 
+        <div class="section-divider"></div>
+
+        <!-- Press Section -->
+        <div style="text-align: center; font-size: 1.5rem; font-weight: 300;">
+            Press
+        </div>
+        <br>
+        
+        <div style="text-align: center; max-width: 800px; margin: 0 auto; padding: 0 20px;">
+            <p style="font-style: italic; margin-bottom: 0.5rem;">"Eclectic and intelligent."</p>
+            <p style="font-style: italic; margin-bottom: 0.5rem;">"One of the most exciting publications of the moment."</p>
+            <p style="color: #666; margin-bottom: 2rem;">-Models.com</p>
+            
+            <p style="font-style: italic; margin-bottom: 0.5rem;">"A cornucopia of color."</p>
+            <p style="color: #666; margin-bottom: 2rem;">-i-D</p>
+            
+            <p style="font-style: italic; margin-bottom: 0.5rem;">"The enduring appeal of the "real" in life as in art."</p>
+            <p style="color: #666; margin-bottom: 2rem;">-Dazed & Confused</p>
+
+            <p style="font-style: italic; margin-bottom: 0.5rem;">"Personal, intimate, and refreshingly direct."</p>
+            <p style="font-style: italic; margin-bottom: 0.5rem;">"Continues to grow into something much larger than just the brainchild of a single powerful mind."</p>
+            <p style="color: #666; margin-bottom: 2rem;">-The Last Magazine</p>
+
+            <p style="font-style: italic; margin-bottom: 0.5rem;">"Careful to convey a sense of sensitivity."</p>
+            <p style="font-style: italic; margin-bottom: 0.5rem;">"[The] work has a real analogue, retro tinge that breathes a lot of personality. There is a lot of natural beauty, highlighted with natural light."</p>
+            <p style="color: #666; margin-bottom: 2rem;">-Kitsuné</p>
+
+            <p style="font-style: italic; margin-bottom: 0.5rem;">"[The] raw approach to photography and writing will assure you that there are actually new voices out there [that] aint afraid to say shit."</p>
+            <p style="color: #666; margin-bottom: 2rem;">-OAK</p>
+        </div>
+
+        <!-- Magazine Modal -->
+        <div id="magazine-modal"></div>
     </main>
 
     <footer>
-        <p>&copy; <span id="current-year"></span> Dylan Forsberg. All rights reserved.</p>
+        <p>&copy; <span id="current-year">2025</span> Dylan Forsberg. All rights reserved.</p>
     </footer>
 
     <!-- PDF.js Library -->

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transmission Presents - Dylan Forsberg</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="logo"><a href="portfolio.html">Dylan Forsberg</a></h1>
+            
+            <!-- Mobile menu toggle -->
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="transmission.html">Transmission Magazine</a></li>
+                    <li><a href="video.html">Video</a></li>
+                    <li><a href="landscapes.html">Landscapes</a></li>
+                    <li><a href="writing.html">Writing</a></li>
+                    <li><a href="info.html">Info</a></li>
+                </ul>
+            </nav>
+            
+            <div class="social-icons">
+                <a href="https://instagram.com/dylanforsberg" target="_blank" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="https://twitter.com/dylanforsberg" target="_blank" aria-label="Twitter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h3 style="text-align: center; margin: 2rem 0 1rem; font-weight: 300; font-size: 2rem;">Transmission Presents</h3>
+
+        
+        <!-- Top row with 4 magazines -->
+        <div class="magazines-row">
+            <!-- Magazine 1 -->
+            <div class="magazine-column">
+                <h2 class="magazine-title">FNT</h2>
+                <div class="magazine-cover" onclick="openMagazine('pdfs/03 FNT Photojournalism.pdf')">
+                    <img src="images/thumbnails/03 FNT Photojournalism.jpg" alt="Transmission Presents: FNT">
+                </div>
+            </div>
+
+            <!-- Magazine 2 -->
+            <div class="magazine-column">
+                <h2 class="magazine-title">Côte & Ciel</h2>
+                <div class="magazine-cover" onclick="openMagazine('pdfs/06 Presents Cote_Ciel Lookbook.pdf')">
+                    <img src="images/thumbnails/06 Presents Cote_Ciel Lookbook.jpg" alt="Transmission Presents: Côte & Ciel">
+                </div>
+            </div>
+
+            <!-- Magazine 3 -->
+            <div class="magazine-column">
+                <h2 class="magazine-title">The SS16 New Faces Issue</h2>
+                <div class="magazine-cover" onclick="openMagazine('pdfs/05 Presents New Faces.pdf')">
+                    <img src="images/thumbnails/05 Presents New Faces.jpg" alt="Transmission Presents: The SS16 New Faces Issue">
+                </div>
+            </div>
+
+            <!-- Magazine 4 -->
+            <div class="magazine-column">
+                <h2 class="magazine-title">A Year in a Day with Lindsey Wixson</h2>
+                <div class="magazine-cover" onclick="openMagazine('pdfs/07 Presents Lindsey Wixson.pdf')">
+                    <img src="images/thumbnails/07 Presents Lindsey Wixson.jpg" alt="Transmission Presents: A Year in a Day with Lindsey Wixson">
+                </div>
+            </div>
+        </div>
+
+        <!-- Section header with reduced whitespace -->
+        <h3 style="text-align: center; margin: 2rem 0 1rem; font-weight: 300; font-size: 2rem;">Transmission Showcase</h3>
+
+        <!-- Bottom magazine with controlled size -->
+        <div class="magazines-row" style="display: flex; justify-content: center; margin: 0.5rem auto;">
+            <div class="magazine-column" style="width: 350px; max-width: 350px; flex: none;">
+                <h2 class="magazine-title">Le Cam Romain</h2>
+                <div class="magazine-cover" style="cursor: pointer; position: relative; height: 0; padding-bottom: 133%; overflow: hidden;">
+                    <img src="images/thumbnails/08 Showcase Le Cam Romain.jpg" alt="Transmission Showcase: Le Cam Romain" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Magazine Modal -->
+        <div id="magazine-modal"></div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> Dylan Forsberg. All rights reserved.</p>
+    </footer>
+
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <!-- Custom PDF viewer -->
+    <script src="js/magazine-viewer.js"></script>
+    <!-- Magazine functionality -->
+    <script src="js/magazine.js"></script>
+
+    <script>
+        // Run after page load to ensure all elements are available
+        document.addEventListener('DOMContentLoaded', function() {
+          // Find the showcase section elements
+          const showcaseTitle = document.querySelector('h3:contains("Transmission Showcase")') || 
+                                document.querySelector('h3.page-title:nth-of-type(2)');
+          const showcaseRow = document.querySelector('.magazines-row:last-of-type');
+          const showcaseColumn = showcaseRow ? showcaseRow.querySelector('.magazine-column') : null;
+          
+          // Apply styles directly with JavaScript
+          if (showcaseTitle) {
+            showcaseTitle.style.margin = '2rem 0 1rem';
+          }
+          
+          if (showcaseRow) {
+            showcaseRow.style.display = 'flex';
+            showcaseRow.style.justifyContent = 'center';
+          }
+          
+          if (showcaseColumn) {
+            showcaseColumn.style.width = '350px';
+            showcaseColumn.style.maxWidth = '350px';
+            showcaseColumn.style.flex = 'none';
+          }
+          
+          console.log('Styles applied by JavaScript');
+        });
+      </script>
+</body>
+</html>

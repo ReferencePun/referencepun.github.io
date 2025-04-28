@@ -51,7 +51,7 @@ img {
 
 /* Header styles */
 header {
-    padding: 1.5rem 2rem;
+    padding: 1rem 2rem;
     border-bottom: 1px solid #f0f0f0;
     position: sticky;
     top: 0;
@@ -149,16 +149,16 @@ nav {
 main {
     max-width: 1800px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
     flex-grow: 1;
     width: 95%; /* Take up more screen space */
 }
 
 .page-title {
     text-align: center;
-    margin: 2rem 0 3rem;
+    margin: 1rem 0 1.5rem;
     font-weight: 300;
-    font-size: 2.5rem;
+    font-size: 2rem;
     letter-spacing: 1px;
 }
 
@@ -374,15 +374,7 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
-    margin: 3rem auto;
-}
-
-.magazine-column, .centered-magazine {
-    flex: 1;
-    min-width: 250px;
-    max-width: 350px;
-    margin-bottom: 40px;
-    text-align: center;
+    margin: 1.5rem auto;
 }
 
 /* Magazine issue styles */
@@ -410,6 +402,29 @@ main {
     justify-content: center;
 }
 
+.magazine-column {
+  flex: 0 0 25%;
+  max-width: 25%;
+  box-sizing: border-box;
+}
+
+/* Reduce space between section headers and content */
+h3.page-title + .magazines-row {
+    margin-top: 0.5rem;
+}
+
+/* Add space between sections */
+h3.page-title:not(:first-of-type) {
+    margin-top: 3rem;
+}
+
+.magazines-row .magazine-column {
+    flex: 1;
+    min-width: 250px;
+    max-width: 100%;
+    text-align: center;
+}
+
 .magazine-cover {
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -432,7 +447,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .magazine-issue:hover .magazine-cover img {
@@ -460,7 +475,7 @@ main {
     width: 100%;
     height: 1px;
     background-color: #eee;
-    margin: 4rem 0 2rem;
+    margin: 1rem 0 1rem;
 }
 
 .section-title {
@@ -805,8 +820,8 @@ main {
 
 .video-container h2 {
     margin-bottom: 1rem;
-    font-weight: 400;
-    font-size: 1.8rem;
+    font-weight: 300;
+    font-size: 1.5rem;
 }
 
 .video-wrapper {
@@ -1072,7 +1087,7 @@ main {
 
 /* Info/About page styles */
 .info-container {
-    max-width: 900px;
+    max-width: 80%;
     margin: 0 auto;
 }
 
@@ -1094,8 +1109,8 @@ main {
 }
 
 .info-details h2 {
-    font-size: 1.4rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 300;
     margin: 2rem 0 1rem;
 }
 
@@ -1115,8 +1130,8 @@ main {
 }
 
 .contact-section h2 {
-    font-size: 1.8rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 300;
     margin-bottom: 1rem;
 }
 
