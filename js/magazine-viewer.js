@@ -1,7 +1,12 @@
 /**
  * Transmission Magazine PDF Viewer - Enhanced Version
- * Features: Sleek UI, animations, minimalist controls, improved UX
+ * Features: Sleek UI, responsive design, consistent sizing, improved UX
+ * Last updated: April 2025
  */
+
+//=============================================================================
+// 1. CONFIGURATION AND INITIALIZATION
+//=============================================================================
 
 // PDF.js worker configuration
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
@@ -10,6 +15,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 let pdfDoc = null;
 let currentPage = 1;
 let pageRendering = false;
+let pageCache = {};
 let pageNumPending = null;
 let scale = 1.5;
 let canvas = null;
@@ -20,6 +26,30 @@ let isFullscreen = false;
 let controlsVisible = true;
 let controlsTimeout = null;
 let isTransitioning = false; // Flag to prevent multiple transitions
+
+/**
+ * Calculate appropriate scale based on screen size
+ */
+function calculateResponsiveScale() {
+  const viewportWidth = window.innerWidth;
+  
+  // Base scale on viewport dimensions
+  if (viewportWidth < 480) {
+    return 0.8; // Mobile
+  } else if (viewportWidth < 768) {
+    return 1.0; // Small tablet
+  } else if (viewportWidth < 1024) {
+    return 1.2; // Large tablet
+  } else if (viewportWidth < 1400) {
+    return 1.3; // Small desktop
+  } else {
+    return 1.5; // Large desktop
+  }
+}
+
+//=============================================================================
+// 2. MAGAZINE OPENING AND PDF LOADING
+//=============================================================================
 
 /**
  * Opens a magazine PDF in the modal with enhanced UI
@@ -38,11 +68,14 @@ function openMagazine(pdfPath) {
   
   try {
     // Set up the modal content with improved UI
-    // In the openMagazine function, modify the modal content HTML
     modal.innerHTML = `
       <div class="modal-content">
         <div class="magazine-viewer">
           <div class="pdf-status">
+            <div id="loading-indicator" class="loading-indicator">
+              <div class="spinner"></div>
+              <span>Loading magazine...</span>
+            </div>
             <div id="error-message" class="error-message" style="display:none;"></div>
           </div>
           
@@ -53,7 +86,7 @@ function openMagazine(pdfPath) {
             </div>
           </div>
           
-          <!-- Move controls outside the container -->
+          <!-- Controls container -->
           <div class="pdf-controls-fixed" id="pdf-controls">
             <button id="prev-button" class="nav-button" aria-label="Previous page">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -102,7 +135,9 @@ function openMagazine(pdfPath) {
     canvas = document.getElementById('pdf-canvas');
     ctx = canvas.getContext('2d');
     secondPageCanvas = document.getElementById('second-pdf-canvas');
-    const secondCtx = secondPageCanvas.getContext('2d');
+    
+    // Set initial scale based on screen size
+    scale = calculateResponsiveScale();
     
     // Set up event listeners
     const prevButton = document.getElementById('prev-button');
@@ -113,7 +148,6 @@ function openMagazine(pdfPath) {
     const fullscreenToggleButton = document.getElementById('fullscreen-toggle');
     const closeButton = document.getElementById('close-button');
     const pdfContainer = document.querySelector('.pdf-container');
-    const controls = document.getElementById('pdf-controls');
     
     if (prevButton) prevButton.addEventListener('click', onPrevPage);
     if (nextButton) nextButton.addEventListener('click', onNextPage);
@@ -128,6 +162,10 @@ function openMagazine(pdfPath) {
     
     // Add touch swipe navigation
     setupTouchNavigation(pdfContainer);
+    
+    // Add responsive handling
+    window.addEventListener('resize', adjustForMobileViewing);
+    adjustForMobileViewing();
     
     // Load the PDF using the encoded path
     loadPdf(encodedPath);
@@ -149,34 +187,6 @@ function openMagazine(pdfPath) {
 }
 
 /**
- * Set up touch navigation for swiping between pages
- */
-function setupTouchNavigation(element) {
-  let touchStartX = 0;
-  let touchEndX = 0;
-  
-  element.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-  
-  element.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  });
-  
-  function handleSwipe() {
-    const swipeThreshold = 50; // Minimum distance to trigger swipe
-    if (touchEndX < touchStartX - swipeThreshold) {
-      // Swiped left - next page
-      onNextPage();
-    } else if (touchEndX > touchStartX + swipeThreshold) {
-      // Swiped right - previous page
-      onPrevPage();
-    }
-  }
-}
-
-/**
  * Load a PDF document with enhanced error handling
  */
 function loadPdf(pdfPath) {
@@ -189,15 +199,15 @@ function loadPdf(pdfPath) {
     
     // Check if we're using file:// protocol (which has CORS issues)
     const isFileProtocol = window.location.protocol === 'file:';
-    if (isFileProtocol) {
-      console.warn('Using file:// protocol may cause PDF loading issues due to security restrictions.');
-    }
     
-    // Create options for PDF.js
+    // Create options for PDF.js with enhanced preloading
     const loadingOptions = {
       url: pdfPath,
       disableStream: isFileProtocol, 
       disableRange: isFileProtocol,
+      disableAutoFetch: false,  // Enable auto fetching of pages
+      rangeChunkSize: 65536,    // Optimal chunk size for faster fetching
+      maxImageSize: 4096 * 4096, // Allow larger images for high-quality PDFs
       cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/cmaps/',
       cMapPacked: true
     };
@@ -260,6 +270,395 @@ function loadPdf(pdfPath) {
   }
 }
 
+//=============================================================================
+// 3. PAGE RENDERING FUNCTIONS
+//=============================================================================
+
+/**
+ * Render pages based on current view mode with optimizations
+ */
+function renderCurrentPages() {
+  if (!pdfDoc) return;
+  
+  // Show loading placeholder
+  if (ctx) {
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#f0f0f0';
+    ctx.fillRect(canvas.width/4, canvas.height/2 - 1, canvas.width/2, 2);
+  }
+  
+  if (viewMode === 'single') {
+    // Single page mode
+    secondPageCanvas.style.display = 'none';
+    renderPage(currentPage);
+    // Preload adjacent pages for faster navigation
+    preloadAdjacentPages(currentPage);
+  } else {
+    // Double page mode
+    // Handle special cases for cover and back cover
+    if (currentPage === 1) {
+      // First page (cover) is always shown alone
+      secondPageCanvas.style.display = 'none';
+      renderPage(currentPage);
+      // Preload next page
+      if (currentPage + 1 <= pdfDoc.numPages) {
+        pdfDoc.getPage(currentPage + 1);
+      }
+    } else if (currentPage === pdfDoc.numPages) {
+      // Last page (back cover) is shown alone if total pages is odd
+      secondPageCanvas.style.display = 'none';
+      renderPage(currentPage);
+      // Preload previous page
+      if (currentPage - 1 >= 1) {
+        pdfDoc.getPage(currentPage - 1);
+      }
+    } else {
+      // Regular spread - show two pages side by side
+      let leftPage, rightPage;
+      
+      // Explicitly set second canvas to be visible
+      secondPageCanvas.style.display = 'block';
+      
+      if (currentPage % 2 === 0) {
+        // Even page number
+        leftPage = currentPage;
+        rightPage = Math.min(currentPage + 1, pdfDoc.numPages);
+      } else {
+        // Odd page number
+        leftPage = Math.max(currentPage - 1, 1);
+        rightPage = currentPage;
+      }
+      
+      // Render left page
+      renderPageToCanvas(leftPage, canvas, ctx);
+      
+      // Render right page (if not the last page)
+      if (rightPage <= pdfDoc.numPages) {
+        renderPageToCanvas(rightPage, secondPageCanvas, secondPageCanvas.getContext('2d'));
+      }
+      
+      // Update page display number
+      const pageNum = document.getElementById('page-num');
+      if (pageNum) {
+        pageNum.textContent = leftPage === rightPage ? leftPage : `${leftPage}-${rightPage}`;
+      }
+      
+      // Preload next spread
+      if (currentPage + 2 <= pdfDoc.numPages) {
+        pdfDoc.getPage(currentPage + 2);
+      }
+    }
+  }
+  
+  // Update navigation button states
+  updateNavigationState();
+}
+
+/**
+ * Render a single page (used in single page mode)
+ */
+function renderPage(pageNumber) {
+  if (!pdfDoc) return;
+  
+  pageRendering = true;
+  
+  // Update page status
+  const pageNum = document.getElementById('page-num');
+  if (pageNum) pageNum.textContent = pageNumber;
+  
+  // Render to the main canvas with consistent sizing
+  renderPageToCanvas(pageNumber, canvas, ctx);
+}
+
+/**
+ * Render a page to a specific canvas with caching
+ */
+function renderPageToCanvas(pageNumber, targetCanvas, targetCtx) {
+  if (!pdfDoc) return;
+  
+  pageRendering = true;
+  
+  // Check if page is in cache
+  const cacheKey = `page_${pageNumber}_${scale}`;
+  if (pageCache[cacheKey]) {
+    // Reuse cached image data
+    targetCanvas.width = pageCache[cacheKey].width;
+    targetCanvas.height = pageCache[cacheKey].height;
+    targetCtx.putImageData(pageCache[cacheKey].imageData, 0, 0);
+    pageRendering = false;
+    return;
+  }
+  
+  // Render at full quality 
+  pdfDoc.getPage(pageNumber).then(function(page) {
+    const viewport = page.getViewport({ scale: scale });
+    
+    targetCanvas.height = viewport.height;
+    targetCanvas.width = viewport.width;
+    
+    // Configure rendering for best quality
+    targetCtx.imageSmoothingEnabled = true;
+    targetCtx.imageSmoothingQuality = 'high';
+    
+    const renderContext = {
+      canvasContext: targetCtx,
+      viewport: viewport,
+      intent: 'display'
+    };
+    
+    const renderTask = page.render(renderContext);
+    
+    renderTask.promise.then(function() {
+      // Cache the rendered page
+      pageCache[cacheKey] = {
+        width: targetCanvas.width,
+        height: targetCanvas.height,
+        imageData: targetCtx.getImageData(0, 0, targetCanvas.width, targetCanvas.height)
+      };
+      
+      // Limit cache size to prevent memory issues
+      const cacheKeys = Object.keys(pageCache);
+      if (cacheKeys.length > 10) {
+        delete pageCache[cacheKeys[0]];
+      }
+      
+      pageRendering = false;
+      
+      if (pageNumPending !== null) {
+        renderCurrentPages();
+        pageNumPending = null;
+      }
+      
+      // Add subtle fade-in effect to rendered page
+      targetCanvas.classList.add('page-loaded');
+      setTimeout(() => {
+        targetCanvas.classList.remove('page-loaded');
+      }, 300);
+    });
+  }).catch(function(error) {
+    console.error('Error rendering page:', error);
+    pageRendering = false;
+  });
+}
+
+/**
+ * Queue rendering pages if already rendering
+ */
+function queueRenderPage(pageNum) {
+  if (pageRendering) {
+    pageNumPending = pageNum;
+  } else {
+    renderCurrentPages();
+  }
+}
+
+/**
+ * Preload adjacent pages for faster navigation - enhanced version
+ */
+function preloadAdjacentPages(currentPageNum) {
+  if (!pdfDoc) return;
+  
+  // Keep track of pages being preloaded
+  if (!window.preloadingPages) {
+    window.preloadingPages = {};
+  }
+  
+  // Function to preload a single page more thoroughly
+  const preloadPage = (pageNum) => {
+    // Skip if already preloaded or currently visible
+    if (window.preloadingPages[pageNum] || pageNum === currentPage) return;
+    
+    // Mark as being preloaded
+    window.preloadingPages[pageNum] = true;
+    
+    // Actually preload the page by going through full rendering preparation
+    pdfDoc.getPage(pageNum).then(page => {
+      // Generate the viewport (this forces PDF.js to prepare the page)
+      const viewport = page.getViewport({ scale: scale });
+      
+      // Create cache key
+      const cacheKey = `page_${pageNum}_${scale}`;
+      
+      // Skip further processing if already in cache
+      if (pageCache[cacheKey]) {
+        window.preloadingPages[pageNum] = false;
+        return;
+      }
+      
+      // Create temporary canvas for off-screen rendering
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = viewport.width;
+      tempCanvas.height = viewport.height;
+      const tempCtx = tempCanvas.getContext('2d', { alpha: false });
+      
+      // Pre-render to the temporary canvas
+      page.render({
+        canvasContext: tempCtx,
+        viewport: viewport
+      }).promise.then(() => {
+        // Cache the rendered page
+        pageCache[cacheKey] = {
+          width: tempCanvas.width,
+          height: tempCanvas.height,
+          imageData: tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height)
+        };
+        
+        // Cleanup
+        window.preloadingPages[pageNum] = false;
+      });
+    }).catch(error => {
+      console.error(`Error preloading page ${pageNum}:`, error);
+      window.preloadingPages[pageNum] = false;
+    });
+  };
+  
+  // Preload next few pages
+  for (let i = 1; i <= 2; i++) {
+    const nextPage = currentPageNum + i;
+    if (nextPage <= pdfDoc.numPages) {
+      preloadPage(nextPage);
+    }
+  }
+  
+  // Preload previous page
+  if (currentPageNum > 1) {
+    preloadPage(currentPageNum - 1);
+  }
+}
+
+//=============================================================================
+// 4. NAVIGATION FUNCTIONS
+//=============================================================================
+
+/**
+ * Update the state of navigation buttons
+ */
+function updateNavigationState() {
+  const prevButton = document.getElementById('prev-button');
+  const nextButton = document.getElementById('next-button');
+  
+  if (prevButton) {
+    if (currentPage <= 1) {
+      prevButton.classList.add('disabled');
+      prevButton.setAttribute('disabled', 'disabled');
+    } else {
+      prevButton.classList.remove('disabled');
+      prevButton.removeAttribute('disabled');
+    }
+  }
+  
+  if (nextButton) {
+    if (currentPage >= pdfDoc.numPages) {
+      nextButton.classList.add('disabled');
+      nextButton.setAttribute('disabled', 'disabled');
+    } else {
+      nextButton.classList.remove('disabled');
+      nextButton.removeAttribute('disabled');
+    }
+  }
+}
+
+/**
+ * Go to previous page with improved animation
+ */
+function onPrevPage() {
+  if (!pdfDoc || currentPage <= 1 || isTransitioning) return;
+  
+  isTransitioning = true;
+  
+  const pageContainer = document.getElementById('page-container');
+  if (pageContainer) pageContainer.classList.add('turn-right');
+  
+  // Shorter delay for better responsiveness
+  setTimeout(() => {
+    // Remove transition class first to prevent stacking animations
+    if (pageContainer) pageContainer.classList.remove('turn-right');
+    
+    if (viewMode === 'single') {
+      currentPage--;
+    } else {
+      // In double mode, move back two pages (except for special cases)
+      if (currentPage === pdfDoc.numPages && pdfDoc.numPages % 2 === 1) {
+        // If on last page and total pages is odd, go back to the spread
+        currentPage = Math.max(1, currentPage - 1);
+      } else {
+        currentPage = Math.max(1, currentPage - 2);
+      }
+    }
+    
+    // Render new page immediately
+    renderCurrentPages();
+    isTransitioning = false;
+  }, 150);
+}
+
+/**
+ * Go to next page with improved animation
+ */
+function onNextPage() {
+  if (!pdfDoc || currentPage >= pdfDoc.numPages || isTransitioning) return;
+  
+  isTransitioning = true;
+  
+  const pageContainer = document.getElementById('page-container');
+  if (pageContainer) pageContainer.classList.add('turn-left');
+  
+  // Shorter delay for better responsiveness
+  setTimeout(() => {
+    // Remove transition class first to prevent stacking animations
+    if (pageContainer) pageContainer.classList.remove('turn-left');
+    
+    if (viewMode === 'single') {
+      currentPage++;
+    } else {
+      // In double mode, move forward two pages (except for special cases)
+      if (currentPage === 1) {
+        // If on cover, go to first spread
+        currentPage = 2;
+      } else {
+        currentPage = Math.min(pdfDoc.numPages, currentPage + 2);
+      }
+    }
+    
+    // Render new page immediately
+    renderCurrentPages();
+    isTransitioning = false;
+  }, 150);
+}
+
+/**
+ * Set up touch navigation for swiping between pages
+ */
+function setupTouchNavigation(element) {
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  element.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  
+  element.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+  
+  function handleSwipe() {
+    const swipeThreshold = 50; // Minimum distance to trigger swipe
+    if (touchEndX < touchStartX - swipeThreshold) {
+      // Swiped left - next page
+      onNextPage();
+    } else if (touchEndX > touchStartX + swipeThreshold) {
+      // Swiped right - previous page
+      onPrevPage();
+    }
+  }
+}
+
+//=============================================================================
+// 5. VIEW MODE CONTROLS
+//=============================================================================
+
 /**
  * Toggle between single and double-page views with smooth transition
  */
@@ -276,10 +675,22 @@ function toggleViewMode() {
     setTimeout(() => {
       viewMode = viewMode === 'single' ? 'double' : 'single';
       
+      // Update container class based on view mode
+      if (viewMode === 'single') {
+        pageContainer.classList.add('single-view');
+      } else {
+        pageContainer.classList.remove('single-view');
+      }
+      
       if (viewToggleButton) {
-        // Update initial icon based on view mode being 'double' by default
-        viewToggleButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect></svg>`;
-        viewToggleButton.setAttribute('aria-label', 'Switch to single page view');
+        // Update icon based on current view mode
+        if (viewMode === 'single') {
+          viewToggleButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="16"></rect><rect x="14" y="4" width="6" height="16"></rect></svg>`;
+          viewToggleButton.setAttribute('aria-label', 'Switch to double page view');
+        } else {
+          viewToggleButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect></svg>`;
+          viewToggleButton.setAttribute('aria-label', 'Switch to single page view');
+        }
       }
       
       // Render pages before transition completes
@@ -295,6 +706,51 @@ function toggleViewMode() {
     viewMode = viewMode === 'single' ? 'double' : 'single';
     renderCurrentPages();
     isTransitioning = false;
+  }
+}
+
+/**
+ * Adjust viewer for responsive viewing while preserving layout
+ */
+function adjustForMobileViewing() {
+  const isMobile = window.innerWidth < 768;
+  const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+  
+  // Adjust scale based on screen size but don't change view mode
+  if (isMobile) {
+    // Smaller scale for mobile, but don't change page mode
+    scale = Math.min(0.8, scale);
+  } else if (isTablet) {
+    scale = Math.min(1.2, scale);
+  } else {
+    // On desktop, restore default scale if it was lowered
+    if (scale < 1.3) scale = 1.5;
+  }
+  
+  // Adjust buttons and controls for better touch targets
+  const buttons = document.querySelectorAll('.nav-button, .view-button');
+  buttons.forEach(btn => {
+    btn.style.padding = isMobile ? '10px' : '8px';
+  });
+  
+  // Adjust PDF container size
+  const pdfContainer = document.querySelector('.pdf-container');
+  if (pdfContainer) {
+    // Set max-width to ensure content fits
+    pdfContainer.style.maxWidth = '100%';
+  }
+  
+  // Make both canvases visible when in double mode
+  if (viewMode === 'double') {
+    const secondCanvas = document.getElementById('second-pdf-canvas');
+    if (secondCanvas) {
+      secondCanvas.style.display = 'block';
+    }
+  }
+  
+  // Re-render with new settings if PDF is loaded
+  if (pdfDoc) {
+    renderCurrentPages();
   }
 }
 
@@ -370,273 +826,9 @@ function updateFullscreenState() {
   }
 }
 
-/**
- * Render pages based on current view mode
- */
-function renderCurrentPages() {
-  if (!pdfDoc) return;
-  
-  if (viewMode === 'single') {
-    // Single page mode
-    secondPageCanvas.style.display = 'none';
-    renderPage(currentPage);
-  } else {
-    // Double page mode
-    // Handle special cases for cover and back cover
-    if (currentPage === 1) {
-      // First page (cover) is always shown alone
-      secondPageCanvas.style.display = 'none';
-      renderPage(currentPage);
-    } else if (currentPage === pdfDoc.numPages) {
-      // Last page (back cover) is shown alone if total pages is odd
-      secondPageCanvas.style.display = 'none';
-      renderPage(currentPage);
-    } else {
-      // Regular spread - show two pages side by side
-      // For even pages, show current page on left and next page on right
-      // For odd pages, show previous page on left and current page on right
-      let leftPage, rightPage;
-      
-      if (currentPage % 2 === 0) {
-        // Even page number
-        leftPage = currentPage;
-        rightPage = Math.min(currentPage + 1, pdfDoc.numPages);
-      } else {
-        // Odd page number
-        leftPage = Math.max(currentPage - 1, 1);
-        rightPage = currentPage;
-      }
-      
-      secondPageCanvas.style.display = 'block';
-      
-      // Render left page
-      renderPageToCanvas(leftPage, canvas, ctx);
-      
-      // Render right page (if not the last page)
-      if (rightPage <= pdfDoc.numPages) {
-        renderPageToCanvas(rightPage, secondPageCanvas, secondPageCanvas.getContext('2d'));
-      }
-      
-      // Update page display number
-      const pageNum = document.getElementById('page-num');
-      if (pageNum) {
-        pageNum.textContent = leftPage === rightPage ? leftPage : `${leftPage}-${rightPage}`;
-      }
-    }
-  }
-  
-  // Update navigation button states
-  updateNavigationState();
-}
-
-/**
- * Update the state of navigation buttons
- */
-function updateNavigationState() {
-  const prevButton = document.getElementById('prev-button');
-  const nextButton = document.getElementById('next-button');
-  
-  if (prevButton) {
-    if (currentPage <= 1) {
-      prevButton.classList.add('disabled');
-      prevButton.setAttribute('disabled', 'disabled');
-    } else {
-      prevButton.classList.remove('disabled');
-      prevButton.removeAttribute('disabled');
-    }
-  }
-  
-  if (nextButton) {
-    if (currentPage >= pdfDoc.numPages) {
-      nextButton.classList.add('disabled');
-      nextButton.setAttribute('disabled', 'disabled');
-    } else {
-      nextButton.classList.remove('disabled');
-      nextButton.removeAttribute('disabled');
-    }
-  }
-}
-
-/**
- * Render a page to a specific canvas with improved rendering
- */
-function renderPageToCanvas(pageNumber, targetCanvas, targetCtx) {
-  if (!pdfDoc) return;
-  
-  pageRendering = true;
-  
-  // Make sure canvas is visible during rendering
-  targetCanvas.style.opacity = "1";
-  
-  pdfDoc.getPage(pageNumber).then(function(page) {
-    const viewport = page.getViewport({ scale: scale });
-    
-    targetCanvas.height = viewport.height;
-    targetCanvas.width = viewport.width;
-    
-    // Add rendering styles for better quality
-    targetCtx.imageSmoothingEnabled = true;
-    targetCtx.imageSmoothingQuality = 'high';
-    
-    const renderContext = {
-      canvasContext: targetCtx,
-      viewport: viewport,
-      intent: 'display'
-    };
-    
-    const renderTask = page.render(renderContext);
-    
-    renderTask.promise.then(function() {
-      pageRendering = false;
-      
-      if (pageNumPending !== null) {
-        renderCurrentPages();
-        pageNumPending = null;
-      }
-      
-      // Add subtle fade-in effect to rendered page
-      targetCanvas.classList.add('page-loaded');
-      setTimeout(() => {
-        targetCanvas.classList.remove('page-loaded');
-      }, 300);
-    });
-  }).catch(function(error) {
-    console.error('Error rendering page:', error);
-    pageRendering = false;
-  });
-}
-
-/**
- * Render a single page (used in single page mode)
- */
-function renderPage(pageNumber) {
-  if (!pdfDoc) return;
-  
-  pageRendering = true;
-  
-  // Update page status
-  const pageNum = document.getElementById('page-num');
-  if (pageNum) pageNum.textContent = pageNumber;
-  
-  // Render to the main canvas
-  renderPageToCanvas(pageNumber, canvas, ctx);
-}
-
-/**
- * Queue rendering pages if already rendering
- */
-function queueRenderPage(pageNum) {
-  if (pageRendering) {
-    pageNumPending = pageNum;
-  } else {
-    renderCurrentPages();
-  }
-}
-
-/**
- * Go to previous page with improved animation
- */
-function onPrevPage() {
-  if (!pdfDoc || currentPage <= 1 || isTransitioning) return;
-  
-  isTransitioning = true;
-  
-  const pageContainer = document.getElementById('page-container');
-  if (pageContainer) pageContainer.classList.add('turn-right');
-  
-  // Shorter delay for better responsiveness
-  setTimeout(() => {
-    // Remove transition class first to prevent stacking animations
-    if (pageContainer) pageContainer.classList.remove('turn-right');
-    
-    if (viewMode === 'single') {
-      currentPage--;
-    } else {
-      // In double mode, move back two pages (except for special cases)
-      if (currentPage === pdfDoc.numPages && pdfDoc.numPages % 2 === 1) {
-        // If on last page and total pages is odd, go back to the spread
-        currentPage = Math.max(1, currentPage - 1);
-      } else {
-        currentPage = Math.max(1, currentPage - 2);
-      }
-    }
-    
-    // Render new page immediately
-    renderCurrentPages();
-    isTransitioning = false;
-  }, 150);
-}
-
-/**
- * Go to next page with improved animation
- */
-function onNextPage() {
-  if (!pdfDoc || currentPage >= pdfDoc.numPages || isTransitioning) return;
-  
-  isTransitioning = true;
-  
-  const pageContainer = document.getElementById('page-container');
-  if (pageContainer) pageContainer.classList.add('turn-left');
-  
-  // Shorter delay for better responsiveness
-  setTimeout(() => {
-    // Remove transition class first to prevent stacking animations
-    if (pageContainer) pageContainer.classList.remove('turn-left');
-    
-    if (viewMode === 'single') {
-      currentPage++;
-    } else {
-      // In double mode, move forward two pages (except for special cases)
-      if (currentPage === 1) {
-        // If on cover, go to first spread
-        currentPage = 2;
-      } else {
-        currentPage = Math.min(pdfDoc.numPages, currentPage + 2);
-      }
-    }
-    
-    // Render new page immediately
-    renderCurrentPages();
-    isTransitioning = false;
-  }, 150);
-}
-
-/**
- * Handle keyboard navigation
- */
-function handleKeyPress(event) {
-  if (!pdfDoc) return;
-  
-  if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
-    onPrevPage();
-    event.preventDefault();
-  } else if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
-    onNextPage();
-    event.preventDefault();
-  } else if (event.key === 'Home') {
-    currentPage = 1;
-    queueRenderPage(currentPage);
-    event.preventDefault();
-  } else if (event.key === 'End') {
-    currentPage = pdfDoc.numPages;
-    queueRenderPage(currentPage);
-    event.preventDefault();
-  } else if (event.key === 'Escape' && !isFullscreen) {
-    closeModal();
-  } else if (event.key === 'f') {
-    toggleFullscreen();
-    event.preventDefault();
-  } else if (event.key === 'v') {
-    toggleViewMode();
-    event.preventDefault();
-  } else if (event.key === '+' || event.key === '=') {
-    onZoomIn();
-    event.preventDefault();
-  } else if (event.key === '-') {
-    onZoomOut();
-    event.preventDefault();
-  }
-}
+//=============================================================================
+// 6. ZOOM CONTROLS
+//=============================================================================
 
 /**
  * Zoom in with smooth transition
@@ -681,6 +873,51 @@ function applyZoomTransition(oldScale, newScale) {
     isTransitioning = false;
   }, 250);
 }
+
+//=============================================================================
+// 7. EVENT HANDLERS
+//=============================================================================
+
+/**
+ * Handle keyboard navigation
+ */
+function handleKeyPress(event) {
+  if (!pdfDoc) return;
+  
+  if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+    onPrevPage();
+    event.preventDefault();
+  } else if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
+    onNextPage();
+    event.preventDefault();
+  } else if (event.key === 'Home') {
+    currentPage = 1;
+    queueRenderPage(currentPage);
+    event.preventDefault();
+  } else if (event.key === 'End') {
+    currentPage = pdfDoc.numPages;
+    queueRenderPage(currentPage);
+    event.preventDefault();
+  } else if (event.key === 'Escape' && !isFullscreen) {
+    closeModal();
+  } else if (event.key === 'f') {
+    toggleFullscreen();
+    event.preventDefault();
+  } else if (event.key === 'v') {
+    toggleViewMode();
+    event.preventDefault();
+  } else if (event.key === '+' || event.key === '=') {
+    onZoomIn();
+    event.preventDefault();
+  } else if (event.key === '-') {
+    onZoomOut();
+    event.preventDefault();
+  }
+}
+
+//=============================================================================
+// 8. MODAL CLOSING
+//=============================================================================
 
 /**
  * Close the modal with fade-out effect
@@ -727,7 +964,6 @@ function closeModal() {
     pageNumPending = null;
     currentPage = 1;
     isFullscreen = false;
-    viewMode = 'double'; // Reset to double page view for next time
     isTransitioning = false;
     
     // Clear controls timeout

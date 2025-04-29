@@ -1,0 +1,1684 @@
+/* Base styles and reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cormorant Garamond', Times, serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* General link styling */
+a {
+    text-decoration: underline;
+    color: #0066cc;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #004499;
+}
+
+/* Keep header navigation links clean */
+.nav-menu a, .logo a, .social-icons a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Style links in video descriptions */
+.video-description a {
+    color: #0066cc;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.video-description a:hover {
+    color: #004499;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Header styles */
+header {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #f0f0f0;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.logo a:hover {
+    opacity: 0.8;
+}
+
+nav {
+    flex-grow: 1;
+    margin: 0 2rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+
+.nav-menu li {
+    margin: 0 1.2rem;
+}
+
+.nav-menu a {
+    position: relative;
+    padding-bottom: 0.2rem;
+    transition: all 0.3s ease;
+}
+
+.nav-menu a:hover, .nav-menu a.active {
+    opacity: 0.7;
+}
+
+.nav-menu a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #333;
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover:after, .nav-menu a.active:after {
+    width: 100%;
+}
+
+.social-icons {
+    display: flex;
+}
+
+.social-icons a {
+    margin-left: 1rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.social-icons a:hover {
+    opacity: 1;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 1.5px;
+    margin: 5px auto;
+    background-color: #333;
+    transition: all 0.3s ease;
+}
+
+/* Main content styles */
+main {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 1rem;
+    flex-grow: 1;
+    width: 95%; /* Take up more screen space */
+}
+
+.page-title {
+    text-align: center;
+    margin: 1rem 0 1.5rem;
+    font-weight: 300;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+/* Portfolio-grid */
+.portfolio-grid {
+    display: grid;
+    /* Define the grid with consistent row heights */
+    grid-template-columns: repeat(3, 1fr);
+    /* Create a consistent grid where 2 rows = 1 tall image */
+    grid-auto-rows: minmax(15vw, auto);
+    grid-gap: 20px;
+    max-width: 1800px;
+    margin: 0 auto 3rem;
+    padding: 0 0px;
+  }
+  
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease;
+    background-color: #fff;
+  }
+  
+  /* Make horizontal images fit one row */
+  .portfolio-item.horizontal {
+    grid-row: span 1;
+  }
+  
+  /* Make vertical images span two rows exactly */
+  .portfolio-item.vertical {
+    grid-row: span 2;
+  }
+  
+  /* Make square images span approximately 1.5 rows */
+  .portfolio-item.square {
+    grid-row: span 1.5;
+  }
+  
+  .portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures images maintain aspect ratio while filling container */
+  }
+  
+  .portfolio-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  /* Keep the hover effects from your original CSS */
+  .portfolio-item:hover img {
+    transform: scale(1.02);
+  }
+  
+  .portfolio-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .portfolio-item:hover::after {
+    opacity: 1;
+  }
+  
+  .portfolio-item .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+  
+  .portfolio-item:hover .caption {
+    transform: translateY(0);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1400px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: minmax(20vw, auto);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: minmax(30vw, auto);
+    }
+    
+    .portfolio-item.horizontal, 
+    .portfolio-item.vertical,
+    .portfolio-item.square {
+      grid-column: span 1;
+    }
+    
+    /* On mobile maintain some distinction in image heights */
+    .portfolio-item.horizontal {
+      grid-row: span 1;
+    }
+    
+    .portfolio-item.vertical {
+      grid-row: span 1.5;
+    }
+  }
+
+/* Lightbox styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.lightbox.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    position: relative;
+    width: 85%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    color: white;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 15px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox-prev:hover, .lightbox-next:hover {
+    opacity: 1;
+}
+
+.lightbox-prev {
+    left: -50px;
+}
+
+.lightbox-next {
+    right: -50px;
+}
+
+/* Transmission Magazine page styles */
+/* Magazine grid layout */
+.magazine-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin: 3rem 1rem;
+}
+
+.magazines-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.5rem auto;
+}
+
+/* Magazine issue styles */
+.magazine-issue {
+    display: flex;
+    flex-direction: column-reverse;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.magazine-issue h3 {
+    margin-top: 1rem;
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+
+.magazine-issue:hover {
+    transform: translateY(-5px);
+}
+
+.magazine-title {
+    height: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.magazine-column {
+  flex: 0 0 25%;
+  max-width: 25%;
+  box-sizing: border-box;
+}
+
+/* Reduce space between section headers and content */
+h3.page-title + .magazines-row {
+    margin-top: 0.5rem;
+}
+
+/* Add space between sections */
+h3.page-title:not(:first-of-type) {
+    margin-top: 3rem;
+}
+
+.magazines-row .magazine-column {
+    flex: 1;
+    min-width: 250px;
+    max-width: 100%;
+    text-align: center;
+}
+
+.magazine-cover {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: block;
+    position: relative;
+    padding-bottom: 133%;
+    height: 0;
+    overflow: hidden;
+}
+
+.magazine-cover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.magazine-cover img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.magazine-issue:hover .magazine-cover img {
+    transform: scale(1.03);
+}
+
+.view-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.magazine-cover:hover .view-button {
+    transform: translateY(0);
+}
+
+/* Section divider and title styles */
+.section-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    margin: 2rem 0 0rem;
+}
+
+.section-title {
+    text-align: center;
+    font-weight: 400;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* View more link style */
+.centered-link {
+    text-align: center;
+    margin: 1rem 0 3rem;
+}
+
+.view-more {
+    font-size: 1.5rem;
+    color: #333;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.view-more:hover {
+    border-color: #333;
+}
+
+/* Press quotes styles */
+.press-quotes {
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.press-quotes blockquote {
+    font-size: 1.3rem;
+    font-style: italic;
+    margin: 2rem 0 0.5rem;
+    padding: 0;
+    border: none;
+}
+
+.quote-source {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+/* Magazine lightbox and modal styles */
+.magazine-lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.magazine-lightbox.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.magazine-lightbox .lightbox-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.magazine-lightbox .close-lightbox {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.magazine-embed-container {
+    width: 100%;
+    height: 100%;
+}
+
+.magazine-embed-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Enhanced PDF Viewer Modal Styles */
+#magazine-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.92);
+    z-index: 1000;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Animation classes */
+#magazine-modal.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+#magazine-modal.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.modal-content {
+    position: relative;
+    margin: 0;
+    width: 98%;
+    max-width: none;
+    height: 96%;
+    background-color: #000;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Adjust the main container to accommodate the controls */
+.magazine-viewer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Base container styling */
+.pdf-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 70px);
+  overflow: hidden;
+}
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  gap: 4px; /* Small gap between pages */
+}
+
+
+/* Fixed transitions - smoother and less dramatic */
+.page-container.page-transition {
+    opacity: 0.7;
+    transform: scale(0.98);
+}
+
+.page-container.turn-left {
+    opacity: 0.7;
+}
+
+.page-container.turn-right {
+    opacity: 0.7;
+}
+
+/* Canvas styling for consistent sizing */
+#pdf-canvas, #second-pdf-canvas {
+  max-width: 48%; /* Allow room for both pages with gap */
+  max-height: 85vh;
+  object-fit: contain;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Single page view mode */
+.page-container.single-view #pdf-canvas {
+    max-width: 90%;
+  }
+
+#pdf-canvas.page-loaded, #second-pdf-canvas.page-loaded {
+    animation: fadePageIn 0.4s ease forwards;
+}
+
+@keyframes fadePageIn {
+    from { opacity: 0.9; transform: scale(0.99); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Controls */
+.pdf-controls-fixed {
+    height: auto;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 10px; /* Add space between magazine and controls */
+}
+
+.controls-spacer {
+    flex-grow: 1;
+}
+
+.nav-button {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 8px;
+    margin: 0 5px;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 1;
+}
+
+.nav-button.disabled {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+}
+
+.page-info {
+    margin: 0 15px;
+    color: white;
+    font-family: 'Cormorant Garamond', Times, serif;
+    font-size: 1rem;
+    opacity: 0.9;
+    min-width: 100px;
+    text-align: center;
+}
+
+/* View controls */
+.view-controls {
+    display: flex;
+    margin: 0 5px;
+}
+
+.view-button {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 1;
+}
+
+/* Close button */
+.close-button {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.close-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    opacity: 1;
+}
+
+/* Loading and error indicators */
+.pdf-status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.loading-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.loading-indicator.fade-out {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error-message {
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.error-content {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: white;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-content h3 {
+    margin: 15px 0;
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.error-content p {
+    margin: 5px 0;
+    opacity: 0.9;
+}
+
+.error-path {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    word-break: break-all;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  #pdf-canvas, #second-pdf-canvas {
+    max-width: 48%;
+    max-height: 75vh;
+  }
+}
+
+@media (max-width: 768px) {
+  #pdf-canvas, #second-pdf-canvas {
+    max-width: 48%;
+    max-height: 65vh;
+  }
+  
+  .pdf-controls-fixed {
+    padding: 8px 10px;
+  }
+  
+  .nav-button, .view-button {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  #pdf-canvas, #second-pdf-canvas {
+    max-width: 48%; /* Still maintain double page view */
+    max-height: 55vh;
+  }
+  
+  .page-container {
+    gap: 2px; /* Smaller gap on small screens */
+  }
+  
+  .pdf-controls-fixed {
+    flex-wrap: wrap;
+    padding: 6px 8px;
+  }
+  
+  .view-controls {
+    margin-top: 6px;
+  }
+  
+  .nav-button, .view-button {
+    width: 32px;
+    height: 32px;
+    margin: 0 2px;
+  }
+}
+
+@media (max-width: 768px) {
+    .pdf-controls {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+    
+    .view-controls {
+        order: 2;
+        width: 100%;
+        justify-content: center;
+        margin-top: 8px;
+    }
+    
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        margin: 0;
+    }
+    
+    .page-info {
+        margin: 0 10px;
+        font-size: 0.9rem;
+    }
+    
+    .nav-button, .view-button {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .controls-spacer {
+        display: none;
+    }
+}
+
+/* Mobile portrait adjustments */
+@media (max-width: 480px) {
+    .pdf-controls {
+        min-height: 50px;
+    }
+    
+    .modal-content {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .page-info {
+        font-size: 0.85rem;
+        min-width: 80px;
+    }
+    
+    .nav-button, .view-button {
+        width: 32px;
+        height: 32px;
+        margin: 0 3px;
+    }
+}
+
+/* Video page styles */
+.video-container {
+    margin: 3rem 0;
+}
+
+.video-container h2 {
+    margin-bottom: 1rem;
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-description {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Larger video containers */
+.large-video {
+    position: relative;
+    width: 100%;
+    max-width: 1600px;
+    padding-top: 56.25%;
+    margin: 0 auto;
+}
+
+.video-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Video section with more space */
+.video-section {
+    margin: 4rem 0;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+/* Landscapes page styles */
+.landscape-categories {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.landscape-category {
+    flex: 1;
+    min-width: 200px;
+    max-width: 33%;
+}
+
+.category-thumbnail {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.category-thumbnail:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.category-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.category-thumbnail:hover img {
+    transform: scale(1.05);
+}
+
+.category-thumbnail h3 {
+    text-align: center;
+    margin-top: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+/* Updated grid-based layout for the landscape gallery - replace existing .landscape-gallery */
+.landscape-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(15vw, auto);
+    grid-gap: 20px;
+    max-width: 1800px;
+    margin: 2rem auto;
+    padding: 0 0px;
+}
+
+/* Portfolio item styles for landscape gallery */
+.landscape-gallery .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease;
+    background-color: #fff;
+}
+
+/* Make horizontal images fit one row */
+.landscape-gallery .portfolio-item.horizontal {
+    grid-row: span 1;
+}
+
+/* Make vertical images span two rows exactly */
+.landscape-gallery .portfolio-item.vertical {
+    grid-row: span 2;
+}
+
+/* Make square images span approximately 1.5 rows */
+.landscape-gallery .portfolio-item.square {
+    grid-row: span 1.5;
+}
+
+.landscape-gallery .portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures images maintain aspect ratio while filling container */
+    transition: transform 0.5s ease;
+}
+
+.landscape-gallery .portfolio-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.landscape-gallery .portfolio-item:hover img {
+    transform: scale(1.02);
+}
+
+.landscape-gallery .portfolio-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.landscape-gallery .portfolio-item:hover::after {
+    opacity: 1;
+}
+
+.landscape-gallery .portfolio-item .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.landscape-gallery .portfolio-item:hover .caption {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+    .landscape-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(20vw, auto);
+    }
+    
+    .landscape-category {
+        max-width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .landscape-categories {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .landscape-category {
+        max-width: 100%;
+    }
+    
+    .landscape-gallery {
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(30vw, auto);
+    }
+    
+    .landscape-gallery .portfolio-item.horizontal, 
+    .landscape-gallery .portfolio-item.vertical,
+    .landscape-gallery .portfolio-item.square {
+        grid-column: span 1;
+    }
+    
+    /* On mobile maintain some distinction in image heights */
+    .landscape-gallery .portfolio-item.horizontal {
+        grid-row: span 1;
+    }
+    
+    .landscape-gallery .portfolio-item.vertical {
+        grid-row: span 1.5;
+    }
+}
+
+/* Article page styles */
+.article-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.full-article h1 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.article-meta {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.article-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.article-footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.article-footer a {
+    color: #555;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.article-footer a:hover {
+    color: #000;
+    border-color: #999;
+}
+
+/* Writing page styles */
+.writing-content p {
+    font-size: 1.2rem; /* Increase from default */
+    margin-bottom: 0.5rem;
+}
+
+.writing-content .read-more a {
+    font-size: 1.2rem; /* Make "Read more" even larger */
+}
+
+/* Styling for writing meta information (date and category) */
+.writing-meta {
+    margin: 0.5rem 0 1rem 0;
+    font-size: 1.2rem; /* Increase overall size */
+}
+
+.writing-date {
+    margin-right: 0.5rem; /* Add space between date and category */
+    font-weight: 400; /* Make it slightly bolder */
+    font-style: italic; /* Make the category stand out */
+}
+
+.writing-category {
+    font-style: italic; /* Make the category stand out */
+}
+
+/* Info/About page styles */
+.info-container {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.info-bio {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.info-image img {
+    width: 100%;
+    height: auto;
+}
+
+.info-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.info-details h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin: 2rem 0 1rem;
+}
+
+.info-details ul {
+    list-style-position: inside;
+    margin-bottom: 1.5rem;
+}
+
+.info-details li {
+    margin-bottom: 0.5rem;
+}
+
+.contact-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.contact-section h2 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.contact-info {
+    margin-top: 1.5rem;
+}
+
+.contact-info p {
+    margin-bottom: 0.5rem;
+}
+
+.contact-info a {
+    color: #555;
+    border-bottom: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #000;
+    border-color: #999;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: auto;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Updated grid-based layout for the landscape gallery */
+.landscape-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(15vw, auto);
+  grid-gap: 20px;
+  max-width: 1800px;
+  margin: 2rem auto;
+  padding: 0 20px;
+}
+
+/* Portfolio item styles for landscape gallery */
+.landscape-gallery .portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease;
+  background-color: #fff;
+}
+
+/* Make horizontal images fit one row */
+.landscape-gallery .portfolio-item.horizontal {
+  grid-row: span 1;
+}
+
+/* Make vertical images span two rows exactly */
+.landscape-gallery .portfolio-item.vertical {
+  grid-row: span 2;
+}
+
+/* Make square images span approximately 1.5 rows */
+.landscape-gallery .portfolio-item.square {
+  grid-row: span 1.5;
+}
+
+.landscape-gallery .portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures images maintain aspect ratio while filling container */
+  transition: transform 0.5s ease;
+}
+
+.landscape-gallery .portfolio-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.landscape-gallery .portfolio-item:hover img {
+  transform: scale(1.02);
+}
+
+.landscape-gallery .portfolio-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.landscape-gallery .portfolio-item:hover::after {
+  opacity: 1;
+}
+
+.landscape-gallery .portfolio-item .caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.landscape-gallery .portfolio-item:hover .caption {
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+  .landscape-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(20vw, auto);
+  }
+  
+  .landscape-category {
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .landscape-categories {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .landscape-category {
+    max-width: 100%;
+  }
+  
+  .landscape-gallery {
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(30vw, auto);
+    grid-gap: 30px;
+    padding: 0 30px;
+  }
+  
+  .landscape-gallery .portfolio-item.horizontal, 
+  .landscape-gallery .portfolio-item.vertical,
+  .landscape-gallery .portfolio-item.square {
+    grid-column: span 1;
+  }
+  
+  /* On mobile maintain some distinction in image heights */
+  .landscape-gallery .portfolio-item.horizontal {
+    grid-row: span 1;
+  }
+  
+  .landscape-gallery .portfolio-item.vertical {
+    grid-row: span 1.3;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landscape-gallery {
+    padding: 0 20px;
+    grid-gap: 35px;
+  }
+  
+  .landscape-gallery .portfolio-item {
+    margin-bottom: 20px;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 1400px) {
+    .portfolio-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 1200px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .info-bio {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .info-image img {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .magazine-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    header {
+        padding: 1rem;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .nav-menu li {
+        margin: 0 0.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-wrap: wrap;
+    }
+    
+    .menu-toggle {
+        display: block;
+        order: 3;
+    }
+    
+    nav {
+        flex-basis: 100%;
+        margin: 0;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease;
+        order: 4;
+    }
+    
+    nav.active {
+        height: auto;
+        margin-top: 1rem;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav-menu li {
+        margin: 0 0.8rem;
+    }
+    
+    .social-icons {
+        display: none;
+    }
+    
+    .portfolio-grid {
+        column-count: 1;
+        column-gap: 0;
+    }
+    
+    .portfolio-item {
+        margin-bottom: 20px;
+    }
+    
+    .magazine-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .lightbox-prev {
+        left: 10px;
+    }
+    
+    .lightbox-next {
+        right: 10px;
+    }
+    
+    .landscape-categories {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .landscape-category {
+        max-width: 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px auto;
+        height: 90%;
+    }
+    
+    .pdf-controls {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px;
+    }
+    
+    .zoom-controls {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .page-info {
+        font-size: 14px;
+    }
+    
+    .nav-button {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.3rem;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .magazine-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .lightbox-content {
+        width: 95%;
+    }
+    
+    .close-lightbox {
+        top: -30px;
+        right: 0;
+    }
+    
+    .lightbox-caption {
+        bottom: -30px;
+    }
+    
+    .lightbox-prev, .lightbox-next {
+        font-size: 1.5rem;
+    }
+}
