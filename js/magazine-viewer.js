@@ -10,7 +10,6 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 let pdfDoc = null;
 let currentPage = 1;
 let pageRendering = false;
-let pageCache = {};
 let pageNumPending = null;
 let scale = 1.5;
 let canvas = null;
@@ -194,15 +193,15 @@ function loadPdf(pdfPath) {
     
     // Check if we're using file:// protocol (which has CORS issues)
     const isFileProtocol = window.location.protocol === 'file:';
+    if (isFileProtocol) {
+      console.warn('Using file:// protocol may cause PDF loading issues due to security restrictions.');
+    }
     
-    // Create options for PDF.js with enhanced preloading
+    // Create options for PDF.js
     const loadingOptions = {
       url: pdfPath,
       disableStream: isFileProtocol, 
       disableRange: isFileProtocol,
-      disableAutoFetch: false,  // Enable auto fetching of pages
-      rangeChunkSize: 65536,    // Optimal chunk size for faster fetching
-      maxImageSize: 4096 * 4096, // Allow larger images for high-quality PDFs
       cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/cmaps/',
       cMapPacked: true
     };
@@ -376,104 +375,15 @@ function updateFullscreenState() {
 }
 
 /**
- * Preload adjacent pages for faster navigation
- */
-/**
- * Preload adjacent pages for faster navigation - enhanced version
- */
-function preloadAdjacentPages(currentPageNum) {
-  if (!pdfDoc) return;
-  
-  // Keep track of pages being preloaded
-  if (!window.preloadingPages) {
-    window.preloadingPages = {};
-  }
-  
-  // Function to preload a single page more thoroughly
-  const preloadPage = (pageNum) => {
-    // Skip if already preloaded or currently visible
-    if (window.preloadingPages[pageNum] || pageNum === currentPage) return;
-    
-    // Mark as being preloaded
-    window.preloadingPages[pageNum] = true;
-    
-    console.log(`Preloading page ${pageNum}`); // Helps verify preloading is happening
-    
-    // Actually preload the page by going through full rendering preparation
-    pdfDoc.getPage(pageNum).then(page => {
-      // Generate the viewport (this forces PDF.js to prepare the page)
-      const viewport = page.getViewport({ scale: scale });
-      
-      // Create cache key
-      const cacheKey = `page_${pageNum}_${scale}`;
-      
-      // Skip further processing if already in cache
-      if (pageCache[cacheKey]) {
-        window.preloadingPages[pageNum] = false;
-        return;
-      }
-      
-      // Create temporary canvas for off-screen rendering
-      const tempCanvas = document.createElement('canvas');
-      tempCanvas.width = viewport.width;
-      tempCanvas.height = viewport.height;
-      const tempCtx = tempCanvas.getContext('2d', { alpha: false });
-      
-      // Pre-render to the temporary canvas
-      page.render({
-        canvasContext: tempCtx,
-        viewport: viewport
-      }).promise.then(() => {
-        // Cache the rendered page
-        pageCache[cacheKey] = {
-          width: tempCanvas.width,
-          height: tempCanvas.height,
-          imageData: tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height)
-        };
-        
-        // Cleanup
-        window.preloadingPages[pageNum] = false;
-      });
-    }).catch(error => {
-      console.error(`Error preloading page ${pageNum}:`, error);
-      window.preloadingPages[pageNum] = false;
-    });
-  };
-  
-  // Preload next few pages
-  for (let i = 1; i <= 2; i++) {
-    const nextPage = currentPageNum + i;
-    if (nextPage <= pdfDoc.numPages) {
-      preloadPage(nextPage);
-    }
-  }
-  
-  // Preload previous page
-  if (currentPageNum > 1) {
-    preloadPage(currentPageNum - 1);
-  }
-}
-
-/**
- * Render pages based on current view mode with optimizations
+ * Render pages based on current view mode
  */
 function renderCurrentPages() {
   if (!pdfDoc) return;
-  
-  // Show loading placeholder
-  if (ctx) {
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#f0f0f0';
-    ctx.fillRect(canvas.width/4, canvas.height/2 - 1, canvas.width/2, 2);
-  }
   
   if (viewMode === 'single') {
     // Single page mode
     secondPageCanvas.style.display = 'none';
     renderPage(currentPage);
-    // Preload adjacent pages for faster navigation
-    preloadAdjacentPages(currentPage);
   } else {
     // Double page mode
     // Handle special cases for cover and back cover
@@ -481,20 +391,14 @@ function renderCurrentPages() {
       // First page (cover) is always shown alone
       secondPageCanvas.style.display = 'none';
       renderPage(currentPage);
-      // Preload next page
-      if (currentPage + 1 <= pdfDoc.numPages) {
-        pdfDoc.getPage(currentPage + 1);
-      }
     } else if (currentPage === pdfDoc.numPages) {
       // Last page (back cover) is shown alone if total pages is odd
       secondPageCanvas.style.display = 'none';
       renderPage(currentPage);
-      // Preload previous page
-      if (currentPage - 1 >= 1) {
-        pdfDoc.getPage(currentPage - 1);
-      }
     } else {
       // Regular spread - show two pages side by side
+      // For even pages, show current page on left and next page on right
+      // For odd pages, show previous page on left and current page on right
       let leftPage, rightPage;
       
       if (currentPage % 2 === 0) {
@@ -522,87 +426,11 @@ function renderCurrentPages() {
       if (pageNum) {
         pageNum.textContent = leftPage === rightPage ? leftPage : `${leftPage}-${rightPage}`;
       }
-      
-      // Preload next spread
-      if (currentPage + 2 <= pdfDoc.numPages) {
-        pdfDoc.getPage(currentPage + 2);
-      }
     }
   }
   
   // Update navigation button states
   updateNavigationState();
-}
-
-/**
- * Render a page to a specific canvas with caching
- */
-function renderPageToCanvas(pageNumber, targetCanvas, targetCtx) {
-  if (!pdfDoc) return;
-  
-  pageRendering = true;
-  
-  // Check if page is in cache
-  const cacheKey = `page_${pageNumber}_${scale}`;
-  if (pageCache[cacheKey]) {
-    // Reuse cached image data
-    targetCanvas.width = pageCache[cacheKey].width;
-    targetCanvas.height = pageCache[cacheKey].height;
-    targetCtx.putImageData(pageCache[cacheKey].imageData, 0, 0);
-    pageRendering = false;
-    return;
-  }
-  
-  // Render at full quality only
-  pdfDoc.getPage(pageNumber).then(function(page) {
-    const viewport = page.getViewport({ scale: scale });
-    
-    targetCanvas.height = viewport.height;
-    targetCanvas.width = viewport.width;
-    
-    // Configure rendering for best quality
-    targetCtx.imageSmoothingEnabled = true;
-    targetCtx.imageSmoothingQuality = 'high';
-    
-    const renderContext = {
-      canvasContext: targetCtx,
-      viewport: viewport,
-      intent: 'display'
-    };
-    
-    const renderTask = page.render(renderContext);
-    
-    renderTask.promise.then(function() {
-      // Cache the rendered page
-      pageCache[cacheKey] = {
-        width: targetCanvas.width,
-        height: targetCanvas.height,
-        imageData: targetCtx.getImageData(0, 0, targetCanvas.width, targetCanvas.height)
-      };
-      
-      // Limit cache size to prevent memory issues
-      const cacheKeys = Object.keys(pageCache);
-      if (cacheKeys.length > 10) {
-        delete pageCache[cacheKeys[0]];
-      }
-      
-      pageRendering = false;
-      
-      if (pageNumPending !== null) {
-        renderCurrentPages();
-        pageNumPending = null;
-      }
-      
-      // Add subtle fade-in effect to rendered page
-      targetCanvas.classList.add('page-loaded');
-      setTimeout(() => {
-        targetCanvas.classList.remove('page-loaded');
-      }, 300);
-    });
-  }).catch(function(error) {
-    console.error('Error rendering page:', error);
-    pageRendering = false;
-  });
 }
 
 /**
@@ -631,6 +459,55 @@ function updateNavigationState() {
       nextButton.removeAttribute('disabled');
     }
   }
+}
+
+/**
+ * Render a page to a specific canvas with improved rendering
+ */
+function renderPageToCanvas(pageNumber, targetCanvas, targetCtx) {
+  if (!pdfDoc) return;
+  
+  pageRendering = true;
+  
+  // Make sure canvas is visible during rendering
+  targetCanvas.style.opacity = "1";
+  
+  pdfDoc.getPage(pageNumber).then(function(page) {
+    const viewport = page.getViewport({ scale: scale });
+    
+    targetCanvas.height = viewport.height;
+    targetCanvas.width = viewport.width;
+    
+    // Add rendering styles for better quality
+    targetCtx.imageSmoothingEnabled = true;
+    targetCtx.imageSmoothingQuality = 'high';
+    
+    const renderContext = {
+      canvasContext: targetCtx,
+      viewport: viewport,
+      intent: 'display'
+    };
+    
+    const renderTask = page.render(renderContext);
+    
+    renderTask.promise.then(function() {
+      pageRendering = false;
+      
+      if (pageNumPending !== null) {
+        renderCurrentPages();
+        pageNumPending = null;
+      }
+      
+      // Add subtle fade-in effect to rendered page
+      targetCanvas.classList.add('page-loaded');
+      setTimeout(() => {
+        targetCanvas.classList.remove('page-loaded');
+      }, 300);
+    });
+  }).catch(function(error) {
+    console.error('Error rendering page:', error);
+    pageRendering = false;
+  });
 }
 
 /**
@@ -854,7 +731,7 @@ function closeModal() {
     pageNumPending = null;
     currentPage = 1;
     isFullscreen = false;
-    viewMode = 'double'; // Reset to single page view for next time
+    viewMode = 'double'; // Reset to double page view for next time
     isTransitioning = false;
     
     // Clear controls timeout
