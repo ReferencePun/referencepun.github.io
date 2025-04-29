@@ -64,14 +64,14 @@ function initMobileMenu() {
  * Highlights the current page in the navigation menu
  */
 function highlightCurrentPage() {
-    const currentPage = window.location.pathname.split('/').pop() || 'portfolio.html';
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.nav-menu a');
     
     navLinks.forEach(link => {
         const linkPage = link.getAttribute('href');
         if (linkPage === currentPage) {
             link.classList.add('active');
-        } else if (currentPage === 'portfolio.html' && linkPage === '/') {
+        } else if (currentPage === 'index.html' && linkPage === '/') {
             link.classList.add('active');
         }
     });
