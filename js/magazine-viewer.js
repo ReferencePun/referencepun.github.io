@@ -755,51 +755,75 @@ function adjustForMobileViewing() {
 }
 
 /**
- * Toggle fullscreen mode with improved handling
+ * Toggle fullscreen mode with improved mobile support
  */
 function toggleFullscreen() {
   const modalContent = document.querySelector('.modal-content');
   const fullscreenButton = document.getElementById('fullscreen-toggle');
   
-  if (!isFullscreen) {
-    // Enter fullscreen
-    if (modalContent.requestFullscreen) {
-      modalContent.requestFullscreen();
-    } else if (modalContent.webkitRequestFullscreen) {
-      modalContent.webkitRequestFullscreen();
-    } else if (modalContent.msRequestFullscreen) {
-      modalContent.msRequestFullscreen();
-    }
-  } else {
-    // Exit fullscreen
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    }
-  }
+  // Check if currently in fullscreen
+  const isCurrentlyFullscreen = !!document.fullscreenElement || 
+                               !!document.webkitFullscreenElement || 
+                               !!document.mozFullScreenElement ||
+                               !!document.msFullscreenElement;
   
-  // Update fullscreen state
-  isFullscreen = !isFullscreen;
-  
-  // Update icon
-  if (fullscreenButton) {
-    if (isFullscreen) {
-      fullscreenButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>`;
-      fullscreenButton.setAttribute('aria-label', 'Exit fullscreen');
+  try {
+    if (!isCurrentlyFullscreen) {
+      // Enter fullscreen - with all vendor prefixes for mobile support
+      if (modalContent.requestFullscreen) {
+        modalContent.requestFullscreen();
+      } else if (modalContent.webkitRequestFullscreen) {
+        // Safari & Chrome
+        modalContent.webkitRequestFullscreen();
+      } else if (modalContent.mozRequestFullScreen) {
+        // Firefox
+        modalContent.mozRequestFullScreen();
+      } else if (modalContent.msRequestFullscreen) {
+        // IE/Edge
+        modalContent.msRequestFullscreen();
+      } else if (document.body.webkitEnterFullscreen) {
+        // iOS Safari
+        document.body.webkitEnterFullscreen();
+      }
     } else {
-      fullscreenButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>`;
-      fullscreenButton.setAttribute('aria-label', 'Enter fullscreen');
+      // Exit fullscreen - with all vendor prefixes
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+    
+    // Update button immediately for better responsiveness
+    if (fullscreenButton) {
+      setTimeout(() => {
+        // Check again after a short delay to ensure accurate state
+        const isInFullscreen = !!document.fullscreenElement || 
+                              !!document.webkitFullscreenElement || 
+                              !!document.mozFullScreenElement ||
+                              !!document.msFullscreenElement;
+                              
+        if (isInFullscreen) {
+          fullscreenButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path></svg>`;
+          fullscreenButton.setAttribute('aria-label', 'Exit fullscreen');
+        } else {
+          fullscreenButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>`;
+          fullscreenButton.setAttribute('aria-label', 'Enter fullscreen');
+        }
+      }, 300);
+    }
+  } catch (error) {
+    console.error('Fullscreen error:', error);
+    // Fallback for devices that don't support fullscreen
+    const magazineViewer = document.querySelector('.magazine-viewer');
+    if (magazineViewer) {
+      magazineViewer.classList.toggle('simulated-fullscreen');
     }
   }
-  
-  // Listen for fullscreen change events
-  document.addEventListener('fullscreenchange', updateFullscreenState);
-  document.addEventListener('webkitfullscreenchange', updateFullscreenState);
-  document.addEventListener('mozfullscreenchange', updateFullscreenState);
-  document.addEventListener('MSFullscreenChange', updateFullscreenState);
 }
 
 /**
