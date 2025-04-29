@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landscapes - Dylan Forsberg</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Dylan Forsberg - Landscapes</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
         <div class="header-container">
             <h1 class="logo"><a href="portfolio.html">Dylan Forsberg</a></h1>
-            
+
             <!-- Mobile menu toggle -->
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -42,42 +42,8 @@
     </header>
 
     <main>
-        
-        <div class="landscape-categories">
-            <!-- Category 1: Old -->
-            <div class="landscape-category">
-                <a href="#" class="category-link" data-category="old">
-                    <div class="category-thumbnail">
-                        <img src="images/landscapes/old/thumbnail.jpg" alt="Old Landscapes">
-                        <h3>Old</h3>
-                    </div>
-                </a>
-            </div>
-            
-            <!-- Category 2: Flowers -->
-            <div class="landscape-category">
-                <a href="#" class="category-link" data-category="flowers">
-                    <div class="category-thumbnail">
-                        <img src="images/landscapes/flowers/thumbnail.jpg" alt="Flowers">
-                        <h3>Flowers</h3>
-                    </div>
-                </a>
-            </div>
-            
-            <!-- Category 3: New -->
-            <div class="landscape-category">
-                <a href="#" class="category-link" data-category="new">
-                    <div class="category-thumbnail">
-                        <img src="images/landscapes/new/thumbnail.jpg" alt="New Landscapes">
-                        <h3>New</h3>
-                    </div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Landscape Gallery -->
-        <div class="landscape-gallery" id="landscape-gallery">
-            <!-- Images will be loaded here via JavaScript based on selected category -->
+        <div class="portfolio-grid" id="portfolio-grid">
+            <!-- Landscape images will be loaded dynamically by JavaScript -->
         </div>
         
         <!-- Lightbox for viewing images -->
@@ -93,10 +59,9 @@
     </main>
 
     <footer>
-        <p>&copy; <span id="current-year"></span> Dylan Forsberg. All rights reserved.</p>
+        <p>&copy; <span id="current-year">2025</span> Dylan Forsberg. All rights reserved.</p>
     </footer>
 
-    <script src="js/main.js"></script>
     <script src="js/landscapes.js"></script>
 </body>
 </html>
