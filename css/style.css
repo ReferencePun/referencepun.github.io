@@ -1213,6 +1213,32 @@ h3.page-title:not(:first-of-type) {
     border-color: #999;
 }
 
+/* Writing page styles */
+.writing-content p {
+    font-size: 1.2rem; /* Increase from default */
+    margin-bottom: 0.5rem;
+}
+
+.writing-content .read-more a {
+    font-size: 1.2rem; /* Make "Read more" even larger */
+}
+
+/* Styling for writing meta information (date and category) */
+.writing-meta {
+    margin: 0.5rem 0 1rem 0;
+    font-size: 1.2rem; /* Increase overall size */
+}
+
+.writing-date {
+    margin-right: 0.5rem; /* Add space between date and category */
+    font-weight: 400; /* Make it slightly bolder */
+    font-style: italic; /* Make the category stand out */
+}
+
+.writing-category {
+    font-style: italic; /* Make the category stand out */
+}
+
 /* Info/About page styles */
 .info-container {
     max-width: 80%;
