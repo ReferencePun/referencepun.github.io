@@ -1281,277 +1281,291 @@ nav {
     border-color: #999;
   }
   
-  /*=============================================================================
-   * 15. RESPONSIVE MEDIA QUERIES
-   *=============================================================================*/
-  
-  /* Large desktops and laptops */
-  @media (max-width: 1400px) {
-    .portfolio-grid, .landscape-gallery {
-      grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: minmax(20vw, auto);
-    }
-    
-    .magazine-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .landscape-category {
-      max-width: 45%;
-    }
-    
-    /* PDF viewer adjustments for large screens */
-    #pdf-canvas, #second-pdf-canvas {
-      max-width: 48%;
-      max-height: 80vh;
-    }
+/*=============================================================================
+ * 15. RESPONSIVE MEDIA QUERIES
+ *=============================================================================*/
+
+/* Large desktops and laptops */
+@media (max-width: 1400px) {
+  .portfolio-grid, .landscape-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(20vw, auto);
   }
   
-  /* Tablets and smaller desktops */
-  @media (max-width: 1200px) {
-    .portfolio-grid {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
-    
-    .info-bio {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-    
-    .info-image img {
-      max-width: 300px;
-      margin: 0 auto;
-    }
-    
-    .magazine-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* PDF viewer adjustments for medium screens */
-    #pdf-canvas, #second-pdf-canvas {
-      max-width: 48%;
-      max-height: 75vh;
-    }
+  .magazine-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
   
-  /* Small tablets and large smartphones */
-  @media (max-width: 900px) {
-    header {
-      padding: 1rem;
-    }
-    
-    .logo {
-      font-size: 1.5rem;
-    }
-    
-    .nav-menu li {
-      margin: 0 0.8rem;
-    }
-    
-    /* PDF viewer adjustments for small tablets */
-    #pdf-canvas, #second-pdf-canvas {
-      max-width: 48%;
-      max-height: 70vh;
-    }
-    
-    .pdf-controls-fixed {
-      padding: 8px 10px;
-    }
-    
-    .nav-button, .view-button {
-      width: 36px;
-      height: 36px;
-    }
+  .landscape-category {
+    max-width: 45%;
   }
   
-  /* Smartphones */
-  @media (max-width: 768px) {
-    .header-container {
-      flex-wrap: wrap;
-    }
-    
-    .menu-toggle {
-      display: block;
-      order: 3;
-    }
-    
-    nav {
-      flex-basis: 100%;
-      margin: 0;
-      height: 0;
-      overflow: hidden;
-      transition: height 0.3s ease;
-      order: 4;
-    }
-    
-    nav.active {
-      height: auto;
-      margin-top: 1rem;
-    }
-    
-    .nav-menu {
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .nav-menu li {
-      margin: 0.5rem 0;
-    }
-    
-    .social-icons {
-      display: none;
-    }
-    
-    .portfolio-grid, .landscape-gallery {
-      grid-template-columns: 1fr;
-      grid-auto-rows: minmax(30vw, auto);
-      grid-gap: 30px;
-      padding: 0 30px;
-    }
-    
-    .portfolio-item, .landscape-gallery .portfolio-item {
-      margin-bottom: 15px;
-    }
-    
-    /* Reset all grid spans for mobile */
-    .portfolio-item.horizontal, 
-    .portfolio-item.vertical,
-    .portfolio-item.square,
-    .landscape-gallery .portfolio-item.horizontal, 
-    .landscape-gallery .portfolio-item.vertical,
-    .landscape-gallery .portfolio-item.square {
-      grid-column: span 1;
-    }
-    
-    /* Give vertical images more height but not too much */
-    .portfolio-item.vertical,
-    .landscape-gallery .portfolio-item.vertical {
-      grid-row: span 1.3;
-    }
-    
-    .lightbox-prev {
-      left: 10px;
-    }
-    
-    .lightbox-next {
-      right: 10px;
-    }
-    
-    .landscape-categories {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .landscape-category {
-      max-width: 100%;
-    }
-    
-    /* PDF viewer adjustments for mobile */
-    #magazine-modal .modal-content {
-      width: 95% !important;
-      height: 90% !important;
-      margin: 5% auto !important;
-    }
-    
-    .pdf-container {
-      height: calc(100% - 100px) !important; /* Give more space for controls */
-    }
-    
-    #pdf-canvas, #second-pdf-canvas {
-      max-width: 48%; /* Still maintain double page view */
-      max-height: 65vh;
-    }
-    
-    .page-container {
-      gap: 0.5px;
-    }
-    
-    .pdf-controls-fixed {
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 8px;
-    }
-    
-    .view-controls {
-      width: 100%;
-      justify-content: center;
-      margin-top: 8px;
-    }
-    
-    .close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
+  /* PDF viewer adjustments for large screens */
+  #pdf-canvas, #second-pdf-canvas {
+    max-width: 48%;
+    max-height: 80vh;
+  }
+}
+
+/* Tablets and smaller desktops */
+@media (max-width: 1200px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
   
-  /* Small smartphones */
-  @media (max-width: 480px) {
-    .logo {
-      font-size: 1.3rem;
-    }
-    
-    main {
-      padding: 1rem;
-    }
-    
-    .portfolio-grid, .landscape-gallery {
-      padding: 0 20px;
-      grid-gap: 35px;
-    }
-    
-    .portfolio-item, .landscape-gallery .portfolio-item {
-      margin-bottom: 20px;
-    }
-    
-    .magazine-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .lightbox-content {
-      width: 95%;
-    }
-    
-    .close-lightbox {
-      top: -30px;
-      right: 0;
-    }
-    
-    .lightbox-caption {
-      bottom: -30px;
-    }
-    
-    .lightbox-prev, .lightbox-next {
-      font-size: 1.5rem;
-    }
-    
-    /* PDF viewer adjustments for small mobile */
-    #magazine-modal .modal-content {
-      width: 100% !important;
-      height: 100% !important;
-      margin: 0 !important;
-      border-radius: 0;
-    }
-    
-    #pdf-canvas, #second-pdf-canvas {
-      max-width: 48%; /* Still maintain double page layout */
-      max-height: 55vh;
-    }
-    
-    .page-container {
-      gap: 0.5px;
-    }
-    
-    .pdf-controls-fixed {
-      padding: 6px 8px;
-    }
-    
-    .nav-button, .view-button {
-      width: 32px;
-      height: 32px;
-      margin: 0 2px;
-    }
+  .info-bio {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
+  
+  .info-image img {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .magazine-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* PDF viewer adjustments for medium screens */
+  #pdf-canvas, #second-pdf-canvas {
+    max-width: 48%;
+    max-height: 75vh;
+  }
+}
+
+/* Small tablets and large smartphones */
+@media (max-width: 900px) {
+  header {
+    padding: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .nav-menu li {
+    margin: 0 0.8rem;
+  }
+  
+  /* PDF viewer adjustments for small tablets */
+  #pdf-canvas, #second-pdf-canvas {
+    max-width: 48%;
+    max-height: 70vh;
+  }
+  
+  .pdf-controls-fixed {
+    padding: 8px 10px;
+  }
+  
+  .nav-button, .view-button {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Smartphones */
+@media (max-width: 768px) {
+  .header-container {
+    flex-wrap: wrap;
+  }
+  
+  .menu-toggle {
+    display: block;
+    order: 3;
+  }
+  
+  nav {
+    flex-basis: 100%;
+    margin: 0;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+    order: 4;
+  }
+  
+  nav.active {
+    height: auto;
+    margin-top: 1rem;
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav-menu li {
+    margin: 0.5rem 0;
+  }
+  
+  .social-icons {
+    display: none;
+  }
+  
+  .portfolio-grid, .landscape-gallery {
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(30vw, auto);
+    grid-gap: 30px;
+    padding: 0 30px;
+  }
+  
+  .portfolio-item, .landscape-gallery .portfolio-item {
+    margin-bottom: 15px;
+  }
+  
+  /* Reset all grid spans for mobile */
+  .portfolio-item.horizontal, 
+  .portfolio-item.vertical,
+  .portfolio-item.square,
+  .landscape-gallery .portfolio-item.horizontal, 
+  .landscape-gallery .portfolio-item.vertical,
+  .landscape-gallery .portfolio-item.square {
+    grid-column: span 1;
+  }
+  
+  /* Give vertical images more height but not too much */
+  .portfolio-item.vertical,
+  .landscape-gallery .portfolio-item.vertical {
+    grid-row: span 1.3;
+  }
+  
+  .lightbox-prev {
+    left: 10px;
+  }
+  
+  .lightbox-next {
+    right: 10px;
+  }
+  
+  .landscape-categories {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .landscape-category {
+    max-width: 100%;
+  }
+  
+  /* PDF viewer adjustments for mobile */
+  #magazine-modal .modal-content {
+    width: 95% !important;
+    height: 90% !important;
+    margin: 5% auto !important;
+  }
+  
+  .pdf-container {
+    height: calc(100% - 100px) !important; /* Give space for controls */
+  }
+  
+  #pdf-canvas, #second-pdf-canvas {
+    max-width: 48%; /* Still maintain double page view */
+    max-height: 65vh;
+  }
+  
+  .page-container {
+    gap: 2px; /* Smaller gap on mobile screens */
+  }
+  
+  /* Hide view controls on mobile */
+  .view-controls {
+    display: none !important;
+  }
+  
+  /* Center the navigation buttons */
+  .pdf-controls-fixed {
+    justify-content: center;
+    padding: 8px 10px;
+  }
+  
+  /* No need for spacer when centered */
+  .controls-spacer {
+    display: none;
+  }
+  
+  /* Make nav buttons more prominent */
+  .nav-button {
+    width: 44px;
+    height: 44px;
+    margin: 0 12px;
+  }
+  
+  /* Make pagination info more readable */
+  .page-info {
+    font-size: 1.1rem;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* Small smartphones */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.3rem;
+  }
+  
+  main {
+    padding: 1rem;
+  }
+  
+  .portfolio-grid, .landscape-gallery {
+    padding: 0 20px;
+    grid-gap: 35px;
+  }
+  
+  .portfolio-item, .landscape-gallery .portfolio-item {
+    margin-bottom: 20px;
+  }
+  
+  .magazine-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .lightbox-content {
+    width: 95%;
+  }
+  
+  .close-lightbox {
+    top: -30px;
+    right: 0;
+  }
+  
+  .lightbox-caption {
+    bottom: -30px;
+  }
+  
+  .lightbox-prev, .lightbox-next {
+    font-size: 1.5rem;
+  }
+  
+  /* PDF viewer adjustments for small mobile */
+  #magazine-modal .modal-content {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border-radius: 0;
+  }
+  
+  #pdf-canvas, #second-pdf-canvas {
+    max-width: 48%; /* Still maintain double page layout */
+    max-height: 55vh;
+  }
+  
+  .page-container {
+    gap: 1px; /* Minimal gap on small screens */
+  }
+  
+  .pdf-controls-fixed {
+    padding: 6px 8px;
+  }
+  
+  .nav-button {
+    margin: 0 8px;
+  }
+}
   
   /*=============================================================================
    * 16. UTILITY CLASSES

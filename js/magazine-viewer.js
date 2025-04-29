@@ -944,7 +944,7 @@ function handleKeyPress(event) {
 //=============================================================================
 
 /**
- * Close the modal with fade-out effect
+ * Close the modal with fade-out effect and proper cleanup
  */
 function closeModal() {
   try {
@@ -976,19 +976,37 @@ function closeModal() {
         modal.classList.remove('fade-out');
         modal.classList.remove('fade-in');
         document.body.style.overflow = 'auto';
+        
+        // Clear the modal content to prevent caching issues
+        modal.innerHTML = '';
       }, 300);
     }
     
     // Remove keyboard listener
     window.removeEventListener('keydown', handleKeyPress);
     
-    // Clear PDF data
+    // IMPORTANT: Clear PDF data and cache
     pdfDoc = null;
     pageRendering = false;
     pageNumPending = null;
     currentPage = 1;
     isFullscreen = false;
+    viewMode = 'double';
     isTransitioning = false;
+    scale = 1.5;
+    
+    // Clear canvas references
+    canvas = null;
+    ctx = null;
+    secondPageCanvas = null;
+    
+    // Clear page cache completely
+    pageCache = {};
+    
+    // Clear preloading tracking
+    if (window.preloadingPages) {
+      window.preloadingPages = {};
+    }
     
     // Clear controls timeout
     if (controlsTimeout) {
@@ -1002,6 +1020,7 @@ function closeModal() {
     const modal = document.getElementById('magazine-modal');
     if (modal) {
       modal.style.display = 'none';
+      modal.innerHTML = ''; // Clear content in fallback as well
       document.body.style.overflow = 'auto';
     }
   }
