@@ -43,10 +43,6 @@ function openMagazine(pdfPath) {
       <div class="modal-content">
         <div class="magazine-viewer">
           <div class="pdf-status">
-            <div id="loading-indicator" class="loading-indicator">
-              <div class="spinner"></div>
-              <span>Loading magazine...</span>
-            </div>
             <div id="error-message" class="error-message" style="display:none;"></div>
           </div>
           
