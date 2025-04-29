@@ -111,7 +111,7 @@ const portfolioImages = [
         caption: 'Jerreth Ludwig'
     },
     {
-        src: 'images/portfolio/_8_0169l.jpg',
+        src: 'images/portfolio/grace_van_dien.jpg',
         alt: 'Grace Van Dien',
         caption: 'Grace Van Dien'
     },
