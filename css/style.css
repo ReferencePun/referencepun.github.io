@@ -958,6 +958,21 @@ nav {
     margin-top: 1rem;
     font-size: 1.1rem;
   }
+
+  .inline-credits {
+    margin: 2rem auto;
+    text-align: center;
+    line-height: 2;
+  }
+  
+  .credit-item {
+    white-space: nowrap;
+  }
+  
+  .credit-separator {
+    margin: 0 0.8rem;
+    opacity: 0.5;
+  }
   
   /* Larger video containers */
   .large-video {
