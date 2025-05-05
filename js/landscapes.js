@@ -30,43 +30,48 @@ const portfolioImages = [
     { src: "images/landscapes/all/65430018l1.jpg", alt: "Landscape Photography", caption: "55. Landscape Photography" },
     { src: "images/landscapes/all/72410018.JPG", alt: "Landscape Photography", caption: "76. Landscape Photography" },
 
+    { src: "images/landscapes/all/65430009.JPG", alt: "Landscape Photography", caption: "53. Landscape Photography" },
+    { src: "images/landscapes/all/F1000023l1.jpg", alt: "Landscape Photography", caption: "106. Landscape Photography" },
+    { src: "images/landscapes/all/000012630002l.jpg", alt: "Landscape Photography", caption: "4. Landscape Photography" },
+
+    { src: "images/landscapes/all/33330016.JPG", alt: "Landscape Photography", caption: "45. Landscape Photography" },
+    { src: "images/landscapes/all/20520028l.jpeg", alt: "Landscape Photography", caption: "27. Landscape Photography" },
+    { src: "images/landscapes/all/F1010001l.jpg", alt: "Landscape Photography", caption: "107. Landscape Photography" },
+    { src: "images/landscapes/all/R1-08245-004A.jpg", alt: "Landscape Photography", caption: "129. Landscape Photography" },
+    { src: "images/landscapes/all/23150024lf1.jpg", alt: "Landscape Photography", caption: "40. Landscape Photography" },
+
+
+
 
 
     { src: "images/landscapes/all/F1010002l.jpg", alt: "Landscape Photography", caption: "108. Landscape Photography" },
-    { src: "images/landscapes/all/F1010001l.jpg", alt: "Landscape Photography", caption: "107. Landscape Photography" },
     { src: "images/landscapes/all/F1010003l__281_29.jpg", alt: "Landscape Photography", caption: "109. Landscape Photography" },
-
-    { src: "images/landscapes/all/70990028l1.jpg", alt: "Landscape Photography", caption: "74. Landscape Photography" },
-    { src: "images/landscapes/all/49500048_559883431106539_5663161701172772864_n.jpg", alt: "Landscape Photography", caption: "46. Landscape Photography" },
-    { src: "images/landscapes/all/va__2810_29.JPG", alt: "Landscape Photography", caption: "142. Landscape Photography" },
 
     { src: "images/landscapes/all/F1010008.JPG", alt: "Landscape Photography", caption: "110. Landscape Photography" },
     { src: "images/landscapes/all/5877-27al.jpg", alt: "Landscape Photography", caption: "49. Landscape Photography" },
     { src: "images/landscapes/all/65440019l.jpg", alt: "Landscape Photography", caption: "62. Landscape Photography" },
 
-
-
+    
+    { src: "images/landscapes/all/05010029.JPG", alt: "Landscape Photography", caption: "17. Landscape Photography" },
+    { src: "images/landscapes/all/R1-08253-018A.jpg", alt: "Landscape Photography", caption: "139. Landscape Photography" },
+    { src: "images/landscapes/all/70990028l1.jpg", alt: "Landscape Photography", caption: "74. Landscape Photography" },
+    { src: "images/landscapes/all/49500048_559883431106539_5663161701172772864_n.jpg", alt: "Landscape Photography", caption: "46. Landscape Photography" },
+    { src: "images/landscapes/all/va__2810_29.JPG", alt: "Landscape Photography", caption: "142. Landscape Photography" },
     { src: "images/landscapes/all/F1000019llbw.jpg", alt: "Landscape Photography", caption: "105. Landscape Photography" },
     { src: "images/landscapes/all/FH000001.jpg", alt: "Landscape Photography", caption: "124. Landscape Photography" },
     { src: "images/landscapes/all/R1-08252-032Al.jpg", alt: "Landscape Photography", caption: "137. Landscape Photography" },
     { src: "images/landscapes/all/R1-08253-000A_0001l.jpg", alt: "Landscape Photography", caption: "138. Landscape Photography" },
     { src: "images/landscapes/all/21330038l.jpeg", alt: "Landscape Photography", caption: "36. Landscape Photography" },
-    { src: "images/landscapes/all/65430009.JPG", alt: "Landscape Photography", caption: "53. Landscape Photography" },
-    { src: "images/landscapes/all/F1000023l1.jpg", alt: "Landscape Photography", caption: "106. Landscape Photography" },
     { src: "images/landscapes/all/F1000011.JPG", alt: "Landscape Photography", caption: "100. Landscape Photography" },
     { src: "images/landscapes/all/000005050031.jpg", alt: "Landscape Photography", caption: "2. Landscape Photography" },
     { src: "images/landscapes/all/F1000005l.jpg", alt: "Landscape Photography", caption: "98. Landscape Photography" },
     { src: "images/landscapes/all/97410002l.jpg", alt: "Landscape Photography", caption: "84. Landscape Photography" },
-    { src: "images/landscapes/all/33330016.JPG", alt: "Landscape Photography", caption: "45. Landscape Photography" },
-    { src: "images/landscapes/all/20520028l.jpeg", alt: "Landscape Photography", caption: "27. Landscape Photography" },
     { src: "images/landscapes/all/05010021.JPG", alt: "Landscape Photography", caption: "15. Landscape Photography" },
     { src: "images/landscapes/all/65440020l.jpg", alt: "Landscape Photography", caption: "63. Landscape Photography" },
     { src: "images/landscapes/all/000013050012l.jpg", alt: "Landscape Photography", caption: "5. Landscape Photography" },
     { src: "images/landscapes/all/F1010034.JPG", alt: "Landscape Photography", caption: "116. Landscape Photography" },
-
     { src: "images/landscapes/all/000013050032l1.jpg", alt: "Landscape Photography", caption: "7. Landscape Photography" },
     { src: "images/landscapes/all/000012610004.jpg", alt: "Landscape Photography", caption: "3. Landscape Photography" },
-    { src: "images/landscapes/all/000012630002l.jpg", alt: "Landscape Photography", caption: "4. Landscape Photography" },
     { src: "images/landscapes/all/000013050033.jpg", alt: "Landscape Photography", caption: "8. Landscape Photography" },
     { src: "images/landscapes/all/000013160032l.jpg", alt: "Landscape Photography", caption: "9. Landscape Photography" },
     { src: "images/landscapes/all/000019070001l.jpg", alt: "Landscape Photography", caption: "10. Landscape Photography" },
@@ -75,7 +80,6 @@ const portfolioImages = [
     { src: "images/landscapes/all/00830016albw.jpg", alt: "Landscape Photography", caption: "13. Landscape Photography" },
     { src: "images/landscapes/all/03050009.JPG", alt: "Landscape Photography", caption: "14. Landscape Photography" },
     { src: "images/landscapes/all/05010023.JPG", alt: "Landscape Photography", caption: "16. Landscape Photography" },
-    { src: "images/landscapes/all/05010029.JPG", alt: "Landscape Photography", caption: "17. Landscape Photography" },
     { src: "images/landscapes/all/05010031.JPG", alt: "Landscape Photography", caption: "18. Landscape Photography" },
     { src: "images/landscapes/all/13810001l.jpg", alt: "Landscape Photography", caption: "19. Landscape Photography" },
     { src: "images/landscapes/all/13810003l.jpg", alt: "Landscape Photography", caption: "20. Landscape Photography" },
@@ -90,7 +94,6 @@ const portfolioImages = [
     { src: "images/landscapes/all/21330035l2.jpg", alt: "Landscape Photography", caption: "35. Landscape Photography" },
     { src: "images/landscapes/all/21340002l.jpeg", alt: "Landscape Photography", caption: "37. Landscape Photography" },
     { src: "images/landscapes/all/22240021l1.jpg", alt: "Landscape Photography", caption: "39. Landscape Photography" },
-    { src: "images/landscapes/all/23150024lf1.jpg", alt: "Landscape Photography", caption: "40. Landscape Photography" },
     { src: "images/landscapes/all/23150027l.jpg", alt: "Landscape Photography", caption: "41. Landscape Photography" },
     { src: "images/landscapes/all/52220009l.jpg", alt: "Landscape Photography", caption: "47. Landscape Photography" },
     { src: "images/landscapes/all/56610010.JPG", alt: "Landscape Photography", caption: "48. Landscape Photography" },
@@ -143,12 +146,10 @@ const portfolioImages = [
     { src: "images/landscapes/all/F1040024.JPG", alt: "Landscape Photography", caption: "123. Landscape Photography" },
     { src: "images/landscapes/all/R002-002al2fix.jpg", alt: "Landscape Photography", caption: "125. Landscape Photography" },
     { src: "images/landscapes/all/R1-08241-035A.jpg", alt: "Landscape Photography", caption: "127. Landscape Photography" },
-    { src: "images/landscapes/all/R1-08245-004A.jpg", alt: "Landscape Photography", caption: "129. Landscape Photography" },
     { src: "images/landscapes/all/R1-08246-013A.jpg", alt: "Landscape Photography", caption: "130. Landscape Photography" },
     { src: "images/landscapes/all/R1-08246-028A.jpg", alt: "Landscape Photography", caption: "132. Landscape Photography" },
     { src: "images/landscapes/all/R1-08247-0031l.jpg", alt: "Landscape Photography", caption: "135. Landscape Photography" },
     { src: "images/landscapes/all/R1-08252-001A.jpg", alt: "Landscape Photography", caption: "136. Landscape Photography" },
-    { src: "images/landscapes/all/R1-08253-018A.jpg", alt: "Landscape Photography", caption: "139. Landscape Photography" },
     { src: "images/landscapes/all/R1-08254-0035l.jpg", alt: "Landscape Photography", caption: "141. Landscape Photography" },
 ];
 
