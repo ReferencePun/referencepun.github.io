@@ -32,10 +32,6 @@ const portfolioImages = [
 
 
 
-    { src: "images/landscapes/all/F1010008.JPG", alt: "Landscape Photography", caption: "110. Landscape Photography" },
-    { src: "images/landscapes/all/5877-27al.jpg", alt: "Landscape Photography", caption: "49. Landscape Photography" },
-    { src: "images/landscapes/all/65440019l.jpg", alt: "Landscape Photography", caption: "62. Landscape Photography" },
-
     { src: "images/landscapes/all/F1010002l.jpg", alt: "Landscape Photography", caption: "108. Landscape Photography" },
     { src: "images/landscapes/all/F1010001l.jpg", alt: "Landscape Photography", caption: "107. Landscape Photography" },
     { src: "images/landscapes/all/F1010003l__281_29.jpg", alt: "Landscape Photography", caption: "109. Landscape Photography" },
@@ -43,6 +39,13 @@ const portfolioImages = [
     { src: "images/landscapes/all/70990028l1.jpg", alt: "Landscape Photography", caption: "74. Landscape Photography" },
     { src: "images/landscapes/all/49500048_559883431106539_5663161701172772864_n.jpg", alt: "Landscape Photography", caption: "46. Landscape Photography" },
     { src: "images/landscapes/all/va__2810_29.JPG", alt: "Landscape Photography", caption: "142. Landscape Photography" },
+
+    { src: "images/landscapes/all/F1010008.JPG", alt: "Landscape Photography", caption: "110. Landscape Photography" },
+    { src: "images/landscapes/all/5877-27al.jpg", alt: "Landscape Photography", caption: "49. Landscape Photography" },
+    { src: "images/landscapes/all/65440019l.jpg", alt: "Landscape Photography", caption: "62. Landscape Photography" },
+
+
+
     { src: "images/landscapes/all/F1000019llbw.jpg", alt: "Landscape Photography", caption: "105. Landscape Photography" },
     { src: "images/landscapes/all/FH000001.jpg", alt: "Landscape Photography", caption: "124. Landscape Photography" },
     { src: "images/landscapes/all/R1-08252-032Al.jpg", alt: "Landscape Photography", caption: "137. Landscape Photography" },
