@@ -36,6 +36,11 @@ const portfolioImages = [
         caption: 'Hyunji Shin'
     },
     {
+        src: 'images/portfolio/23720028l1.jpg',
+        alt: 'Pixie',
+        caption: 'Pixie'
+    },
+    {
         src: 'images/portfolio/03120030.jpg',
         alt: 'Hyunji Shin',
         caption: 'Hyunji Shin'
@@ -54,11 +59,6 @@ const portfolioImages = [
         src: 'images/portfolio/23380020albw1.jpg',
         alt: 'Madisyn Ritland',
         caption: 'Madisyn Ritland 4'
-    },
-    {
-        src: 'images/portfolio/23720028l1.jpg',
-        alt: 'Pixie',
-        caption: 'Pixie'
     },
     {
         src: 'images/portfolio/33890037l.jpg',

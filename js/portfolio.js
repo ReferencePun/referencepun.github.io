@@ -96,6 +96,21 @@ const portfolioImages = [
         caption: 'Kasia Struss 3'
     },
     {
+        src: 'images/portfolio/FH100009l0lhp2.jpg',
+        alt: 'Kasia Struss',
+        caption: 'Kasia Struss 1'
+    },
+    {
+        src: 'images/portfolio/FH200006_2l1ahp2.jpg',
+        alt: 'Kasia Struss',
+        caption: 'Kasia Struss 2'
+    },
+    {
+        src: 'images/portfolio/22360003lc.jpg',
+        alt: 'Kasia Struss',
+        caption: 'Kasia Struss 8'
+    },
+    {
         src: 'images/portfolio/50810020.jpg',
         alt: 'Matt Loewen',
         caption: 'Matt Loewen'
@@ -431,6 +446,21 @@ const portfolioImages = [
         caption: 'Giedre Dukauskaite 4'
     },
     {
+        src: 'images/portfolio/23590015l.jpg',
+        alt: 'Madisyn Ritland',
+        caption: 'Madisyn Ritland 3'
+    },
+    {
+        src: 'images/portfolio/57570033ll.jpg',
+        alt: 'Kasia Struss',
+        caption: 'Kasia Struss'
+    },
+    {
+        src: 'images/portfolio/38030007fix.jpg',
+        alt: 'Samantha Gradoville',
+        caption: 'Samantha Gradoville 1'
+    },
+    {
         src: 'images/portfolio/000012700033l.jpg',
         alt: 'Chanel - Irene Kim',
         caption: 'Chanel - Irene Kim 1'
@@ -464,21 +494,6 @@ const portfolioImages = [
         src: 'images/portfolio/81180030lfix.jpg',
         alt: 'Laragh McCann',
         caption: 'Laragh McCann'
-    },
-    {
-        src: 'images/portfolio/FH100009l0lhp2.jpg',
-        alt: 'Kasia Struss',
-        caption: 'Kasia Struss 1'
-    },
-    {
-        src: 'images/portfolio/FH200006_2l1ahp2.jpg',
-        alt: 'Kasia Struss',
-        caption: 'Kasia Struss 2'
-    },
-    {
-        src: 'images/portfolio/22360003lc.jpg',
-        alt: 'Kasia Struss',
-        caption: 'Kasia Struss 8'
     },
     {
         src: 'images/portfolio/56740002fixcon.jpg',
