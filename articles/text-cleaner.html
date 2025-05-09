@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clean HTML Formatter</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      color: #444;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    #editor {
+      width: 100%;
+      min-height: 300px;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      overflow: auto;
+      font-size: 16px;
+    }
+    #output {
+      width: 100%;
+      height: 300px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      overflow: auto;
+      background: #f5f5f5;
+    }
+    button {
+      padding: 10px 20px;
+      background: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    button:hover {
+      background: #006cc1;
+    }
+    .instructions {
+      background: #f8f8f8;
+      border-left: 4px solid #0078d7;
+      padding: 10px 15px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Clean HTML Formatter</h1>
+  
+  <div class="instructions">
+    <p>Paste your formatted text from TextEdit below, then click "Get Clean HTML".</p>
+    <p>This will strip out all TextEdit-specific markup while preserving <strong>bold</strong> and <em>italic</em> formatting.</p>
+  </div>
+  
+  <div id="editor" contenteditable="true">
+    <!-- Paste content here -->
+  </div>
+  
+  <button id="cleanHtmlButton">Get Clean HTML</button>
+  
+  <textarea id="output" readonly></textarea>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const editor = document.getElementById('editor');
+      const output = document.getElementById('output');
+      const button = document.getElementById('cleanHtmlButton');
+      
+      // Clean the pasted HTML
+      function cleanHTML() {
+        // Get the content
+        let html = editor.innerHTML;
+        
+        // Create a DOM parser to handle the HTML properly
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Process each paragraph
+        const paragraphs = [];
+        const indent = '                    '; // 20 spaces for indentation
+        
+        // Find all paragraphs
+        doc.querySelectorAll('p').forEach(p => {
+          // Skip truly empty paragraphs
+          if (p.textContent.trim() === '') return;
+          
+          // Check if the entire paragraph should be italic
+          let isAllItalic = false;
+          
+          // If it contains i or em tags or has font-style: italic
+          if (p.querySelector('i, em') || 
+              p.innerHTML.includes('<i>') || 
+              p.innerHTML.includes('<em>') ||
+              window.getComputedStyle(p).fontStyle === 'italic') {
+            
+            // Check if the entire text is within italic tags
+            const textContent = p.textContent.trim();
+            const italicContent = Array.from(p.querySelectorAll('i, em'))
+              .map(el => el.textContent.trim())
+              .join('');
+            
+            if (textContent === italicContent) {
+              isAllItalic = true;
+            }
+          }
+          
+          // Capture if there are any bold elements
+          const boldElements = p.querySelectorAll('b, strong');
+          const hasBoldText = boldElements.length > 0;
+          
+          // Create a clean version of the paragraph
+          let cleanContent = '';
+          
+          if (isAllItalic) {
+            // For fully italic paragraphs, wrap the cleaned text content in em tags
+            cleanContent = `<em>${p.textContent.trim()}</em>`;
+          } else if (hasBoldText) {
+            // For paragraphs with bold elements, we need to recreate the structure
+            // Start with the text content
+            cleanContent = p.innerHTML;
+            
+            // Remove all TextEdit-specific spans
+            cleanContent = cleanContent.replace(/<span[^>]*class="Apple[^>]*>[^<]*<\/span>/g, '');
+            cleanContent = cleanContent.replace(/<span[^>]*style="white-space[^>]*>[^<]*<\/span>/g, '');
+            
+            // Convert <i> to <em>
+            cleanContent = cleanContent.replace(/<i>/g, '<em>');
+            cleanContent = cleanContent.replace(/<\/i>/g, '</em>');
+            
+            // Make sure we didn't leave any empty spans
+            cleanContent = cleanContent.replace(/<span[^>]*><\/span>/g, '');
+            
+            // Clean up any extra whitespace
+            cleanContent = cleanContent.trim().replace(/\s+/g, ' ');
+          } else {
+            // For regular paragraphs, just use the text content
+            cleanContent = p.textContent.trim();
+          }
+          
+          // Add the clean paragraph to our list
+          paragraphs.push(`${indent}<p>${cleanContent}</p>`);
+        });
+        
+        // If no paragraphs were found, try an alternative approach
+        if (paragraphs.length === 0) {
+          // Get the text content and split it into paragraphs
+          const text = editor.textContent;
+          const textParagraphs = text.split(/\n\s*\n/);
+          
+          textParagraphs.forEach(para => {
+            const trimmedPara = para.trim();
+            if (trimmedPara) {
+              paragraphs.push(`${indent}<p>${trimmedPara}</p>`);
+            }
+          });
+        }
+        
+        // Join the paragraphs with double line breaks for proper spacing
+        return paragraphs.join('\n\n');
+      }
+      
+      // Add click event listener to the button
+      button.addEventListener('click', function() {
+        try {
+          // Clean the HTML
+          const cleanedHTML = cleanHTML();
+          
+          // Set the content to the output textarea
+          output.value = cleanedHTML;
+          
+          // Select the output text for easy copying
+          output.select();
+        } catch (error) {
+          console.error('Error cleaning HTML:', error);
+          alert('There was an error processing the content. Please try again with simpler text.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
