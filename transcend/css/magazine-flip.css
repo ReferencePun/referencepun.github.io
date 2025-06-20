@@ -1,0 +1,331 @@
+/* magazine-flip.css - Complete updated version with seamless background blending */
+
+/* Flipbook Container */
+.flipbook-container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    touch-action: none; /* Prevent scroll/pan on touch devices */
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Page styles */
+.page {
+    background-color: white;
+    cursor: default;
+    overflow: hidden;
+    border: none; /* Remove any borders */
+    outline: none; /* Remove focus outline */
+}
+
+/* Only make pages clickable during flip */
+.stf__item {
+    cursor: pointer;
+}
+
+.page-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.page-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: white;
+    display: block;
+}
+
+/* Perfect background blending for consistent animations */
+
+/* Make the background page completely invisible */
+.background-page {
+    background: #ffffff !important; /* Match your exact website background */
+    border: none !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+}
+
+.background-content {
+    background: #ffffff !important; /* Match your exact website background */
+    border: none !important;
+}
+
+/* Remove ALL shadows from the background page */
+.stf__parent .stf__item.background-page {
+    box-shadow: none !important;
+    background: #ffffff !important;
+}
+
+.stf__parent .stf__item:first-child.background-page {
+    box-shadow: none !important;
+    background: #ffffff !important;
+    transform: translateZ(0); /* Force hardware acceleration for clean rendering */
+    will-change: transform;
+}
+
+.stf__parent[data-state="read"] .stf__item:first-child.background-page {
+    box-shadow: none !important;
+    background: #ffffff !important;
+}
+
+/* Make sure the background page never shows any visual artifacts */
+.background-page::before,
+.background-page::after {
+    display: none !important;
+}
+
+.background-content::before,
+.background-content::after {
+    display: none !important;
+}
+
+/* Ensure background page doesn't interfere with interactions */
+.background-page * {
+    pointer-events: none !important;
+}
+
+/* StPageFlip container (auto-generated) - ENHANCED SHADOWS with containment */
+.stf__parent {
+    margin: 0 auto;
+    /* Enhanced shadow system for white background */
+    box-shadow: 
+        0 0 0 1px rgba(0, 0, 0, 0.1),          /* Subtle border */
+        0 5px 15px rgba(0, 0, 0, 0.15),        /* Close shadow */
+        0 15px 35px rgba(0, 0, 0, 0.2),        /* Medium shadow */
+        0 25px 50px rgba(0, 0, 0, 0.15);       /* Far shadow */
+    
+    /* Add slight background to distinguish from page */
+    background: #fafafa;
+    border-radius: 2px;
+    
+    /* Prevent shadow bleeding onto website background */
+    overflow: hidden !important;
+    isolation: isolate;
+    /* Ensure shadows stay within the book bounds */
+    contain: layout style paint;
+}
+
+/* Enhanced shadow for better visibility on white background */
+.stf__parent .stf__wrapper {
+    overflow: visible !important;
+    /* Additional shadow for the book content */
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    overflow: hidden !important;
+}
+
+/* Additional shadow containment for clean appearance */
+.stf__parent[data-state="read"] {
+    contain: layout style paint;
+}
+
+/* Fix initial state shadow issues */
+.stf__parent[data-state="read"] .stf__item:first-child {
+    box-shadow: 
+        2px 0 8px rgba(0, 0, 0, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Enhanced cover page styling */
+.stf__parent .stf__item:only-child {
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.15),
+        0 15px 35px rgba(0, 0, 0, 0.2),
+        0 25px 50px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Add subtle inner shadows for page depth */
+.stf__parent .stf__item {
+    box-shadow: 
+        inset 0 0 0 1px rgba(0, 0, 0, 0.03),
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Page spread shadows */
+.stf__parent[data-state="read"] .stf__wrapper {
+    box-shadow: 
+        0 0 0 1px rgba(0, 0, 0, 0.08),
+        0 8px 25px rgba(0, 0, 0, 0.15),
+        0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Clean shadows for cover state */
+.stf__parent[data-display-mode="single"] .stf__wrapper::before {
+    display: none !important;
+}
+
+/* Ensure the magazine container doesn't extend shadows beyond its bounds */
+.magazine-view {
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Hide flip hints on mobile */
+@media (max-width: 768px) {
+    .flip-hint {
+        display: none;
+    }
+}
+
+/* Dissolution trigger page styling */
+.dissolution-trigger .page-content {
+    position: relative;
+}
+
+/* Dissolution Effects Container */
+.dissolution-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.dissolution-container.active {
+    pointer-events: all;
+}
+
+/* Burning effect overlay */
+.burn-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: multiply;
+    opacity: 0;
+    animation: burnIn 2s ease-in forwards;
+}
+
+@keyframes burnIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Ash particles */
+.ash-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: ashFall 3s ease-in forwards;
+}
+
+@keyframes ashFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Enhanced dissolving animation for the book */
+.stf__parent.dissolving {
+    animation: dissolveBook 4s ease-in forwards;
+    transform-origin: center center;
+}
+
+@keyframes dissolveBook {
+    0% { 
+        filter: brightness(1) contrast(1) saturate(1);
+        transform: scale(1) rotate(0deg);
+        box-shadow: 
+            0 0 0 1px rgba(0, 0, 0, 0.1),
+            0 5px 15px rgba(0, 0, 0, 0.15),
+            0 15px 35px rgba(0, 0, 0, 0.2),
+            0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+    25% { 
+        filter: brightness(1.3) contrast(1.2) saturate(1.5) hue-rotate(10deg);
+        transform: scale(1.02) rotate(0.5deg);
+        box-shadow: 
+            0 0 0 1px rgba(255, 100, 0, 0.2),
+            0 8px 25px rgba(255, 100, 0, 0.15),
+            0 20px 40px rgba(255, 100, 0, 0.1),
+            0 0 30px rgba(255, 100, 0, 0.2);
+    }
+    50% { 
+        filter: brightness(1.8) contrast(1.8) saturate(2) hue-rotate(25deg);
+        transform: scale(1.05) rotate(1deg);
+        box-shadow: 
+            0 0 0 1px rgba(255, 100, 0, 0.4),
+            0 15px 40px rgba(255, 100, 0, 0.25),
+            0 30px 60px rgba(255, 100, 0, 0.15),
+            0 0 50px rgba(255, 100, 0, 0.3);
+    }
+    75% { 
+        filter: brightness(0.8) contrast(2.5) saturate(0.5) hue-rotate(45deg);
+        transform: scale(0.98) rotate(-0.5deg);
+        box-shadow: 
+            0 0 0 1px rgba(100, 50, 0, 0.3),
+            0 10px 30px rgba(100, 50, 0, 0.2),
+            0 25px 50px rgba(100, 50, 0, 0.15);
+    }
+    100% { 
+        filter: brightness(0.2) contrast(3) saturate(0.2) hue-rotate(60deg);
+        transform: scale(0.95) rotate(0deg);
+        opacity: 0.1;
+        box-shadow: 
+            0 0 0 1px rgba(50, 25, 0, 0.2),
+            0 5px 20px rgba(50, 25, 0, 0.3),
+            0 15px 35px rgba(50, 25, 0, 0.2);
+    }
+}
+
+/* Phoenix rise */
+.phoenix-rise {
+    text-align: center;
+    opacity: 0;
+    animation: rise 2s ease-out forwards;
+    animation-delay: 2s;
+}
+
+.phoenix-rise h2 {
+    font-size: 72px;
+    margin-bottom: 20px;
+    color: #ff6400;
+    text-shadow: 0 0 20px rgba(255, 100, 0, 0.5);
+}
+
+.phoenix-rise p {
+    font-size: 24px;
+    letter-spacing: 6px;
+    color: #666;
+}
+
+@keyframes rise {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive shadow adjustments */
+@media (max-width: 768px) {
+    .stf__parent {
+        box-shadow: 
+            0 0 0 1px rgba(0, 0, 0, 0.08),
+            0 3px 10px rgba(0, 0, 0, 0.12),
+            0 10px 25px rgba(0, 0, 0, 0.15),
+            0 20px 35px rgba(0, 0, 0, 0.1);
+    }
+}

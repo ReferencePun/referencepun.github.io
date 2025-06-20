@@ -6,6 +6,7 @@
     <title>Transcend - An Interactive Magazine</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/magazine-flip.css">
+    <link rel="stylesheet" href="css/exploration.css">
 </head>
 <body>
     <div id="app" class="app-container">
@@ -16,19 +17,13 @@
 
         <!-- Magazine View -->
         <div id="magazine-view" class="magazine-view active">
-            <!-- Debug button - remove after testing -->
-            <button onclick="triggerDissolution()" style="position: fixed; top: 10px; right: 10px; z-index: 9999; padding: 10px; background: orange; color: white; border: none; cursor: pointer;">Test Dissolution</button>
-            
             <!-- StPageFlip Container -->
             <div id="flipbook" class="flipbook-container">
-                <!-- Blank page before everything (for back of page 1 during turn) -->
-                <div class="page">
-                    <div class="page-content empty-page"></div>
-                </div>
-                
-                <!-- Left side empty page for cover spread -->
-                <div class="page">
-                    <div class="page-content empty-page"></div>
+                <!-- Left side of cover spread - matches website background perfectly -->
+                <div class="page background-page">
+                    <div class="page-content background-content">
+                        <!-- This page will be invisible and match your website background -->
+                    </div>
                 </div>
                 
                 <!-- Cover (right side of first spread) -->
@@ -85,7 +80,6 @@
                 <div class="page dissolution-trigger">
                     <div class="page-content">
                         <img src="assets/magazine/page-8.jpg" alt="Page 8">
-                        <div class="dissolution-overlay" onclick="console.log('Overlay clicked!'); triggerDissolution()" data-trigger="dissolution"></div>
                     </div>
                 </div>
             </div>
@@ -94,12 +88,59 @@
             <div id="dissolution-container" class="dissolution-container hidden"></div>
         </div>
 
-        <!-- Exploration View (for after dissolution) -->
+        <!-- ENHANCED Exploration View (replaces simple phoenix-rise) -->
         <div id="exploration-view" class="exploration-view hidden">
-            <div class="phoenix-rise">
-                <h2>✦</h2>
-                <p>TRANSCENDING</p>
+            <div class="navigation-hub">
+
+                <!-- Navigation Buttons (Placeholder shapes for animator's GIFs) -->
+                
+                <!-- MEMORIES Button -->
+                <div class="nav-button memories" data-section="memories">
+                    <div class="icon">🚪</div>
+                    <div class="label">Constitutive</div>
+                </div>
+
+                <!-- DREAMS Button -->
+                <div class="nav-button dreams" data-section="dreams">
+                    <div class="icon">🌙</div>
+                    <div class="label">Scale of Awareness</div>
+                </div>
+
+                <!-- FUTURE Button -->
+                <div class="nav-button future" data-section="future">
+                    <div class="icon">⚡</div>
+                    <div class="label">Recognition-Fear</div>
+                </div>
+
+                <!-- ESSENCE Button -->
+                <div class="nav-button essence" data-section="essence">
+                    <div class="icon">✦</div>
+                    <div class="label">Temporal Recognition</div>
+                </div>
+
+                <!-- CONNECTION Button -->
+                <div class="nav-button connection" data-section="connection">
+                    <div class="icon">🔗</div>
+                    <div class="label">Interdependence</div>
+                </div>
+
+                <!-- Return Button -->
+                <div class="return-button" onclick="returnToMagazine()">
+                    ← Return to Magazine
+                </div>
             </div>
+
+            <!-- Notification Modal for section previews -->
+            <div class="notification" id="notification">
+                <h3 id="notificationTitle">Section Title</h3>
+                <p id="notificationDescription">This is where the content would load...</p>
+                <button onclick="closeNotification()">Continue Exploring</button>
+            </div>
+        </div>
+
+        <!-- Transition Overlay (for future dynamic loading) -->
+        <div id="transition-overlay" class="transition-overlay hidden">
+            <!-- Transition GIFs will be inserted here -->
         </div>
     </div>
 
@@ -109,5 +150,6 @@
     <!-- Custom Scripts -->
     <script src="js/magazine-flip.js"></script>
     <script src="js/dissolution.js"></script>
+    <script src="js/exploration.js"></script>
 </body>
 </html>
