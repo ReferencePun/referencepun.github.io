@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/magazine-flip.css">
     <link rel="stylesheet" href="css/exploration.css">
+    <link rel="stylesheet" href="css/enhanced-magazine.css">
 </head>
 <body>
     <div id="app" class="app-container">
@@ -19,6 +20,7 @@
         <div id="magazine-view" class="magazine-view active">
             <!-- StPageFlip Container -->
             <div id="flipbook" class="flipbook-container">
+                <!-- Initial Magazine: Pages 1-8 only -->
                 <!-- Left side of cover spread - matches website background perfectly -->
                 <div class="page background-page">
                     <div class="page-content background-content">
@@ -33,7 +35,7 @@
                     </div>
                 </div>
                 
-                <!-- Magazine Pages 1-8 -->
+                <!-- Magazine Pages 1-8 ONLY -->
                 <div class="page">
                     <div class="page-content">
                         <img src="assets/magazine/page-1.jpg" alt="Page 1">
@@ -118,33 +120,28 @@
 
                 <!-- Navigation Buttons (Placeholder shapes for animator's GIFs) -->
                 
-                <!-- MEMORIES Button -->
-                <div class="nav-button memories" data-section="memories">
-                    <div class="icon">🚪</div>
+                <!-- Constitutive Button -->
+                <div class="nav-button constitutive" data-section="constitutive">
                     <div class="label">Constitutive</div>
                 </div>
 
-                <!-- DREAMS Button -->
-                <div class="nav-button dreams" data-section="dreams">
-                    <div class="icon">🌙</div>
-                    <div class="label">Scale of Awareness</div>
+                <!-- Fear Button -->
+                <div class="nav-button fear" data-section="fear">
+                    <div class="label">Fear</div>
                 </div>
 
-                <!-- FUTURE Button -->
-                <div class="nav-button future" data-section="future">
-                    <div class="icon">⚡</div>
-                    <div class="label">Recognition-Fear</div>
+                <!-- Temporal Button -->
+                <div class="nav-button temporal" data-section="temporal">
+                    <div class="label">Temporal</div>
                 </div>
 
-                <!-- ESSENCE Button -->
-                <div class="nav-button essence" data-section="essence">
-                    <div class="icon">✦</div>
-                    <div class="label">Temporal Recognition</div>
+                <!-- Awareness Button -->
+                <div class="nav-button awareness" data-section="awareness">
+                    <div class="label">Awareness</div>
                 </div>
 
-                <!-- CONNECTION Button -->
-                <div class="nav-button connection" data-section="connection">
-                    <div class="icon">🔗</div>
+                <!-- Interdependence Button -->
+                <div class="nav-button interdependence" data-section="interdependence">
                     <div class="label">Interdependence</div>
                 </div>
 
@@ -160,7 +157,6 @@
                 <p id="notificationDescription">This is where the content would load...</p>
                 <button onclick="closeNotification()">Continue Exploring</button>
             </div>
-        </div>
 
         <!-- Transition Overlay (for future dynamic loading) -->
         <div id="transition-overlay" class="transition-overlay hidden">
@@ -175,5 +171,6 @@
     <script src="js/magazine-flip.js"></script>
     <script src="js/dissolution.js"></script>
     <script src="js/exploration.js"></script>
+    <script src="js/meditation-transcendence.js"></script>
 </body>
 </html>

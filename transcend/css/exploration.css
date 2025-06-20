@@ -91,17 +91,17 @@
     font-style: italic;
 }
 
-/* MEMORIES - Top Left - Pulsing Blue */
-.memories {
+/* Constitutive - Top Left - Pulsing Blue */
+.constitutive {
     top: 15%;
     left: 20%;
     background: radial-gradient(circle, rgba(70, 130, 255, 0.2) 0%, rgba(30, 80, 200, 0.1) 100%);
     border-color: rgba(70, 130, 255, 0.6);
     color: #2c5aa0 !important;
-    animation: pulseMemories 3s ease-in-out infinite;
+    animation: pulseConstitutive 3s ease-in-out infinite;
 }
 
-@keyframes pulseMemories {
+@keyframes pulseConstitutives {
     0%, 100% { 
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 0 0 0 rgba(70, 130, 255, 0.4);
         transform: scale(1);
@@ -112,56 +112,56 @@
     }
 }
 
-/* DREAMS - Top Right - Floating Purple */
-.dreams {
+/* Fear - Top Right - Floating Purple */
+.fear {
     top: 20%;
-    right: 15%;
+    right: 20%;
     background: radial-gradient(circle, rgba(200, 100, 255, 0.2) 0%, rgba(150, 50, 200, 0.1) 100%);
     border-color: rgba(200, 100, 255, 0.6);
     color: #8e44ad !important;
-    animation: floatDreams 4s ease-in-out infinite;
+    animation: floatFear 4s ease-in-out infinite;
 }
 
-@keyframes floatDreams {
+@keyframes floatFear {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-15px); }
 }
 
-/* FUTURE - Bottom Right - Rotating Green */
-.future {
+/* Temporal - Bottom Right - Rotating Green */
+.temporal {
     bottom: 25%;
     right: 8%;
     background: radial-gradient(circle, rgba(100, 255, 150, 0.2) 0%, rgba(50, 200, 100, 0.1) 100%);
     border-color: rgba(100, 255, 150, 0.6);
     color: #27ae60 !important;
-    animation: rotateFuture 6s linear infinite;
+    animation: rotateTemporal 6s linear infinite;
 }
 
-@keyframes rotateFuture {
+@keyframes rotateTemporal {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
 
-.future .icon {
-    animation: counterRotateFuture 6s linear infinite;
+.temporal .icon {
+    animation: counterRotateTemporal 6s linear infinite;
 }
 
-@keyframes counterRotateFuture {
+@keyframes counterRotateTemporal {
     from { transform: rotate(0deg); }
     to { transform: rotate(-360deg); }
 }
 
-/* ESSENCE - Bottom Left - Glowing Gold */
-.essence {
+/* Awareness - Bottom Left - Glowing Gold */
+.awareness {
     bottom: 15%;
-    left: 40%;
+    left: 30%;
     background: radial-gradient(circle, rgba(255, 200, 100, 0.2) 0%, rgba(200, 150, 50, 0.1) 100%);
     border-color: rgba(255, 200, 100, 0.6);
     color: #d68910 !important;
-    animation: glowEssence 2.5s ease-in-out infinite alternate;
+    animation: glowAwareness 2.5s ease-in-out infinite alternate;
 }
 
-@keyframes glowEssence {
+@keyframes glowAwareness {
     from { 
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 200, 100, 0.3);
     }
@@ -170,17 +170,17 @@
     }
 }
 
-/* CONNECTION - Center Left - Morphing Pink */
-.connection {
+/* Interdependence - Center Left - Morphing Pink */
+.interdependence {
     top: 45%;
     left: 5%;
     background: radial-gradient(circle, rgba(255, 100, 150, 0.2) 0%, rgba(200, 50, 100, 0.1) 100%);
     border-color: rgba(255, 100, 150, 0.6);
     color: #c0392b !important;
-    animation: morphConnection 3.5s ease-in-out infinite;
+    animation: morphInterdependence 3.5s ease-in-out infinite;
 }
 
-@keyframes morphConnection {
+@keyframes morphInterdependence {
     0%, 100% { 
         border-radius: 50%;
         transform: rotate(0deg);
@@ -269,6 +269,48 @@
 .notification button:hover {
     background: currentColor;
     color: white;
+}
+
+/* Animator Notes Panel */
+.animator-notes {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333 !important;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.animator-notes h4 {
+    color: #d68910 !important;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(214, 137, 16, 0.3);
+    padding-bottom: 5px;
+}
+
+.animator-notes ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.animator-notes li {
+    margin-bottom: 8px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.animator-notes li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #27ae60 !important;
 }
 
 /* Transition Overlay for dynamic loading */

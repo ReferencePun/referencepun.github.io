@@ -1,0 +1,284 @@
+/* enhanced-magazine.css - Post-transcendence magazine experience */
+
+/* Enhanced magazine mode - activated after meditation transcendence */
+.magazine-view.enhanced {
+    background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+    transition: background 3s ease;
+}
+
+/* Enhanced flipbook with subtle transformation indicators */
+.magazine-view.enhanced .flipbook-container {
+    filter: contrast(1.02) brightness(1.01);
+    transition: filter 2s ease;
+}
+
+.magazine-view.enhanced .stf__parent {
+    box-shadow: 
+        0 0 0 1px rgba(100, 150, 255, 0.1),
+        0 5px 15px rgba(0, 0, 0, 0.15),
+        0 15px 35px rgba(100, 150, 255, 0.1),
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 0 50px rgba(100, 150, 255, 0.05);
+    transition: box-shadow 3s ease;
+}
+
+/* Breathing pages - subtle animation on all content */
+.magazine-view.enhanced .page-content img {
+    animation: pageBreathing 8s ease-in-out infinite;
+    filter: contrast(1.01) brightness(1.005);
+}
+
+@keyframes pageBreathing {
+    0%, 100% { 
+        transform: scale(1); 
+        filter: contrast(1.01) brightness(1.005); 
+    }
+    50% { 
+        transform: scale(1.003); 
+        filter: contrast(1.02) brightness(1.01); 
+    }
+}
+
+/* Enhanced text that seems to shimmer subtly */
+.magazine-view.enhanced .page-content {
+    position: relative;
+}
+
+.magazine-view.enhanced .page-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 70%
+    );
+    animation: shimmerSweep 12s ease-in-out infinite;
+    pointer-events: none;
+    opacity: 0;
+}
+
+@keyframes shimmerSweep {
+    0%, 90%, 100% { 
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    5%, 15% { 
+        opacity: 0.3;
+        transform: translateX(100%);
+    }
+}
+
+/* Subtle particle effects in enhanced mode */
+.magazine-view.enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(1px 1px at 20% 30%, rgba(100, 150, 255, 0.3), transparent),
+        radial-gradient(1px 1px at 40% 70%, rgba(150, 100, 255, 0.2), transparent),
+        radial-gradient(1px 1px at 90% 40%, rgba(100, 200, 150, 0.3), transparent),
+        radial-gradient(1px 1px at 70% 80%, rgba(200, 150, 100, 0.2), transparent);
+    background-size: 200px 200px, 300px 300px, 250px 250px, 350px 350px;
+    animation: particleDrift 30s linear infinite;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+@keyframes particleDrift {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-10px, -10px); }
+    50% { transform: translate(5px, -5px); }
+    75% { transform: translate(-5px, 5px); }
+    100% { transform: translate(0, 0); }
+}
+
+/* Enhanced shadows for deeper dimensionality */
+.magazine-view.enhanced .stf__parent .stf__item {
+    box-shadow: 
+        inset 0 0 0 1px rgba(100, 150, 255, 0.05),
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 0 20px rgba(100, 150, 255, 0.03);
+}
+
+/* Last pages leading to back cover get special treatment */
+.magazine-view.enhanced .page:nth-last-child(-n+3) .page-content img {
+    animation: finalPageGlow 6s ease-in-out infinite;
+}
+
+@keyframes finalPageGlow {
+    0%, 100% { 
+        filter: contrast(1.01) brightness(1.005); 
+        box-shadow: inset 0 0 0 1px rgba(200, 150, 100, 0.1);
+    }
+    50% { 
+        filter: contrast(1.03) brightness(1.015); 
+        box-shadow: inset 0 0 0 1px rgba(200, 150, 100, 0.2);
+    }
+}
+
+/* Marginalia and hidden text becomes visible */
+.magazine-view.enhanced .hidden-marginalia {
+    opacity: 1;
+    animation: textReveal 2s ease-in forwards;
+    color: rgba(100, 150, 200, 0.7);
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+@keyframes textReveal {
+    0% { 
+        opacity: 0; 
+        transform: translateY(5px); 
+    }
+    100% { 
+        opacity: 0.7; 
+        transform: translateY(0); 
+    }
+}
+
+/* Back cover gets special completion energy */
+.magazine-view.enhanced .page:last-child .page-content {
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(250, 252, 255, 1) 50%,
+        rgba(245, 248, 255, 1) 100%
+    );
+    animation: completionAura 10s ease-in-out infinite;
+}
+
+@keyframes completionAura {
+    0%, 100% { 
+        background: linear-gradient(
+            135deg, 
+            rgba(255, 255, 255, 1) 0%, 
+            rgba(250, 252, 255, 1) 50%,
+            rgba(245, 248, 255, 1) 100%
+        );
+    }
+    50% { 
+        background: linear-gradient(
+            135deg, 
+            rgba(252, 254, 255, 1) 0%, 
+            rgba(248, 251, 255, 1) 50%,
+            rgba(243, 247, 255, 1) 100%
+        );
+    }
+}
+
+/* Subtle energy lines that occasionally appear */
+.magazine-view.enhanced .energy-line {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(100, 150, 255, 0.2) 50%,
+        transparent 100%
+    );
+    animation: energyPulse 8s ease-in-out infinite;
+    opacity: 0;
+}
+
+.magazine-view.enhanced .energy-line:nth-child(1) {
+    left: 25%;
+    animation-delay: 0s;
+}
+
+.magazine-view.enhanced .energy-line:nth-child(2) {
+    left: 75%;
+    animation-delay: 4s;
+}
+
+@keyframes energyPulse {
+    0%, 90%, 100% { opacity: 0; }
+    5%, 15% { opacity: 0.6; }
+}
+
+/* Connection lines between facing pages */
+.magazine-view.enhanced .page-connection {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(150, 200, 150, 0.3) 50%,
+        transparent 100%
+    );
+    transform: translateY(-50%);
+    animation: connectionPulse 12s ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes connectionPulse {
+    0%, 95%, 100% { opacity: 0; transform: translateY(-50%) scaleX(0); }
+    2%, 8% { opacity: 0.5; transform: translateY(-50%) scaleX(1); }
+}
+
+/* Remove enhanced mode indicator - was causing size differences */
+/*
+.magazine-view.enhanced::after {
+    content: '✦ Enhanced Perception ✦';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(100, 150, 200, 0.4);
+    font-size: 12px;
+    letter-spacing: 2px;
+    animation: fadeInOut 3s ease-in-out;
+    pointer-events: none;
+    z-index: 1000;
+}
+*/
+
+/* Remove fadeInOut animation - no longer needed */
+/*
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+*/
+
+/* Responsive adjustments for enhanced mode */
+@media (max-width: 768px) {
+    .magazine-view.enhanced .page-content img {
+        animation-duration: 10s; /* Slower on mobile for battery */
+    }
+    
+    .magazine-view.enhanced::before {
+        opacity: 0.2; /* Reduce particle density on mobile */
+    }
+}
+
+/* Transition states for entering enhanced mode */
+.magazine-view.entering-enhanced {
+    animation: enhancedTransition 3s ease-out forwards;
+}
+
+@keyframes enhancedTransition {
+    0% {
+        background: #ffffff;
+        filter: brightness(1);
+    }
+    50% {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+        filter: brightness(1.05);
+    }
+    100% {
+        background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+        filter: brightness(1.01);
+    }
+}

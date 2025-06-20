@@ -1,4 +1,4 @@
-// exploration.js - Non-linear navigation interface logic
+// exploration.js - Enhanced with meditation transcendence integration
 
 // Initialize exploration interface when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -111,28 +111,36 @@ function setupKeyboardNavigation() {
                 closeNotification();
                 break;
             case '1':
-                simulateButtonClick('memories');
+                simulateButtonClick('constitutive');
                 break;
             case '2':
-                simulateButtonClick('dreams');
+                simulateButtonClick('fear');
                 break;
             case '3':
-                simulateButtonClick('future');
+                simulateButtonClick('temporal');
                 break;
             case '4':
-                simulateButtonClick('essence');
+                simulateButtonClick('awareness');
                 break;
             case '5':
-                simulateButtonClick('connection');
+                simulateButtonClick('interdependence');
                 break;
             case 'r':
             case 'R':
                 returnToMagazine();
                 break;
+            case 'm':
+            case 'M':
+                // Debug: manually trigger meditation mode
+                if (window.MeditationTranscendence) {
+                    console.log('🧘‍♀️ Manually triggering meditation mode');
+                    window.MeditationTranscendence.triggerTranscendence();
+                }
+                break;
         }
     });
     
-    console.log('⌨️ Keyboard navigation: 1-5 for sections, R for return, ESC to close');
+    console.log('⌨️ Keyboard navigation: 1-5 for sections, R for return, ESC to close, M for meditation test');
 }
 
 function simulateButtonClick(section) {
@@ -166,6 +174,7 @@ function returnToMagazine() {
     
     // Future implementation: reverse dissolution animation
     // For now, just show alert
+    alert('This would transition back to the magazine view with your dissolution effect in reverse!');
     
     // In the future, this would trigger:
     // 1. Reverse dissolution animation
@@ -230,27 +239,41 @@ function isExplorationActive() {
     return explorationView && explorationView.classList.contains('active');
 }
 
-// Function to handle transition from magazine dissolution
+// ENHANCED: Function to handle transition from magazine dissolution with meditation
 function initializeExplorationFromDissolution() {
     console.log('🌟 Initializing exploration from dissolution...');
     
     // Add any special initialization needed when coming from dissolution
-    // This could include:
-    // - Special entrance animations
-    // - Audio initialization
-    // - Preloading next sections
-    
     const hubTitle = document.querySelector('.hub-title h1');
     if (hubTitle) {
         hubTitle.style.animation = 'none';
         hubTitle.offsetHeight; // Trigger reflow
         hubTitle.style.animation = 'gentlePulse 4s ease-in-out infinite';
     }
+    
+    // START MEDITATION TRANSCENDENCE DETECTION
+    if (window.MeditationTranscendence) {
+        console.log('🧘‍♀️ Starting meditation transcendence detection');
+        window.MeditationTranscendence.startDetection();
+    } else {
+        console.warn('⚠️ MeditationTranscendence not found - loading...');
+        // Try to load meditation system if not already loaded
+        setTimeout(() => {
+            if (window.MeditationTranscendence) {
+                window.MeditationTranscendence.startDetection();
+            }
+        }, 1000);
+    }
 }
 
 // Enhanced return to magazine function for future integration
 function enhancedReturnToMagazine() {
     console.log('🔄 Enhanced return to magazine...');
+    
+    // Stop meditation detection if active
+    if (window.MeditationTranscendence) {
+        window.MeditationTranscendence.stopDetection();
+    }
     
     const explorationView = document.getElementById('exploration-view');
     const magazineView = document.getElementById('magazine-view');
@@ -278,6 +301,7 @@ window.ExplorationInterface = {
     isActive: isExplorationActive
 };
 
-console.log('🎨 Exploration interface module loaded');
+console.log('🎨 Exploration interface module loaded with meditation integration');
 console.log('🎯 Available sections:', Object.keys(sectionInfo));
-console.log('⌨️ Keyboard shortcuts: 1-5 (sections), R (return), ESC (close)');
+console.log('⌨️ Keyboard shortcuts: 1-5 (sections), R (return), ESC (close), M (test meditation)');
+console.log('🧘‍♀️ Meditation transcendence: Be still for 60 seconds to achieve enlightenment');
