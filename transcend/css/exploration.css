@@ -199,30 +199,6 @@
     }
 }
 
-/* Return to Magazine Button */
-.return-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 12px 24px;
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 25px;
-    color: #333 !important;
-    cursor: pointer;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    z-index: 10;
-}
-
-.return-button:hover {
-    background: rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
 /* Notification System */
 .notification {
     position: fixed;
