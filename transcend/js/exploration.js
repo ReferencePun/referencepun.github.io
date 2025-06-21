@@ -173,9 +173,6 @@ function returnToMagazine() {
     console.log('🔄 Returning to magazine...');
     
     // Future implementation: reverse dissolution animation
-    // For now, just show alert
-    alert('This would transition back to the magazine view with your dissolution effect in reverse!');
-    
     // In the future, this would trigger:
     // 1. Reverse dissolution animation
     // 2. Fade out exploration view

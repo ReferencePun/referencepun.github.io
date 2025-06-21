@@ -329,3 +329,51 @@
             0 20px 35px rgba(0, 0, 0, 0.1);
     }
 }
+
+/* GIF Overlay System */
+.gif-overlay {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+    /* Remove border-radius and overflow that can interfere */
+    background: transparent !important; /* Ensure container is transparent */
+}
+
+.gif-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Changed from 'cover' to 'contain' - prevents cropping */
+    background: transparent !important; /* Ensure image background is transparent */
+}
+
+/* Interactive GIF Overlay (if you want clickable GIFs) */
+.gif-overlay.interactive {
+    pointer-events: all;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gif-overlay.interactive:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    z-index: 20;
+}
+
+/* Optional animation effects */
+.gif-overlay.fade-in {
+    animation: fadeInGif 2s ease-in-out;
+}
+
+.gif-overlay.pulse {
+    animation: pulseGif 3s ease-in-out infinite;
+}
+
+@keyframes fadeInGif {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulseGif {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+}

@@ -45,6 +45,10 @@
                 <div class="page">
                     <div class="page-content">
                         <img src="assets/magazine/page-2.jpg" alt="Page 2">
+
+                        <div class="gif-overlay" style="top: 41%; right: 34%; width: 150px; height: 100px;">
+                            <img src="assets/animation/giftest.gif" alt="Animation">
+                        </div>
                     </div>
                 </div>
                 
@@ -117,6 +121,17 @@
         <!-- ENHANCED Exploration View (replaces simple phoenix-rise) -->
         <div id="exploration-view" class="exploration-view hidden">
             <div class="navigation-hub">
+
+                <!-- Stacking order reference for exploration view:
+                Background elements: z-index 1-10
+                Navigation buttons: z-index 5 (from your existing CSS)
+                Background GIFs: z-index 15-20
+                Foreground GIFs: z-index 25-30
+                Interactive overlays: z-index 35+ -->
+
+                <div class="gif-overlay clickable" style="top: 35%; right: 40%; width: 200px; height: 200px; z-index: 25;" onclick="showSectionInfo('rainbow')">
+                    <img src="assets/animation/rainbow.gif" alt="Rainbow">
+                </div>
 
                 <!-- Navigation Buttons (Placeholder shapes for animator's GIFs) -->
                 

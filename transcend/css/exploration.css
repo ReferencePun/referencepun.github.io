@@ -382,6 +382,16 @@
     }
 }
 
+/* Clickable GIF overlays for exploration view */
+.gif-overlay.clickable {
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.gif-overlay.clickable:hover {
+    opacity: 0.9; /* Optional: slight fade on hover */
+}
+
 /* DEBUG: Temporary bright background to test visibility */
 .exploration-view.debug {
     background: #ff0000 !important; /* Bright red background for testing */
