@@ -1,4 +1,4 @@
-// Constants to replace magic numbers
+// Constants to replace magic numbers 
 const GAME_CONFIG = {
     BOARD_SPACES: 40,
     MAX_CONSECUTIVE_ROLLS: 3,
