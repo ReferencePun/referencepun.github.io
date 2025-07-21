@@ -224,18 +224,29 @@ function createBoard() {
 function positionBoardSpaces() {
     const board = document.getElementById('game-board');
     const boardRect = board.getBoundingClientRect();
-    const boardSize = Math.min(boardRect.width, boardRect.height);
-    const cornerSpacePercentage = 0.10; // 10% for corner squares
-    const regularSpacePercentage = 0.08; // 8% for regular squares
-    const margin = 0.025; // 2.5% margin
-
+    
+    // Get the computed size of a space
+    const testSpace = document.querySelector('.board-space');
+    if (!testSpace) return;
+    
+    const spaceStyle = window.getComputedStyle(testSpace);
+    const spaceWidth = parseFloat(spaceStyle.width);
+    const spaceHeight = parseFloat(spaceStyle.height);
+    
+    // Calculate space size as percentage of board
+    const spaceWidthPercent = spaceWidth / boardRect.width;
+    const spaceHeightPercent = spaceHeight / boardRect.height;
+    
+    // Set margins to prevent edge overlap
+    const marginPercent = 0.04; // 4% margin
+    const maxPercent = 0.96 - spaceWidthPercent; // Account for space size
+    
     boardSpaces.forEach((space, index) => {
         const spaceElement = document.querySelector(`[data-index="${index}"]`);
         if (!spaceElement) return;
-
-        // Calculate position based on index
-        const position = calculateSpacePosition(index, margin, 1 - margin - cornerSpacePercentage);
-
+        
+        const position = calculateSpacePosition(index, marginPercent, maxPercent);
+        
         spaceElement.style.left = (position.x * 100) + '%';
         spaceElement.style.top = (position.y * 100) + '%';
     });

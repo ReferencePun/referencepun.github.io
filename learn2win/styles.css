@@ -142,8 +142,9 @@ body.modal-open {
 
 .board-space {
     position: absolute;
-    width: 8%;
-    aspect-ratio: 1;
+    /* Use min() to ensure spaces get smaller on smaller screens */
+    width: min(8%, 48px);
+    height: min(8%, 48px);
     border-radius: 8px;
     background: rgba(255,255,255,0.2);
     border: 2px solid rgba(255,255,255,0.4);
@@ -157,6 +158,7 @@ body.modal-open {
     text-align: center;
     line-height: 1.1;
     padding: 2px;
+    box-sizing: border-box;
 }
 
 .board-space:hover {
@@ -167,14 +169,21 @@ body.modal-open {
 /* Improve board space touch targets on mobile */
 @media (max-width: 768px) {
     .board-space {
-        width: 10%;
-        min-width: 44px;
-        min-height: 44px;
+        width: min(8%, 45px);  /* CHANGED: Same 8% but max 45px instead of 40px */
+        height: min(8%, 45px);
+        font-size: 0;  /* Hide text on smaller screens */
+        border-width: 1.5px;
+        padding: 0;
+    }
+    
+    .board-space.corner-space {
+        font-size: clamp(0.8em, 2vw, 1.2em);
     }
 }
 
 /* Special space types - FIXED: Reduced pulsing */
 .board-space.corner-space {
+    /* Inherit size from .board-space */
     background: #FF6F61;
     border-color: #FF6F61;
     font-size: clamp(1.2em, 3vw, 1.8em);
@@ -187,7 +196,6 @@ body.modal-open {
         transparent 50%, 
         rgba(0, 0, 0, 0.05) 100%);
     overflow: hidden;
-    aspect-ratio: 1;
     z-index: 2;
     animation: pulseGlowSubtle 3s ease-in-out infinite;
 }
@@ -236,8 +244,8 @@ body.modal-open {
 /* Player Pieces */
 .player-piece {
     position: absolute;
-    width: 4%;
-    aspect-ratio: 1;
+    width: min(4%, 24px);
+    height: min(4%, 24px);
     min-width: 20px;
     min-height: 20px;
     border-radius: 50%;
@@ -268,8 +276,8 @@ body.modal-open {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 33%;
-    aspect-ratio: 1;
+    width: min(33%, 200px);
+    height: min(33%, 200px);
     border-radius: 20px;
     background: rgba(0,0,0,0.3);
     border: 3px solid rgba(255,255,255,0.3);
@@ -542,6 +550,28 @@ button:focus {
     
     .terminal-btn {
         font-size: 0.85em;
+    }
+}
+
+@media (max-width: 600px) {
+    .board-container {
+        max-width: 95vw;
+    }
+    
+    .board-space {
+        width: min(8%, 42px);  /* CHANGED: Now 8% instead of 6.5% */
+        height: min(8%, 42px);
+        border-width: 1px;
+        border-radius: 4px;
+    }
+    
+    .board-space.corner-space {
+        font-size: clamp(0.7em, 1.8vw, 1em);
+    }
+    
+    .game-board {
+        border-width: 2px;
+        border-radius: 15px;
     }
 }
 
