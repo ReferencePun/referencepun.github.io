@@ -298,18 +298,34 @@ function positionPiece(pieceId, spaceIndex) {
     const piece = document.getElementById(pieceId);
     const space = document.querySelector(`[data-index="${spaceIndex}"]`);
 
-    if (space) {
+    if (space && piece) {
         const spaceRect = space.getBoundingClientRect();
         const boardRect = document.getElementById('game-board').getBoundingClientRect();
-        const board = document.getElementById('game-board');
-
-        // Calculate percentages
-        const xPercent = ((spaceRect.left - boardRect.left + spaceRect.width / 2) / boardRect.width * 100);
-        const yPercent = ((spaceRect.top - boardRect.top + spaceRect.height / 2) / boardRect.height * 100);
-
-        // Offset for piece size (2% radius)
-        piece.style.left = (xPercent - 2) + '%';
-        piece.style.top = (yPercent - 2) + '%';
+        
+        // Get the computed styles for both space and piece
+        const spaceStyle = window.getComputedStyle(space);
+        const pieceStyle = window.getComputedStyle(piece);
+        
+        // Get the actual sizes
+        const spaceWidth = parseFloat(spaceStyle.width);
+        const spaceHeight = parseFloat(spaceStyle.height);
+        const pieceWidth = parseFloat(pieceStyle.width);
+        const pieceHeight = parseFloat(pieceStyle.height);
+        
+        // Calculate the center of the space relative to the board
+        const spaceCenterX = (spaceRect.left - boardRect.left) + (spaceWidth / 2);
+        const spaceCenterY = (spaceRect.top - boardRect.top) + (spaceHeight / 2);
+        
+        // Convert to percentages and adjust for piece size
+        const xPercent = (spaceCenterX / boardRect.width) * 100;
+        const yPercent = (spaceCenterY / boardRect.height) * 100;
+        
+        // Position the piece by its center (subtract half the piece size)
+        const pieceWidthPercent = (pieceWidth / boardRect.width) * 100;
+        const pieceHeightPercent = (pieceHeight / boardRect.height) * 100;
+        
+        piece.style.left = (xPercent - pieceWidthPercent / 2) + '%';
+        piece.style.top = (yPercent - pieceHeightPercent / 2) + '%';
     }
 }
 
