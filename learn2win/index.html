@@ -25,6 +25,22 @@
             <p>Collect Linux Mastery Tokens to Prove Your Command Line Skills!</p>
         </header>
 
+        <script async
+        src="https://js.stripe.com/v3/buy-button.js">
+        </script>
+
+        <div style="text-align: center;">
+            <script async
+            src="https://js.stripe.com/v3/buy-button.js">
+            </script>
+
+            <stripe-buy-button
+            buy-button-id="buy_btn_1RpwypHPkc6U1judrdFgSJKM"
+            publishable-key="pk_live_jXTowX8oQXS0f6VVyNuh6GQ7"
+            >
+            </stripe-buy-button>
+        </div>
+
         <div class="board-container">
             <div class="game-board" id="game-board">
                 <div class="board-center">
@@ -302,17 +318,17 @@
                         <button class="difficulty-btn" onclick="startGameWithDifficulty('easy')">
                             <span class="difficulty-icon">🟢</span>
                             <span class="difficulty-name">Easy</span>
-                            <span class="difficulty-desc">Ghost accuracy: ~60%</span>
+                            <span class="difficulty-desc">Ghost accuracy: ~50%</span>
                         </button>
                         <button class="difficulty-btn" onclick="startGameWithDifficulty('medium')">
                             <span class="difficulty-icon">🟡</span>
                             <span class="difficulty-name">Medium</span>
-                            <span class="difficulty-desc">Ghost accuracy: ~75%</span>
+                            <span class="difficulty-desc">Ghost accuracy: ~65%</span>
                         </button>
                         <button class="difficulty-btn" onclick="startGameWithDifficulty('hard')">
                             <span class="difficulty-icon">🔴</span>
                             <span class="difficulty-name">Hard</span>
-                            <span class="difficulty-desc">Ghost accuracy: ~85%</span>
+                            <span class="difficulty-desc">Ghost accuracy: ~75%</span>
                         </button>
                     </div>
                 </div>

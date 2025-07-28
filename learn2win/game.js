@@ -1196,19 +1196,19 @@ function ghostAnswerQuestion() {
     // Base accuracy by difficulty level
     const difficultySettings = {
         easy: {
-            baseAccuracy: 0.60,
+            baseAccuracy: 0.50,
             specialtyBonus: 0.10,
             learningRate: 0.01,
             variance: 0.15
         },
         medium: {
-            baseAccuracy: 0.75,
+            baseAccuracy: 0.65,
             specialtyBonus: 0.05,
             learningRate: 0.02,
             variance: 0.10
         },
         hard: {
-            baseAccuracy: 0.85,
+            baseAccuracy: 0.75,
             specialtyBonus: 0.05,
             learningRate: 0.03,
             variance: 0.05
@@ -1696,9 +1696,9 @@ function showGameRules() {
             <h3>🤖 Ghost Difficulty</h3>
             <p>Choose LinuxBot's skill level at game start:</p>
             <ul>
-                <li><strong>🟢 Easy:</strong> ~60% accuracy, good for beginners</li>
-                <li><strong>🟡 Medium:</strong> ~75% accuracy, balanced challenge</li>
-                <li><strong>🔴 Hard:</strong> ~85% accuracy, for Linux experts!</li>
+                <li><strong>🟢 Easy:</strong> ~50% accuracy, good for beginners</li>
+                <li><strong>🟡 Medium:</strong> ~65% accuracy, balanced challenge</li>
+                <li><strong>🔴 Hard:</strong> ~75% accuracy, for Linux experts!</li>
             </ul>
         </div>
 
