@@ -31,6 +31,21 @@ const portfolioImages = [
         caption: 'Giedre Dukauskaite'
     },
     {
+        src: 'images/commissioned/accessories/F10060193.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 21'
+    },
+    {
+        src: 'images/commissioned/accessories/F1050015l.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 23'
+    },
+    {
+        src: 'images/commissioned/accessories/F10060172lf1.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 20'
+    },
+    {
         src: 'images/portfolio/16630027.jpg',
         alt: 'Bekim Trenova and Nina De Raadt',
         caption: 'Bekim Trenova and Nina De Raadt 1'
@@ -206,6 +221,21 @@ const portfolioImages = [
         caption: 'Ashley Smith and Charlie Himmelstein 4'
     },
     {
+        src: 'images/commissioned/accessories/17520030LF.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 12'
+    },
+    {
+        src: 'images/commissioned/accessories/17510004.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 10'
+    },
+    {
+        src: 'images/commissioned/accessories/17530005LF2.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 13'
+    },
+    {
         src: 'images/portfolio/61770013.jpg',
         alt: 'Hanne Gaby Odiele',
         caption: 'Hanne Gaby Odiele'
@@ -339,6 +369,26 @@ const portfolioImages = [
         src: 'images/portfolio/03000015.jpg',
         alt: 'Hyunji Shin',
         caption: 'Hyunji Shin'
+    },
+    {
+        src: 'images/commissioned/accessories/26A_0295l.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 15'
+    },
+    {
+        src: 'images/commissioned/accessories/_7A_0195l1bw1b1.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 6'
+    },
+    {
+        src: 'images/commissioned/accessories/F1050023l_2.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 24'
+    },
+    {
+        src: 'images/commissioned/accessories/16A_0285lR.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 7'
     },
     {
         src: 'images/portfolio/F1040012fix1.jpg',
