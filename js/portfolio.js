@@ -376,7 +376,7 @@ const portfolioImages = [
         caption: 'Commissioned Accessories 15'
     },
     {
-        src: 'images/commissioned/accessories/_7A_0195l1bw1b1.jpg',
+        src: 'images/commissioned/accessories/7A_0195l1bw1b1.jpg',
         alt: 'Commissioned Accessories',
         caption: 'Commissioned Accessories 6'
     },
