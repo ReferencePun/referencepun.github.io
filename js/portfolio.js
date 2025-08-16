@@ -31,7 +31,7 @@ const portfolioImages = [
         caption: 'Giedre Dukauskaite'
     },
     {
-        src: 'images/commissioned/accessories/F10060193.JPG',
+        src: 'images/commissioned/accessories/F10060193a.JPG',
         alt: 'Commissioned Accessories',
         caption: 'Commissioned Accessories 21'
     },
