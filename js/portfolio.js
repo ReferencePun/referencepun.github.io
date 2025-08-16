@@ -31,21 +31,6 @@ const portfolioImages = [
         caption: 'Giedre Dukauskaite'
     },
     {
-        src: 'images/commissioned/accessories/F10060193a.JPG',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 21'
-    },
-    {
-        src: 'images/commissioned/accessories/F1050015l.jpg',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 23'
-    },
-    {
-        src: 'images/commissioned/accessories/F10060172lf1.jpg',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 20'
-    },
-    {
         src: 'images/portfolio/16630027.jpg',
         alt: 'Bekim Trenova and Nina De Raadt',
         caption: 'Bekim Trenova and Nina De Raadt 1'
@@ -79,6 +64,21 @@ const portfolioImages = [
         src: 'images/portfolio/000019780027l1.jpg',
         alt: 'Georgia Fowler',
         caption: 'Georgia Fowler'
+    },
+    {
+        src: 'images/commissioned/accessories/F10060193a.JPG',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 21'
+    },
+    {
+        src: 'images/commissioned/accessories/F1050015l.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 23'
+    },
+    {
+        src: 'images/commissioned/accessories/F10060172lf1.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 20'
     },
     {
         src: 'images/portfolio/25520024lbwb2fix.jpg',
@@ -250,7 +250,7 @@ const portfolioImages = [
         alt: 'Hanne Gaby Odiele',
         caption: 'Hanne Gaby Odiele'
     },
-        {
+    {
         src: 'images/portfolio/24410011lbwifix.jpg',
         alt: 'Ali Michael',
         caption: 'Ali Michael 1'
