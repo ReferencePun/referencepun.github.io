@@ -1,28 +1,5 @@
 // Portfolio images data
 const portfolioImages = [
-
-
-    {
-        src: 'images/commissioned/accessories/26A_0295l.jpg',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 15'
-    },
-    {
-        src: 'images/commissioned/accessories/_7A_0195l1bw1b1.jpg',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 6'
-    },
-    {
-        src: 'images/commissioned/accessories/F1050023l_2.jpg',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 24'
-    },
-    {
-        src: 'images/commissioned/accessories/16A_0285lR.jpg',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 7'
-    },
-
     {
         src: 'images/commissioned/accessories/F10060100l.jpg',
         alt: 'Commissioned Accessories',
@@ -38,19 +15,15 @@ const portfolioImages = [
         alt: 'Commissioned Accessories',
         caption: 'Commissioned Accessories 2'
     },
-
-
-
-
     {
-        src: 'images/commissioned/accessories/17500021.jpg',
+        src: 'images/commissioned/accessories/_35_0183lR.jpg',
         alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 9'
+        caption: 'Commissioned Accessories 4'
     },
     {
-        src: 'images/commissioned/accessories/17510007.jpg',
+        src: 'images/commissioned/accessories/_3A_0313lR.jpg',
         alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 11'
+        caption: 'Commissioned Accessories 5'
     },
     {
         src: 'images/commissioned/accessories/__7_0155l.jpg',
@@ -63,51 +36,35 @@ const portfolioImages = [
         caption: 'Commissioned Accessories 3'
     },
     {
-        src: 'images/commissioned/accessories/_35_0183lR.jpg',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 4'
-    },
-    {
-        src: 'images/commissioned/accessories/_3A_0313lR.jpg',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 5'
-    },
-    {
         src: 'images/commissioned/accessories/17480013l3.jpg',
         alt: 'Commissioned Accessories',
         caption: 'Commissioned Accessories 8'
-    },
-    {
-        src: 'images/commissioned/accessories/19710010ll2.jpg',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 14'
-    },
-    {
-        src: 'images/commissioned/accessories/F10060082.jpg',
-        alt: 'Commissioned Accessories',
-        caption: 'Commissioned Accessories 16'
     },
     {
         src: 'images/commissioned/accessories/F10060126l1.jpg',
         alt: 'Commissioned Accessories',
         caption: 'Commissioned Accessories 18'
     },
-
+    {
+        src: 'images/commissioned/accessories/19710010ll2.jpg',
+        alt: 'Commissioned Accessories',
+        caption: 'Commissioned Accessories 14'
+    },
 
     {
-        src: 'images/portfolio/23590015l.jpg',
-        alt: 'Madisyn Ritland',
-        caption: 'Madisyn Ritland 3'
+        src: 'images/portfolio/00100011.jpg',
+        alt: 'Modern Weekly China',
+        caption: 'Modern Weekly China'
     },
     {
-        src: 'images/portfolio/57570033ll.jpg',
-        alt: 'Kasia Struss',
-        caption: 'Kasia Struss'
+        src: 'images/portfolio/00030030.jpg',
+        alt: 'Modern Weekly China',
+        caption: 'Modern Weekly China'
     },
     {
-        src: 'images/portfolio/38030007fix.jpg',
-        alt: 'Samantha Gradoville',
-        caption: 'Samantha Gradoville 1'
+        src: 'images/portfolio/00020025.jpg',
+        alt: 'Modern Weekly China',
+        caption: 'Modern Weekly China'
     },
     {
         src: 'images/portfolio/_9A_0093lbwb.jpg',
@@ -214,21 +171,6 @@ const portfolioImages = [
         src: 'images/portfolio/F1040208.jpg',
         alt: 'Va Bien Lingerie',
         caption: 'Va Bien Lingerie'
-    },
-    {
-        src: 'images/portfolio/00100011.jpg',
-        alt: 'Modern Weekly China',
-        caption: 'Modern Weekly China'
-    },
-    {
-        src: 'images/portfolio/00030030.jpg',
-        alt: 'Modern Weekly China',
-        caption: 'Modern Weekly China'
-    },
-    {
-        src: 'images/portfolio/00020025.jpg',
-        alt: 'Modern Weekly China',
-        caption: 'Modern Weekly China'
     },
     {
         src: 'images/portfolio/10090015.jpg',
