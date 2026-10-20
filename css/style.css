@@ -253,7 +253,7 @@ nav {
     overflow: hidden;
     border-radius: 0px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-    transition: transform 0.3s ease;
+    cursor: pointer;
     background-color: #fff;
   }
   
@@ -276,50 +276,6 @@ nav {
     width: 100%;
     height: 100%;
     object-fit: cover; /* This ensures images maintain aspect ratio while filling container */
-    transition: transform 0.3s ease;
-  }
-  
-  .portfolio-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-  
-  /* Keep the hover effects from your original CSS */
-  .portfolio-item:hover img {
-    transform: scale(1.02);
-  }
-  
-  .portfolio-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.05);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  .portfolio-item:hover::after {
-    opacity: 1;
-  }
-  
-  .portfolio-item .caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 0.8rem;
-    background: rgba(255, 255, 255, 0.8);
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-  
-  .portfolio-item:hover .caption {
-    transform: translateY(0);
   }
   
   /*=============================================================================
@@ -1063,7 +1019,6 @@ nav {
     overflow: hidden;
     border-radius: 0px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.12);
-    transition: transform 0.3s ease;
     background-color: #fff;
   }
   
@@ -1086,49 +1041,6 @@ nav {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Ensures images maintain aspect ratio while filling container */
-    transition: transform 0.5s ease;
-  }
-  
-  .landscape-gallery .portfolio-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-  
-  .landscape-gallery .portfolio-item:hover img {
-    transform: scale(1.02);
-  }
-  
-  .landscape-gallery .portfolio-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.05);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  .landscape-gallery .portfolio-item:hover::after {
-    opacity: 1;
-  }
-  
-  .landscape-gallery .portfolio-item .caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 0.8rem;
-    background: rgba(255, 255, 255, 0.8);
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-  
-  .landscape-gallery .portfolio-item:hover .caption {
-    transform: translateY(0);
   }
   
   /*=============================================================================

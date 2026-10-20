@@ -248,11 +248,6 @@ function loadPortfolioImages() {
             loadedImages++;
         };
         
-        // Create caption element
-        const caption = document.createElement('div');
-        caption.className = 'caption';
-        caption.textContent = image.caption;
-        
         // Add click event for lightbox
         item.addEventListener('click', function() {
             openLightbox(index);
@@ -260,7 +255,6 @@ function loadPortfolioImages() {
         
         // Append elements to item
         item.appendChild(img);
-        item.appendChild(caption);
         
         // Add to grid
         portfolioGrid.appendChild(item);
