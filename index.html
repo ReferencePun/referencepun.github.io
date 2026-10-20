@@ -4,7 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dylan Forsberg</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="description" content="Photography, films, writing, and Transmission Magazine by Dylan Forsberg.">
+    <meta property="og:site_name" content="Dylan Forsberg">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dylan Forsberg">
+    <meta property="og:description" content="Photography, films, writing, and Transmission Magazine by Dylan Forsberg.">
+    <meta property="og:url" content="https://dylanforsberg.com/">
+    <meta property="og:image" content="https://dylanforsberg.com/images/share.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="810">
+    <meta property="og:image:alt" content="Sunset over the sea, photographed through grasses by Dylan Forsberg.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dylan Forsberg">
+    <meta name="twitter:description" content="Photography, films, writing, and Transmission Magazine by Dylan Forsberg.">
+    <meta name="twitter:image" content="https://dylanforsberg.com/images/share.jpg">
+    <meta name="twitter:image:alt" content="Sunset over the sea, photographed through grasses by Dylan Forsberg.">
+    <link rel="canonical" href="https://dylanforsberg.com/">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap">
     <link rel="stylesheet" href="css/style.css">
 
@@ -25,13 +41,13 @@
             <h1 class="logo"><a href="/">Dylan Forsberg</a></h1>
 
             <!-- Mobile menu toggle -->
-            <div class="menu-toggle" id="mobile-menu">
+            <button class="menu-toggle" id="mobile-menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-navigation">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
             
-            <nav>
+            <nav id="site-navigation" aria-label="Main navigation">
                 <ul class="nav-menu">
                     <li><a href="/" class="active">Portrait</a></li>
                     <li><a href="landscapes.html">Landscape</a></li>
@@ -59,13 +75,13 @@
         </div>
         
         <!-- Lightbox for viewing images -->
-        <div class="lightbox" id="lightbox">
+        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photograph viewer" aria-hidden="true">
             <div class="lightbox-content">
-                <button class="close-lightbox">&times;</button>
+                <button class="close-lightbox" type="button" aria-label="Close photograph">&times;</button>
                 <img src="" alt="" id="lightbox-img">
                 <div class="lightbox-caption" id="lightbox-caption"></div>
-                <button class="lightbox-prev">&#10094;</button>
-                <button class="lightbox-next">&#10095;</button>
+                <button class="lightbox-prev" type="button" aria-label="Previous photograph">&#10094;</button>
+                <button class="lightbox-next" type="button" aria-label="Next photograph">&#10095;</button>
             </div>
         </div>
     </main>
@@ -74,6 +90,9 @@
         <p>&copy; <span id="current-year">2025</span> Dylan Forsberg. All rights reserved.</p>
     </footer>
 
+    <script src="js/main.js"></script>
+    <script src="js/gallery-images.js"></script>
+    <script src="js/gallery.js"></script>
     <script src="js/portfolio.js"></script>
 </body>
 </html>

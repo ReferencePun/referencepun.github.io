@@ -1,0 +1,12 @@
+{
+  "name": "dylan-forsberg-website",
+  "private": true,
+  "scripts": {
+    "images": "node scripts/build-gallery-images.cjs",
+    "test": "node tests/gallery.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "sharp": "0.35.5"
+  }
+}
