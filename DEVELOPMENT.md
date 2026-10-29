@@ -2,6 +2,20 @@
 
 The site is static HTML, CSS, and JavaScript. Serve the repository root with a local HTTP server; there is no production build step.
 
+## Homepage preview
+
+The `website-homepage` branch is a local draft. It has not been pushed or published. `index.html` is the overview; the original portrait gallery is at `portrait.html`, with its photograph sequence unchanged. Vogue and Chanel have dedicated selections at `vogue.html` and `chanel.html`. Homepage styles live in `css/home.css`.
+
+The Vogue spreads are a temporary selection, pending the owner's preferred shoot/images. These are published spreads of Dylan's editorials, rather than unrelated stock photographs. Source pages:
+
+- https://models.com/work/vogue-me-freestyle-1 (October 2017)
+- https://models.com/work/vogue-me-light-up (June 2017)
+- https://models.com/work/vogue-me-as-you-are (August 2016)
+
+The originals in `images/home/originals/` also include poster frames for the existing Vimeo films 803186311 and 651829056. Chanel images and all other photographs and magazine covers come from the existing site. Press excerpts come from `transmission.html`; the homepage attributes them to reviews of Transmission. Publication figures and the Madewell credit come from `info.html`.
+
+Run `npm run images:home` to regenerate the small WebP derivatives and `js/home-images.js`. The homepage includes static image dimensions and responsive sources, so its content works without JavaScript. The featured galleries use the shared photograph viewer. Keep gallery links in the header pointed at `portrait.html` rather than `/`.
+
 ## Gallery photographs
 
 Edit the selections in `js/portfolio.js`, `js/landscapes.js`, or `js/extra_images.js`, keeping their intended sequence. Original photographs remain in place and are used by the image viewer.

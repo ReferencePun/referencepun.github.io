@@ -22,7 +22,7 @@ async function run() {
     }
     try {
         const desktop = await context();
-        for (const [route, count] of [['/', 112], ['/landscapes.html', 130], ['/portfolio_test.html', 49]]) {
+        for (const [route, count] of [['/portrait.html', 112], ['/landscapes.html', 130], ['/portfolio_test.html', 49]]) {
             const page = await desktop.newPage();
             let release;
             const gate = new Promise(resolve => { release = resolve; });
@@ -72,7 +72,7 @@ async function run() {
             await last.locator('img').evaluate(img => img.decode());
             assert.ok(await last.locator('img').evaluate(img => img.naturalWidth > 0));
             await page.evaluate(() => scrollTo(0, 0));
-            if (route !== '/portfolio_test.html') await page.screenshot({ path: path.join(output, route === '/' ? 'portraits-desktop.png' : 'landscapes-desktop.png') });
+            if (route !== '/portfolio_test.html') await page.screenshot({ path: path.join(output, route === '/portrait.html' ? 'portraits-desktop.png' : 'landscapes-desktop.png') });
             console.log(`${route}: stable layout, ${requests.length} image requests after scroll/viewer, deferred loading and keyboard focus passed`);
             await page.close();
         }
@@ -80,7 +80,7 @@ async function run() {
 
         const mobile = await context({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
         const page = await mobile.newPage();
-        await page.goto(base, { waitUntil: 'domcontentloaded' });
+        await page.goto(base + '/portrait.html', { waitUntil: 'domcontentloaded' });
         await page.waitForFunction(() => document.querySelector('.portfolio-item img')?.naturalWidth > 0);
         await page.evaluate(() => document.fonts.ready);
         const first = page.locator('.portfolio-item').first();
@@ -115,7 +115,7 @@ async function run() {
         console.log('Mobile swipe, multi-touch, close controls and focus restoration passed');
         await mobile.close();
 
-        const pages = ['/', '/landscapes.html', '/info.html', '/video.html', '/transmission.html', '/writing.html', '/articles/hitchhiking-part-1.html', '/articles/love-and-loss.html', '/portfolio_test.html'];
+        const pages = ['/', '/portrait.html', '/vogue.html', '/chanel.html', '/landscapes.html', '/info.html', '/video.html', '/transmission.html', '/writing.html', '/articles/hitchhiking-part-1.html', '/articles/love-and-loss.html', '/portfolio_test.html'];
         const menus = await context({ viewport: { width: 390, height: 844 } });
         for (const route of pages) {
             const page = await menus.newPage();
@@ -142,7 +142,7 @@ async function run() {
         }
         const response = await menus.request.get(base + '/images/share.jpg');
         assert.equal(response.status(), 200);
-        console.log('Menu keyboard behavior, desktop resize and metadata passed on all nine pages');
+        console.log('Menu keyboard behavior, desktop resize and metadata passed on all pages');
         await menus.close();
         assert.deepEqual(errors, []);
         assert.deepEqual(missing, []);

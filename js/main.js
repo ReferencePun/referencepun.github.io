@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('mobile-menu');
     const nav = document.querySelector('header nav');
     if (!button || !nav) return;
-    const mobile = matchMedia('(max-width: 768px)');
+    const mobile = matchMedia('(max-width: 1000px)');
     function setOpen(open) {
         const expanded = mobile.matches && open;
         nav.classList.toggle('active', expanded);

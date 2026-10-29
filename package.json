@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "images": "node scripts/build-gallery-images.cjs",
-    "test": "node tests/gallery.cjs"
+    "images:home": "node scripts/build-home-images.cjs",
+    "test": "node tests/gallery.cjs && node tests/home.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1",
