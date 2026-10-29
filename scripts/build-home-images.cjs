@@ -11,6 +11,9 @@ async function build() {
     sources.push(
         ['transition', 'images/thumbnails/01 Issue 01 Transition.jpg'],
         ['transparency', 'images/thumbnails/02 Issue 02 Transparency.jpg'],
+        ['transform', 'images/thumbnails/04 Issue 03 Transform.jpg'],
+        ['lindsey-wixson', 'images/thumbnails/07 Presents Lindsey Wixson.jpg'],
+        ['photojournalism', 'images/thumbnails/03 FNT Photojournalism.jpg'],
         ['madewell', 'images/thumbnails/whereiwanttobe2.jpg'],
         ['love-and-loss', 'images/thumbnails/FH000016lnew.jpg'],
         ['hitchhiking', 'images/thumbnails/FH000034.jpg']

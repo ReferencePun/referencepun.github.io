@@ -17,7 +17,7 @@ async function run() {
             const url = new URL(href);
             const response = await context.request.get(url.href);
             assert.equal(response.status(), 200, `Broken homepage destination: ${url.pathname}`);
-            if (url.hash) assert.ok((await response.text()).includes(`id="${url.hash.slice(1)}"`), `Missing anchor: ${url.href}`);
+            if (url.hash && !url.pathname.endsWith('.pdf')) assert.ok((await response.text()).includes(`id="${url.hash.slice(1)}"`), `Missing anchor: ${url.href}`);
         }
         for (const width of [320, 390, 768, 900, 1000, 1024, 1440, 1920]) {
             await page.setViewportSize({ width, height: 1000 });

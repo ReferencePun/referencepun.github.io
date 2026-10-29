@@ -36,6 +36,24 @@ Object.assign(window.galleryImageVariants ||= {}, {
       }
     ]
   },
+  "images/home/originals/transmission-spread.jpg": {
+    "width": 1738,
+    "height": 1200,
+    "variants": [
+      {
+        "src": "images/home/transmission-spread-480.webp",
+        "width": 480
+      },
+      {
+        "src": "images/home/transmission-spread-960.webp",
+        "width": 960
+      },
+      {
+        "src": "images/home/transmission-spread-1440.webp",
+        "width": 1440
+      }
+    ]
+  },
   "images/home/originals/vogue-as-you-are-0.jpg": {
     "width": 800,
     "height": 1030,
@@ -229,6 +247,48 @@ Object.assign(window.galleryImageVariants ||= {}, {
       {
         "src": "images/home/transparency-756.webp",
         "width": 756
+      }
+    ]
+  },
+  "images/thumbnails/04 Issue 03 Transform.jpg": {
+    "width": 756,
+    "height": 1044,
+    "variants": [
+      {
+        "src": "images/home/transform-480.webp",
+        "width": 480
+      },
+      {
+        "src": "images/home/transform-756.webp",
+        "width": 756
+      }
+    ]
+  },
+  "images/thumbnails/07 Presents Lindsey Wixson.jpg": {
+    "width": 756,
+    "height": 1044,
+    "variants": [
+      {
+        "src": "images/home/lindsey-wixson-480.webp",
+        "width": 480
+      },
+      {
+        "src": "images/home/lindsey-wixson-756.webp",
+        "width": 756
+      }
+    ]
+  },
+  "images/thumbnails/03 FNT Photojournalism.jpg": {
+    "width": 720,
+    "height": 993,
+    "variants": [
+      {
+        "src": "images/home/photojournalism-480.webp",
+        "width": 480
+      },
+      {
+        "src": "images/home/photojournalism-720.webp",
+        "width": 720
       }
     ]
   },
