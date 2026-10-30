@@ -240,7 +240,13 @@
     "group": "vogue-accessories",
     "matchedVariant": "images/gallery/d95847a78f2f7507-1440.webp",
     "sha256": "01040237b0e69ef229633e0dd363b00ee16467cae89dfbe9150743469629ec1c",
-    "homepage": true
+    "homepage": true,
+    "replacement": {
+      "file": "26A_0295l1.jpg",
+      "src": "images/commissioned/accessories/26A_0295l1.jpg",
+      "sourceSha256": "5bc1407892b476d61173550db7d370ee104c2aee9f727094386d620129735d89",
+      "matchedVariant": "images/gallery/d0f71bf5f3f2ac73-1440.webp"
+    }
   },
   {
     "file": "vogueaccessories4.webp",

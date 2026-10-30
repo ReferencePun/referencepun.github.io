@@ -371,7 +371,7 @@ const portfolioImages = [
         caption: 'Hyunji Shin'
     },
     {
-        src: 'images/commissioned/accessories/26A_0295l.jpg',
+        src: 'images/commissioned/accessories/26A_0295l1.jpg',
         alt: 'Commissioned Accessories',
         caption: 'Commissioned Accessories 15'
     },

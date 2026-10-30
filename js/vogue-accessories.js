@@ -1,7 +1,7 @@
 // Owner-selected photographs; see content/home-selection.json.
 const portfolioImages = [
     {
-        "src": "images/commissioned/accessories/26A_0295l.jpg",
+        "src": "images/commissioned/accessories/26A_0295l1.jpg",
         "alt": "Red feathered shoe photographed for Vogue",
         "caption": "Red feathered shoe photographed for Vogue"
     },
