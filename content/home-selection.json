@@ -6,7 +6,7 @@
     "group": "portrait",
     "matchedVariant": "images/gallery/0a146fdcf4b94329-1440.webp",
     "sha256": "cdf7fe0f29eadb7ae943c2e1ae6f45a4542094389d4c21a17b09d1298e7dddac",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "3e3a020e62883dca-1440.webp",
@@ -24,7 +24,7 @@
     "group": "portrait",
     "matchedVariant": "images/gallery/9db18fb33cc639bd-1440.webp",
     "sha256": "7ad91f8e51bdc1148c8d80a4d9c61a677f352608e58d044f492407d9cf45a539",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "30e2b48182973d2f-1440.webp",
@@ -33,7 +33,7 @@
     "group": "portrait",
     "matchedVariant": "images/gallery/30e2b48182973d2f-1440.webp",
     "sha256": "1f1404c1f9d8b3ff725f7734714be91201efd269e8a99200d01563cf2ab75523",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "438be4ba69733733-1440.webp",
@@ -42,7 +42,7 @@
     "group": "portrait",
     "matchedVariant": "images/gallery/438be4ba69733733-1440.webp",
     "sha256": "8575c7d86c4b89cb764125f99d2b7114162d99a4b73b20c17b9fb6879ae8970c",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "45288156853d88e6-1024.webp",
@@ -60,7 +60,7 @@
     "group": "portrait",
     "matchedVariant": "images/gallery/985122916866f109-1440.webp",
     "sha256": "4e82f77ce5a6d04a0390525a154b6f9ea3f3e05323376e2ad5e0b638c8e0fa3f",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "aa0c206cac56e213-1440.webp",
@@ -87,7 +87,7 @@
     "group": "portrait",
     "matchedVariant": "images/gallery/bbf95ac87799e85c-1440.webp",
     "sha256": "15f77cf84699b9be326bb3967fbb1d1430132d54376b99a917ef91f08b738e5a",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "cb88992990624ebb-756.webp",
@@ -105,7 +105,7 @@
     "group": "chanel",
     "matchedVariant": "images/gallery/84706bd562cdb3ba-1440.webp",
     "sha256": "dd9c2983900397ffc7718eae366bceb5c7e439eb474219d1282179cfb80fc0eb",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "chanel1.webp",
@@ -123,7 +123,7 @@
     "group": "chanel",
     "matchedVariant": "images/gallery/4bd2b73059993989-1440.webp",
     "sha256": "7fd7810a23c82170e4c4cd91257bb5830bea9e59233b2af146d9fa9fa97e6ac0",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "chanel3.webp",
@@ -141,7 +141,7 @@
     "group": "chanel",
     "matchedVariant": "images/gallery/0219d74c18eab05f-1440.webp",
     "sha256": "c353cc3be9750812b00ec7c8793a5bc9fd8aff08c5aa46788b0db920feec33d9",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "d1d97fe19701cb76-1440.webp",
@@ -195,7 +195,7 @@
     "group": "portrait",
     "matchedVariant": "images/gallery/ffcdc594ffd4e63b-1000.webp",
     "sha256": "79ab5a4e52f959a5c7a815c7cde5cabc5331afa374fe7dcc32f9d135ef2b6166",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "vogue1.webp",
@@ -213,7 +213,7 @@
     "group": "vogue-fashion",
     "matchedVariant": "images/gallery/5e468d4ea101d538-1440.webp",
     "sha256": "52bf5e9f806a4ac149bcc61ead4094abdd83d6ac8dbdfadc4fb86c6b7a95d475",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "vogue6.webp",
@@ -231,7 +231,7 @@
     "group": "vogue-fashion",
     "matchedVariant": "images/gallery/ff8f25ba6e077f56-1440.webp",
     "sha256": "1c2bbe8b13e181d51029a30d242efc87c3f8d133a7bfdc0dc7b37819702a3cb3",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "vogueaccessories.webp",
@@ -249,7 +249,7 @@
     "group": "vogue-accessories",
     "matchedVariant": "images/gallery/8547fbac3f57b4e6-1440.webp",
     "sha256": "3705a7987fb8cff6308beac1bd32a8033c6cad42d6f3b4ce14285b134ebef647",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "vogueaccessories5.webp",
