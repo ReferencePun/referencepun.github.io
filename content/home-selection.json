@@ -51,7 +51,7 @@
     "group": "portrait",
     "matchedVariant": "images/gallery/45288156853d88e6-1024.webp",
     "sha256": "6973a01e3f2bfcdcfe6987d84786228db989cfa90e218044dfe59f509f698a87",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "985122916866f109-1440.webp",
@@ -168,7 +168,7 @@
     "group": "portrait",
     "matchedVariant": "images/gallery/e1a689fb80bad372-1440.webp",
     "sha256": "d79e97b20e326754af543b4b321da2cd3b05ef50923f41f47d096b4949884866",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "eaec29d70632a590-1440.webp",
@@ -177,7 +177,7 @@
     "group": "portrait",
     "matchedVariant": "images/gallery/eaec29d70632a590-1440.webp",
     "sha256": "0f742db0ab873138c105d43cd6de52108177373dabae927dea3fe583115d77a2",
-    "homepage": true
+    "homepage": false
   },
   {
     "file": "ebf6560afe4c4b94-1440.webp",
