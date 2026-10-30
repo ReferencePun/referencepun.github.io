@@ -1,64 +1,39 @@
-// Featured selection; the main portrait sequence remains unchanged.
+// Owner-selected photographs; see content/home-selection.json.
 const portfolioImages = [
     {
-        "src": "images/home/originals/vogue-freestyle-1-0.jpg",
-        "alt": "Freestyle — Vogue Me China, October 2017, spread 1",
-        "caption": "Freestyle — Vogue Me China, October 2017"
+        "src": "images/portfolio/10080016.jpg",
+        "alt": "Giedre Dukauskaite for Vogue China",
+        "caption": "Giedre Dukauskaite for Vogue China"
     },
     {
-        "src": "images/home/originals/vogue-freestyle-1-1.jpg",
-        "alt": "Freestyle — Vogue Me China, October 2017, spread 2",
-        "caption": "Freestyle — Vogue Me China, October 2017"
+        "src": "images/portfolio/10100023.jpg",
+        "alt": "Giedre Dukauskaite for Vogue China",
+        "caption": "Giedre Dukauskaite for Vogue China"
     },
     {
-        "src": "images/home/originals/vogue-freestyle-1-2.jpg",
-        "alt": "Freestyle — Vogue Me China, October 2017, spread 3",
-        "caption": "Freestyle — Vogue Me China, October 2017"
+        "src": "images/portfolio/03020022lfix2.jpg",
+        "alt": "Hyunji Shin for Vogue China",
+        "caption": "Hyunji Shin for Vogue China"
     },
     {
-        "src": "images/home/originals/vogue-freestyle-1-3.jpg",
-        "alt": "Freestyle — Vogue Me China, October 2017, spread 4",
-        "caption": "Freestyle — Vogue Me China, October 2017"
+        "src": "images/portfolio/03000015.jpg",
+        "alt": "Hyunji Shin for Vogue China",
+        "caption": "Hyunji Shin for Vogue China"
     },
     {
-        "src": "images/home/originals/vogue-light-up-0.jpg",
-        "alt": "Light Up — Vogue Me China, June 2017, spread 1",
-        "caption": "Light Up — Vogue Me China, June 2017"
+        "src": "images/commissioned/accessories/26A_0295l.jpg",
+        "alt": "Red feathered shoe photographed for Vogue",
+        "caption": "Red feathered shoe photographed for Vogue"
     },
     {
-        "src": "images/home/originals/vogue-light-up-1.jpg",
-        "alt": "Light Up — Vogue Me China, June 2017, spread 2",
-        "caption": "Light Up — Vogue Me China, June 2017"
+        "src": "images/commissioned/accessories/F10060193a.JPG",
+        "alt": "Handbag and bracelets photographed for Vogue",
+        "caption": "Handbag and bracelets photographed for Vogue"
     },
     {
-        "src": "images/home/originals/vogue-light-up-2.jpg",
-        "alt": "Light Up — Vogue Me China, June 2017, spread 3",
-        "caption": "Light Up — Vogue Me China, June 2017"
-    },
-    {
-        "src": "images/home/originals/vogue-light-up-3.jpg",
-        "alt": "Light Up — Vogue Me China, June 2017, spread 4",
-        "caption": "Light Up — Vogue Me China, June 2017"
-    },
-    {
-        "src": "images/home/originals/vogue-as-you-are-0.jpg",
-        "alt": "As You Are — Vogue Me China, August 2016, spread 1",
-        "caption": "As You Are — Vogue Me China, August 2016"
-    },
-    {
-        "src": "images/home/originals/vogue-as-you-are-1.jpg",
-        "alt": "As You Are — Vogue Me China, August 2016, spread 2",
-        "caption": "As You Are — Vogue Me China, August 2016"
-    },
-    {
-        "src": "images/home/originals/vogue-as-you-are-2.jpg",
-        "alt": "As You Are — Vogue Me China, August 2016, spread 3",
-        "caption": "As You Are — Vogue Me China, August 2016"
-    },
-    {
-        "src": "images/home/originals/vogue-as-you-are-3.jpg",
-        "alt": "As You Are — Vogue Me China, August 2016, spread 4",
-        "caption": "As You Are — Vogue Me China, August 2016"
+        "src": "images/commissioned/accessories/16A_0285lR.jpg",
+        "alt": "Accessories among yellow flowers, photographed for Vogue",
+        "caption": "Accessories among yellow flowers, photographed for Vogue"
     }
 ];
 initGallery(portfolioImages);

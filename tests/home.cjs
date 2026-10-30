@@ -44,7 +44,7 @@ async function run() {
             for (const image of document.images) { image.loading = 'eager'; await image.decode(); }
         });
         assert.ok(await page.locator('main img').evaluateAll(images => images.every(image => image.naturalWidth && image.width && image.height)));
-        for (const [route, count] of [['vogue.html', 12], ['chanel.html', 8]]) {
+        for (const [route, count] of [['vogue.html', 7], ['chanel.html', 5]]) {
             await page.setViewportSize({ width: 390, height: 844 });
             await page.goto(`${base}/${route}`, { waitUntil: 'domcontentloaded' });
             assert.equal(await page.locator('.portfolio-item').count(), count);

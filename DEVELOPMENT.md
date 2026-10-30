@@ -6,13 +6,11 @@ The site is static HTML, CSS, and JavaScript. Serve the repository root with a l
 
 The `website-homepage` branch is a local draft. It has not been pushed or published. `index.html` is the overview; the original portrait gallery is at `portrait.html`, with its photograph sequence unchanged. Vogue and Chanel have dedicated selections at `vogue.html` and `chanel.html`. Homepage styles live in `css/home.css`. Its features are portraits, Vogue, Chanel, the Devil in Me film, and Transmission; writing and landscape sections are omitted from the homepage. All nine press excerpts are placed alongside related visual material.
 
-The Vogue spreads are a temporary selection, pending the owner's preferred shoot/images. These are published spreads of Dylan's editorials, rather than unrelated stock photographs. Source pages:
+The homepage uses all 29 files selected by the owner in `/Users/dylanforsberg/Desktop/homepage` on October 30, 2026. `content/home-selection.json` records the supplied filenames, original source paths, groups, and SHA-256 matches. Every supplied file matches an existing optimized gallery image byte for byte, so the site reuses those assets and does not depend on the external folder. Each selection appears once on the homepage; the only additional image is the existing Devil in Me film poster.
 
-- https://models.com/work/vogue-me-freestyle-1 (October 2017)
-- https://models.com/work/vogue-me-light-up (June 2017)
-- https://models.com/work/vogue-me-as-you-are (August 2016)
+The seven files labeled Vogue replace the provisional editorial spreads. The five labeled Chanel replace the provisional Chanel selection. These selections also populate the linked shoot galleries. The main portrait and landscape galleries retain their original selections and order. No photograph is cropped in the homepage layout.
 
-The originals in `images/home/originals/` also include poster frames for the existing Vimeo films 803186311 and 651829056. Chanel images and all other photographs and magazine covers come from the existing site. Press excerpts come from `transmission.html`; the homepage attributes them to reviews of Transmission. Publication figures come from `info.html`. `images/home/originals/transmission-spread.jpg` is a full-page rendering of pages 10–11 of the existing Issue 01 PDF, displayed as a magazine spread alongside the OAK quote.
+The film poster is from the existing Vimeo film 803186311. Press excerpts come from `transmission.html`; all nine retain their attribution to reviews of Transmission. Publication figures come from `info.html`.
 
 Run `npm run images:home` to regenerate the small WebP derivatives and `js/home-images.js`. The homepage includes static image dimensions and responsive sources, so its content works without JavaScript. The featured galleries use the shared photograph viewer. Keep gallery links in the header pointed at `portrait.html` rather than `/`.
 
