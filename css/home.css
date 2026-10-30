@@ -29,6 +29,7 @@
 .lead-detail { grid-column: 9 / -1; grid-row: 2; align-self: end; }
 
 .home-projects { margin-top: var(--spread-space); }
+.vogue-feature { margin-top: var(--spread-space); }
 .vogue-masthead { display: grid; grid-template-columns: 7fr 4fr; gap: 8.3%; align-items: end; margin-bottom: 44px; }
 .color-quote blockquote { font-size: clamp(26px, 2.6vw, 46px); line-height: 1.1; }
 .color-quote { padding-bottom: 5px; }
@@ -36,7 +37,7 @@
 .vogue-fashion { grid-column: 1 / 8; }
 .vogue-accessories { grid-column: 9 / -1; }
 .fashion-images { display: grid; grid-template-columns: 4fr 3fr; gap: 24px; align-items: end; }
-.chanel-feature { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: end; margin-top: var(--spread-space); }
+.chanel-feature { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: end; }
 .chanel-primary { grid-column: 1 / 5; }
 .chanel-title { grid-column: 5 / 9; align-self: center; text-align: center; padding-bottom: 14%; }
 .chanel-title .display-heading { margin-bottom: 24px; }
@@ -65,17 +66,17 @@
 .film-quote { grid-column: 10 / -1; align-self: center; padding-bottom: 38px; }
 .film-quote blockquote { font-size: clamp(28px, 2.6vw, 48px); line-height: 1.13; }
 
-.publishing-edit { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 48px 24px; margin-top: var(--spread-space); align-items: center; }
-.publication-masthead { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: end; gap: 32px; }
-.publication-masthead .display-heading { font-size: clamp(64px, 9vw, 172px); }
-.publication-masthead .display-heading span { display: block; margin-top: 18px; font: 11px/1.5 Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
-.publication-masthead .quiet-link { flex-shrink: 0; margin-bottom: 5px; }
-.publication-covers { grid-column: 1 / 7; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
-.publication-cover:last-child { width: 86%; justify-self: end; }
-.home .caption { color: #777; font: 10px/1.5 Arial, sans-serif; margin-top: 12px; }
-.publication-copy { grid-column: 8 / -1; }
-.publishing-quote blockquote { font-size: clamp(30px, 2.6vw, 48px); line-height: 1.1; }
-.publication-facts { margin: 30px 0; color: #686864; font: 11px/1.6 Arial, sans-serif; }
+/* A single magazine spread: title and review beside the paired covers. */
+.publishing-edit { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 36px 24px; margin-top: var(--spread-space); padding-top: 40px; border-top: 1px solid #e6e6e2; }
+.publication-masthead { grid-column: 1 / 6; grid-row: 1; }
+.publication-masthead .display-heading { font-size: clamp(48px, 6vw, 112px); }
+.publication-masthead .display-heading span { display: block; margin-top: 18px; font: 10px/1.5 Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+.publication-covers { grid-column: 7 / -1; grid-row: 1 / 4; display: grid; grid-template-columns: 1.12fr 1fr; gap: clamp(20px, 2.5vw, 48px); align-items: end; }
+.home .caption { color: #777; font: 10px/1.5 Arial, sans-serif; margin-top: 16px; }
+.publication-copy { grid-column: 1 / 6; grid-row: 2; align-self: center; }
+.publishing-quote blockquote { max-width: 22ch; font-size: clamp(28px, 2.8vw, 48px); line-height: 1.12; text-wrap: pretty; }
+.publication-footer { grid-column: 1 / 6; grid-row: 3; align-self: end; }
+.publication-facts { margin: 0 0 20px; color: #686864; font: 11px/1.6 Arial, sans-serif; }
 .home-contact { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid #e6e6e2; margin-top: var(--spread-space); padding: 28px 0 22px; font: 11px/1.5 Arial, sans-serif; }
 .home-contact a { text-decoration: none; }
 .home-contact a:hover { text-decoration: underline; text-underline-offset: 4px; }
@@ -89,7 +90,6 @@
     .film-quote { grid-column: 9 / -1; padding-left: 16px; }
     .film-link { grid-column: 1 / 9; }
     .film-caption h3 { font-size: 22px; }
-    .publication-copy { grid-column: 8 / -1; }
 }
 @media (max-width: 760px) {
     .home { padding-top: 24px; }
@@ -131,15 +131,15 @@
     .film-caption h3 { font-size: 20px; }
     .film-quote { max-width: 90%; padding: 10px 0 0; }
     .film-quote blockquote { font-size: 30px; }
-    .publishing-edit { grid-template-columns: 1fr; gap: 32px; }
-    .publication-masthead, .publication-covers, .publication-copy { grid-column: 1; }
-    .publication-masthead { display: block; }
-    .publication-masthead .display-heading { font-size: clamp(48px, 12.8vw, 82px); }
+    .publishing-edit { grid-template-columns: 1fr; gap: 28px; padding-top: 28px; }
+    .publication-masthead, .publication-covers, .publication-copy, .publication-footer { grid-column: 1; }
+    .publication-masthead { grid-row: 1; }
+    .publication-masthead .display-heading { font-size: clamp(44px, 12.8vw, 82px); }
     .publication-masthead .display-heading span { margin-top: 12px; }
-    .publication-masthead .quiet-link { margin: 22px 0 0; }
-    .publication-covers { gap: 28px; }
+    .publication-covers { grid-row: 2; gap: 22px; }
+    .publication-copy { grid-row: 3; margin-top: 8px; }
     .publishing-quote blockquote { font-size: 30px; }
-    .publication-facts { margin: 26px 0; }
+    .publication-footer { grid-row: 4; }
     .home-contact { flex-wrap: wrap; gap: 14px; }
 }
 
