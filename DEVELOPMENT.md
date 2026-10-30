@@ -10,6 +10,8 @@ The homepage uses all 29 files selected by the owner in `/Users/dylanforsberg/De
 
 The seven files labeled Vogue replace the provisional editorial spreads. The five labeled Chanel replace the provisional Chanel selection. These selections also populate the linked shoot galleries. The main portrait and landscape galleries retain their original selections and order. No photograph is cropped in the homepage layout.
 
+The homepage is constrained to a 1,040px frame, with a twelve-column opening composition, smaller supporting photographs, and press excerpts integrated into the grid. Phone layouts retain paired photographs rather than full-width portrait panels. The linked Vogue and Chanel galleries use four columns on desktop and two on phones. These rules are scoped to the homepage and featured selections; the original galleries keep their existing layout.
+
 The film poster is from the existing Vimeo film 803186311. Press excerpts come from `transmission.html`; all nine retain their attribution to reviews of Transmission. Publication figures come from `info.html`.
 
 Run `npm run images:home` to regenerate the small WebP derivatives and `js/home-images.js`. The homepage includes static image dimensions and responsive sources, so its content works without JavaScript. The featured galleries use the shared photograph viewer. Keep gallery links in the header pointed at `portrait.html` rather than `/`.
