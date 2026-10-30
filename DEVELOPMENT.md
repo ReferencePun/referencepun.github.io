@@ -23,3 +23,5 @@ Edit the selections in `js/portfolio.js`, `js/landscapes.js`, or `js/extra_image
 Install the development dependencies with `npm install`, then run `npm run images` to regenerate WebP sizes, dimensions in `js/gallery-images.js`, and the shared link photograph. Commit these generated assets alongside selection changes. The converter preserves the full composition and converts gallery derivatives to sRGB.
 
 Run `npm test` while the site is served at `http://127.0.0.1:4174`. Set `SITE_URL` for a different local URL. Install Chromium with `npx playwright install chromium` if needed; `BROWSER_PATH` can select an existing Chromium executable. The tests cover deferred loading, layout stability, keyboard focus, touch navigation, mobile menus, and sharing metadata.
+
+Writing is available directly at `/writing.html` but is omitted from the site navigation, including article pages. Article links back to Writing remain. The standalone `/do_not_enter.html` page has been removed.
