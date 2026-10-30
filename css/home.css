@@ -30,27 +30,29 @@
 .sensitivity-quote { grid-column: 11 / -1; grid-row: 2; }
 .sensitivity-quote blockquote { font-size: 22px; }
 
-.light-study { display: grid; grid-template-columns: .9fr 1fr 1.25fr; gap: 36px; align-items: center; }
-.light-main { width: 90%; }
+.light-study { display: grid; grid-template-columns: .95fr 1.1fr .95fr 1.2fr; gap: 24px; align-items: center; }
+.light-main, .light-sunlight { width: 100%; }
 .light-pair { display: grid; gap: 20px; }
-.light-aside { display: grid; gap: 24px; }
-.light-aside > figure:last-child { width: 80%; justify-self: end; }
-.sunlight-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; align-items: center; margin-top: 36px; }
-.sunlight-row > figure:nth-child(2), .sunlight-row > figure:nth-child(4) { width: 82%; justify-self: center; }
+.light-study .long-quote blockquote { font-size: 21px; }
 
 .section-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 24px; padding-top: 16px; border-top: 1px solid #e5e5e5; }
 .section-heading h2 { margin: 0; font-size: 25px; line-height: 1.2; }
 .section-heading p { font-size: 16px; color: #666; margin: 4px 0 0; }
+.home .featured-label { margin: 0 0 20px; font: 11px/1.5 Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.featured-project + .featured-project { margin-top: 48px; }
+.project-heading { border-top-color: #888; padding-top: 18px; margin-bottom: 26px; }
+.project-heading h3 { margin: 0; font-size: 38px; line-height: 1.1; }
+.project-heading p { margin-top: 7px; font-size: 19px; color: #333; }
 .vogue-fashion { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; align-items: center; }
 .vogue-fashion > figure:nth-child(2), .vogue-fashion > figure:nth-child(3) { width: 86%; justify-self: center; }
-.vogue-accessories { display: grid; grid-template-columns: 1fr 1fr 2.2fr 1.9fr; gap: 24px; align-items: center; margin-top: 32px; }
+.vogue-accessories { display: grid; grid-template-columns: 1fr 1fr 1.5fr 1.2fr; gap: 24px; align-items: center; }
 .color-quote { padding-left: 10px; }
 .color-quote blockquote { font-size: 27px; }
 .chanel-selection { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; align-items: center; }
 .chanel-selection > figure:nth-child(2) { width: 86%; justify-self: center; }
 .chanel-details { display: grid; gap: 24px; }
 
-.raw-study { display: grid; grid-template-columns: 1fr 1.8fr; gap: 56px; align-items: center; }
+.raw-study { display: grid; grid-template-columns: 1fr 1.8fr; gap: 56px; align-items: center; margin-top: 48px; }
 .portrait-trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: center; }
 .portrait-trio > figure:nth-child(2) { width: 85%; justify-self: center; }
 .film-feature { display: grid; grid-template-columns: 1fr 1.45fr; gap: 72px; align-items: center; }
@@ -88,10 +90,10 @@
     .opening-study { gap: 12px; }
     .sensitivity-quote blockquote { font-size: 19px; }
     .home-section { margin-top: 56px; }
-    .light-study { gap: 24px; grid-template-columns: .9fr 1fr 1.3fr; }
+    .light-study { gap: 18px; }
     .long-quote blockquote { font-size: 21px; }
-    .light-aside > figure:last-child { width: 90%; }
-    .sunlight-row, .vogue-fashion, .chanel-selection { gap: 18px; }
+    .light-study .long-quote blockquote { font-size: 19px; }
+    .vogue-fashion, .chanel-selection { gap: 18px; }
     .vogue-accessories { gap: 18px; }
     .color-quote { padding-left: 0; }
     .color-quote blockquote { font-size: 24px; }
@@ -115,25 +117,26 @@
     .sensitivity-quote blockquote { font-size: 23px; }
     .press-excerpt blockquote { margin-bottom: 10px; }
     .home-section { margin-top: 48px; }
+    .home .featured-label { margin-bottom: 16px; }
+    .featured-project + .featured-project { margin-top: 36px; }
+    .home .project-heading { margin-bottom: 22px; padding-top: 16px; }
+    .project-heading h3 { font-size: 32px; }
+    .home .project-heading p { font-size: 18px; }
     .light-study { grid-template-columns: 1fr 1fr; gap: 24px 14px; }
     .light-main { width: 94%; }
     .light-pair { gap: 14px; }
-    .light-aside { grid-column: 1 / -1; grid-template-columns: 1.5fr 1fr; align-items: center; gap: 20px; }
-    .light-aside .long-quote blockquote { font-size: 20px; }
-    .light-aside > figure:last-child { width: 100%; }
-    .sunlight-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; margin-top: 28px; }
-    .sunlight-row > figure:nth-child(2), .sunlight-row > figure:nth-child(4) { width: 84%; }
+    .light-study .long-quote blockquote { font-size: 20px; }
     .section-heading { margin-bottom: 20px; padding-top: 14px; gap: 12px; }
     .section-heading h2 { font-size: 23px; }
     .section-heading p { font-size: 15px; }
     .home .text-link { font-size: 15px; }
     .vogue-fashion { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; }
-    .vogue-accessories { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 14px; margin-top: 24px; }
+    .vogue-accessories { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 14px; }
     .color-quote { grid-column: 2 / -1; margin-top: 2px !important; }
     .color-quote blockquote { font-size: 25px; }
     .chanel-selection { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; }
     .chanel-details { gap: 14px; }
-    .raw-study { grid-template-columns: 1fr; gap: 24px; }
+    .raw-study { grid-template-columns: 1fr; gap: 24px; margin-top: 36px; }
     .raw-study .press-excerpt { max-width: 340px; }
     .portrait-trio { gap: 14px; }
     .long-quote blockquote { font-size: 22px; }
@@ -161,8 +164,7 @@
     .home { padding-left: 16px; padding-right: 16px; }
     .opening { column-gap: 12px; }
     .opening-quote blockquote { font-size: 21px; }
-    .light-aside { gap: 16px; }
-    .light-aside .long-quote blockquote { font-size: 19px; }
+    .light-study .long-quote blockquote { font-size: 19px; }
     .film-caption { display: block; }
     .section-heading .text-link { text-align: right; }
 }

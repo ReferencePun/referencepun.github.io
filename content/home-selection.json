@@ -5,7 +5,8 @@
     "subject": "Ciera and Cymone King",
     "group": "portrait",
     "matchedVariant": "images/gallery/0a146fdcf4b94329-1440.webp",
-    "sha256": "cdf7fe0f29eadb7ae943c2e1ae6f45a4542094389d4c21a17b09d1298e7dddac"
+    "sha256": "cdf7fe0f29eadb7ae943c2e1ae6f45a4542094389d4c21a17b09d1298e7dddac",
+    "homepage": true
   },
   {
     "file": "3e3a020e62883dca-1440.webp",
@@ -13,7 +14,8 @@
     "subject": "Elsa Hosk",
     "group": "portrait",
     "matchedVariant": "images/gallery/3e3a020e62883dca-1440.webp",
-    "sha256": "97700cb223af8a5fde6a4e382484f51daff03313ffe9de10f6c1c4bbe6c278cf"
+    "sha256": "97700cb223af8a5fde6a4e382484f51daff03313ffe9de10f6c1c4bbe6c278cf",
+    "homepage": true
   },
   {
     "file": "9db18fb33cc639bd-1440.webp",
@@ -21,7 +23,8 @@
     "subject": "Georgia Fowler",
     "group": "portrait",
     "matchedVariant": "images/gallery/9db18fb33cc639bd-1440.webp",
-    "sha256": "7ad91f8e51bdc1148c8d80a4d9c61a677f352608e58d044f492407d9cf45a539"
+    "sha256": "7ad91f8e51bdc1148c8d80a4d9c61a677f352608e58d044f492407d9cf45a539",
+    "homepage": true
   },
   {
     "file": "30e2b48182973d2f-1440.webp",
@@ -29,7 +32,8 @@
     "subject": "Ali Michael",
     "group": "portrait",
     "matchedVariant": "images/gallery/30e2b48182973d2f-1440.webp",
-    "sha256": "1f1404c1f9d8b3ff725f7734714be91201efd269e8a99200d01563cf2ab75523"
+    "sha256": "1f1404c1f9d8b3ff725f7734714be91201efd269e8a99200d01563cf2ab75523",
+    "homepage": true
   },
   {
     "file": "438be4ba69733733-1440.webp",
@@ -37,7 +41,8 @@
     "subject": "Samantha Gradoville",
     "group": "portrait",
     "matchedVariant": "images/gallery/438be4ba69733733-1440.webp",
-    "sha256": "8575c7d86c4b89cb764125f99d2b7114162d99a4b73b20c17b9fb6879ae8970c"
+    "sha256": "8575c7d86c4b89cb764125f99d2b7114162d99a4b73b20c17b9fb6879ae8970c",
+    "homepage": true
   },
   {
     "file": "45288156853d88e6-1024.webp",
@@ -45,7 +50,8 @@
     "subject": "Charlotte Free",
     "group": "portrait",
     "matchedVariant": "images/gallery/45288156853d88e6-1024.webp",
-    "sha256": "6973a01e3f2bfcdcfe6987d84786228db989cfa90e218044dfe59f509f698a87"
+    "sha256": "6973a01e3f2bfcdcfe6987d84786228db989cfa90e218044dfe59f509f698a87",
+    "homepage": true
   },
   {
     "file": "985122916866f109-1440.webp",
@@ -53,7 +59,8 @@
     "subject": "Hanne Gaby Odiele",
     "group": "portrait",
     "matchedVariant": "images/gallery/985122916866f109-1440.webp",
-    "sha256": "4e82f77ce5a6d04a0390525a154b6f9ea3f3e05323376e2ad5e0b638c8e0fa3f"
+    "sha256": "4e82f77ce5a6d04a0390525a154b6f9ea3f3e05323376e2ad5e0b638c8e0fa3f",
+    "homepage": true
   },
   {
     "file": "aa0c206cac56e213-1440.webp",
@@ -61,7 +68,8 @@
     "subject": "Ali Michael",
     "group": "portrait",
     "matchedVariant": "images/gallery/aa0c206cac56e213-1440.webp",
-    "sha256": "e5d00589c7d484166f14409f254cebf5eaa8a6d1902030db8beeb96317b2291e"
+    "sha256": "e5d00589c7d484166f14409f254cebf5eaa8a6d1902030db8beeb96317b2291e",
+    "homepage": false
   },
   {
     "file": "bac5cd8820b95bd3-1440.webp",
@@ -69,7 +77,8 @@
     "subject": "Va Bien Lingerie",
     "group": "portrait",
     "matchedVariant": "images/gallery/bac5cd8820b95bd3-1440.webp",
-    "sha256": "e9586d779d7245cc74c296938451af2f7ba980cb5d8f79d4ef30a2b2258336ac"
+    "sha256": "e9586d779d7245cc74c296938451af2f7ba980cb5d8f79d4ef30a2b2258336ac",
+    "homepage": false
   },
   {
     "file": "bbf95ac87799e85c-1440.webp",
@@ -77,7 +86,8 @@
     "subject": "Elsa Hosk",
     "group": "portrait",
     "matchedVariant": "images/gallery/bbf95ac87799e85c-1440.webp",
-    "sha256": "15f77cf84699b9be326bb3967fbb1d1430132d54376b99a917ef91f08b738e5a"
+    "sha256": "15f77cf84699b9be326bb3967fbb1d1430132d54376b99a917ef91f08b738e5a",
+    "homepage": true
   },
   {
     "file": "cb88992990624ebb-756.webp",
@@ -85,7 +95,8 @@
     "subject": "Transition Issue 01 - Kasia Struss",
     "group": "transmission",
     "matchedVariant": "images/gallery/cb88992990624ebb-756.webp",
-    "sha256": "315ff4932b956cb519ecc21da6abf11ae9729ecd30623a7db9ad4aa4f2188d44"
+    "sha256": "315ff4932b956cb519ecc21da6abf11ae9729ecd30623a7db9ad4aa4f2188d44",
+    "homepage": true
   },
   {
     "file": "chanel.webp",
@@ -93,7 +104,8 @@
     "subject": "Chanel - Nozomi Iijima",
     "group": "chanel",
     "matchedVariant": "images/gallery/84706bd562cdb3ba-1440.webp",
-    "sha256": "dd9c2983900397ffc7718eae366bceb5c7e439eb474219d1282179cfb80fc0eb"
+    "sha256": "dd9c2983900397ffc7718eae366bceb5c7e439eb474219d1282179cfb80fc0eb",
+    "homepage": true
   },
   {
     "file": "chanel1.webp",
@@ -101,7 +113,8 @@
     "subject": "Chanel - Irene Kim",
     "group": "chanel",
     "matchedVariant": "images/gallery/946745d08c56535d-1440.webp",
-    "sha256": "432d7b9b35fab0069b9639995c368a8dabd793e36782b1947a469b4a6e6424df"
+    "sha256": "432d7b9b35fab0069b9639995c368a8dabd793e36782b1947a469b4a6e6424df",
+    "homepage": true
   },
   {
     "file": "chanel2.webp",
@@ -109,7 +122,8 @@
     "subject": "Chanel - Irene Kim",
     "group": "chanel",
     "matchedVariant": "images/gallery/4bd2b73059993989-1440.webp",
-    "sha256": "7fd7810a23c82170e4c4cd91257bb5830bea9e59233b2af146d9fa9fa97e6ac0"
+    "sha256": "7fd7810a23c82170e4c4cd91257bb5830bea9e59233b2af146d9fa9fa97e6ac0",
+    "homepage": true
   },
   {
     "file": "chanel3.webp",
@@ -117,7 +131,8 @@
     "subject": "Chanel - Nozomi Iijima",
     "group": "chanel",
     "matchedVariant": "images/gallery/969aaa863895cc2f-1440.webp",
-    "sha256": "791ab32ab971f55e701f1110989fd1302bc49cc7d45747da6f7115375425eacb"
+    "sha256": "791ab32ab971f55e701f1110989fd1302bc49cc7d45747da6f7115375425eacb",
+    "homepage": true
   },
   {
     "file": "chanel4.webp",
@@ -125,7 +140,8 @@
     "subject": "Chanel - Nozomi Iijima",
     "group": "chanel",
     "matchedVariant": "images/gallery/0219d74c18eab05f-1440.webp",
-    "sha256": "c353cc3be9750812b00ec7c8793a5bc9fd8aff08c5aa46788b0db920feec33d9"
+    "sha256": "c353cc3be9750812b00ec7c8793a5bc9fd8aff08c5aa46788b0db920feec33d9",
+    "homepage": true
   },
   {
     "file": "d1d97fe19701cb76-1440.webp",
@@ -133,7 +149,8 @@
     "subject": "Carmella Rose",
     "group": "portrait",
     "matchedVariant": "images/gallery/d1d97fe19701cb76-1440.webp",
-    "sha256": "4cc42b9f56fd919b8c23effa827eaeca7669dc99a51a1b2ae41192958cb27e91"
+    "sha256": "4cc42b9f56fd919b8c23effa827eaeca7669dc99a51a1b2ae41192958cb27e91",
+    "homepage": false
   },
   {
     "file": "d526bfdf2a7c918e-1440.webp",
@@ -141,7 +158,8 @@
     "subject": "Rebecca Longendyke",
     "group": "portrait",
     "matchedVariant": "images/gallery/d526bfdf2a7c918e-1440.webp",
-    "sha256": "a2c1b854557a089f3c3469cbd19349037e43b72c3f460f3deabf7a9b139809fc"
+    "sha256": "a2c1b854557a089f3c3469cbd19349037e43b72c3f460f3deabf7a9b139809fc",
+    "homepage": true
   },
   {
     "file": "e1a689fb80bad372-1440.webp",
@@ -149,7 +167,8 @@
     "subject": "Elsa Hosk",
     "group": "portrait",
     "matchedVariant": "images/gallery/e1a689fb80bad372-1440.webp",
-    "sha256": "d79e97b20e326754af543b4b321da2cd3b05ef50923f41f47d096b4949884866"
+    "sha256": "d79e97b20e326754af543b4b321da2cd3b05ef50923f41f47d096b4949884866",
+    "homepage": true
   },
   {
     "file": "eaec29d70632a590-1440.webp",
@@ -157,7 +176,8 @@
     "subject": "Ciera and Cymone King",
     "group": "portrait",
     "matchedVariant": "images/gallery/eaec29d70632a590-1440.webp",
-    "sha256": "0f742db0ab873138c105d43cd6de52108177373dabae927dea3fe583115d77a2"
+    "sha256": "0f742db0ab873138c105d43cd6de52108177373dabae927dea3fe583115d77a2",
+    "homepage": true
   },
   {
     "file": "ebf6560afe4c4b94-1440.webp",
@@ -165,7 +185,8 @@
     "subject": "Lindsey Wixson",
     "group": "portrait",
     "matchedVariant": "images/gallery/ebf6560afe4c4b94-1440.webp",
-    "sha256": "db4c70115eb85e53fb6b324b426ef80b9e571b7fbf9699880c8b0131a4ef6f88"
+    "sha256": "db4c70115eb85e53fb6b324b426ef80b9e571b7fbf9699880c8b0131a4ef6f88",
+    "homepage": false
   },
   {
     "file": "ffcdc594ffd4e63b-1000.webp",
@@ -173,62 +194,70 @@
     "subject": "Jerreth Ludwig",
     "group": "portrait",
     "matchedVariant": "images/gallery/ffcdc594ffd4e63b-1000.webp",
-    "sha256": "79ab5a4e52f959a5c7a815c7cde5cabc5331afa374fe7dcc32f9d135ef2b6166"
+    "sha256": "79ab5a4e52f959a5c7a815c7cde5cabc5331afa374fe7dcc32f9d135ef2b6166",
+    "homepage": true
   },
   {
     "file": "vogue1.webp",
     "src": "images/portfolio/10080016.jpg",
     "subject": "Giedre Dukauskaite",
-    "group": "vogue",
+    "group": "vogue-fashion",
     "matchedVariant": "images/gallery/0d48a12431488341-1440.webp",
-    "sha256": "be3798f0c81d44de6f8f860781f6371707575c389c03a03f0eb562ec400b54b3"
+    "sha256": "be3798f0c81d44de6f8f860781f6371707575c389c03a03f0eb562ec400b54b3",
+    "homepage": true
   },
   {
     "file": "vogue2.webp",
     "src": "images/portfolio/10100023.jpg",
     "subject": "Giedre Dukauskaite",
-    "group": "vogue",
+    "group": "vogue-fashion",
     "matchedVariant": "images/gallery/5e468d4ea101d538-1440.webp",
-    "sha256": "52bf5e9f806a4ac149bcc61ead4094abdd83d6ac8dbdfadc4fb86c6b7a95d475"
+    "sha256": "52bf5e9f806a4ac149bcc61ead4094abdd83d6ac8dbdfadc4fb86c6b7a95d475",
+    "homepage": true
   },
   {
     "file": "vogue6.webp",
     "src": "images/portfolio/03000015.jpg",
     "subject": "Hyunji Shin",
-    "group": "vogue",
+    "group": "vogue-fashion",
     "matchedVariant": "images/gallery/b4bc1f30126891f9-1440.webp",
-    "sha256": "2a0600b0e55b0b918c0c543c80aa6ea6b1276a64819b1dc98d9ea78ade8ec91b"
+    "sha256": "2a0600b0e55b0b918c0c543c80aa6ea6b1276a64819b1dc98d9ea78ade8ec91b",
+    "homepage": true
   },
   {
     "file": "vogue9.webp",
     "src": "images/portfolio/03020022lfix2.jpg",
     "subject": "Hyunji Shin",
-    "group": "vogue",
+    "group": "vogue-fashion",
     "matchedVariant": "images/gallery/ff8f25ba6e077f56-1440.webp",
-    "sha256": "1c2bbe8b13e181d51029a30d242efc87c3f8d133a7bfdc0dc7b37819702a3cb3"
+    "sha256": "1c2bbe8b13e181d51029a30d242efc87c3f8d133a7bfdc0dc7b37819702a3cb3",
+    "homepage": true
   },
   {
     "file": "vogueaccessories.webp",
     "src": "images/commissioned/accessories/26A_0295l.jpg",
     "subject": "Commissioned Accessories",
-    "group": "vogue",
+    "group": "vogue-accessories",
     "matchedVariant": "images/gallery/d95847a78f2f7507-1440.webp",
-    "sha256": "01040237b0e69ef229633e0dd363b00ee16467cae89dfbe9150743469629ec1c"
+    "sha256": "01040237b0e69ef229633e0dd363b00ee16467cae89dfbe9150743469629ec1c",
+    "homepage": true
   },
   {
     "file": "vogueaccessories4.webp",
     "src": "images/commissioned/accessories/F10060193a.JPG",
     "subject": "Commissioned Accessories",
-    "group": "vogue",
+    "group": "vogue-accessories",
     "matchedVariant": "images/gallery/8547fbac3f57b4e6-1440.webp",
-    "sha256": "3705a7987fb8cff6308beac1bd32a8033c6cad42d6f3b4ce14285b134ebef647"
+    "sha256": "3705a7987fb8cff6308beac1bd32a8033c6cad42d6f3b4ce14285b134ebef647",
+    "homepage": true
   },
   {
     "file": "vogueaccessories5.webp",
     "src": "images/commissioned/accessories/16A_0285lR.jpg",
     "subject": "Commissioned Accessories",
-    "group": "vogue",
+    "group": "vogue-accessories",
     "matchedVariant": "images/gallery/5169311e71b3101f-1440.webp",
-    "sha256": "6b8a41500335a67c77c654d178117c8b3b9e24a7c4fdb474ed6ca74b0bcd3c06"
+    "sha256": "6b8a41500335a67c77c654d178117c8b3b9e24a7c4fdb474ed6ca74b0bcd3c06",
+    "homepage": true
   }
 ]
