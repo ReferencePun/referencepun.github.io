@@ -86,19 +86,6 @@
 .publishing-quote blockquote { max-width: 27ch; font-size: clamp(28px, 2.3vw, 40px); line-height: 1.15; text-wrap: pretty; }
 .publishing-quote figcaption { font-size: clamp(18px, 1.05vw, 20px); }
 
-/* The four page links close the overview using the same section rhythm. */
-.home-explore { margin-top: var(--spread-space); }
-.home-explore > h2 { margin: 0 0 var(--heading-space); font-size: clamp(28px, 3vw, 48px); line-height: 1.1; letter-spacing: -.02em; }
-.home-explore .explore-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
-.home-explore .section-link { display: grid; grid-template-rows: auto 1fr auto; gap: 8px; text-decoration: none; }
-.home-explore .section-number { color: #555550; font-size: 14px; line-height: 1; }
-.home-explore h3 { margin: 0 0 8px; font-size: clamp(20px, 1.65vw, 28px); line-height: 1.2; font-weight: 400; letter-spacing: -.02em; }
-.home-explore .section-image { width: 100%; aspect-ratio: 1.3; position: relative; overflow: hidden; background: #eeede8; }
-.home-explore .section-image > img { width: 100%; height: 100%; object-fit: cover; }
-.home-explore .photography-image > img { object-position: center 34%; }
-.home-explore .magazine-image .board-cover { position: absolute; top: 5%; left: 50%; width: auto; height: 90%; object-fit: contain; transform: translateX(-50%) rotate(-1.5deg); box-shadow: 2px 3px 6px #0002; }
-.home-explore .play-symbol { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 28px; height: 34px; fill: #fff; filter: drop-shadow(0 1px 5px #0008); }
-.home-explore .section-link:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .home-footer { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: baseline; gap: 32px; margin-top: var(--spread-space); padding: 28px var(--page-gutter) 36px; }
 .home-footer::before { content: ""; position: absolute; top: 0; left: var(--page-gutter); right: var(--page-gutter); border-top: 1px solid var(--rule-color); }
 .home-contact { display: contents; }
@@ -154,7 +141,6 @@
     .publication-covers { grid-row: 2; gap: 22px; }
     .publication-copy { grid-row: 3; margin-top: 8px; padding-left: 0; }
     .publishing-quote blockquote { font-size: 30px; }
-    .home-explore .explore-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; }
     .home-footer { grid-template-columns: minmax(0, 1fr); gap: 4px; padding-bottom: 28px; text-align: left; }
     .home-contact a { font-size: 21px; }
     .home-contact a:last-child { grid-column: 1; grid-row: 2; justify-self: start; }
