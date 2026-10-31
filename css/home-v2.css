@@ -102,10 +102,6 @@
 .magazine-image .board-cover { position: absolute; top: 5%; left: 50%; width: auto; height: 90%; object-fit: contain; transform: translateX(-50%) rotate(-1.5deg); box-shadow: 2px 3px 6px #0002; }
 .play-symbol { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 28px; height: 34px; fill: #fff; filter: drop-shadow(0 1px 5px #0008); }
 .section-link:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-.board-contact { margin-top: var(--section-space); padding: 24px 0 16px; border-top: 1px solid var(--board-rule); display: flex; justify-content: space-between; gap: 18px; font-size: 17px; }
-.board-contact a:hover { text-decoration: underline; text-underline-offset: 4px; }
-.home-alternate footer { padding: 24px var(--board-gutter) 32px; font-size: 14px; }
-.home-alternate footer p { margin: 0; }
 
 /* Featured work: one wide fashion image, followed by two paired projects. */
 .work-vogue { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--board-gap); align-items: center; }
@@ -193,8 +189,6 @@
     .explore-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; }
     .section-link h3 { font-size: 21px; }
     .section-image { aspect-ratio: 1; }
-    .board-contact { padding-top: 22px; flex-wrap: wrap; gap: 12px; font-size: 16px; }
-    .home-alternate footer { padding-top: 12px; }
     .project-viewer { width: 96vw; max-height: 94dvh; padding: 0 16px 20px; }
     .project-photographs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 }

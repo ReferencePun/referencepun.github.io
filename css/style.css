@@ -171,6 +171,23 @@ footer > p {
     margin: 0;
 }
 
+.site-footer { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: baseline; gap: 32px; margin-top: clamp(66px, 6vw, 114px); padding: 28px var(--site-gutter) 36px; }
+.site-footer::before { content: ""; position: absolute; top: 0; left: var(--site-gutter); right: var(--site-gutter); border-top: 1px solid #e5e5e2; }
+.site-contact { display: contents; }
+.site-footer .site-contact a { min-height: 44px; padding: 8px 0; color: #292927; font-size: clamp(18px, 1.6vw, 24px); line-height: 1.4; text-decoration: none; }
+.site-contact a:first-child { grid-column: 1; grid-row: 1; justify-self: start; }
+.site-contact a:last-child { grid-column: 3; grid-row: 1; justify-self: end; }
+.site-contact a span { margin-left: 12px; }
+.site-contact a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.site-footer > p { grid-column: 2; grid-row: 1; font-size: 16px; }
+
+@media (max-width: 760px) {
+    .site-footer { grid-template-columns: minmax(0, 1fr); gap: 4px; padding-bottom: 28px; text-align: left; }
+    .site-footer .site-contact a { font-size: 21px; }
+    .site-contact a:last-child { grid-column: 1; grid-row: 2; justify-self: start; }
+    .site-footer > p { grid-column: 1; grid-row: 3; margin-top: 24px; }
+}
+
 /*=============================================================================
  * 4. NAVIGATION
  *=============================================================================*/
