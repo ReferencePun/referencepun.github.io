@@ -1,7 +1,14 @@
 /* A sequence of photographic spreads, with type and imagery sharing the page. */
-.home-page { --page-gutter: clamp(20px, 3vw, 64px); --spread-space: clamp(76px, 8vw, 150px); }
+.home-page {
+    /* Opening layout controls. Save this file and refresh the local preview. */
+    --opening-space-above: 48px; /* Increase to move the whole opening down. */
+    --opening-text-x: -36px;     /* Negative = left; positive = right, from the midpoint layout. */
+    --opening-text-y: 24px;      /* Increase to move the quote, credit, and introduction down. */
+    --page-gutter: clamp(20px, 3vw, 64px);
+    --spread-space: clamp(76px, 8vw, 150px);
+}
 .home-page .header-container { width: 100%; max-width: none; padding-inline: var(--page-gutter); }
-.home { width: 100%; max-width: none; padding: 32px var(--page-gutter) 0; color: #292927; }
+.home { width: 100%; max-width: none; padding: var(--opening-space-above) var(--page-gutter) 0; color: #292927; }
 .home a, .shoot-intro a { color: inherit; }
 .home a:hover, .shoot-intro a:hover { color: #777; }
 .home h2, .home h3, .home h4 { font-weight: 300; }
@@ -21,10 +28,18 @@
 .press-excerpt figcaption a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .home-intro { grid-column: 5 / 8; grid-row: 2; align-self: center; }
-.home-intro, .lead-quote { position: relative; left: var(--opening-text-shift); }
+.home-intro, .lead-quote { position: relative; left: var(--opening-text-shift); top: var(--opening-text-y); }
 .home-intro h2 { max-width: 32ch; margin: 0; font-size: clamp(24px, 2.1vw, 36px); line-height: 1.15; letter-spacing: -.015em; text-wrap: pretty; }
 .home-intro p { max-width: 32ch; margin: 18px 0 0; font-size: clamp(18px, 1.35vw, 22px); line-height: 1.4; text-wrap: pretty; }
-.home-lead { --lead-gap: 24px; --opening-text-shift: calc((100vw - var(--page-gutter) - var(--page-gutter) + var(--lead-gap)) / 24); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 26px var(--lead-gap); }
+.home-lead {
+    --lead-gap: 24px;
+    /* Keep a clear gap beside the portrait when narrowing the window. */
+    --opening-text-shift: max(0px, calc((100vw - var(--page-gutter) - var(--page-gutter) + var(--lead-gap)) / 24 + var(--opening-text-x)));
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 26px var(--lead-gap);
+    padding-bottom: max(0px, var(--opening-text-y));
+}
 .lead-portrait { grid-column: 1 / 5; grid-row: 1 / 3; align-self: center; }
 .lead-quote { grid-column: 5 / 12; grid-row: 1; padding-top: 22px; }
 .lead-quote blockquote { margin-bottom: 20px; font-size: clamp(40px, 6vw, 114px); line-height: .98; letter-spacing: -.045em; }
@@ -73,7 +88,8 @@
     .chanel-title .display-heading { font-size: 8vw; }
 }
 @media (max-width: 760px) {
-    .home { padding-top: 24px; }
+    /* Phone spacing is adjusted separately; text keeps the page's left margin. */
+    .home-page { --opening-space-above: 40px; --opening-text-y: 12px; }
     .home-intro { grid-column: 1 / -1; grid-row: 3; }
     .home-intro h2 { max-width: 28ch; font-size: 28px; }
     .home-intro p { margin-top: 14px; font-size: 20px; }
