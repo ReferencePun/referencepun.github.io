@@ -105,17 +105,16 @@
     .lead-quote { grid-column: 1 / -1; grid-row: 4; top: 0; padding: 8px 0 0; }
     .lead-quote blockquote { font-size: clamp(36px, 9.4vw, 64px); line-height: 1.03; }
     .lead-quote blockquote span { display: inline; }
-    .vogue-feature { --center-inset: 0px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--heading-space) 16px; }
+    .vogue-feature { --center-inset: 0px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px 16px; margin-top: clamp(40px, 8vw, 56px); }
     .vogue-masthead, .vogue-pair { display: contents; }
-    #vogue-heading { grid-column: 1 / -1; grid-row: 1; text-align: right; }
+    #vogue-heading { grid-column: 4 / -1; grid-row: 1; align-self: baseline; text-align: right; }
     .vogue-fashion, .fashion-images, .vogue-accessories { display: contents; }
-    .vogue-feature { row-gap: 20px; }
-    .vogue-fashion .project-label { grid-column: 1 / 7; grid-row: 2; margin: 0; }
-    .fashion-images .project-primary { grid-column: 1 / 7; grid-row: 3; }
-    .vogue-fashion .project-secondary { grid-column: 7 / -1; grid-row: 4 / 6; align-self: start; }
-    .vogue-accessories .project-label { grid-column: 1 / 7; grid-row: 4; margin: 0; }
-    .accessories-shoe { grid-column: 1 / 7; grid-row: 5; }
-    .vogue-quote { grid-column: 7 / -1; grid-row: 3; align-self: center; padding: 0; }
+    .vogue-fashion .project-label { grid-column: 1 / 4; grid-row: 1; align-self: baseline; margin: 0; }
+    .fashion-images .project-primary { grid-column: 1 / 7; grid-row: 2; }
+    .vogue-fashion .project-secondary { grid-column: 7 / -1; grid-row: 3 / 5; align-self: start; }
+    .vogue-accessories .project-label { grid-column: 1 / 7; grid-row: 3; margin: 0; }
+    .accessories-shoe { grid-column: 1 / 7; grid-row: 4; }
+    .vogue-quote { grid-column: 7 / -1; grid-row: 2; align-self: center; padding: 0; }
     .vogue-quote blockquote { font-size: clamp(24px, 6.2vw, 36px); text-wrap: pretty; }
     /* Stagger the campaign images around the title and review. */
     .chanel-feature { grid-template-rows: auto auto auto; gap: 20px 16px; }
