@@ -1213,7 +1213,7 @@ nav {
   }
 
   .info-text {
-    max-width: 680px;
+    width: 100%;
     margin-bottom: 2rem;
   }
   

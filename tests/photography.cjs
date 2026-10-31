@@ -88,7 +88,7 @@ async function run() {
         await page.screenshot({ path: path.resolve(__dirname, '../.qa/film-photography-mobile.png') });
 
         await page.goto(base);
-        assert.deepEqual(await page.locator('.home-projects > section').evaluateAll(items => items.map(el => el.className)), ['vogue-feature', 'chanel-feature']);
+        assert.deepEqual(await page.locator('.home-projects > section').evaluateAll(items => items.map(el => el.className)), ['chanel-feature', 'vogue-feature']);
         assert.equal(await page.locator('.film-edit').count(), 0);
         assert.equal(await page.getByRole('navigation').getByRole('link', { name: 'Portrait', exact: true }).count(), 0);
         assert.equal(await page.getByRole('navigation').getByRole('link', { name: 'Landscape', exact: true }).count(), 0);
