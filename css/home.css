@@ -2,8 +2,9 @@
 .home-page {
     /* Opening layout controls. Save this file and refresh the local preview. */
     --opening-space-above: 48px; /* Increase to move the whole opening down. */
-    --opening-text-x: -36px;     /* Negative = left; positive = right, from the midpoint layout. */
-    --opening-text-y: 24px;      /* Increase to move the quote, credit, and introduction down. */
+    --opening-text-x: -50px;     /* Negative = left; positive = right, for the quote and credit. */
+    --opening-text-y: 24px;      /* Increase to move the quote and credit down. */
+    --opening-intro-y: 28px;     /* Introduction offset below the smaller portrait's top edge. */
     --page-gutter: clamp(20px, 3vw, 64px);
     --spread-space: clamp(76px, 8vw, 150px);
 }
@@ -26,23 +27,24 @@
 .press-excerpt figcaption a { text-decoration: none; }
 .press-excerpt figcaption a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-.home-intro { grid-column: 5 / 8; grid-row: 2; align-self: center; }
-.home-intro, .lead-quote { position: relative; left: var(--opening-text-shift); top: var(--opening-text-y); }
-.home-intro h2 { max-width: 32ch; margin: 0; font-size: clamp(24px, 2.1vw, 36px); line-height: 1.15; letter-spacing: -.015em; text-wrap: pretty; }
-.home-intro p { max-width: 32ch; margin: 18px 0 0; font-size: clamp(18px, 1.35vw, 22px); line-height: 1.4; text-wrap: pretty; }
+.home-intro { grid-column: 6 / 9; grid-row: 2; align-self: start; justify-self: center; width: 100%; max-width: clamp(320px, 18.7vw, 360px); position: relative; top: var(--opening-intro-y); }
+.home-intro h2 { max-width: 32ch; margin: 0; font-size: clamp(24px, 1.9vw, 34px); line-height: 1.15; letter-spacing: -.015em; text-wrap: pretty; }
+.home-intro p { max-width: 32ch; margin: 18px 0 0; font-size: clamp(18px, 1.2vw, 21px); line-height: 1.4; text-wrap: pretty; }
 .home-lead {
     --lead-gap: 24px;
     /* Keep a clear gap beside the portrait when narrowing the window. */
     --opening-text-shift: max(0px, calc((100vw - var(--page-gutter) - var(--page-gutter) + var(--lead-gap)) / 24 + var(--opening-text-x)));
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr) auto;
     gap: 26px var(--lead-gap);
     padding-bottom: max(0px, var(--opening-text-y));
 }
 .lead-portrait { grid-column: 1 / 5; grid-row: 1 / 3; align-self: center; }
-.lead-quote { grid-column: 5 / 12; grid-row: 1; padding-top: 22px; }
-.lead-quote blockquote { margin-bottom: 20px; font-size: clamp(40px, 6vw, 114px); line-height: .98; letter-spacing: -.045em; }
+.lead-quote { grid-column: 5 / -1; grid-row: 1; position: relative; left: var(--opening-text-shift); top: var(--opening-text-y); width: calc(100% - var(--opening-text-shift)); padding-top: clamp(44px, 4.7vw, 90px); }
+.lead-quote blockquote { margin-bottom: 10px; font-size: clamp(40px, 6.3vw, 120px); line-height: .98; letter-spacing: -.045em; }
 .lead-quote blockquote span { display: block; }
+.lead-quote figcaption { padding-left: 6px; font-size: 12px; }
 .lead-detail { grid-column: 9 / -1; grid-row: 2; align-self: end; }
 
 .home-projects { margin-top: var(--spread-space); }
@@ -89,25 +91,27 @@
 @media (max-width: 1100px) {
     .home-lead { --lead-gap: 18px; }
     .vogue-pair, .chanel-feature, .publishing-edit { column-gap: 18px; }
-    .lead-quote { padding-top: 12px; }
-    .home-intro { grid-column: 5 / 9; }
+    .lead-quote { padding-top: clamp(24px, 4.7vw, 52px); }
+    .home-intro { grid-column: 5 / 10; max-width: 320px; align-self: center; justify-self: start; top: 0; }
+    .lead-portrait { align-self: end; }
     .lead-detail { grid-column: 10 / -1; }
     .chanel-title .display-heading { font-size: 8vw; }
 }
 @media (max-width: 760px) {
     /* Phone spacing is adjusted separately; text keeps the page's left margin. */
-    .home-page { --opening-space-above: 40px; --opening-text-y: 12px; }
-    .home-intro { grid-column: 1 / -1; grid-row: 3; }
+    .home-page { --opening-space-above: 40px; --opening-text-y: 12px; --opening-intro-y: 12px; }
+    .home-intro { grid-column: 1 / -1; grid-row: 3; max-width: none; align-self: start; top: var(--opening-intro-y); }
     .home-intro h2 { max-width: 28ch; font-size: 28px; }
     .home-intro p { margin-top: 14px; font-size: 20px; }
     .display-heading { font-size: clamp(54px, 14vw, 86px); }
     .featured-heading { font-size: clamp(42px, 6.8vw, 72px); }
-    .home-lead { --opening-text-shift: 0px; gap: 28px 14px; }
+    .home-lead { --opening-text-shift: 0px; grid-template-rows: auto; gap: 28px 14px; }
     .lead-portrait { grid-column: 1 / 6; grid-row: 1; align-self: end; }
     .lead-detail { grid-column: 7 / -1; grid-row: 1; }
     .lead-quote { grid-column: 1 / -1; grid-row: 2; padding: 0; }
     .lead-quote blockquote { font-size: clamp(36px, 9.4vw, 64px); line-height: 1.03; }
     .lead-quote blockquote span { display: inline; }
+    .lead-quote figcaption { padding-left: 0; }
     .vogue-feature { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 16px; }
     .vogue-masthead, .vogue-pair { display: contents; }
     #vogue-heading { grid-column: 1 / -1; grid-row: 1; }
