@@ -1,7 +1,7 @@
 // Owner-selected photographs; see content/home-selection.json.
 const portfolioImages = [
     {
-        "src": "images/portfolio/10080016.jpg",
+        "src": "images/portfolio/vogue1l.webp",
         "alt": "Giedre Dukauskaite for Vogue China",
         "caption": "Giedre Dukauskaite for Vogue China"
     },

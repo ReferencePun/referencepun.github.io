@@ -204,7 +204,13 @@
     "group": "vogue-fashion",
     "matchedVariant": "images/gallery/0d48a12431488341-1440.webp",
     "sha256": "be3798f0c81d44de6f8f860781f6371707575c389c03a03f0eb562ec400b54b3",
-    "homepage": true
+    "homepage": true,
+    "replacement": {
+      "file": "vogue1l.webp",
+      "src": "images/portfolio/vogue1l.webp",
+      "sourceSha256": "680046330cbfa3b7d1d38819a3958c29020e57667137f3272b25cbdaed93a5b0",
+      "matchedVariant": "images/gallery/2e75e63ce324a66c-1440.webp"
+    }
   },
   {
     "file": "vogue2.webp",

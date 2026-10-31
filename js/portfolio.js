@@ -27,7 +27,7 @@ const portfolioImages = [
         caption: 'Giedre Dukauskaite'
     },
     {
-        src: 'images/portfolio/10080016.jpg',
+        src: 'images/portfolio/vogue1l.webp',
         alt: 'Giedre Dukauskaite',
         caption: 'Giedre Dukauskaite'
     },

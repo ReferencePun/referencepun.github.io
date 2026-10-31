@@ -102,8 +102,7 @@
 .opening-review { grid-column: 5 / 10; grid-row: 2; align-self: center; padding: 32px 0; position: relative; z-index: 3; }
 .opening-review blockquote { margin: 0; }
 .opening-review blockquote p { font-size: clamp(32px, 3.35vw, 62px); line-height: 1.08; letter-spacing: -.045em; font-weight: 400; }
-.opening-review figcaption { margin-top: 18px; font-size: clamp(15px, 1.08vw, 19px); line-height: 1.4; }
-.opening-review a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.opening-review figcaption { margin-top: clamp(6px, .5vw, 10px); font-size: clamp(15px, 1.08vw, 19px); line-height: 1.4; text-align: left; }
 .landscape-note { grid-column: 10 / -1; grid-row: 2; width: 100%; align-self: end; justify-self: end; transform: rotate(-.6deg); }
 .landscape-note::before { right: -12px; top: -8px; width: 88px; height: 23px; transform: rotate(6deg); }
 .landscape-note img { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; object-position: 50% 40%; }
@@ -199,7 +198,7 @@
     .landscape-note::before { width: 54px; height: 18px; right: -3px; }
     .opening-review { grid-column: 1 / -1; grid-row: 4; padding: 8px 0 0; }
     .opening-review blockquote p { font-size: clamp(29px, 7.8vw, 44px); }
-    .opening-review figcaption { margin-top: 16px; font-size: 15px; }
+    .opening-review figcaption { font-size: 15px; }
     .home-board .section-eyebrow { font-size: 10px; }
     .selected-work, .explore-section { padding-top: 22px; }
     .work-vogue { grid-template-columns: 1fr; gap: 24px; }
