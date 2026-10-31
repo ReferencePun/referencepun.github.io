@@ -159,10 +159,16 @@ main {
 /* Footer styles */
 footer {
     text-align: center;
-    padding: 2rem;
+    padding: clamp(40px, 4vw, 64px) clamp(20px, 4vw, 64px) clamp(28px, 3vw, 40px);
     margin-top: auto;
-    font-size: 0.9rem;
-    color: #777;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #70706a;
+}
+
+footer > p {
+    margin: 0;
 }
 
 /*=============================================================================
