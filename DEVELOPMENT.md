@@ -27,3 +27,11 @@ Run `npm test` while the site is served at `http://127.0.0.1:4174`. Set `SITE_UR
 Writing is available directly at `/writing.html` but is omitted from the site navigation, including article pages. Article links back to Writing remain. The standalone `/do_not_enter.html` page has been removed.
 
 The Info biography spans the same full container width as the image row beneath it.
+
+## Alternate homepage study
+
+`home-v2.html` is a separate, unpublished homepage based on the owner’s `homemock.png` reference. The existing `index.html` and shared navigation remain unchanged. Preview it at `http://127.0.0.1:4174/home-v2.html`.
+
+The alternate page uses the existing Elsa Hosk and Rebecca Longendyke photographs, a palm photograph from the landscape collection, the Transform cover, the Transmission contact sheet, and the actual Devil in Me film still. Square crops, monochrome treatments, tape, film-edge labels, and pencil details are confined to `css/home-v2.css`; source photographs and the galleries are unchanged. Introductory copy and handwritten notes follow the supplied mockup. The Last Magazine quotation retains its Transmission attribution. Four image links open Film Photography, Transmission Magazine, Devil in Me on the Video page, and Info. There are no embedded videos or individual editorial-story links.
+
+On tablets the review sits beneath the opening composition. On phones, the introduction, main portrait, and review form a single column, followed by paired small photographs and a two-column section index. The page reuses the existing accessible mobile navigation, adds a skip link, and is marked `noindex, nofollow` while it is a draft. It is not linked from the existing homepage or sitemap.
