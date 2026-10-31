@@ -18,13 +18,13 @@ async function run() {
             originals[collection] = await page.evaluate(key => window.photographyCollections[key], collection);
         }
         await page.goto(`${base}/photography.html`);
-        const portraits = page.getByRole('button', { name: 'Portraits', exact: true });
-        const landscapes = page.getByRole('button', { name: 'Landscapes', exact: true });
+        const portraits = page.locator('#portraits-selector');
+        const landscapes = page.locator('#landscapes-selector');
         async function checkSelection(name) {
             const selector = name === 'portraits' ? portraits : landscapes;
             assert.equal(await selector.getAttribute('aria-pressed'), 'true');
             assert.match(await selector.evaluate(el => getComputedStyle(el).boxShadow), /inset/);
-            assert.equal(await page.locator('.collection-panel[aria-pressed="true"]').count(), 1);
+            assert.equal(await page.locator('.collection-panel[aria-pressed="true"]').count(), 2);
             assert.equal(await page.locator('#photography-gallery').getAttribute('aria-labelledby'), `${name}-selector`);
             const actual = await page.locator('.portfolio-item').evaluateAll(items => items.map(item => ({
                 index: Number(item.dataset.index), alt: item.querySelector('img').alt
@@ -71,6 +71,23 @@ async function run() {
             assert.ok(Math.abs(boxes[0].y - boxes[1].y) < 1 && boxes[0].right < boxes[1].x, `Side-by-side selectors at ${width}px`);
             assert.ok(boxes.every(box => box.height >= 44));
             assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Overflow at ${width}px`);
+        }
+        // Both selector groups stay synchronized; bottom switches retain the reader's place.
+        for (const width of [390, 1280]) {
+            await page.setViewportSize({ width, height: 900 });
+            const bottom = page.locator('#portraits-selector-bottom');
+            await bottom.scrollIntoViewIfNeeded();
+            await bottom.click();
+            await checkSelection('portraits');
+            const before = await bottom.evaluate(el => el.getBoundingClientRect().top);
+            await page.locator('#landscapes-selector-bottom').click();
+            await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+            await checkSelection('landscapes');
+            const after = await bottom.evaluate(el => el.getBoundingClientRect().top);
+            assert.ok(Math.abs(before - after) < 3, `Bottom selector keeps position at ${width}px`);
+            await page.keyboard.press('ArrowLeft');
+            await checkSelection('portraits');
+            assert.equal(await bottom.evaluate(el => el === document.activeElement), true);
         }
         await page.setViewportSize({ width: 1280, height: 900 });
         await landscapes.click();

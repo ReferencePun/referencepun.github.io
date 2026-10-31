@@ -106,14 +106,14 @@
 }
 @media (max-width: 760px) {
     /* Phone spacing is adjusted separately; text keeps the page's left margin. */
-    .home-page { --opening-space-above: 40px; --opening-text-y: 12px; --opening-intro-y: 12px; --section-heading-size: clamp(40px, 12vw, 88px); }
+    .home-page { --opening-space-above: 40px; --opening-text-y: 0px; --opening-intro-y: 0px; --section-heading-size: clamp(40px, 12vw, 88px); }
     .home-intro { grid-column: 1 / -1; grid-row: 3; max-width: none; align-self: start; top: var(--opening-intro-y); }
     .home-intro h2 { max-width: 28ch; font-size: 28px; }
     .home-intro p { margin-top: 14px; font-size: 20px; }
     .home-lead { --opening-text-shift: 0px; grid-template-rows: auto; gap: 28px 14px; padding-bottom: var(--opening-intro-y); }
-    .lead-portrait { grid-column: 1 / 6; grid-row: 1; align-self: end; }
-    .lead-detail { grid-column: 7 / -1; grid-row: 1; }
-    .lead-quote { grid-column: 1 / -1; grid-row: 2; top: var(--opening-text-y); padding: 0; }
+    .lead-portrait { grid-column: 1 / 6; grid-row: 2; align-self: end; }
+    .lead-detail { grid-column: 7 / -1; grid-row: 2; }
+    .lead-quote { grid-column: 1 / -1; grid-row: 1; top: var(--opening-text-y); padding: 0; }
     .lead-quote blockquote { font-size: clamp(36px, 9.4vw, 64px); line-height: 1.03; }
     .lead-quote blockquote span { display: inline; }
     .vogue-feature { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--heading-space) 16px; }

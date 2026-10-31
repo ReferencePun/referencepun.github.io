@@ -1,7 +1,6 @@
 (() => {
     'use strict';
-    const switcher = document.querySelector('.photography-switcher');
-    const buttons = [...switcher.querySelectorAll('[data-collection]')];
+    const buttons = [...document.querySelectorAll('.photography-switcher [data-collection]')];
     const region = document.getElementById('photography-gallery');
     const status = document.getElementById('collection-status');
     const collections = window.photographyCollections;
@@ -11,21 +10,28 @@
     function select(button) {
         const collection = button.dataset.collection;
         if (collection === selected) return;
+        const keepPosition = button.closest('.photography-switcher--bottom');
+        const previousTop = button.getBoundingClientRect().top;
         gallery.setImages(collections[collection]);
         selected = collection;
-        buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-        region.setAttribute('aria-labelledby', button.id);
+        buttons.forEach(item => item.setAttribute('aria-pressed', String(item.dataset.collection === collection)));
+        region.setAttribute('aria-labelledby', `${collection}-selector`);
         status.textContent = `${button.textContent}, ${collections[collection].length} photographs.`;
+        if (keepPosition) requestAnimationFrame(() => {
+            window.scrollBy(0, button.getBoundingClientRect().top - previousTop);
+        });
     }
 
-    buttons.forEach((button, index) => {
+    buttons.forEach(button => {
+        const siblings = [...button.parentElement.querySelectorAll('[data-collection]')];
+        const index = siblings.indexOf(button);
         button.addEventListener('click', () => select(button));
         button.addEventListener('keydown', event => {
             let target;
-            if (event.key === 'ArrowRight') target = buttons[(index + 1) % buttons.length];
-            else if (event.key === 'ArrowLeft') target = buttons[(index + buttons.length - 1) % buttons.length];
-            else if (event.key === 'Home') target = buttons[0];
-            else if (event.key === 'End') target = buttons.at(-1);
+            if (event.key === 'ArrowRight') target = siblings[(index + 1) % siblings.length];
+            else if (event.key === 'ArrowLeft') target = siblings[(index + siblings.length - 1) % siblings.length];
+            else if (event.key === 'Home') target = siblings[0];
+            else if (event.key === 'End') target = siblings.at(-1);
             if (!target) return;
             event.preventDefault();
             target.focus({ preventScroll: true });
