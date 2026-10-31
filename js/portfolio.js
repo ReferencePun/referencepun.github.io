@@ -1,3 +1,4 @@
+(() => {
 // Portfolio images data
 const portfolioImages = [
     {
@@ -562,4 +563,8 @@ const portfolioImages = [
     },
 ];
 
-initGallery(portfolioImages);
+window.photographyCollections ??= {};
+window.photographyCollections.portraits = portfolioImages;
+if (!document.querySelector('.photography-switcher')) initGallery(portfolioImages);
+
+})();

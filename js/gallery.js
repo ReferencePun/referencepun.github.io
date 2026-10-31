@@ -24,47 +24,54 @@ window.initGallery = function initGallery(images) {
     function columnWidth() {
         return Math.ceil(parseFloat(getComputedStyle(grid).gridTemplateColumns)) || 480;
     }
-    const initialSize = columnWidth();
-    const fragment = document.createDocumentFragment();
-    images.forEach((image, index) => {
-        const metadata = window.galleryImageVariants?.[image.src];
-        const item = document.createElement('button');
-        item.type = 'button';
-        item.className = 'portfolio-item';
-        item.dataset.index = index;
-        item.setAttribute('aria-label', `View photograph ${index + 1}: ${image.alt || image.caption || 'Photograph'}`);
-        item.setAttribute('aria-haspopup', 'dialog');
-        const img = document.createElement('img');
-        img.alt = image.alt || image.caption || 'Photograph';
-        img.loading = index < 6 ? 'eager' : 'lazy';
-        img.decoding = 'async';
-        if (index < 3) img.fetchPriority = 'high';
-        if (metadata) {
-            img.width = metadata.width;
-            img.height = metadata.height;
-            const ratio = metadata.width / metadata.height;
-            item.classList.add(ratio > 1.2 ? 'horizontal' : ratio < 0.8 ? 'vertical' : 'square');
-            img.sizes = `${initialSize}px`;
-            img.srcset = metadata.variants.map(variant => `${variant.src} ${variant.width}w`).join(', ');
-            img.src = metadata.variants[0].src;
-            img.addEventListener('error', () => {
-                img.removeAttribute('srcset');
-                img.src = image.src;
-            }, { once: true });
-        } else {
-            // A newly added photograph remains usable before regenerating derivatives.
-            img.addEventListener('load', () => {
-                const ratio = img.naturalWidth / img.naturalHeight;
+    let lastSize = 0;
+    function setImages(selection) {
+        close();
+        images = selection;
+        currentIndex = 0;
+        const initialSize = columnWidth();
+        const fragment = document.createDocumentFragment();
+        images.forEach((image, index) => {
+            const metadata = window.galleryImageVariants?.[image.src];
+            const item = document.createElement('button');
+            item.type = 'button';
+            item.className = 'portfolio-item';
+            item.dataset.index = index;
+            item.setAttribute('aria-label', `View photograph ${index + 1}: ${image.alt || image.caption || 'Photograph'}`);
+            item.setAttribute('aria-haspopup', 'dialog');
+            const img = document.createElement('img');
+            img.alt = image.alt || image.caption || 'Photograph';
+            img.loading = index < 6 ? 'eager' : 'lazy';
+            img.decoding = 'async';
+            if (index < 3) img.fetchPriority = 'high';
+            if (metadata) {
+                img.width = metadata.width;
+                img.height = metadata.height;
+                const ratio = metadata.width / metadata.height;
                 item.classList.add(ratio > 1.2 ? 'horizontal' : ratio < 0.8 ? 'vertical' : 'square');
-            }, { once: true });
-            img.src = image.src;
-        }
-        item.append(img);
-        item.addEventListener('click', () => open(index, item));
-        fragment.append(item);
-    });
-    grid.replaceChildren(fragment);
-    let lastSize = initialSize;
+                img.sizes = `${initialSize}px`;
+                img.srcset = metadata.variants.map(variant => `${variant.src} ${variant.width}w`).join(', ');
+                img.src = metadata.variants[0].src;
+                img.addEventListener('error', () => {
+                    img.removeAttribute('srcset');
+                    img.src = image.src;
+                }, { once: true });
+            } else {
+                // A newly added photograph remains usable before regenerating derivatives.
+                img.addEventListener('load', () => {
+                    const ratio = img.naturalWidth / img.naturalHeight;
+                    item.classList.add(ratio > 1.2 ? 'horizontal' : ratio < 0.8 ? 'vertical' : 'square');
+                }, { once: true });
+                img.src = image.src;
+            }
+            item.append(img);
+            item.addEventListener('click', () => open(index, item));
+            fragment.append(item);
+        });
+        grid.replaceChildren(fragment);
+        lastSize = initialSize;
+    }
+    setImages(images);
     new ResizeObserver(() => {
         const size = columnWidth();
         if (size === lastSize) return;
@@ -151,4 +158,5 @@ window.initGallery = function initGallery(images) {
         }
         swipe = null;
     }, { passive: true });
+    return { setImages };
 };

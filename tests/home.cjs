@@ -27,8 +27,8 @@ async function run() {
             if (width <= 1000) {
                 await page.locator('#mobile-menu').click();
                 assert.equal(await nav.evaluate(el => el.inert), false);
-                await page.getByRole('link', { name: 'Portrait', exact: true }).click();
-                await page.waitForURL('**/portrait.html');
+                await page.getByRole('link', { name: 'Film Photography', exact: true }).click();
+                await page.waitForURL('**/photography.html');
                 assert.equal(await page.locator('.portfolio-item').count(), 112);
                 await page.locator('.logo a').click();
                 await page.waitForURL(base + '/');
@@ -40,9 +40,11 @@ async function run() {
                 assert.ok(boxes[0].left > logoRight && boxes.at(-1).right < socialLeft, `Header collisions at ${width}px`);
             }
         }
-        await page.evaluate(async () => {
-            for (const image of document.images) { image.loading = 'eager'; await image.decode(); }
-        });
+        // Let responsive sources settle after the viewport changes and eager-loading update.
+        await page.locator('main img').evaluateAll(images => images.forEach(image => { image.loading = 'eager'; }));
+        await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+        await page.waitForFunction(() => [...document.querySelectorAll('main img')].every(image => image.complete && image.naturalWidth));
+        await page.locator('main img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
         assert.ok(await page.locator('main img').evaluateAll(images => images.every(image => image.naturalWidth && image.width && image.height)));
         for (const [route, count] of [['vogue.html', 4], ['vogue-accessories.html', 3], ['chanel.html', 5]]) {
             await page.setViewportSize({ width: 390, height: 844 });

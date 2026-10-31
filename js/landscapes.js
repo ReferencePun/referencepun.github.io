@@ -1,3 +1,4 @@
+(() => {
 // Landscape images data
 const portfolioImages = [
     { src: "images/landscapes/all/98040025.JPG", alt: "Landscape Photography", caption: "93. Landscape Photography" },
@@ -162,4 +163,8 @@ const portfolioImages = [
     { src: "images/landscapes/all/R1-08254-0035l.jpg", alt: "Landscape Photography", caption: "141. Landscape Photography" },
 ];
 
-initGallery(portfolioImages);
+window.photographyCollections ??= {};
+window.photographyCollections.landscapes = portfolioImages;
+if (!document.querySelector('.photography-switcher')) initGallery(portfolioImages);
+
+})();

@@ -46,7 +46,7 @@ async function run() {
             assert.ok(before.every((box, i) => box.every((value, j) => Math.abs(value - after[i][j]) < 1)), `Loading moves the ${route} grid`);
             assert.ok(requests.length < count / 2, 'Offscreen photographs should not all load on entry');
             assert.ok(requests.every(url => !url.includes('/images/') || url.includes('/images/gallery/')), 'Grid uses derivatives, not originals');
-            const images = await page.evaluate(() => portfolioImages.map(image => image.src));
+            const images = await page.evaluate(() => (window.photographyCollections ? Object.values(window.photographyCollections)[0] : portfolioImages).map(image => image.src));
             const first = page.locator('.portfolio-item').first();
             await first.focus();
             await page.keyboard.press('Enter');
@@ -87,7 +87,7 @@ async function run() {
         await page.screenshot({ path: path.join(output, 'portraits-mobile.png') });
         await first.tap();
         const source = () => page.locator('#lightbox-img').getAttribute('src');
-        const images = await page.evaluate(() => portfolioImages.map(image => image.src));
+        const images = await page.evaluate(() => (window.photographyCollections ? Object.values(window.photographyCollections)[0] : portfolioImages).map(image => image.src));
         const client = await mobile.newCDPSession(page);
         async function swipe(from, to, secondFinger = false) {
             const points = (x, y) => [{ x, y, id: 0 }, ...(secondFinger ? [{ x: x + 30, y: y + 30, id: 1 }] : [])];
@@ -115,7 +115,7 @@ async function run() {
         console.log('Mobile swipe, multi-touch, close controls and focus restoration passed');
         await mobile.close();
 
-        const pages = ['/', '/portrait.html', '/vogue.html', '/vogue-accessories.html', '/chanel.html', '/landscapes.html', '/info.html', '/video.html', '/transmission.html', '/writing.html', '/articles/hitchhiking-part-1.html', '/articles/love-and-loss.html', '/portfolio_test.html'];
+        const pages = ['/', '/photography.html', '/portrait.html', '/vogue.html', '/vogue-accessories.html', '/chanel.html', '/landscapes.html', '/info.html', '/video.html', '/transmission.html', '/writing.html', '/articles/hitchhiking-part-1.html', '/articles/love-and-loss.html', '/portfolio_test.html'];
         const menus = await context({ viewport: { width: 390, height: 844 } });
         for (const route of pages) {
             const page = await menus.newPage();

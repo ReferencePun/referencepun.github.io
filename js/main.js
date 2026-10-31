@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const current = location.pathname.replace(/\/index\.html$/, '/');
     nav.querySelectorAll('a').forEach(link => {
         const target = new URL(link.href).pathname.replace(/\/index\.html$/, '/');
-        const active = current === target || (current.startsWith('/articles/') && target === '/writing.html');
+        const photographyPage = ['/photography.html', '/portrait.html', '/landscapes.html'].includes(current);
+        const active = current === target || (photographyPage && target === '/photography.html');
         link.classList.toggle('active', active);
         if (active) link.setAttribute('aria-current', 'page');
         else link.removeAttribute('aria-current');
