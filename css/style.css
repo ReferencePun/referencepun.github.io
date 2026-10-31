@@ -185,6 +185,7 @@ footer > p {
     .site-footer { grid-template-columns: minmax(0, 1fr); gap: 4px; padding-bottom: 28px; text-align: left; }
     .site-footer .site-contact a { font-size: 21px; }
     .site-contact a:last-child { grid-column: 1; grid-row: 2; justify-self: start; }
+    .site-contact a span { display: none; }
     .site-footer > p { grid-column: 1; grid-row: 3; margin-top: 24px; }
 }
 

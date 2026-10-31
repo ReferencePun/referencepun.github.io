@@ -112,9 +112,9 @@
     .vogue-fashion, .fashion-images, .vogue-accessories { display: contents; }
     .vogue-fashion .project-label { grid-column: 1 / 7; grid-row: 2; margin: 0; }
     .fashion-images .project-primary { grid-column: 1 / 7; grid-row: 3; }
-    .vogue-fashion .project-secondary { grid-column: 7 / -1; grid-row: 4 / 6; align-self: start; }
-    .vogue-accessories .project-label { grid-column: 1 / 7; grid-row: 4; margin: 0; }
-    .accessories-shoe { grid-column: 1 / 7; grid-row: 5; }
+    .vogue-fashion .project-secondary { grid-column: 1 / 7; grid-row: 4 / 6; align-self: start; }
+    .vogue-accessories .project-label { grid-column: 7 / -1; grid-row: 4; margin: 0; }
+    .accessories-shoe { grid-column: 7 / -1; grid-row: 5; }
     .vogue-quote { grid-column: 7 / -1; grid-row: 3; align-self: center; padding: 0; }
     .vogue-quote blockquote { font-size: clamp(24px, 6.2vw, 36px); text-wrap: pretty; }
     /* Stagger the campaign images around the title and review. */
