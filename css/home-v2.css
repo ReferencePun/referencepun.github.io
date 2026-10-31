@@ -44,7 +44,7 @@
 .home-board a { text-decoration: none; }
 .opening-spread {
     display: grid;
-    grid-template-columns: 42fr 30fr 19fr;
+    grid-template-columns: 30fr 37fr 25fr;
     grid-template-rows: auto 1fr;
     gap: 0 3.5%;
     padding: 0 16px 34px 32px;
@@ -68,10 +68,7 @@
 .hero-print a { display: block; }
 .hero-print img {
     width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    object-position: center top;
-    clip-path: polygon(0 .4%, 32% 0, 66% .25%, 99.8% 0, 100% 33%, 99.7% 69%, 100% 99.6%, 66% 100%, 32% 99.8%, .2% 100%, 0 66%, .2% 33%);
+    height: auto;
 }
 .film-edge {
     position: absolute;
@@ -87,19 +84,19 @@
 }
 .film-edge span { writing-mode: vertical-rl; transform: rotate(180deg); }
 .introduction { grid-column: 2; grid-row: 1; padding-top: 28px; }
-.introduction h2 { font-size: clamp(28px, 2.25vw, 46px); line-height: 1.12; letter-spacing: -.025em; font-weight: 400; }
+.introduction h2 { max-width: 24ch; font-size: clamp(28px, 2.25vw, 46px); line-height: 1.12; letter-spacing: -.025em; font-weight: 400; }
 .introduction h2 span { display: block; }
 .introduction p { max-width: 34ch; margin-top: 26px; font-size: clamp(18px, 1.25vw, 24px); line-height: 1.28; }
 .pencil-rule { width: 150px; height: 12px; margin-top: 28px; fill: none; stroke: #77766d; stroke-width: .8; }
 .portrait-note { grid-column: 3; grid-row: 1; width: 94%; justify-self: start; margin-top: 19px !important; transform: rotate(-1.3deg); }
 .portrait-note a { display: block; position: relative; z-index: 1; }
-.portrait-note img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 52% center; }
+.portrait-note img { width: 100%; height: auto; }
 .portrait-note::before { width: 36px; height: 62px; right: 8px; top: -31px; transform: rotate(1deg); z-index: 0; }
 .portrait-note::after { width: 40px; height: 78px; bottom: -64px; right: 23%; transform: rotate(-1deg); z-index: 0; }
 .handwritten { font-family: 'Reenie Beanie', 'Bradley Hand', cursive; font-weight: 400; line-height: .98; letter-spacing: .025em; }
 .portrait-note figcaption { position: absolute; right: -5%; top: calc(100% + 9px); font-size: clamp(19px, 1.55vw, 28px); transform: rotate(-9deg); }
 .pencil-loop { position: absolute; width: 135%; left: -35%; bottom: -2%; fill: none; stroke: #88867c; stroke-width: .5; pointer-events: none; }
-.opening-review { grid-column: 2; grid-row: 2; align-self: end; padding-bottom: 22%; padding-top: 40px; position: relative; z-index: 3; width: 110%; }
+.opening-review { grid-column: 2; grid-row: 2; align-self: end; padding-bottom: 22%; padding-top: 40px; position: relative; z-index: 3; width: 100%; }
 .opening-review blockquote { margin: 0; }
 .opening-review blockquote p { font-size: clamp(32px, 3.45vw, 65px); line-height: 1.02; letter-spacing: -.045em; font-weight: 400; }
 .opening-review figcaption { margin-top: 20px; margin-left: 8px; font-size: clamp(15px, 1.08vw, 20px); line-height: 1.4; }
