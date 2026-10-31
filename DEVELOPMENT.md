@@ -28,7 +28,7 @@ Run `npm test` while the site is served at `http://127.0.0.1:4174`. Set `SITE_UR
 
 Writing is available directly at `/writing.html` but is omitted from the site navigation, including article pages. Article links back to Writing remain. The standalone `/do_not_enter.html` page has been removed.
 
-The Info biography spans the same full container width as the image row beneath it.
+The Info page follows the supplied About reference: an uncropped Georgia Fowler portrait on the left, with a large About heading, biography, Madewell image strip, and contact details on the right. The biography and strip share a width. `css/about.css` contains page-specific styling; the portrait reuses the existing `9db18fb33cc639bd` responsive assets. On phones, the portrait sits beside the heading and introduction, with the remaining biography, strip, and contact details spanning the page below.
 
 The shared site footer uses consistent padding, readable serif type, and no extra paragraph margin. V1 brings the email, copyright, and About & Contact link into one aligned footer row on desktop; on phones, the links stack with the copyright beneath.
 
@@ -42,6 +42,6 @@ The header, opening, Featured Work, Explore, and contact row share fluid outer m
 
 The desktop header groups the navigation and Instagram on the right, using even gaps; the mobile menu remains unchanged. V1 ends with Transmission and the footer; Explore remains only on V2.
 
-Shared headers use the same fluid gutters on all portfolio pages and the V2 study. Standard page content and gallery selectors use these gutters too; Info retains its readable 960px column. Video players keep a 16:9 aspect ratio even above their maximum width.
+Shared headers use the same fluid gutters on all portfolio pages and the V2 study. Standard page content, gallery selectors, and the two-column About layout use these gutters too. Video players keep a 16:9 aspect ratio even above their maximum width.
 
 All portfolio and article pages share the same `.site-footer` in `css/style.css`: email, centered copyright, About & Contact, and an inset divider. At 760px and below it stacks in that order with the copyright last. V2 uses this same footer instead of a separate contact row.
