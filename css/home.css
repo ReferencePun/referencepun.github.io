@@ -56,6 +56,7 @@
 .vogue-feature { margin-top: var(--spread-space); }
 .vogue-masthead { margin-bottom: clamp(20px, 1.5vw, 28px); padding-right: 3vw; text-align: right; }
 .vogue-quote blockquote, .chanel-quote blockquote { font-size: var(--review-size); line-height: 1.15; }
+.vogue-quote blockquote { text-wrap: balance; }
 .vogue-pair { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: auto auto minmax(0, 1fr); column-gap: 24px; align-items: start; }
 .vogue-fashion, .vogue-accessories, .fashion-images { display: contents; }
 .vogue-fashion .project-label { grid-column: 1 / 8; grid-row: 1; }
