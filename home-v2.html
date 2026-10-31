@@ -9,7 +9,7 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Reenie+Beanie&display=swap">
     <link rel="stylesheet" href="css/style.css?v=df6dcab930b0">
-    <link rel="stylesheet" href="css/home-v2.css?v=b97fe4ab54b3">
+    <link rel="stylesheet" href="css/home-v2.css?v=366b187a26fa">
 </head>
 <body class="home-alternate">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -56,7 +56,7 @@
 
             <div class="introduction">
                 <h2 id="introduction-heading">Photographs, films, and independent publications <span>by Dylan Forsberg.</span></h2>
-                <p>A personal approach to portraiture, fashion, and storytelling — from New York to wherever the work takes me.</p>
+                <p>A personal approach to portraiture, fashion, and storytelling.</p>
                 <svg class="pencil-rule" viewBox="0 0 160 12" aria-hidden="true"><path d="M1 10 Q74 3 158 2"/></svg>
             </div>
 
@@ -64,7 +64,6 @@
                 <a href="photography.html" aria-label="Explore portraits">
                     <img src="images/gallery/d526bfdf2a7c918e-480.webp" srcset="images/gallery/d526bfdf2a7c918e-480.webp 480w, images/gallery/d526bfdf2a7c918e-960.webp 960w" sizes="(max-width: 700px) 40vw, (max-width: 1100px) 22vw, 18vw" width="1500" height="995" alt="Black-and-white portrait of Rebecca Longendyke." decoding="async">
                 </a>
-                <figcaption class="handwritten">Tampa<br>NYC<br>2012 — 2026</figcaption>
                 <svg class="pencil-loop" viewBox="0 0 330 100" aria-hidden="true"><path d="M15 86 C84 49 252 20 318 11 C290 24 83 85 15 86 C1 88 0 87 10 84"/></svg>
             </figure>
 
@@ -75,8 +74,41 @@
 
             <figure class="landscape-note taped-print">
                 <img src="images/gallery/11a239c7af61ea48-480.webp" srcset="images/gallery/11a239c7af61ea48-480.webp 480w, images/gallery/11a239c7af61ea48-960.webp 960w" sizes="(max-width: 700px) 46vw, 19vw" width="2400" height="3619" alt="Palm trees photographed on film." decoding="async">
-                <figcaption class="handwritten">Home is wherever<br>the light is.</figcaption>
             </figure>
+        </section>
+
+
+        <section class="selected-work" id="featured-work" aria-labelledby="selected-work-heading">
+            <h2 id="selected-work-heading">Featured Work</h2>
+            <article class="work-vogue" aria-labelledby="work-vogue-heading">
+                <figure class="work-vogue-image"><img src="images/gallery/b4bc1f30126891f9-480.webp" srcset="images/gallery/b4bc1f30126891f9-480.webp 480w, images/gallery/b4bc1f30126891f9-960.webp 960w, images/gallery/b4bc1f30126891f9-1440.webp 1440w" sizes="(max-width: 700px) 90vw, 66vw" width="1500" height="2262" alt="Hyunji Shin wearing a red dress for Vogue China." loading="lazy" decoding="async"></figure>
+                <div class="work-vogue-copy work-copy">
+                    <h3 id="work-vogue-heading">Vogue China</h3>
+                    <p class="work-category">Fashion Editorial</p>
+                    <span class="work-dash" aria-hidden="true"></span>
+                    <button class="work-action" type="button" data-project="vogue-project" aria-haspopup="dialog">View project <span aria-hidden="true">⟶</span></button>
+                </div>
+            </article>
+            <div class="work-pair">
+                <article class="work-chanel" aria-labelledby="work-chanel-heading">
+                    <figure><img src="images/gallery/946745d08c56535d-480.webp" srcset="images/gallery/946745d08c56535d-480.webp 480w, images/gallery/946745d08c56535d-960.webp 960w, images/gallery/946745d08c56535d-1440.webp 1440w" sizes="(max-width: 700px) 52vw, 30vw" width="1500" height="2262" alt="Irene Kim for Chanel Rouge Allure." loading="lazy" decoding="async"></figure>
+                    <div class="work-copy">
+                        <h3 id="work-chanel-heading">Chanel</h3>
+                        <p class="work-category">Rouge Allure<br>International Beauty Campaign</p>
+                        <span class="work-dash" aria-hidden="true"></span>
+                        <button class="work-action" type="button" data-project="chanel-project" aria-haspopup="dialog">View project <span aria-hidden="true">⟶</span></button>
+                    </div>
+                </article>
+                <article class="work-transmission" aria-labelledby="work-transmission-heading">
+                    <figure><img src="images/gallery/3e3a020e62883dca-480.webp" srcset="images/gallery/3e3a020e62883dca-480.webp 480w, images/gallery/3e3a020e62883dca-960.webp 960w, images/gallery/3e3a020e62883dca-1440.webp 1440w" sizes="(max-width: 700px) 48vw, 24vw" width="1500" height="2262" alt="Elsa Hosk, photographed for Transmission Magazine." loading="lazy" decoding="async"></figure>
+                    <div class="work-copy">
+                        <h3 id="work-transmission-heading">Transmission<br>Magazine</h3>
+                        <p class="work-category">Independent Magazine</p>
+                        <span class="work-dash" aria-hidden="true"></span>
+                        <a class="work-action" href="transmission.html">View magazine <span aria-hidden="true">⟶</span></a>
+                    </div>
+                </article>
+            </div>
         </section>
 
         <section class="explore-section" aria-labelledby="explore-heading">
@@ -113,6 +145,27 @@
         <div class="board-contact"><a href="mailto:Dylan.Forsberg@gmail.com">Dylan.Forsberg@gmail.com</a><a href="info.html">About &amp; contact <span aria-hidden="true">↗</span></a></div>
     </main>
     <footer><p>&copy; <span id="current-year">2026</span> Dylan Forsberg. All rights reserved.</p></footer>
+    <dialog class="project-viewer" id="vogue-project" aria-labelledby="vogue-viewer-heading">
+        <div class="viewer-heading"><h2 id="vogue-viewer-heading">Vogue China</h2><button type="button" class="close-project" aria-label="Close project" autofocus>×</button></div>
+        <div class="project-photographs" tabindex="0" role="region" aria-labelledby="vogue-viewer-heading">
+            <img src="images/gallery/b4bc1f30126891f9-480.webp" srcset="images/gallery/b4bc1f30126891f9-480.webp 480w, images/gallery/b4bc1f30126891f9-960.webp 960w, images/gallery/b4bc1f30126891f9-1440.webp 1440w" sizes="(max-width: 600px) 86vw, (max-width: 1000px) 43vw, 28vw" width="1500" height="2262" alt="Hyunji Shin for Vogue China" loading="lazy" decoding="async">
+            <img src="images/gallery/ff8f25ba6e077f56-480.webp" srcset="images/gallery/ff8f25ba6e077f56-480.webp 480w, images/gallery/ff8f25ba6e077f56-960.webp 960w, images/gallery/ff8f25ba6e077f56-1440.webp 1440w" sizes="(max-width: 600px) 86vw, (max-width: 1000px) 43vw, 28vw" width="1500" height="2262" alt="Hyunji Shin for Vogue China" loading="lazy" decoding="async">
+            <img src="images/gallery/0d48a12431488341-480.webp" srcset="images/gallery/0d48a12431488341-480.webp 480w, images/gallery/0d48a12431488341-960.webp 960w, images/gallery/0d48a12431488341-1440.webp 1440w" sizes="(max-width: 600px) 86vw, (max-width: 1000px) 43vw, 28vw" width="1500" height="2262" alt="Giedre Dukauskaite for Vogue China" loading="lazy" decoding="async">
+            <img src="images/gallery/5e468d4ea101d538-480.webp" srcset="images/gallery/5e468d4ea101d538-480.webp 480w, images/gallery/5e468d4ea101d538-960.webp 960w, images/gallery/5e468d4ea101d538-1440.webp 1440w" sizes="(max-width: 600px) 86vw, (max-width: 1000px) 43vw, 28vw" width="1500" height="2262" alt="Giedre Dukauskaite for Vogue China" loading="lazy" decoding="async">
+            <img src="images/gallery/d0f71bf5f3f2ac73-480.webp" srcset="images/gallery/d0f71bf5f3f2ac73-480.webp 480w, images/gallery/d0f71bf5f3f2ac73-960.webp 960w, images/gallery/d0f71bf5f3f2ac73-1440.webp 1440w" sizes="(max-width: 600px) 86vw, (max-width: 1000px) 43vw, 28vw" width="2400" height="3600" alt="Red feathered shoe photographed for Vogue" loading="lazy" decoding="async">
+        </div>
+    </dialog>
+    <dialog class="project-viewer" id="chanel-project" aria-labelledby="chanel-viewer-heading">
+        <div class="viewer-heading"><h2 id="chanel-viewer-heading">Chanel — Rouge Allure</h2><button type="button" class="close-project" aria-label="Close project" autofocus>×</button></div>
+        <div class="project-photographs" tabindex="0" role="region" aria-labelledby="chanel-viewer-heading">
+            <img src="images/gallery/946745d08c56535d-480.webp" srcset="images/gallery/946745d08c56535d-480.webp 480w, images/gallery/946745d08c56535d-960.webp 960w, images/gallery/946745d08c56535d-1440.webp 1440w" sizes="(max-width: 600px) 86vw, (max-width: 1000px) 43vw, 28vw" width="1500" height="2262" alt="Irene Kim for Chanel Rouge Allure" loading="lazy" decoding="async">
+            <img src="images/gallery/969aaa863895cc2f-480.webp" srcset="images/gallery/969aaa863895cc2f-480.webp 480w, images/gallery/969aaa863895cc2f-960.webp 960w, images/gallery/969aaa863895cc2f-1440.webp 1440w" sizes="(max-width: 600px) 86vw, (max-width: 1000px) 43vw, 28vw" width="1500" height="2262" alt="Nozomi Iijima for Chanel Rouge Allure" loading="lazy" decoding="async">
+            <img src="images/gallery/84706bd562cdb3ba-480.webp" srcset="images/gallery/84706bd562cdb3ba-480.webp 480w, images/gallery/84706bd562cdb3ba-960.webp 960w, images/gallery/84706bd562cdb3ba-1440.webp 1440w" sizes="(max-width: 600px) 86vw, (max-width: 1000px) 43vw, 28vw" width="2000" height="3016" alt="Nozomi Iijima for Chanel Rouge Allure" loading="lazy" decoding="async">
+            <img src="images/gallery/0219d74c18eab05f-480.webp" srcset="images/gallery/0219d74c18eab05f-480.webp 480w, images/gallery/0219d74c18eab05f-960.webp 960w, images/gallery/0219d74c18eab05f-1440.webp 1440w" sizes="(max-width: 600px) 86vw, (max-width: 1000px) 43vw, 28vw" width="1500" height="995" alt="Nozomi Iijima for Chanel Rouge Allure" loading="lazy" decoding="async">
+            <img src="images/gallery/4bd2b73059993989-480.webp" srcset="images/gallery/4bd2b73059993989-480.webp 480w, images/gallery/4bd2b73059993989-960.webp 960w, images/gallery/4bd2b73059993989-1440.webp 1440w" sizes="(max-width: 600px) 86vw, (max-width: 1000px) 43vw, 28vw" width="1500" height="995" alt="Irene Kim for Chanel Rouge Allure" loading="lazy" decoding="async">
+        </div>
+    </dialog>
+    <script src="js/home-v2.js?v=a355a491bcb3"></script>
     <script src="js/main.js?v=d733a5d11232"></script>
 </body>
 </html>
