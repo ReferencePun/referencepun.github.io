@@ -1,0 +1,255 @@
+.video-page {
+    --film-gap: clamp(28px, 3.3vw, 64px);
+    color: #292927;
+    padding-bottom: 0;
+}
+
+.film-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 2.6fr) minmax(0, 1fr);
+    gap: var(--film-gap);
+    align-items: start;
+    scroll-margin-top: 120px;
+}
+
+.film-feature + .film-feature {
+    margin-top: 64px;
+}
+
+.video-page.is-interactive .film-feature {
+    margin-top: 0;
+}
+
+.film-feature[hidden], .film-play[hidden] {
+    display: none;
+}
+
+.film-player {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #191918;
+}
+
+.film-play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.film-play img, .film-player iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: 0;
+}
+
+.film-play::after {
+    content: "";
+    position: absolute;
+    inset: 50% 0 0;
+    background: linear-gradient(transparent, rgb(0 0 0 / .24));
+    pointer-events: none;
+}
+
+.film-play-icon {
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: clamp(56px, 5vw, 84px);
+    aspect-ratio: 1;
+    border: 1px solid rgb(255 255 255 / .9);
+    border-radius: 50%;
+    background: rgb(0 0 0 / .12);
+    transition: background .2s ease;
+}
+
+.film-play:hover { color: #fff; }
+.film-play:hover .film-play-icon { background: rgb(0 0 0 / .35); }
+
+.film-watch {
+    position: absolute;
+    bottom: clamp(16px, 2vw, 32px);
+    left: clamp(20px, 2vw, 32px);
+    z-index: 1;
+    font-size: clamp(18px, 1.3vw, 22px);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+}
+
+.film-details { padding-top: 5px; }
+
+.film-details h2 {
+    margin: 0;
+    font-size: clamp(42px, 3.65vw, 70px);
+    font-weight: 400;
+    letter-spacing: -.025em;
+    line-height: 1.06;
+    text-wrap: balance;
+}
+
+.film-title-line { display: block; }
+/* The heading is a reading-position target, not an interactive control. */
+.film-details h2:focus { outline: none; }
+
+.film-meta {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin: 20px 0 0;
+    color: #666058;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+}
+
+.film-summary {
+    margin: clamp(24px, 2vw, 36px) 0 0;
+    font-size: clamp(19px, 1.35vw, 23px);
+    line-height: 1.5;
+}
+
+.film-credits {
+    display: grid;
+    gap: 9px;
+    margin-top: clamp(24px, 2vw, 36px);
+    padding-top: 22px;
+    border-top: 1px solid #dedad3;
+}
+
+.film-credits > div {
+    display: grid;
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.25fr);
+    column-gap: 16px;
+    align-items: baseline;
+}
+
+.film-credits dt {
+    font-size: 11px;
+    letter-spacing: .09em;
+    line-height: 1.6;
+    text-transform: uppercase;
+}
+
+.film-credits dd {
+    min-width: 0;
+    font-size: clamp(18px, 1.2vw, 21px);
+    line-height: 1.4;
+}
+
+.film-credit-name, .film-track { display: block; }
+.film-track { color: #666058; }
+.film-credit-name a { color: inherit; text-decoration: none; }
+.film-credit-name a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.film-navigation {
+    height: auto;
+    overflow: visible;
+    flex-grow: 0;
+    margin: clamp(28px, 2.5vw, 44px) 0 0;
+}
+
+.film-navigation ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(16px, 1.3vw, 24px);
+    list-style: none;
+}
+
+.film-choice {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.film-choice-image, .film-placeholder {
+    display: grid;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    place-items: center;
+}
+
+.film-choice-image img { width: 100%; height: auto; }
+
+.film-choice[aria-current="true"] .film-choice-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgb(247 244 239 / .9);
+    outline: 1px solid #514e48;
+    outline-offset: 3px;
+}
+
+.film-choice-title {
+    display: block;
+    margin-top: 16px;
+    font-size: clamp(22px, 1.7vw, 30px);
+    line-height: 1.15;
+    text-wrap: balance;
+}
+
+.film-choice[aria-current="true"] .film-choice-title {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+}
+
+.film-choice-kind {
+    display: block;
+    margin-top: 7px;
+    color: #666058;
+    font-size: 16px;
+    line-height: 1.35;
+}
+
+.film-choice:hover { color: #666058; }
+
+.film-placeholder {
+    border: 1px solid #dedad3;
+    background: #eee9e1;
+    color: #706a61;
+    font-size: clamp(22px, 2.1vw, 36px);
+}
+
+.film-coming-soon .film-choice-title { color: #706a61; }
+
+@media (max-width: 1200px) and (min-width: 1101px) {
+    .film-feature { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+    .film-details h2 { font-size: 42px; }
+}
+
+@media (max-width: 1100px) {
+    .film-feature { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .film-details { display: grid; grid-template-columns: 1fr 1fr; column-gap: 36px; padding-top: 0; align-items: start; }
+    .film-details h2 { grid-column: 1; }
+    .film-meta { grid-column: 1; margin-top: 16px; }
+    .film-summary { grid-column: 1; margin-top: 24px; }
+    .film-credits { grid-column: 2; grid-row: 1 / 4; margin-top: 0; padding-top: 4px; border: 0; }
+    .film-navigation { margin-top: 36px; }
+}
+
+@media (max-width: 600px) {
+    .film-details { display: block; }
+    .film-details h2 { font-size: clamp(38px, 10vw, 52px); }
+    .film-summary { margin-top: 22px; font-size: 20px; }
+    .film-credits { margin-top: 24px; padding-top: 20px; border-top: 1px solid #dedad3; }
+    .film-credits > div { grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); }
+    .film-credits dt { font-size: 11px; }
+    .film-credits dd { font-size: 20px; }
+    .film-navigation ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 18px; }
+    .film-choice-title { margin-top: 12px; font-size: 23px; }
+    .film-placeholder { font-size: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .film-play-icon { transition: none; }
+}
