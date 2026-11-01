@@ -4,7 +4,8 @@
   "scripts": {
     "images": "node scripts/build-gallery-images.cjs",
     "images:home": "node scripts/build-home-images.cjs",
-    "test": "node tests/gallery.cjs && node tests/home.cjs && node tests/photography.cjs && node tests/video.cjs"
+    "images:magazines": "node scripts/build-magazine-images.cjs",
+    "test": "node tests/gallery.cjs && node tests/home.cjs && node tests/photography.cjs && node tests/video.cjs && node tests/magazines.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1",

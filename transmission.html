@@ -23,6 +23,7 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css?v=fe27b85581f3">
     <link rel="stylesheet" href="css/transmission.css?v=9981f7408c4d">
+    <link rel="stylesheet" href="css/magazine-reader.css?v=f8caaf9fff6c">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
 
     <!-- Google tag (gtag.js) -->
@@ -76,7 +77,7 @@
             </div>
             <ul class="transmission-grid">
                 <li>
-                    <a class="transmission-card" href="pdfs/01 Issue 01 Transition S.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Issue 01: Transition">
+                    <a class="transmission-card" href="pdfs/01 Issue 01 Transition S.pdf" data-magazine="transition" aria-label="Read Transmission Issue 01: Transition">
                         <img src="images/thumbnails/01 Issue 01 Transition.jpg" alt="" width="756" height="1044" loading="eager" decoding="async">
                         <div class="transmission-caption">
                             <p class="transmission-issue-number">Issue 01</p>
@@ -86,7 +87,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="transmission-card" href="pdfs/02 Issue 02 Transparency.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Issue 02: Transparency">
+                    <a class="transmission-card" href="pdfs/02 Issue 02 Transparency.pdf" data-magazine="transparency" aria-label="Read Transmission Issue 02: Transparency">
                         <img src="images/thumbnails/02 Issue 02 Transparency.jpg" alt="" width="756" height="1044" loading="eager" decoding="async">
                         <div class="transmission-caption">
                             <p class="transmission-issue-number">Issue 02</p>
@@ -96,7 +97,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="transmission-card" href="pdfs/04 Issue 03 Transform.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Issue 03: Transform">
+                    <a class="transmission-card" href="pdfs/04 Issue 03 Transform.pdf" data-magazine="transform" aria-label="Read Transmission Issue 03: Transform">
                         <img src="images/thumbnails/04 Issue 03 Transform.jpg" alt="" width="756" height="1044" loading="eager" decoding="async">
                         <div class="transmission-caption">
                             <p class="transmission-issue-number">Issue 03</p>
@@ -106,7 +107,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="transmission-card" href="pdfs/09 Issue 03-04 Intermission.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Issue 03-04: Intermission">
+                    <a class="transmission-card" href="pdfs/09 Issue 03-04 Intermission.pdf" data-magazine="intermission" aria-label="Read Transmission Issue 03-04: Intermission">
                         <img src="images/thumbnails/09 Issue 03-04 Intermission.jpg" alt="" width="756" height="1044" loading="eager" decoding="async">
                         <div class="transmission-caption">
                             <p class="transmission-issue-number">Issue 03–04</p>
@@ -122,7 +123,7 @@
             <h2 class="transmission-collection-title" id="presents-title">Transmission Presents</h2>
             <ul class="transmission-grid">
                 <li>
-                    <a class="transmission-card" href="pdfs/03 FNT Photojournalism.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Presents: FNT">
+                    <a class="transmission-card" href="pdfs/03 FNT Photojournalism.pdf" data-magazine="fnt" aria-label="Read Transmission Presents: FNT">
                         <img src="images/thumbnails/03 FNT Photojournalism.jpg" alt="" width="720" height="993" loading="lazy" decoding="async">
                         <div class="transmission-caption">
                             <h3>FNT</h3>
@@ -131,7 +132,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="transmission-card" href="pdfs/06 Presents Cote_Ciel Lookbook.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Presents: Côte &amp; Ciel">
+                    <a class="transmission-card" href="pdfs/06 Presents Cote_Ciel Lookbook.pdf" data-magazine="cote-ciel" aria-label="Read Transmission Presents: Côte &amp; Ciel">
                         <img src="images/thumbnails/06 Presents Cote_Ciel Lookbook.jpg" alt="" width="756" height="1044" loading="lazy" decoding="async">
                         <div class="transmission-caption">
                             <h3>Côte &amp; Ciel</h3>
@@ -140,7 +141,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="transmission-card" href="pdfs/05 Presents New Faces.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Presents: The SS16 New Faces Issue">
+                    <a class="transmission-card" href="pdfs/05 Presents New Faces.pdf" data-magazine="new-faces" aria-label="Read Transmission Presents: The SS16 New Faces Issue">
                         <img src="images/thumbnails/05 Presents New Faces.jpg" alt="" width="756" height="1044" loading="lazy" decoding="async">
                         <div class="transmission-caption">
                             <h3>The SS16 New Faces Issue</h3>
@@ -149,7 +150,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="transmission-card" href="pdfs/07 Presents Lindsey Wixson S.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Presents: A Year in a Day with Lindsey Wixson">
+                    <a class="transmission-card" href="pdfs/07 Presents Lindsey Wixson S.pdf" data-magazine="lindsey-wixson" aria-label="Read Transmission Presents: A Year in a Day with Lindsey Wixson">
                         <img src="images/thumbnails/07 Presents Lindsey Wixson.jpg" alt="" width="756" height="1044" loading="lazy" decoding="async">
                         <div class="transmission-caption">
                             <h3>A Year in a Day with Lindsey Wixson</h3>
@@ -164,7 +165,7 @@
             <h2 class="transmission-collection-title" id="showcase-title">Transmission Showcase</h2>
             <ul class="transmission-grid transmission-grid--single">
                 <li>
-                    <a class="transmission-card" href="pdfs/08 Showcase Le Cam Romain S.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Showcase: Le Cam Romain">
+                    <a class="transmission-card" href="pdfs/08 Showcase Le Cam Romain S.pdf" data-magazine="le-cam-romain" aria-label="Read Transmission Showcase: Le Cam Romain">
                         <img src="images/thumbnails/08 Showcase Le Cam Romain.jpg" alt="" width="756" height="1044" loading="lazy" decoding="async">
                         <div class="transmission-caption">
                             <h3>Le Cam Romain</h3>
@@ -175,7 +176,52 @@
             </ul>
         </section>
 
-        <div id="magazine-modal"></div>
+        <dialog id="magazine-reader" class="reader" aria-labelledby="reader-title" aria-describedby="reader-position">
+            <div class="reader-shell">
+                <div class="reader-topbar">
+                    <div class="reader-heading">
+                        <p class="reader-series"></p>
+                        <h2 class="reader-title" id="reader-title">Transmission</h2>
+                    </div>
+                    <div class="reader-tools" role="group" aria-label="Reading tools">
+                        <button type="button" data-reader="overview" aria-label="Page overview" aria-expanded="false" aria-controls="reader-overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span class="reader-tool-label">Pages</span></button>
+                        <button type="button" data-reader="view" aria-label="Switch to single pages" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M3 4h18v16H3z"/></svg><span class="reader-tool-label">Spreads</span></button>
+                        <button type="button" data-reader="zoom" aria-label="Zoom in" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M7 10h6M10 7v6"/></svg><span class="reader-tool-label">Zoom</span></button>
+                        <a class="reader-pdf" href="pdfs/01 Issue 01 Transition S.pdf" target="_blank" rel="noopener" aria-label="Open original PDF">PDF</a>
+                        <button type="button" class="reader-fullscreen" data-reader="fullscreen" aria-label="Toggle fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+                        <button type="button" class="reader-close" data-reader="close" aria-label="Close magazine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+                    </div>
+                </div>
+                <div class="reader-body">
+                    <div class="reader-stage" aria-label="Magazine pages" aria-busy="false">
+                        <div class="reader-pages"></div>
+                    </div>
+                    <aside class="reader-overview" id="reader-overview" aria-label="Page overview" hidden>
+                        <h3 class="reader-overview-title">All pages</h3>
+                        <ol class="reader-thumbnails"></ol>
+                    </aside>
+                    <p class="reader-loading" hidden>Loading pages…</p>
+                    <div class="reader-error" hidden>
+                        <p>These pages couldn’t load. Try again, or open the original PDF above.</p>
+                        <button type="button" data-reader="retry">Try again</button>
+                    </div>
+                </div>
+                <div class="reader-bottom">
+                    <div class="reader-navigation" role="group" aria-label="Page navigation">
+                        <button type="button" data-reader="previous" aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg><span>Previous</span></button>
+                        <form class="reader-jump">
+                            <label for="reader-page">Page</label>
+                            <input id="reader-page" type="number" inputmode="numeric" min="1" value="1" aria-label="Go to page">
+                            <span class="reader-range"></span>
+                            <span class="reader-count"></span>
+                        </form>
+                        <button type="button" data-reader="next" aria-label="Next page"><span>Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+                    </div>
+                    <input class="reader-progress" type="range" min="1" max="1" value="1" aria-label="Browse magazine pages">
+                    <p class="visually-hidden" id="reader-position" aria-live="polite" aria-atomic="true"></p>
+                </div>
+            </div>
+        </dialog>
     </main>
 
     <footer class="site-footer">
@@ -183,11 +229,10 @@
         <p>&copy; <span id="current-year">2026</span> Dylan Forsberg. All rights reserved.</p>
     </footer>
 
-    <!-- PDF.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-    <!-- Custom PDF viewer -->
-    <script src="js/magazine-viewer.js?v=53e3268295e8"></script>
-    <!-- Magazine functionality -->
+    <!-- Optimized page files load only when a publication is opened. -->
+    <script src="js/magazine-library.js?v=1a9c02ccfe51"></script>
+    <script src="js/magazine-viewer.js?v=73a0f3c452da"></script>
+    <!-- Shared navigation -->
     <script src="js/main.js?v=d733a5d11232"></script>
 </body>
 </html>

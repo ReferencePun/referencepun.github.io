@@ -62,8 +62,13 @@ async function run() {
             const ratio = await page.locator('#pool-party .film-player').evaluate(el => { const b = el.getBoundingClientRect(); return b.width / b.height; });
             assert.ok(Math.abs(ratio - 16 / 9) < .01, `Uncropped 16:9 player at ${width}px`);
         }
+        const info = await context.newPage();
+        await info.goto(`${base}/info.html`);
+        await info.evaluate(() => document.fonts.ready);
         for (const [width, height] of [[1101, 720], [1280, 720], [1366, 768], [1440, 780], [1440, 900], [1710, 984], [1920, 800], [1920, 1080], [2560, 1440]]) {
             await page.setViewportSize({ width, height });
+            await info.setViewportSize({ width, height });
+            const infoBottom = await info.locator('main').evaluate(el => el.getBoundingClientRect().bottom);
             for (const film of ['devil-in-me', 'pool-party']) {
                 await page.locator(`.film-choice[href="#${film}"]`).click();
                 await page.evaluate(async () => { await document.fonts.ready; scrollTo(0, 0); });
@@ -78,9 +83,11 @@ async function run() {
                 });
                 assert.equal(layout.width, width, 'The Video page keeps the full viewport width');
                 assert.ok(layout.bottom <= height, `${film}: player, credits and navigation fit ${width}x${height} without the footer`);
+                assert.ok(layout.bottom <= infoBottom + 10, `${film}: lower edge matches Info at ${width}x${height} (${layout.bottom} vs ${infoBottom})`);
                 assert.ok(layout.featureBottom < layout.navigationTop, 'Credits and player clear the film navigation');
             }
         }
+        await info.close();
         await page.setViewportSize({ width: 393, height: 852 });
         await page.locator('.film-choice[href="#devil-in-me"]').click();
         assert.equal(await page.locator('#devil-in-me').isVisible(), true);
