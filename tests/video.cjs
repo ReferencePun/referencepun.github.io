@@ -59,7 +59,7 @@ async function run() {
             }));
             assert.equal(cards.length, 3);
             assert.ok(cards.every(card => Math.abs(card.top - cards[0].top) < 1 && Math.abs(card.width - cards[0].width) < 1), 'Three equally sized video selectors share one row');
-            const ratio = await page.locator('#pool-party .film-player').evaluate(el => { const b = el.getBoundingClientRect(); return b.width / b.height; });
+            const ratio = await page.locator('#pool-party .film-player').evaluate(el => { const b = el.getBoundingClientRect(), s = getComputedStyle(el), border = parseFloat(s.borderLeftWidth); return (b.width - 2 * border) / (b.height - 2 * border); });
             assert.ok(Math.abs(ratio - 16 / 9) < .01, `Uncropped 16:9 player at ${width}px`);
         }
         const info = await context.newPage();
@@ -78,10 +78,13 @@ async function run() {
                         width: rect('.video-page').width,
                         bottom: rect('.film-navigation').bottom,
                         featureBottom: rect('.film-feature:not([hidden])').bottom,
-                        navigationTop: rect('.film-navigation').top
+                        navigationTop: rect('.film-navigation').top,
+                        playerRight: rect('.film-feature:not([hidden]) .film-player').right,
+                        middleRight: rect('.film-navigation li:nth-child(2) .film-choice').right - parseFloat(getComputedStyle(document.querySelector('.film-navigation li:nth-child(2) .film-choice'), '::before').right)
                     };
                 });
                 assert.equal(layout.width, width, 'The Video page keeps the full viewport width');
+                assert.ok(Math.abs(layout.playerRight - layout.middleRight) < 2, 'The main player aligns with the middle selector outline');
                 assert.ok(layout.bottom <= height, `${film}: player, credits and navigation fit ${width}x${height} without the footer`);
                 assert.ok(layout.bottom <= infoBottom + 10, `${film}: lower edge matches Info at ${width}x${height} (${layout.bottom} vs ${infoBottom})`);
                 assert.ok(layout.featureBottom < layout.navigationTop, 'Credits and player clear the film navigation');

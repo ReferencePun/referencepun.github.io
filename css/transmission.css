@@ -44,6 +44,13 @@
 }
 
 .transmission-card {
+    appearance: none;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
     display: grid;
     grid-template-rows: auto 1fr;
     gap: clamp(14px, 1.2vw, 22px);
@@ -60,6 +67,7 @@
 }
 
 .transmission-issue-number {
+    display: block;
     margin: 0 0 5px;
     color: #666058;
     font: 400 clamp(10px, .75vw, 13px)/1.5 Arial, sans-serif;
@@ -67,7 +75,8 @@
     letter-spacing: .16em;
 }
 
-.transmission-caption h3 {
+.transmission-title {
+    display: block;
     margin: 0;
     font-size: clamp(24px, 2.4vw, 44px);
     font-weight: var(--heading-weight);
@@ -95,7 +104,7 @@
         grid-column: 1 / -1;
     }
 
-    .transmission-caption h3 {
+    .transmission-title {
         font-size: clamp(24px, 3.5vw, 32px);
     }
 }
@@ -105,7 +114,7 @@
         row-gap: 32px;
     }
 
-    .transmission-caption h3 {
+    .transmission-title {
         font-size: clamp(22px, 6vw, 28px);
     }
 }

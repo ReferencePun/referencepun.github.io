@@ -5,7 +5,8 @@
     "images": "node scripts/build-gallery-images.cjs",
     "images:home": "node scripts/build-home-images.cjs",
     "images:magazines": "node scripts/build-magazine-images.cjs",
-    "test": "node tests/gallery.cjs && node tests/home.cjs && node tests/photography.cjs && node tests/video.cjs && node tests/magazines.cjs"
+    "test": "node tests/gallery.cjs && node tests/home.cjs && node tests/photography.cjs && node tests/video.cjs && node tests/magazines.cjs",
+    "images:about": "node scripts/build-about-images.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1",

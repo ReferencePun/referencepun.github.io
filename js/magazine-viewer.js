@@ -5,6 +5,7 @@
     const library = window.magazineLibrary || [];
     if (!dialog || !dialog.showModal || !library.length) return;
     const find = selector => dialog.querySelector(selector);
+    const shell = find('.reader-shell');
     const stage = find('.reader-stage');
     const pages = find('.reader-pages');
     const body = find('.reader-body');
@@ -27,7 +28,10 @@
     const positions = new Map();
     let publication, manifest, opener, oldOverflow;
     let page = 1, zoom = false, mode = 'auto', request = 0, loadingTimer, preloadTimer;
-    let visible = [], touchStart, readerFullscreen = false;
+    let visible = [], touchStart;
+    const fullscreenElement = () => document.fullscreenElement || document.webkitFullscreenElement;
+    const enterFullscreen = shell.requestFullscreen || shell.webkitRequestFullscreen;
+    const exitFullscreen = () => (document.exitFullscreen || document.webkitExitFullscreen).call(document);
 
     const isSpread = () => mode === 'spread' || (mode === 'auto' && !mobile.matches);
     const source = (book, number, size) => `images/magazines/${book.id}/page-${String(number).padStart(3, '0')}-${size}.webp?v=${book.version}`;
@@ -164,7 +168,7 @@
             if (token !== request || !dialog.open) return;
             setBusy(false);
             error.hidden = false;
-            status.textContent = 'This page could not load. Try again or open the PDF.';
+            status.textContent = 'This page could not load. Please try again.';
         }
     }
     function move(direction) {
@@ -173,11 +177,29 @@
         const step = isSpread() ? 2 : 1;
         showPage(direction > 0 ? (page === 1 ? 2 : page + step) : Math.max(1, page - step));
     }
-    function toggleZoom() {
-        if (!manifest) return;
+    function toggleZoom(event) {
+        if (!manifest || !visible.length) return;
+        // Keep the point under the pointer stable while the pages grow. Keyboard
+        // and toolbar zoom use the center of the visible reading area instead.
+        const viewport = stage.getBoundingClientRect();
+        const before = pages.getBoundingClientRect();
+        const pointer = event?.detail > 0;
+        const clientX = pointer ? event.clientX : viewport.left + stage.clientWidth / 2;
+        const clientY = pointer ? event.clientY : viewport.top + stage.clientHeight / 2;
+        const x = Math.max(0, Math.min(1, (clientX - before.left) / before.width));
+        const y = Math.max(0, Math.min(1, (clientY - before.top) / before.height));
         zoom = !zoom;
         fitPages();
-        showPage(page);
+        if (zoom) {
+            const after = pages.getBoundingClientRect();
+            stage.scrollTo({
+                left: stage.scrollLeft + after.left + x * after.width - clientX,
+                top: stage.scrollTop + after.top + y * after.height - clientY,
+                behavior: 'instant'
+            });
+        } else stage.scrollTo(0, 0);
+        // Decoding a sharper image must not reset the chosen zoom position.
+        showPage(page, { resetScroll: false });
     }
     function buildOverview() {
         if (thumbnails.children.length || !manifest) return;
@@ -234,7 +256,7 @@
             if (token !== request || !dialog.open) return;
             setBusy(false);
             error.hidden = false;
-            status.textContent = 'The magazine could not load. Try again or open the PDF.';
+            status.textContent = 'The magazine could not load. Please try again.';
         }
     }
     function openMagazine(entry, trigger) {
@@ -243,7 +265,7 @@
         manifest = null;
         zoom = false;
         mode = 'auto';
-        fullscreenButton.setAttribute('aria-pressed', String(Boolean(document.fullscreenElement)));
+        fullscreenButton.setAttribute('aria-pressed', 'false');
         page = 1;
         visible = [];
         pages.replaceChildren();
@@ -253,7 +275,6 @@
         overviewButton.setAttribute('aria-expanded', 'false');
         find('.reader-title').textContent = entry.title;
         find('.reader-series').textContent = entry.series;
-        find('.reader-pdf').href = entry.pdf;
         find('.reader-count').textContent = `/ ${entry.pages}`;
         find('.reader-range').textContent = '';
         status.textContent = 'Opening magazine';
@@ -278,23 +299,22 @@
         }
         loadPublication(entry);
     }
-    function cleanup() {
+    async function cleanup() {
         ++request;
         clearTimeout(preloadTimer);
         setBusy(false);
         document.body.style.overflow = oldOverflow;
-        if (readerFullscreen && document.fullscreenElement) document.exitFullscreen().catch(() => {});
         pages.replaceChildren();
         thumbnails.replaceChildren();
         visible = [];
         manifest = null;
-        opener?.focus({ preventScroll: true });
+        try { if (fullscreenElement() === shell) await exitFullscreen(); } catch (_) { /* The browser may already be exiting. */ }
+        if (!dialog.open) opener?.focus({ preventScroll: true });
     }
     document.querySelectorAll('.transmission-card[data-magazine]').forEach(card => {
         const entry = library.find(book => book.id === card.dataset.magazine);
         if (!entry) return;
         card.addEventListener('click', event => {
-            if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
             event.preventDefault();
             openMagazine(entry, card);
         });
@@ -312,23 +332,35 @@
         if (action === 'view') { mode = isSpread() ? 'single' : 'spread'; zoom = false; showPage(page); }
         if (action === 'overview') setOverview(overview.hidden);
         if (action === 'retry') manifest ? showPage(page) : loadPublication(publication);
-        if (action === 'fullscreen') {
-            // Dialogs cannot themselves enter fullscreen. Their document can;
-            // the modal stays in the top layer with focus and controls intact.
-            readerFullscreen = !document.fullscreenElement;
-            const change = document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
-            change.catch(() => { readerFullscreen = false; status.textContent = 'Fullscreen is unavailable in this browser.'; });
-        }
-        if (event.target.closest('button.reader-sheet')) toggleZoom();
+        if (action === 'fullscreen') toggleFullscreen();
+        if (event.target.closest('button.reader-sheet')) toggleZoom(event);
         const thumb = event.target.closest('.reader-thumbnail');
         if (thumb) { zoom = false; setOverview(false); showPage(Number(thumb.dataset.page)); }
     });
-    if (!document.documentElement.requestFullscreen) fullscreenButton.hidden = true;
-    document.addEventListener('fullscreenchange', () => {
-        fullscreenButton.setAttribute('aria-pressed', String(Boolean(document.fullscreenElement)));
-        if (!document.fullscreenElement) readerFullscreen = false;
+    async function toggleFullscreen() {
+        fullscreenButton.disabled = true;
+        try {
+            // Fullscreen the reader's non-dialog shell, keeping its controls and
+            // pages together rather than fullscreening the underlying website.
+            if (fullscreenElement() === shell) await exitFullscreen();
+            else {
+                await enterFullscreen.call(shell);
+                if (!dialog.open && fullscreenElement() === shell) await exitFullscreen();
+            }
+        } catch (_) {
+            status.textContent = 'Fullscreen is unavailable in this browser.';
+        } finally { fullscreenButton.disabled = false; }
+    }
+    if (!enterFullscreen) fullscreenButton.hidden = true;
+    const updateFullscreen = () => {
+        const active = fullscreenElement() === shell;
+        shell.classList.toggle('is-fullscreen', active);
+        fullscreenButton.setAttribute('aria-pressed', String(active));
+        fullscreenButton.setAttribute('aria-label', active ? 'Exit fullscreen' : 'Enter fullscreen');
         fitPages();
-    });
+    };
+    document.addEventListener('fullscreenchange', updateFullscreen);
+    document.addEventListener('webkitfullscreenchange', updateFullscreen);
     find('.reader-jump').addEventListener('submit', event => { event.preventDefault(); zoom = false; showPage(pageInput.value); pageInput.blur(); });
     pageInput.addEventListener('change', () => { zoom = false; showPage(pageInput.value); });
     progress.addEventListener('change', () => { zoom = false; showPage(progress.value); });

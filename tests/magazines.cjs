@@ -1,12 +1,13 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
-const { chromium } = require('playwright');
+const { chromium, webkit } = require('playwright');
 const base = process.env.SITE_URL || 'http://127.0.0.1:4174';
 const root = path.resolve(__dirname, '..');
 
 async function run() {
-    const browser = await chromium.launch({ headless: true, ...(process.env.BROWSER_PATH ? { executablePath: process.env.BROWSER_PATH } : {}) });
+    const browserType = process.env.BROWSER_ENGINE === 'webkit' ? webkit : chromium;
+    const browser = await browserType.launch({ headless: true, ...(process.env.BROWSER_PATH ? { executablePath: process.env.BROWSER_PATH } : {}) });
     const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
     await context.route(/googletagmanager|google-analytics/, route => route.abort());
     const page = await context.newPage();
@@ -45,14 +46,32 @@ async function run() {
         assert.equal(await page.getByRole('button', { name: 'Previous page', exact: true }).isDisabled(), true);
         assert.ok(requests.filter(url => /\/transition\/page-.*-960\.webp/.test(url)).length <= 5, 'Opening only fetches a small page neighborhood');
         assert.equal(requests.some(url => /-240\.webp/.test(url)), false, 'No overview images until requested');
-        assert.equal(await page.getByRole('link', { name: 'Open original PDF' }).getAttribute('href'), 'pdfs/01 Issue 01 Transition S.pdf');
+        assert.equal(await page.locator('a[href*=".pdf"], .reader-pdf').count(), 0, 'The archive and reader have no PDF controls or links');
         await page.getByRole('button', { name: 'Next page', exact: true }).click();
         await ready([2, 3]);
         assert.equal(await page.locator('.reader-range').textContent(), '–3');
-        await page.getByRole('button', { name: 'Toggle fullscreen' }).click();
-        await page.waitForFunction(() => document.fullscreenElement === document.documentElement);
-        await page.getByRole('button', { name: 'Toggle fullscreen' }).click();
+        const fittedHeight = await page.locator('.reader-sheet').first().evaluate(el => el.getBoundingClientRect().height);
+        await page.getByRole('button', { name: 'Enter fullscreen' }).click();
+        await page.waitForFunction(() => document.fullscreenElement === document.querySelector('.reader-shell'));
+        await page.waitForFunction(() => document.querySelector('.reader-shell').classList.contains('is-fullscreen'));
+        assert.ok(await page.locator('.reader-sheet').first().evaluate(el => el.getBoundingClientRect().height) > fittedHeight, 'Fullscreen gives the magazine more reading space');
+        assert.equal(await page.locator('.reader-shell').evaluate(el => { const r = el.getBoundingClientRect(); return r.width === innerWidth && r.height === innerHeight; }), true, 'The reader itself fills the fullscreen viewport');
+        await page.getByRole('button', { name: 'Exit fullscreen' }).click();
         await page.waitForFunction(() => !document.fullscreenElement);
+
+        // Clicks in either half of a spread should enlarge that exact location,
+        // including after the high-resolution image finishes decoding.
+        for (const [number, x, y] of [[2, .65, .4], [3, .35, .6]]) {
+            const sheet = page.locator(`.reader-sheet[data-page="${number}"]`);
+            const before = await sheet.boundingBox();
+            await sheet.click({ position: { x: before.width * x, y: before.height * y } });
+            await ready([2, 3]);
+            const after = await sheet.boundingBox();
+            assert.ok(Math.abs(after.x + after.width * x - (before.x + before.width * x)) < 3, 'Zoom keeps the clicked horizontal point in place');
+            assert.ok(Math.abs(after.y + after.height * y - (before.y + before.height * y)) < 3, 'Zoom keeps the clicked vertical point in place');
+            await page.getByRole('button', { name: 'Zoom out', exact: true }).first().click();
+            await ready([2, 3]);
+        }
         await page.keyboard.press('ArrowLeft');
         await ready([1]);
         await jump(10, [10, 11]);
@@ -125,15 +144,22 @@ async function run() {
         await page.locator('[data-magazine="transition"]').click();
         await ready([16]);
         await page.locator('.reader-stage').evaluate(el => {
-            el.dispatchEvent(new TouchEvent('touchstart', { touches: [new Touch({ identifier: 1, target: el, clientX: 200, clientY: 200 })] }));
-            el.dispatchEvent(new TouchEvent('touchend', { changedTouches: [new Touch({ identifier: 1, target: el, clientX: 190, clientY: 400 })] }));
+            el.dispatchEvent(Object.assign(new Event('touchstart'), { touches: [{ clientX: 200, clientY: 200 }] }));
+            el.dispatchEvent(Object.assign(new Event('touchend'), { touches: [], changedTouches: [{ clientX: 190, clientY: 400 }] }));
         });
         await ready([16]);
         await page.locator('.reader-stage').evaluate(el => {
-            el.dispatchEvent(new TouchEvent('touchstart', { touches: [new Touch({ identifier: 1, target: el, clientX: 300, clientY: 400 })] }));
-            el.dispatchEvent(new TouchEvent('touchend', { changedTouches: [new Touch({ identifier: 1, target: el, clientX: 100, clientY: 410 })] }));
+            el.dispatchEvent(Object.assign(new Event('touchstart'), { touches: [{ clientX: 300, clientY: 400 }] }));
+            el.dispatchEvent(Object.assign(new Event('touchend'), { touches: [], changedTouches: [{ clientX: 100, clientY: 410 }] }));
         });
         await ready([17]);
+        const phoneSheet = page.locator('button.reader-sheet');
+        const phoneBefore = await phoneSheet.boundingBox();
+        await phoneSheet.click({ position: { x: phoneBefore.width * .45, y: phoneBefore.height * .55 } });
+        await ready([17]);
+        const phoneAfter = await phoneSheet.boundingBox();
+        assert.ok(Math.abs(phoneAfter.x + phoneAfter.width * .45 - (phoneBefore.x + phoneBefore.width * .45)) < 3, 'Phone zoom keeps the tapped horizontal point in place');
+        assert.ok(Math.abs(phoneAfter.y + phoneAfter.height * .55 - (phoneBefore.y + phoneBefore.height * .55)) < 3, 'Phone zoom keeps the tapped vertical point in place');
         await close();
         // Opening another issue before an earlier request completes cannot overwrite it.
         await page.setViewportSize({ width: 1440, height: 900 });
@@ -176,9 +202,10 @@ async function run() {
         const fallback = await browser.newContext({ javaScriptEnabled: false });
         const plain = await fallback.newPage();
         await plain.goto(`${base}/transmission.html`);
-        assert.equal(await plain.locator('.transmission-card[href$=".pdf"]').count(), 9, 'Original PDF links remain without JavaScript');
+        assert.equal(await plain.locator('a[href*=".pdf"]').count(), 0, 'PDF links also stay unavailable without JavaScript');
+        assert.equal(await plain.locator('noscript p').isVisible(), true);
         assert.equal(await plain.locator('#magazine-reader').isVisible(), false);
-        console.log('Magazine reader: lazy page requests, spreads and covers, jump/overview, zoom, retries, races, keyboard/focus, swipe, responsive fit, all publication assets, and PDF fallback passed.');
+        console.log('Magazine reader: lazy page requests, spreads and covers, reader fullscreen, click-anchored zoom, jump/overview, retries, races, keyboard/focus, swipe, responsive fit, all publication assets, and disabled PDF links passed.');
     } finally { await browser.close(); }
 }
 run().catch(error => { console.error(error); process.exitCode = 1; });

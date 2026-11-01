@@ -21,6 +21,7 @@
     <meta name="twitter:image:alt" content="Sunset over the sea, photographed through grasses by Dylan Forsberg.">
     <link rel="canonical" href="https://dylanforsberg.com/info.html">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preload" as="image" type="image/avif" imagesrcset="images/about/georgia-fowler-360.avif 360w, images/about/georgia-fowler-540.avif 540w, images/about/georgia-fowler-720.avif 720w, images/about/georgia-fowler-960.avif 960w, images/about/georgia-fowler-1200.avif 1200w, images/about/georgia-fowler-1440.avif 1440w" imagesizes="(max-width: 700px) calc(50vw - 28px), (max-width: 1000px) calc(34.5vw - 14px), min(calc(34.5vw - 28px), calc(70svh - 150px), 668px)" fetchpriority="high">
     <link rel="stylesheet" href="css/style.css?v=fe27b85581f3">
     <link rel="stylesheet" href="css/about.css?v=11b3103e4ebd">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap">
@@ -71,7 +72,10 @@
     <main class="about-page">
         <section class="info-container about-layout" aria-labelledby="about-heading">
             <figure class="about-portrait">
-                <img src="images/gallery/9db18fb33cc639bd-960.webp" srcset="images/gallery/9db18fb33cc639bd-480.webp 480w, images/gallery/9db18fb33cc639bd-960.webp 960w, images/gallery/9db18fb33cc639bd-1440.webp 1440w" sizes="(max-width: 700px) calc(50vw - 28px), 34vw" width="1440" height="2172" alt="Black-and-white portrait of Georgia Fowler by Dylan Forsberg." fetchpriority="high" decoding="async">
+                <picture>
+                    <source type="image/avif" srcset="images/about/georgia-fowler-360.avif 360w, images/about/georgia-fowler-540.avif 540w, images/about/georgia-fowler-720.avif 720w, images/about/georgia-fowler-960.avif 960w, images/about/georgia-fowler-1200.avif 1200w, images/about/georgia-fowler-1440.avif 1440w" sizes="(max-width: 700px) calc(50vw - 28px), (max-width: 1000px) calc(34.5vw - 14px), min(calc(34.5vw - 28px), calc(70svh - 150px), 668px)">
+                    <img src="images/about/georgia-fowler-960.webp" srcset="images/about/georgia-fowler-360.webp 360w, images/about/georgia-fowler-540.webp 540w, images/about/georgia-fowler-720.webp 720w, images/about/georgia-fowler-960.webp 960w, images/about/georgia-fowler-1200.webp 1200w, images/about/georgia-fowler-1440.webp 1440w" sizes="(max-width: 700px) calc(50vw - 28px), (max-width: 1000px) calc(34.5vw - 14px), min(calc(34.5vw - 28px), calc(70svh - 150px), 668px)" width="1500" height="2263" alt="Black-and-white portrait of Georgia Fowler by Dylan Forsberg." loading="eager" fetchpriority="high" decoding="async">
+                </picture>
             </figure>
             <div class="about-content">
                 <h2 class="about-heading" id="about-heading">About</h2>
@@ -82,7 +86,10 @@
                 </div>
 
                 <figure class="about-work-strip">
-                    <img src="images/thumbnails/whereiwanttobe2.jpg" width="3873" height="1000" alt="Where I Want to Be T-shirts for Madewell. Modeled by Behati Prinsloo, Madisyn Ritland and Kasia Struss." loading="lazy" decoding="async">
+                    <picture>
+                        <source type="image/avif" srcset="images/about/selected-work-540.avif 540w, images/about/selected-work-960.avif 960w, images/about/selected-work-1440.avif 1440w, images/about/selected-work-2048.avif 2048w" sizes="(max-width: 700px) 90vw, min(60vw, 1152px)">
+                        <img src="images/about/selected-work-960.webp" srcset="images/about/selected-work-540.webp 540w, images/about/selected-work-960.webp 960w, images/about/selected-work-1440.webp 1440w, images/about/selected-work-2048.webp 2048w" sizes="(max-width: 700px) 90vw, min(60vw, 1152px)" width="3873" height="1000" alt="Where I Want to Be T-shirts for Madewell. Modeled by Behati Prinsloo, Madisyn Ritland and Kasia Struss." loading="lazy" fetchpriority="low" decoding="async">
+                    </picture>
                 </figure>
 
                 <section class="contact-section" aria-labelledby="contact-heading">
