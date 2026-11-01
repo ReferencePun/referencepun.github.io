@@ -14,10 +14,11 @@
 }
 
 :root {
-    --site-background: #f5f2ed;
-    --site-paper: url("../images/paper-grain.svg");
-    --heading-weight: 500;
-    --quote-weight: 500;
+    --site-background: #f6f3ee;
+    --site-paper: url("../images/paper-grain.svg?v=7de161c3216e");
+    --heading-weight: 400;
+    --quote-weight: 400;
+    --image-shadow: 0 4px 8px rgba(0, 0, 0, .1);
 }
 
 body {

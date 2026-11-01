@@ -56,6 +56,25 @@ async function run() {
             const ratio = await page.locator('#pool-party .film-player').evaluate(el => { const b = el.getBoundingClientRect(); return b.width / b.height; });
             assert.ok(Math.abs(ratio - 16 / 9) < .01, `Uncropped 16:9 player at ${width}px`);
         }
+        for (const [width, height] of [[1101, 720], [1280, 720], [1366, 768], [1440, 780], [1440, 900], [1710, 984], [1920, 800], [1920, 1080], [2560, 1440]]) {
+            await page.setViewportSize({ width, height });
+            for (const film of ['devil-in-me', 'pool-party']) {
+                await page.locator(`.film-choice[href="#${film}"]`).click();
+                await page.evaluate(async () => { await document.fonts.ready; scrollTo(0, 0); });
+                const layout = await page.evaluate(() => {
+                    const rect = selector => document.querySelector(selector).getBoundingClientRect();
+                    return {
+                        width: rect('.video-page').width,
+                        bottom: rect('.film-navigation').bottom,
+                        featureBottom: rect('.film-feature:not([hidden])').bottom,
+                        navigationTop: rect('.film-navigation').top
+                    };
+                });
+                assert.equal(layout.width, width, 'The Video page keeps the full viewport width');
+                assert.ok(layout.bottom <= height, `${film}: player, credits and navigation fit ${width}x${height} without the footer`);
+                assert.ok(layout.featureBottom < layout.navigationTop, 'Credits and player clear the film navigation');
+            }
+        }
         await page.setViewportSize({ width: 393, height: 852 });
         await page.locator('.film-choice[href="#devil-in-me"]').click();
         assert.equal(await page.locator('#devil-in-me').isVisible(), true);
@@ -70,7 +89,7 @@ async function run() {
         await plain.goto(`${base}/video.html`);
         assert.equal(await plain.locator('.film-feature:visible').count(), 2);
         assert.equal(await plain.locator('#pool-party .film-play').getAttribute('href'), 'https://vimeo.com/651829056');
-        console.log('Video selection, keyboard navigation, playback cleanup, history, permalinks, nine viewport widths, mobile menu, and no-JavaScript fallback passed.');
+        console.log('Video selection, keyboard navigation, playback cleanup, history, permalinks, responsive widths, full-width desktop window fit, mobile menu, and no-JavaScript fallback passed.');
     } finally { await browser.close(); }
 }
 run().catch(error => { console.error(error); process.exitCode = 1; });

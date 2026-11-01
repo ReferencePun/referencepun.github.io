@@ -8,7 +8,7 @@
     max-width: none;
 }
 .about-portrait, .about-work-strip { margin: 0; }
-.about-portrait img, .about-work-strip img { width: 100%; height: auto; }
+.about-portrait img, .about-work-strip img { width: 100%; height: auto; box-shadow: var(--image-shadow); }
 .about-content { min-width: 0; }
 .about-heading {
     margin: 0 0 24px;
