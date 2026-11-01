@@ -230,7 +230,7 @@
         --film-detail-space: clamp(14px, 2svh, 24px);
         --film-top-space: clamp(20px, 3svh, 32px);
         --film-nav-gap: clamp(20px, 2.5svh, 28px);
-        --film-nav-reserve: clamp(80px, 8vw, 200px);
+        --film-nav-reserve: clamp(100px, 9.6vw, 250px);
         --film-player-limit: calc((100svh - 96px - var(--film-top-space) - var(--film-nav-gap) - var(--film-nav-reserve) - 20px) * 16 / 9);
         padding-top: var(--film-top-space);
     }
@@ -244,7 +244,7 @@
     .film-credits .film-cast { grid-template-columns: 1fr; gap: 6px; }
     .film-cast dd { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 16px; }
     .film-navigation { margin-top: var(--film-nav-gap); }
-    .film-choice { display: grid; grid-template-columns: 1.2fr 1fr; column-gap: clamp(12px, 1vw, 20px); align-items: center; }
+    .film-choice { display: grid; grid-template-columns: 3.2fr 1fr; column-gap: clamp(12px, 1vw, 20px); align-items: center; }
     .film-choice-image { grid-column: 1; grid-row: 1 / 3; }
     .film-choice-title { grid-column: 2; grid-row: 1; align-self: end; margin-top: 0; font-size: clamp(21px, 2.4svh, 26px); }
     .film-choice-kind { grid-column: 2; grid-row: 2; align-self: start; margin-top: 6px; }
