@@ -8,7 +8,14 @@
     max-width: none;
 }
 .about-portrait, .about-work-strip { margin: 0; }
-.about-portrait img, .about-work-strip img { width: 100%; height: auto; box-shadow: var(--image-shadow); }
+.about-portrait img, .about-work-strip img {
+    width: 100%;
+    height: auto;
+    border: clamp(6px, .9vw, 14px) solid #fbfaf7;
+    outline: 1px solid rgb(55 45 35 / .08);
+    box-shadow: var(--image-shadow);
+}
+.about-work-strip { margin-top: clamp(12px, 2svh, 24px); }
 .about-content { min-width: 0; }
 .about-heading {
     margin: 0 0 24px;

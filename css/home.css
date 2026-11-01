@@ -24,6 +24,8 @@
 .home img {
     width: 100%;
     height: auto;
+}
+.home figure:not(.publication-cover) > img {
     border: clamp(6px, .9vw, 14px) solid #fbfaf7;
     outline: 1px solid rgb(55 45 35 / .08);
 }
