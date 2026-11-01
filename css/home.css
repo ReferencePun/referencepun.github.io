@@ -29,6 +29,7 @@
     border: clamp(6px, .9vw, 14px) solid #fbfaf7;
     outline: 1px solid rgb(55 45 35 / .08);
 }
+.home .publication-cover img { box-shadow: var(--image-shadow); }
 .home figure { margin: 0; min-width: 0; }
 .home .eyebrow, .project-label { color: #555550; font-family: inherit; font-size: var(--credit-size); font-weight: 400; line-height: 1.35; }
 .home .eyebrow { margin: 0 0 24px; letter-spacing: .12em; text-transform: uppercase; }

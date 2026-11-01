@@ -9,13 +9,13 @@
 
 .photography-switcher--bottom { margin-bottom: 0; overflow-anchor: none; }
 
-/* A six-portrait frame trial; landscape tiles and the viewer stay unframed. */
-#photography-gallery[aria-labelledby="portraits-selector"] .portfolio-item:nth-child(-n+6) {
+/* Flat white borders across both collections; preserve each full composition. */
+#photography-gallery .portfolio-item {
     border: clamp(6px, .9vw, 14px) solid #fbfaf7;
     background: #fbfaf7;
 }
 
-#photography-gallery[aria-labelledby="portraits-selector"] .portfolio-item:nth-child(-n+6) img {
+#photography-gallery .portfolio-item img {
     object-fit: contain;
 }
 
