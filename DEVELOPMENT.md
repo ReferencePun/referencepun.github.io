@@ -30,7 +30,7 @@ Writing is available directly at `/writing.html` but is omitted from the site na
 
 The Info page follows the supplied About reference: an uncropped Georgia Fowler portrait on the left, with a large About heading, biography, Madewell image strip, and contact details on the right. The biography and strip share a width. On desktop, the composition width, heading, and spacing adapt to the window height so the full portrait and contact details remain in view. The larger composition follows the supplied reference, with the shared footer below the first screen. Shorter laptop windows use tighter spacing while keeping body text at least 18px; content scrolls naturally when needed rather than clipping. The contact block contains the email only; Instagram remains in the shared navigation. On desktop, the larger Contact heading and email sit near the bottom of the portrait, separated from the work strip by generous space and a thin rule. The column expands naturally if text needs more room. `css/about.css` contains page-specific styling. The portrait and work strip use responsive AVIF images with WebP fallbacks in `images/about/`. Run `npm run images:about` to regenerate them from the unchanged original photographs. The portrait is preloaded at high priority, with smaller intermediate sizes and a viewport-aware `sizes` hint; the work strip loads lazily at low priority. This avoids downloading the oversized gallery asset for a small display. On phones, the portrait sits beside the heading and introduction, with the remaining biography, strip, and contact details spanning the page below.
 
-The shared site footer uses consistent padding, readable serif type, and no extra paragraph margin. V1 brings the email, copyright, and About & Contact link into one aligned footer row on desktop; on phones, the links stack with the copyright beneath.
+The shared site footer uses consistent padding, readable serif type, and no extra paragraph margin. The footer places the email on the right and the copyright on the left on desktop; on phones, the email stays right-aligned with the copyright beneath.
 
 ## Alternate homepage study
 
@@ -44,7 +44,7 @@ The desktop header groups the navigation and Instagram on the right, using even 
 
 Shared headers use the same fluid gutters on all portfolio pages and the V2 study. Standard page content, gallery selectors, and the two-column About layout use these gutters too. Video players keep a 16:9 aspect ratio even above their maximum width.
 
-All portfolio and article pages share the same `.site-footer` in `css/style.css`: email, centered copyright, About & Contact, and an inset divider. At 760px and below it stacks in that order with the copyright last; the decorative arrow after About & Contact is hidden on phones. V2 uses this same footer instead of a separate contact row.
+All portfolio and article pages share the same `.site-footer` in `css/style.css`: right-aligned email, left-aligned copyright, and an inset divider. The About & Contact link is removed. At 760px and below the email remains on the right with the copyright on the next row. V2 uses this same footer instead of a separate contact row.
 
 ## Transmission archive and site color
 
