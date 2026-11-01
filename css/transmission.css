@@ -70,7 +70,7 @@
 .transmission-caption h3 {
     margin: 0;
     font-size: clamp(24px, 2.4vw, 44px);
-    font-weight: 400;
+    font-weight: var(--heading-weight);
     line-height: 1.12;
     letter-spacing: -.02em;
     text-wrap: balance;

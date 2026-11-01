@@ -13,7 +13,7 @@
 .about-heading {
     margin: 0 0 24px;
     font-size: clamp(64px, 8.8vw, 168px);
-    font-weight: 300;
+    font-weight: var(--heading-weight);
     line-height: 1;
     letter-spacing: -.04em;
 }

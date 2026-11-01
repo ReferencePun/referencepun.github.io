@@ -50,7 +50,7 @@ All portfolio and article pages share the same `.site-footer` in `css/style.css`
 
 `transmission.html` uses `css/transmission.css` for a full-width four-column cover grid, with issue numbers and titles below each uncropped cover. The original subtle cover shadows are retained to distinguish pale covers from the background. At 900px and below the grid switches to two columns. Transmission Presents and Transmission Showcase retain their original publications and PDF destinations. The covers open the existing PDF reader and link directly to their PDFs when JavaScript is unavailable. The removed Press section is stored, with its original wording and markup, in `content/archive/transmission-press.html`; it is not included in the page. Homepage press excerpts remain unchanged.
 
-The shared portfolio background is `--site-background: #f7f4ef` in `css/style.css`, used by the page, sticky navigation, gallery placeholders, collection selectors, and V2 dialogs. Photograph and PDF colors are unchanged.
+The shared portfolio background is `--site-background: #f5f2ed` in `css/style.css`, sampled from the owner’s paper reference. `--site-paper` adds a subtle, seamlessly repeating SVG grain from `images/paper-grain.svg` to the page, sticky navigation, gallery placeholders, collection selectors, and V2 dialogs. It sits behind content and never filters photographs or PDFs. The shared `--heading-weight: 500` and `--quote-weight: 500` use the real medium Cormorant Garamond font; body copy, captions, navigation, and the introduction remain regular weight. Every portfolio page loads the same font weights. All V1 homepage photographs, including the opening portraits, are plain images without links; galleries and navigation retain their interactions.
 
 ## Video page
 

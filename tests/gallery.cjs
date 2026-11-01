@@ -27,7 +27,10 @@ async function run() {
             let release;
             const gate = new Promise(resolve => { release = resolve; });
             const requests = [];
-            page.on('request', request => { if (request.resourceType() === 'image') requests.push(request.url()); });
+            page.on('request', request => {
+                // The shared paper texture is decorative, not a gallery photograph.
+                if (request.resourceType() === 'image' && new URL(request.url()).pathname !== '/images/paper-grain.svg') requests.push(request.url());
+            });
             await page.route('**/images/gallery/**', async request => { await gate; await request.continue(); });
             await page.goto(base + route, { waitUntil: 'domcontentloaded' });
             await page.evaluate(() => document.fonts.ready);

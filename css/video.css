@@ -88,7 +88,7 @@
 .film-details h2 {
     margin: 0;
     font-size: clamp(42px, 3.65vw, 70px);
-    font-weight: 400;
+    font-weight: var(--heading-weight);
     letter-spacing: -.025em;
     line-height: 1.06;
     text-wrap: balance;
@@ -184,13 +184,14 @@
     content: "";
     position: absolute;
     inset: 0;
-    border: 1px solid rgb(247 244 239 / .9);
+    border: 1px solid var(--site-background);
     outline: 1px solid #514e48;
     outline-offset: 3px;
 }
 
 .film-choice-title {
     display: block;
+    font-weight: var(--heading-weight);
     margin-top: 16px;
     font-size: clamp(22px, 1.7vw, 30px);
     line-height: 1.15;
