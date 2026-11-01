@@ -16,17 +16,17 @@ async function run() {
     page.on('pageerror', error => errors.push(error.message));
     page.on('request', request => requests.push(request.url()));
     const dialog = page.locator('#magazine-reader');
-    async function ready(numbers) {
-        await page.waitForFunction(expected => {
+    async function ready(numbers, readerPage = page) {
+        await readerPage.waitForFunction(expected => {
             const stage = document.querySelector('.reader-stage');
             const sheets = [...document.querySelectorAll('button.reader-sheet')];
             return stage.getAttribute('aria-busy') === 'false' && sheets.map(s => +s.dataset.page).join(',') === expected.join(',') && sheets.every(s => s.querySelector('img').complete);
         }, numbers);
     }
-    async function jump(number, expected) {
-        await page.locator('#reader-page').fill(String(number));
-        await page.locator('#reader-page').press('Enter');
-        await ready(expected);
+    async function jump(number, expected, readerPage = page) {
+        await readerPage.locator('#reader-page').fill(String(number));
+        await readerPage.locator('#reader-page').press('Enter');
+        await ready(expected, readerPage);
     }
     async function close() {
         await page.getByRole('button', { name: 'Close magazine', exact: true }).click();
@@ -161,6 +161,57 @@ async function run() {
         assert.ok(Math.abs(phoneAfter.x + phoneAfter.width * .45 - (phoneBefore.x + phoneBefore.width * .45)) < 3, 'Phone zoom keeps the tapped horizontal point in place');
         assert.ok(Math.abs(phoneAfter.y + phoneAfter.height * .55 - (phoneBefore.y + phoneBefore.height * .55)) < 3, 'Phone zoom keeps the tapped vertical point in place');
         await close();
+        // Real touch input: rotate phones below the old 900px breakpoint and
+        // keep the chosen page when switching between one page and its spread.
+        for (const [width, height] of [[393, 852], [320, 568]]) {
+            const phoneContext = await browser.newContext({ viewport: { width, height }, isMobile: true, hasTouch: true });
+            await phoneContext.route(/googletagmanager|google-analytics/, route => route.abort());
+            const phone = await phoneContext.newPage();
+            phone.on('pageerror', error => errors.push(error.message));
+            try {
+                await phone.goto(`${base}/transmission.html`);
+                await phone.locator('[data-magazine="transition"]').tap();
+                await ready([1], phone);
+                await phone.getByRole('button', { name: 'Switch to spreads', exact: true }).tap();
+                await ready([1], phone); // The cover remains a single page in spread mode.
+                assert.equal(await phone.locator('[data-reader="view"]').getAttribute('aria-pressed'), 'true');
+                await phone.getByRole('button', { name: 'Next page', exact: true }).tap();
+                await ready([2, 3], phone);
+                await phone.getByRole('button', { name: 'Switch to single pages', exact: true }).tap();
+                await ready([2], phone);
+                await jump(17, [17], phone);
+                await phone.setViewportSize({ width: height, height: width });
+                await ready([16, 17], phone);
+                assert.equal(await phone.locator('[data-reader="view"]').getAttribute('aria-pressed'), 'true', 'Landscape phones automatically show spreads, including after a manual single-page selection');
+                const fit = await phone.evaluate(() => {
+                    const stage = document.querySelector('.reader-stage').getBoundingClientRect();
+                    const view = document.querySelector('[data-reader="view"]').getBoundingClientRect();
+                    return {
+                        pageHeight: document.querySelector('.reader-sheet').getBoundingClientRect().height,
+                        control: view.left >= 0 && view.right <= innerWidth && view.top >= 0 && view.bottom <= innerHeight,
+                        pages: [...document.querySelectorAll('.reader-sheet')].every(el => { const r = el.getBoundingClientRect(); return r.top >= stage.top && r.bottom <= stage.bottom + 1 && r.left >= stage.left && r.right <= stage.right + 1; })
+                    };
+                });
+                assert.ok(fit.control && fit.pages, `Landscape reader and view button fit ${height}x${width}`);
+                assert.ok(fit.pageHeight > width / 2, 'Compact phone toolbars leave most of the height for the spread');
+                await phone.getByRole('button', { name: 'Switch to single pages', exact: true }).tap();
+                await ready([17], phone);
+                await phone.getByRole('button', { name: 'Switch to spreads', exact: true }).tap();
+                await ready([16, 17], phone);
+                await phone.getByRole('button', { name: 'Next page', exact: true }).tap();
+                await ready([18, 19], phone);
+                await phone.setViewportSize({ width, height });
+                await ready([18], phone);
+                await phone.getByRole('button', { name: 'Switch to spreads', exact: true }).tap();
+                await ready([18, 19], phone);
+                await phone.getByRole('button', { name: 'Previous page', exact: true }).tap();
+                await ready([16, 17], phone);
+                await phone.getByRole('button', { name: 'Switch to single pages', exact: true }).tap();
+                await ready([16], phone);
+                await phone.getByRole('button', { name: 'Close magazine', exact: true }).tap();
+                await phone.waitForFunction(() => document.body.style.overflow !== 'hidden');
+            } finally { await phoneContext.close(); }
+        }
         // Opening another issue before an earlier request completes cannot overwrite it.
         await page.setViewportSize({ width: 1440, height: 900 });
         await page.route('**/transition/page-050-960.webp*', async route => { await new Promise(resolve => setTimeout(resolve, 400)); await route.continue().catch(() => {}); });

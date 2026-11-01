@@ -117,13 +117,17 @@
     .reader-jump { gap: 4px; font-size: 12px; }
     .reader-jump input { width: 36px; }
 }
-@media (max-height: 500px) and (min-width: 601px) {
-    .reader-topbar { padding-block: 6px; }
+@media (max-height: 500px) and (orientation: landscape) {
+    .reader-topbar { display: flex; gap: 8px; padding: 6px max(12px, env(safe-area-inset-right)) 6px max(12px, env(safe-area-inset-left)); }
+    .reader-heading { padding-right: 0; }
+    .reader-tools { margin-top: 0; }
+    .reader-tools .reader-close { position: static; }
+    .reader-tool-label { display: none; }
     .reader-series { display: none; }
     .reader-title { font-size: 24px; }
     .reader-bottom { padding-block: 4px; }
     .reader-progress { margin-top: 0; height: 12px; }
-    .reader-stage { padding: 12px; }
+    .reader-stage { padding: 12px max(12px, env(safe-area-inset-right)) 12px max(12px, env(safe-area-inset-left)); }
 }
 @media (max-width: 360px) {
     .reader-navigation button span { display: none; }

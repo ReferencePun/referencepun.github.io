@@ -22,18 +22,18 @@
     const viewButton = find('[data-reader="view"]');
     const overviewButton = find('[data-reader="overview"]');
     const fullscreenButton = find('[data-reader="fullscreen"]');
-    const mobile = matchMedia('(max-width: 899px)');
+    const spreadLayout = matchMedia('(min-width: 900px), (orientation: landscape)');
     const manifests = new Map();
     const images = new Map();
     const positions = new Map();
     let publication, manifest, opener, oldOverflow;
-    let page = 1, zoom = false, mode = 'auto', request = 0, loadingTimer, preloadTimer;
+    let page = 1, readingPage = 1, zoom = false, mode = 'auto', request = 0, loadingTimer, preloadTimer;
     let visible = [], touchStart;
     const fullscreenElement = () => document.fullscreenElement || document.webkitFullscreenElement;
     const enterFullscreen = shell.requestFullscreen || shell.webkitRequestFullscreen;
     const exitFullscreen = () => (document.exitFullscreen || document.webkitExitFullscreen).call(document);
 
-    const isSpread = () => mode === 'spread' || (mode === 'auto' && !mobile.matches);
+    const isSpread = () => mode === 'spread' || (mode === 'auto' && spreadLayout.matches);
     const source = (book, number, size) => `images/magazines/${book.id}/page-${String(number).padStart(3, '0')}-${size}.webp?v=${book.version}`;
     const normalized = number => isSpread() && number > 1 ? number - number % 2 : number;
     function numbersFor(number) {
@@ -96,6 +96,7 @@
         find('.reader-range').textContent = numbers.length === 2 ? `–${numbers[1]}` : '';
         viewButton.setAttribute('aria-pressed', String(isSpread()));
         viewButton.setAttribute('aria-label', isSpread() ? 'Switch to single pages' : 'Switch to spreads');
+        viewButton.querySelector('.reader-tool-label').textContent = isSpread() ? 'Single page' : 'Two pages';
         zoomButton.setAttribute('aria-pressed', String(zoom));
         zoomButton.setAttribute('aria-label', zoom ? 'Zoom out' : 'Zoom in');
         zoomButton.querySelector('span').textContent = zoom ? 'Fit' : 'Zoom';
@@ -135,7 +136,8 @@
     }
     async function showPage(number, { resetScroll = true } = {}) {
         if (!dialog.open || !manifest) return;
-        page = normalized(Math.max(1, Math.min(manifest.pages.length, Math.trunc(Number(number)) || 1)));
+        readingPage = Math.max(1, Math.min(manifest.pages.length, Math.trunc(Number(number)) || 1));
+        page = normalized(readingPage);
         const token = ++request;
         const book = manifest;
         clearTimeout(preloadTimer);
@@ -160,7 +162,7 @@
             fitPages();
             if (resetScroll) stage.scrollTo(0, 0);
             if (focusWasPage) sheets[0].focus({ preventScroll: true });
-            positions.set(book.id, page);
+            positions.set(book.id, readingPage);
             status.textContent = label;
             setBusy(false);
             schedulePreload(token);
@@ -199,7 +201,7 @@
             });
         } else stage.scrollTo(0, 0);
         // Decoding a sharper image must not reset the chosen zoom position.
-        showPage(page, { resetScroll: false });
+        showPage(readingPage, { resetScroll: false });
     }
     function buildOverview() {
         if (thumbnails.children.length || !manifest) return;
@@ -266,7 +268,7 @@
         zoom = false;
         mode = 'auto';
         fullscreenButton.setAttribute('aria-pressed', 'false');
-        page = 1;
+        page = readingPage = 1;
         visible = [];
         pages.replaceChildren();
         thumbnails.replaceChildren();
@@ -329,9 +331,9 @@
         if (action === 'previous') move(-1);
         if (action === 'next') move(1);
         if (action === 'zoom') toggleZoom();
-        if (action === 'view') { mode = isSpread() ? 'single' : 'spread'; zoom = false; showPage(page); }
+        if (action === 'view') { mode = isSpread() ? 'single' : 'spread'; zoom = false; showPage(readingPage); }
         if (action === 'overview') setOverview(overview.hidden);
-        if (action === 'retry') manifest ? showPage(page) : loadPublication(publication);
+        if (action === 'retry') manifest ? showPage(readingPage) : loadPublication(publication);
         if (action === 'fullscreen') toggleFullscreen();
         if (event.target.closest('button.reader-sheet')) toggleZoom(event);
         const thumb = event.target.closest('.reader-thumbnail');
@@ -383,6 +385,12 @@
         if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) move(dx < 0 ? 1 : -1);
         touchStart = null;
     }, { passive: true });
-    mobile.addEventListener('change', () => { if (dialog.open && mode === 'auto') showPage(page); });
+    spreadLayout.addEventListener('change', () => {
+        // A new orientation gets its natural layout. The view button can still
+        // override that layout until the next orientation/breakpoint change.
+        mode = 'auto';
+        zoom = false;
+        if (dialog.open) showPage(readingPage);
+    });
     new ResizeObserver(fitPages).observe(stage);
 })();
