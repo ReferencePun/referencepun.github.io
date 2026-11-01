@@ -169,11 +169,14 @@
     position: absolute;
     inset: calc(-1 * var(--selection-inset));
     z-index: -1;
-    border: 1px solid #292927;
+    border: 1px solid #d9d9d5;
     pointer-events: none;
 }
 
+.film-choice:hover::before { border-color: #aaa; }
+
 .film-choice[aria-current="true"]::before {
+    border-color: #c8c8c2;
     background: #eae4da;
 }
 
