@@ -21,7 +21,7 @@ async function run() {
         assert.equal(await page.locator('#devil-in-me').isVisible(), true);
         assert.equal(await page.locator('iframe').count(), 0, 'No third-party player before playback');
         assert.equal(embeds.length, 0);
-        assert.equal(await page.locator('.film-coming-soon').count(), 2);
+        assert.equal(await page.locator('.film-coming-soon').count(), 1);
         assert.equal(await page.locator('.film-coming-soon a, .film-coming-soon button').count(), 0, 'Coming soon cards are inactive');
 
         await page.getByRole('link', { name: 'Play The Overland — Devil in Me', exact: true }).click();
@@ -53,6 +53,12 @@ async function run() {
             await page.evaluate(() => document.fonts.ready);
             assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `Overflow at ${width}px`);
             assert.ok(await page.locator('.film-navigation').evaluate(el => el.getBoundingClientRect().height > 0), 'Navigation stays visible on phones');
+            const cards = await page.locator('.film-navigation li').evaluateAll(items => items.map(item => {
+                const { top, width } = item.getBoundingClientRect();
+                return { top, width };
+            }));
+            assert.equal(cards.length, 3);
+            assert.ok(cards.every(card => Math.abs(card.top - cards[0].top) < 1 && Math.abs(card.width - cards[0].width) < 1), 'Three equally sized video selectors share one row');
             const ratio = await page.locator('#pool-party .film-player').evaluate(el => { const b = el.getBoundingClientRect(); return b.width / b.height; });
             assert.ok(Math.abs(ratio - 16 / 9) < .01, `Uncropped 16:9 player at ${width}px`);
         }

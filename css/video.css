@@ -119,7 +119,7 @@
 
 .film-credits {
     display: grid;
-    gap: 9px;
+    gap: 16px;
     margin-top: clamp(24px, 2vw, 36px);
     padding-top: 22px;
     border-top: 1px solid #dedad3;
@@ -128,7 +128,7 @@
 .film-credits > div {
     display: grid;
     grid-template-columns: minmax(0, .95fr) minmax(0, 1.25fr);
-    column-gap: 16px;
+    column-gap: 24px;
     align-items: baseline;
 }
 
@@ -140,6 +140,8 @@
 }
 
 .film-credits dd {
+    display: grid;
+    row-gap: 4px;
     min-width: 0;
     font-size: clamp(18px, 1.2vw, 21px);
     line-height: 1.4;
@@ -159,7 +161,7 @@
 
 .film-navigation ul {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(16px, 1.3vw, 24px);
     list-style: none;
 }
@@ -230,7 +232,7 @@
         --film-detail-space: clamp(14px, 2svh, 24px);
         --film-top-space: clamp(20px, 3svh, 32px);
         --film-nav-gap: clamp(20px, 2.5svh, 28px);
-        --film-nav-reserve: clamp(100px, 9.6vw, 250px);
+        --film-nav-reserve: clamp(140px, 13vw, 340px);
         --film-player-limit: calc((100svh - 96px - var(--film-top-space) - var(--film-nav-gap) - var(--film-nav-reserve) - 20px) * 16 / 9);
         padding-top: var(--film-top-space);
     }
@@ -239,16 +241,22 @@
     .film-details h2 { font-size: clamp(36px, 5svh, 58px); }
     .film-meta { margin-top: clamp(10px, 1.6svh, 16px); }
     .film-summary { margin-top: var(--film-detail-space); font-size: clamp(18px, 2.2svh, 22px); line-height: 1.35; }
-    .film-credits { gap: clamp(6px, .8svh, 9px); margin-top: var(--film-detail-space); padding-top: var(--film-detail-space); }
+    .film-credits { gap: clamp(12px, 1.6svh, 18px); margin-top: var(--film-detail-space); padding-top: var(--film-detail-space); }
     .film-credits dd { font-size: clamp(18px, 2svh, 21px); line-height: 1.3; }
-    .film-credits .film-cast { grid-template-columns: 1fr; gap: 6px; }
-    .film-cast dd { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 16px; }
+    .film-credits .film-cast { grid-template-columns: 1fr; gap: 10px; }
+    .film-cast dd { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); max-width: 560px; gap: 8px 24px; }
     .film-navigation { margin-top: var(--film-nav-gap); }
     .film-choice { display: grid; grid-template-columns: 3.2fr 1fr; column-gap: clamp(12px, 1vw, 20px); align-items: center; }
     .film-choice-image { grid-column: 1; grid-row: 1 / 3; }
     .film-choice-title { grid-column: 2; grid-row: 1; align-self: end; margin-top: 0; font-size: clamp(21px, 2.4svh, 26px); }
     .film-choice-kind { grid-column: 2; grid-row: 2; align-self: start; margin-top: 6px; }
     .film-placeholder { height: 100%; aspect-ratio: auto; font-size: clamp(22px, 3svh, 32px); }
+}
+
+@media (min-width: 1101px) and (max-height: 780px) {
+    .video-page { --film-top-space: 16px; --film-nav-gap: 14px; --film-detail-space: 12px; }
+    .film-credits .film-cast { gap: 8px; }
+    .film-cast dd { row-gap: 6px; }
 }
 
 @media (max-width: 1100px) {
@@ -269,9 +277,9 @@
     .film-credits > div { grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); }
     .film-credits dt { font-size: 11px; }
     .film-credits dd { font-size: 20px; }
-    .film-navigation ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 18px; }
-    .film-choice-title { margin-top: 12px; font-size: 23px; }
-    .film-placeholder { font-size: 24px; }
+    .film-navigation ul { gap: clamp(10px, 3vw, 18px); }
+    .film-choice-title { margin-top: 12px; font-size: clamp(18px, 4.6vw, 23px); }
+    .film-placeholder { padding: 4px; font-size: clamp(16px, 4vw, 22px); line-height: 1.2; }
 }
 
 @media (prefers-reduced-motion: reduce) {
