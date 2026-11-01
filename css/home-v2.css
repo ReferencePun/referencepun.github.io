@@ -7,7 +7,7 @@
     --feature-height: clamp(300px, 34vw, 640px);
     --board-rule: #deded9;
     color: #181817;
-    background: #fff;
+    background: var(--site-background);
 }
 .home-alternate a { color: inherit; }
 .home-alternate .skip-link {
@@ -16,7 +16,7 @@
     left: var(--board-gutter);
     z-index: 101;
     padding: 8px 12px;
-    background: white;
+    background: var(--site-background);
     transform: translateY(-180%);
 }
 .home-alternate .skip-link:focus { transform: none; }
@@ -124,11 +124,11 @@
 .work-transmission h3 { font-size: clamp(30px, 3.35vw, 62px); }
 .work-pair .work-category { margin-top: 20px; font-size: 10px; letter-spacing: .12em; }
 
-.project-viewer { width: min(94vw, 1440px); max-width: none; max-height: 92vh; margin: auto; padding: 0 28px 28px; border: 1px solid #deded9; color: #181817; background: white; }
+.project-viewer { width: min(94vw, 1440px); max-width: none; max-height: 92vh; margin: auto; padding: 0 28px 28px; border: 1px solid #deded9; color: #181817; background: var(--site-background); }
 .project-viewer::backdrop { background: rgb(20 20 18 / .55); }
-.viewer-heading { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px 0; background: white; z-index: 1; }
+.viewer-heading { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px 0; background: var(--site-background); z-index: 1; }
 .viewer-heading h2 { margin: 0; font: 400 clamp(26px, 3vw, 42px)/1.1 'Cormorant Garamond', Times, serif; }
-.close-project { flex: 0 0 44px; height: 44px; border: 0; background: white; color: #181817; font: 300 32px/1 Arial, sans-serif; cursor: pointer; }
+.close-project { flex: 0 0 44px; height: 44px; border: 0; background: var(--site-background); color: #181817; font: 300 32px/1 Arial, sans-serif; cursor: pointer; }
 .project-photographs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start; }
 .project-photographs img { width: 100%; height: auto; }
 

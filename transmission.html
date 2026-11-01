@@ -21,7 +21,8 @@
     <meta name="twitter:image:alt" content="Sunset over the sea, photographed through grasses by Dylan Forsberg.">
     <link rel="canonical" href="https://dylanforsberg.com/transmission.html">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/style.css?v=dca67288c330">
+    <link rel="stylesheet" href="css/style.css?v=4f6d53fd1a24">
+    <link rel="stylesheet" href="css/transmission.css?v=15b943707d79">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap">
 
     <!-- Google tag (gtag.js) -->
@@ -67,145 +68,113 @@
         </div>
     </header>
 
-    <main>
-        <!-- Simple text heading instead of traditional heading -->
-        <div style="text-align: center; font-size: 1.5rem; font-weight: 300;">
-            Transmission Magazine
-        </div>
-        <br>
-        
-        <!-- Responsive magazine grid -->
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; width: 100%;">
-            <!-- Issue 01 -->
-            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
-                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Issue 01: Transition</div>
-                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/01 Issue 01 Transition S.pdf')">
-                    <img src="images/thumbnails/01 Issue 01 Transition.jpg" alt="Transmission Issue 01: Transition" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                </div>
+    <main class="transmission-page">
+        <section class="transmission-collection" aria-labelledby="transmission-title">
+            <div class="transmission-intro">
+                <h2 id="transmission-title">Transmission Magazine</h2>
+
             </div>
+            <ul class="transmission-grid">
+                <li>
+                    <a class="transmission-card" href="pdfs/01 Issue 01 Transition S.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Issue 01: Transition">
+                        <img src="images/thumbnails/01 Issue 01 Transition.jpg" alt="" width="756" height="1044" loading="eager" decoding="async">
+                        <div class="transmission-caption">
+                            <p class="transmission-issue-number">Issue 01</p>
+                            <h3>Transition</h3>
+                        </div>
 
-            <!-- Issue 02 -->
-            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
-                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Issue 02: Transparency</div>
-                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0;" onclick="openMagazine('pdfs/02 Issue 02 Transparency.pdf')">
-                    <img src="images/thumbnails/02 Issue 02 Transparency.jpg" alt="Transmission Issue 02: Transparency" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="transmission-card" href="pdfs/02 Issue 02 Transparency.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Issue 02: Transparency">
+                        <img src="images/thumbnails/02 Issue 02 Transparency.jpg" alt="" width="756" height="1044" loading="eager" decoding="async">
+                        <div class="transmission-caption">
+                            <p class="transmission-issue-number">Issue 02</p>
+                            <h3>Transparency</h3>
+                        </div>
 
-            <!-- Issue 03 -->
-            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
-                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Issue 03: Transform</div>
-                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/04 Issue 03 Transform.pdf')">
-                    <img src="images/thumbnails/04 Issue 03 Transform.jpg" alt="Transmission Issue 03: Transform" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="transmission-card" href="pdfs/04 Issue 03 Transform.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Issue 03: Transform">
+                        <img src="images/thumbnails/04 Issue 03 Transform.jpg" alt="" width="756" height="1044" loading="eager" decoding="async">
+                        <div class="transmission-caption">
+                            <p class="transmission-issue-number">Issue 03</p>
+                            <h3>Transform</h3>
+                        </div>
 
-            <!-- Issue 03-04 -->
-            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
-                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Issue 03-04: Intermission</div>
-                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/09 Issue 03-04 Intermission.pdf')">
-                    <img src="images/thumbnails/09 Issue 03-04 Intermission.jpg" alt="Transmission Issue 03-04: Intermission" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
-        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="transmission-card" href="pdfs/09 Issue 03-04 Intermission.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Issue 03-04: Intermission">
+                        <img src="images/thumbnails/09 Issue 03-04 Intermission.jpg" alt="" width="756" height="1044" loading="eager" decoding="async">
+                        <div class="transmission-caption">
+                            <p class="transmission-issue-number">Issue 03–04</p>
+                            <h3>Intermission</h3>
+                        </div>
 
-        <div class="section-divider"></div>
-        <br>
+                    </a>
+                </li>
+            </ul>
+        </section>
 
-        <!-- Simple text instead of heading -->
-        <div style="text-align: center; font-size: 1.5rem; font-weight: 300;">
-            Transmission Presents
-        </div>
-        <br>
-        
-        <!-- Responsive magazine grid -->
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; width: 100%;">
-            <!-- Magazine 1 -->
-            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
-                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">FNT</div>
-                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/03 FNT Photojournalism.pdf')">
-                    <img src="images/thumbnails/03 FNT Photojournalism.jpg" alt="Transmission Presents: FNT" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
+        <section class="transmission-collection" aria-labelledby="presents-title">
+            <h2 class="transmission-collection-title" id="presents-title">Transmission Presents</h2>
+            <ul class="transmission-grid">
+                <li>
+                    <a class="transmission-card" href="pdfs/03 FNT Photojournalism.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Presents: FNT">
+                        <img src="images/thumbnails/03 FNT Photojournalism.jpg" alt="" width="720" height="993" loading="lazy" decoding="async">
+                        <div class="transmission-caption">
+                            <h3>FNT</h3>
+                        </div>
 
-            <!-- Magazine 2 -->
-            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
-                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Côte & Ciel</div>
-                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/06 Presents Cote_Ciel Lookbook.pdf')">
-                    <img src="images/thumbnails/06 Presents Cote_Ciel Lookbook.jpg" alt="Transmission Presents: Côte & Ciel" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="transmission-card" href="pdfs/06 Presents Cote_Ciel Lookbook.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Presents: Côte &amp; Ciel">
+                        <img src="images/thumbnails/06 Presents Cote_Ciel Lookbook.jpg" alt="" width="756" height="1044" loading="lazy" decoding="async">
+                        <div class="transmission-caption">
+                            <h3>Côte &amp; Ciel</h3>
+                        </div>
 
-            <!-- Magazine 3 -->
-            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
-                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">The SS16 New Faces Issue</div>
-                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/05 Presents New Faces.pdf')">
-                    <img src="images/thumbnails/05 Presents New Faces.jpg" alt="Transmission Presents: The SS16 New Faces Issue" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="transmission-card" href="pdfs/05 Presents New Faces.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Presents: The SS16 New Faces Issue">
+                        <img src="images/thumbnails/05 Presents New Faces.jpg" alt="" width="756" height="1044" loading="lazy" decoding="async">
+                        <div class="transmission-caption">
+                            <h3>The SS16 New Faces Issue</h3>
+                        </div>
 
-            <!-- Magazine 4 -->
-            <div style="flex: 1 1 200px; max-width: 300px; margin: 0 10px 2rem 10px; text-align: center;">
-                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">A Year in a Day with Lindsey Wixson</div>
-                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/07 Presents Lindsey Wixson S.pdf')">
-                    <img src="images/thumbnails/07 Presents Lindsey Wixson.jpg" alt="Transmission Presents: A Year in a Day with Lindsey Wixson" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
-        </div>
+                    </a>
+                </li>
+                <li>
+                    <a class="transmission-card" href="pdfs/07 Presents Lindsey Wixson S.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Presents: A Year in a Day with Lindsey Wixson">
+                        <img src="images/thumbnails/07 Presents Lindsey Wixson.jpg" alt="" width="756" height="1044" loading="lazy" decoding="async">
+                        <div class="transmission-caption">
+                            <h3>A Year in a Day with Lindsey Wixson</h3>
+                        </div>
 
-        <div class="section-divider"></div>
-        <br>
+                    </a>
+                </li>
+            </ul>
+        </section>
 
-        <!-- Simple text instead of heading -->
-        <div style="text-align: center; font-size: 1.5rem; font-weight: 300;">
-            Transmission Showcase
-        </div>
-        <br>
-        
-        <!-- Center the single magazine -->
-        <div style="display: flex; justify-content: center; width: 100%;">
-            <div style="flex: 0 1 300px; margin: 0 10px; text-align: center;">
-                <div style="margin-bottom: 1rem; font-weight: 400; font-size: 1.2rem;">Le Cam Romain</div>
-                <div style="position: relative; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding-bottom: 140%; height: 0; overflow: hidden;" onclick="openMagazine('pdfs/08 Showcase Le Cam Romain S.pdf')">
-                    <img src="images/thumbnails/08 Showcase Le Cam Romain.jpg" alt="Transmission Showcase: Le Cam Romain" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-                </div>
-            </div>
-        </div>
+        <section class="transmission-collection" aria-labelledby="showcase-title">
+            <h2 class="transmission-collection-title" id="showcase-title">Transmission Showcase</h2>
+            <ul class="transmission-grid transmission-grid--single">
+                <li>
+                    <a class="transmission-card" href="pdfs/08 Showcase Le Cam Romain S.pdf" onclick="if (typeof openMagazine === 'function') { openMagazine(this.getAttribute('href')); return false; }" aria-label="Read Transmission Showcase: Le Cam Romain">
+                        <img src="images/thumbnails/08 Showcase Le Cam Romain.jpg" alt="" width="756" height="1044" loading="lazy" decoding="async">
+                        <div class="transmission-caption">
+                            <h3>Le Cam Romain</h3>
+                        </div>
 
-        <br>        
-        <div class="section-divider"></div>
-        <br>
+                    </a>
+                </li>
+            </ul>
+        </section>
 
-        <!-- Press Section -->
-        <div id="press" style="text-align: center; font-size: 1.5rem; font-weight: 300; scroll-margin-top: 120px;">
-            Press
-        </div>
-        <br>
-        
-        <div style="text-align: center; max-width: 800px; margin: 0 auto; padding: 0 20px;">
-            <p style="font-style: italic; margin-bottom: 0.5rem;">"Eclectic and intelligent."</p>
-            <p style="font-style: italic; margin-bottom: 0.5rem;">"One of the most exciting publications of the moment."</p>
-            <p style="color: #666; margin-bottom: 2rem;">-Models.com</p>
-            
-            <p style="font-style: italic; margin-bottom: 0.5rem;">"A cornucopia of color."</p>
-            <p style="color: #666; margin-bottom: 2rem;">-i-D</p>
-            
-            <p style="font-style: italic; margin-bottom: 0.5rem;">"The enduring appeal of the "real" in life as in art."</p>
-            <p style="color: #666; margin-bottom: 2rem;">-Dazed & Confused</p>
-
-            <p style="font-style: italic; margin-bottom: 0.5rem;">"Personal, intimate, and refreshingly direct."</p>
-            <p style="font-style: italic; margin-bottom: 0.5rem;">"Continues to grow into something much larger than just the brainchild of a single powerful mind."</p>
-            <p style="color: #666; margin-bottom: 2rem;">-The Last Magazine</p>
-
-            <p style="font-style: italic; margin-bottom: 0.5rem;">"Careful to convey a sense of sensitivity."</p>
-            <p style="font-style: italic; margin-bottom: 0.5rem;">"[The] work has a real analogue, retro tinge that breathes a lot of personality. There is a lot of natural beauty, highlighted with natural light."</p>
-            <p style="color: #666; margin-bottom: 2rem;">-Kitsuné</p>
-
-            <p style="font-style: italic; margin-bottom: 0.5rem;">"[The] raw approach to photography and writing will assure you that there are actually new voices out there [that] aint afraid to say shit."</p>
-            <p style="color: #666; margin-bottom: 2rem;">-OAK</p>
-        </div>
-
-        <!-- Magazine Modal -->
         <div id="magazine-modal"></div>
     </main>
 
@@ -217,7 +186,7 @@
     <!-- PDF.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
     <!-- Custom PDF viewer -->
-    <script src="js/magazine-viewer.js"></script>
+    <script src="js/magazine-viewer.js?v=53e3268295e8"></script>
     <!-- Magazine functionality -->
     <script src="js/main.js?v=d733a5d11232"></script>
 </body>

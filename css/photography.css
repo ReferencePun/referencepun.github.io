@@ -15,7 +15,7 @@
     padding: 10px 16px;
     border: 1px solid #d9d9d5;
     border-radius: 0;
-    background: #fff;
+    background: var(--site-background);
     color: #666660;
     font: 400 clamp(22px, 1.5vw, 26px)/1.15 'Cormorant Garamond', Times, serif;
     cursor: pointer;
@@ -28,7 +28,7 @@
 
 .collection-panel[aria-pressed="true"] {
     border-color: #c8c8c2;
-    background: #f3f3f0;
+    background: #eee9e1;
     color: #292927;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, .09);
 }

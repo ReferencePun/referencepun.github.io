@@ -1,0 +1,111 @@
+/* Full-width publication archive. Cover images retain their native proportions. */
+.transmission-page {
+    --transmission-gap: clamp(18px, 2.2vw, 44px);
+    --transmission-section-space: clamp(64px, 6vw, 114px);
+    color: #292927;
+    padding-bottom: 0;
+}
+
+.transmission-collection + .transmission-collection {
+    margin-top: var(--transmission-section-space);
+}
+
+.transmission-intro {
+    margin-bottom: clamp(28px, 2.8vw, 48px);
+    text-align: center;
+}
+
+.transmission-intro h2 {
+    margin: 0;
+    font-size: clamp(44px, 6.5vw, 136px);
+    line-height: 1.05;
+    letter-spacing: -.035em;
+}
+
+.transmission-collection-title {
+    margin: 0 0 clamp(28px, 2.8vw, 48px);
+    text-align: center;
+    font-size: clamp(38px, 4.5vw, 88px);
+    line-height: 1.1;
+    letter-spacing: -.03em;
+}
+
+.transmission-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 40px var(--transmission-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.transmission-grid > li {
+    min-width: 0;
+}
+
+.transmission-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: clamp(14px, 1.2vw, 22px);
+    height: 100%;
+    color: inherit;
+    text-align: center;
+    text-decoration: none;
+}
+
+.transmission-card img {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+}
+
+.transmission-issue-number {
+    margin: 0 0 5px;
+    color: #666058;
+    font: 400 clamp(10px, .75vw, 13px)/1.5 Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+}
+
+.transmission-caption h3 {
+    margin: 0;
+    font-size: clamp(24px, 2.4vw, 44px);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: -.02em;
+    text-wrap: balance;
+}
+
+.transmission-card:hover {
+    color: #666058;
+}
+
+.transmission-grid--single > li {
+    grid-column: 2 / 4;
+    width: calc((100% - var(--transmission-gap)) / 2);
+    justify-self: center;
+}
+
+@media (max-width: 900px) {
+    .transmission-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .transmission-grid--single > li {
+        grid-column: 1 / -1;
+    }
+
+    .transmission-caption h3 {
+        font-size: clamp(24px, 3.5vw, 32px);
+    }
+}
+
+@media (max-width: 480px) {
+    .transmission-grid {
+        row-gap: 32px;
+    }
+
+    .transmission-caption h3 {
+        font-size: clamp(22px, 6vw, 28px);
+    }
+}
