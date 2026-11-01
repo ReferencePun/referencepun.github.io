@@ -1,8 +1,7 @@
 .video-page {
     --film-gap: clamp(28px, 3.3vw, 64px);
-    --film-card-gap: clamp(16px, 1.3vw, 24px);
+    --film-card-gap: clamp(24px, 2vw, 36px);
     --selection-inset: clamp(4px, .45vw, 8px);
-    --player-frame: clamp(8px, .9vw, 18px);
     color: #292927;
     padding-bottom: 0;
 }
@@ -29,12 +28,11 @@
 
 .film-player {
     position: relative;
-    width: 100%;
-    border: var(--player-frame) solid #191918;
-    background: #191918;
+    width: calc(100% + 2 * var(--selection-inset));
+    margin-inline: calc(-1 * var(--selection-inset));
+    aspect-ratio: 16 / 9;
+    background: transparent;
 }
-
-.film-player::before { content: ''; display: block; aspect-ratio: 16 / 9; }
 
 .film-play {
     position: absolute;
@@ -43,6 +41,7 @@
     place-items: center;
     color: #fff;
     text-decoration: none;
+    overflow: hidden;
 }
 
 .film-play img, .film-player iframe {
@@ -54,13 +53,8 @@
     border: 0;
 }
 
-.film-play::after {
-    content: "";
-    position: absolute;
-    inset: 50% 0 0;
-    background: linear-gradient(transparent, rgb(0 0 0 / .24));
-    pointer-events: none;
-}
+/* Hide the screenshot's embedded edge without adding a frame to the player. */
+.film-player[data-vimeo-id="803186311"] .film-play img { transform: scale(1.004); }
 
 .film-play-icon {
     z-index: 1;
@@ -76,17 +70,6 @@
 
 .film-play:hover { color: #fff; }
 .film-play:hover .film-play-icon { background: rgb(0 0 0 / .35); }
-
-.film-watch {
-    position: absolute;
-    bottom: clamp(16px, 2vw, 32px);
-    left: clamp(20px, 2vw, 32px);
-    z-index: 1;
-    font-size: clamp(18px, 1.3vw, 22px);
-    text-decoration: underline;
-    text-underline-offset: 6px;
-    text-decoration-thickness: 1px;
-}
 
 .film-details { padding-top: 5px; }
 
@@ -186,7 +169,7 @@
     position: absolute;
     inset: calc(-1 * var(--selection-inset));
     z-index: -1;
-    border: 1px solid #a99f90;
+    border: 1px solid #292927;
     pointer-events: none;
 }
 
@@ -252,7 +235,7 @@
         --film-bottom-edge: min(calc(100svh - var(--film-bottom-space)), 1206px);
         --film-composition-width: min(calc(100vw - 2 * clamp(20px, 3vw, 64px)), calc((100svh - 220px) * 2.1), 1900px);
         --film-player-width: calc((var(--film-composition-width) * 2 - var(--film-card-gap)) / 3 + var(--selection-inset));
-        --film-player-height: calc(var(--film-player-width) * 9 / 16 + var(--player-frame) * 7 / 8);
+        --film-player-height: calc((var(--film-player-width) + var(--selection-inset)) * 9 / 16);
         --film-feature-reserve: var(--film-player-height);
         --film-thumbnail-width: calc(max(80px, var(--film-bottom-edge) - 96px - var(--film-top-space) - var(--film-nav-gap) - var(--film-feature-reserve) - 8px) * 16 / 9);
         padding-top: var(--film-top-space);
@@ -260,6 +243,7 @@
     .film-stage, .film-navigation { width: var(--film-composition-width); margin-inline: auto; }
     /* The player's outer right edge meets the middle selector's outer outline. */
     .film-feature { grid-template-columns: minmax(0, var(--film-player-width)) minmax(0, 1fr); }
+    .film-player { width: calc(100% + var(--selection-inset)); margin-right: 0; }
     .film-details { padding-top: 0; }
     .film-details h2 { font-size: clamp(36px, 5svh, 58px); }
     .film-meta { margin-top: clamp(10px, 1.6svh, 16px); }
@@ -317,7 +301,7 @@
     .film-credits > div { grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); }
     .film-credits dt { font-size: 11px; }
     .film-credits dd { font-size: 20px; }
-    .film-navigation ul { gap: clamp(10px, 3vw, 18px); }
+    .film-navigation ul { gap: clamp(16px, 4.5vw, 24px); }
     .film-choice-title { margin-top: 12px; font-size: clamp(18px, 4.6vw, 23px); }
     .film-placeholder { padding: 4px; font-size: clamp(16px, 4vw, 22px); line-height: 1.2; }
 }

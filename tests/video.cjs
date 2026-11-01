@@ -80,11 +80,14 @@ async function run() {
                         featureBottom: rect('.film-feature:not([hidden])').bottom,
                         navigationTop: rect('.film-navigation').top,
                         playerRight: rect('.film-feature:not([hidden]) .film-player').right,
+                        playerLeft: rect('.film-feature:not([hidden]) .film-player').left,
+                        firstLeft: rect('.film-choice').left + parseFloat(getComputedStyle(document.querySelector('.film-choice'), '::before').left),
                         middleRight: rect('.film-navigation li:nth-child(2) .film-choice').right - parseFloat(getComputedStyle(document.querySelector('.film-navigation li:nth-child(2) .film-choice'), '::before').right)
                     };
                 });
                 assert.equal(layout.width, width, 'The Video page keeps the full viewport width');
                 assert.ok(Math.abs(layout.playerRight - layout.middleRight) < 2, 'The main player aligns with the middle selector outline');
+                assert.ok(Math.abs(layout.playerLeft - layout.firstLeft) < 2, 'The main player aligns with the first selector outline on the left');
                 assert.ok(layout.bottom <= height, `${film}: player, credits and navigation fit ${width}x${height} without the footer`);
                 assert.ok(layout.bottom <= infoBottom + 10, `${film}: lower edge matches Info at ${width}x${height} (${layout.bottom} vs ${infoBottom})`);
                 assert.ok(layout.featureBottom < layout.navigationTop, 'Credits and player clear the film navigation');
