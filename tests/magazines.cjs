@@ -166,12 +166,21 @@ async function run() {
         for (const [width, height] of [[393, 852], [320, 568]]) {
             const phoneContext = await browser.newContext({ viewport: { width, height }, isMobile: true, hasTouch: true });
             await phoneContext.route(/googletagmanager|google-analytics/, route => route.abort());
+            await phoneContext.addInitScript(({ reject }) => {
+                Object.defineProperty(Element.prototype, 'requestFullscreen', { configurable: true, value: reject ? () => Promise.reject(new Error('Unavailable')) : undefined });
+                Object.defineProperty(Element.prototype, 'webkitRequestFullscreen', { configurable: true, value: undefined });
+            }, { reject: width === 320 });
             const phone = await phoneContext.newPage();
             phone.on('pageerror', error => errors.push(error.message));
             try {
                 await phone.goto(`${base}/transmission.html`);
                 await phone.locator('[data-magazine="transition"]').tap();
                 await ready([1], phone);
+                const normalHeight = await phone.locator('.reader-stage').evaluate(el => el.clientHeight);
+                await phone.getByRole('button', { name: 'Enter fullscreen', exact: true }).tap();
+                await phone.waitForFunction(() => document.querySelector('.reader-shell').classList.contains('is-fullscreen'));
+                assert.ok(await phone.locator('.reader-stage').evaluate(el => el.clientHeight) > normalHeight, 'Phone fullscreen fallback increases reading space');
+                assert.equal(await phone.locator('[data-reader="fullscreen"]').getAttribute('aria-pressed'), 'true');
                 await phone.getByRole('button', { name: 'Switch to spreads', exact: true }).tap();
                 await ready([1], phone); // The cover remains a single page in spread mode.
                 assert.equal(await phone.locator('[data-reader="view"]').getAttribute('aria-pressed'), 'true');
@@ -208,8 +217,15 @@ async function run() {
                 await ready([16, 17], phone);
                 await phone.getByRole('button', { name: 'Switch to single pages', exact: true }).tap();
                 await ready([16], phone);
+                await phone.getByRole('button', { name: 'Exit fullscreen', exact: true }).tap();
+                assert.equal(await phone.locator('.reader-shell').evaluate(el => el.classList.contains('is-fullscreen')), false);
+                await phone.getByRole('button', { name: 'Enter fullscreen', exact: true }).tap();
                 await phone.getByRole('button', { name: 'Close magazine', exact: true }).tap();
                 await phone.waitForFunction(() => document.body.style.overflow !== 'hidden');
+                await phone.locator('[data-magazine="transition"]').tap();
+                await ready([16], phone);
+                assert.equal(await phone.locator('[data-reader="fullscreen"]').getAttribute('aria-pressed'), 'false', 'Closing clears expanded reading mode');
+                await phone.getByRole('button', { name: 'Close magazine', exact: true }).tap();
             } finally { await phoneContext.close(); }
         }
         // Opening another issue before an earlier request completes cannot overwrite it.

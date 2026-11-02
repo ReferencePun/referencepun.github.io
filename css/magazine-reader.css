@@ -105,7 +105,7 @@
     .reader-tools { justify-content: space-between; margin-top: 8px; }
     .reader-tools .reader-close { position: absolute; right: 12px; top: max(12px, env(safe-area-inset-top)); }
     .reader-tool-label { display: inline; font-size: 17px; }
-    .reader-fullscreen { display: none !important; }
+    .reader-tools > button:not(.reader-close) { flex: 1; flex-direction: column; gap: 3px; padding-inline: 2px; }
     .reader-stage { padding: 16px; }
     .reader-body.has-overview { grid-template-columns: minmax(0, 1fr); }
     .reader-body.has-overview .reader-stage { display: none; }
@@ -133,4 +133,16 @@
     .reader-navigation button span { display: none; }
     .reader-tool-label { display: none; }
     .reader-tools button { padding-inline: 6px; }
+}
+
+/* Keep all reading tools reachable while giving phone pages more height. */
+@media (max-width: 900px) {
+    .reader-shell.is-fullscreen .reader-heading { display: none; }
+    .reader-shell.is-fullscreen .reader-topbar { display: flex; padding: max(6px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 6px max(12px, env(safe-area-inset-left)); }
+    .reader-shell.is-fullscreen .reader-tools { width: 100%; margin-top: 0; justify-content: space-between; }
+    .reader-shell.is-fullscreen .reader-tools .reader-close { position: static; }
+    .reader-shell.is-fullscreen .reader-tool-label { display: none; }
+    .reader-shell.is-fullscreen .reader-stage { padding: 8px max(8px, env(safe-area-inset-right)) 8px max(8px, env(safe-area-inset-left)); }
+    .reader-shell.is-fullscreen .reader-bottom { padding-bottom: max(6px, env(safe-area-inset-bottom)); }
+    .reader-shell.is-fullscreen .reader-progress { display: none; }
 }
