@@ -163,13 +163,14 @@ async function run() {
         await close();
         // Real touch input: rotate phones below the old 900px breakpoint and
         // keep the chosen page when switching between one page and its spread.
-        for (const [width, height] of [[393, 852], [320, 568]]) {
+        for (const [width, height] of [[393, 852], [320, 568], [375, 812]]) {
             const phoneContext = await browser.newContext({ viewport: { width, height }, isMobile: true, hasTouch: true });
             await phoneContext.route(/googletagmanager|google-analytics/, route => route.abort());
-            await phoneContext.addInitScript(({ reject }) => {
+            await phoneContext.addInitScript(({ reject, disabled }) => {
                 Object.defineProperty(Element.prototype, 'requestFullscreen', { configurable: true, value: reject ? () => Promise.reject(new Error('Unavailable')) : undefined });
                 Object.defineProperty(Element.prototype, 'webkitRequestFullscreen', { configurable: true, value: undefined });
-            }, { reject: width === 320 });
+                Object.defineProperty(document, 'fullscreenEnabled', { configurable: true, value: !disabled });
+            }, { reject: width !== 393, disabled: width === 375 });
             const phone = await phoneContext.newPage();
             phone.on('pageerror', error => errors.push(error.message));
             try {
@@ -177,10 +178,13 @@ async function run() {
                 await phone.locator('[data-magazine="transition"]').tap();
                 await ready([1], phone);
                 const normalHeight = await phone.locator('.reader-stage').evaluate(el => el.clientHeight);
-                await phone.getByRole('button', { name: 'Enter fullscreen', exact: true }).tap();
-                await phone.waitForFunction(() => document.querySelector('.reader-shell').classList.contains('is-fullscreen'));
-                assert.ok(await phone.locator('.reader-stage').evaluate(el => el.clientHeight) > normalHeight, 'Phone fullscreen fallback increases reading space');
-                assert.equal(await phone.locator('[data-reader="fullscreen"]').getAttribute('aria-pressed'), 'true');
+                if (width === 320) {
+                    await phone.getByRole('button', { name: 'Enter fullscreen', exact: true }).tap();
+                    await phone.locator('[data-reader="fullscreen"]').waitFor({ state: 'hidden' });
+                }
+                assert.equal(await phone.locator('[data-reader="fullscreen"]').isVisible(), false, 'Unsupported or rejected fullscreen is hidden');
+                assert.equal(await phone.locator('.reader-shell').evaluate(el => el.classList.contains('is-fullscreen')), false, 'No simulated fullscreen');
+                assert.equal(await phone.locator('.reader-stage').evaluate(el => el.clientHeight), normalHeight, 'No expanded reading fallback');
                 await phone.getByRole('button', { name: 'Switch to spreads', exact: true }).tap();
                 await ready([1], phone); // The cover remains a single page in spread mode.
                 assert.equal(await phone.locator('[data-reader="view"]').getAttribute('aria-pressed'), 'true');
@@ -217,14 +221,11 @@ async function run() {
                 await ready([16, 17], phone);
                 await phone.getByRole('button', { name: 'Switch to single pages', exact: true }).tap();
                 await ready([16], phone);
-                await phone.getByRole('button', { name: 'Exit fullscreen', exact: true }).tap();
-                assert.equal(await phone.locator('.reader-shell').evaluate(el => el.classList.contains('is-fullscreen')), false);
-                await phone.getByRole('button', { name: 'Enter fullscreen', exact: true }).tap();
                 await phone.getByRole('button', { name: 'Close magazine', exact: true }).tap();
                 await phone.waitForFunction(() => document.body.style.overflow !== 'hidden');
                 await phone.locator('[data-magazine="transition"]').tap();
                 await ready([16], phone);
-                assert.equal(await phone.locator('[data-reader="fullscreen"]').getAttribute('aria-pressed'), 'false', 'Closing clears expanded reading mode');
+                assert.equal(await phone.locator('[data-reader="fullscreen"]').getAttribute('aria-pressed'), 'false', 'Fullscreen remains inactive after reopening');
                 await phone.getByRole('button', { name: 'Close magazine', exact: true }).tap();
             } finally { await phoneContext.close(); }
         }

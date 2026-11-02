@@ -29,9 +29,11 @@
     let publication, manifest, opener, oldOverflow;
     let page = 1, readingPage = 1, zoom = false, mode = 'auto', request = 0, loadingTimer, preloadTimer;
     let visible = [], touchStart;
-    let expandedReading = false;
     const fullscreenElement = () => document.fullscreenElement || document.webkitFullscreenElement;
-    const enterFullscreen = shell.requestFullscreen || shell.webkitRequestFullscreen;
+    const enterFullscreen = document.fullscreenEnabled && shell.requestFullscreen
+        ? shell.requestFullscreen
+        : document.webkitFullscreenEnabled && shell.webkitRequestFullscreen;
+    fullscreenButton.hidden = !enterFullscreen;
     const exitFullscreen = () => (document.exitFullscreen || document.webkitExitFullscreen).call(document);
 
     const isSpread = () => mode === 'spread' || (mode === 'auto' && spreadLayout.matches);
@@ -268,7 +270,6 @@
         manifest = null;
         zoom = false;
         mode = 'auto';
-        expandedReading = false;
         updateFullscreen();
         page = readingPage = 1;
         visible = [];
@@ -312,7 +313,6 @@
         thumbnails.replaceChildren();
         visible = [];
         manifest = null;
-        expandedReading = false;
         updateFullscreen();
         try { if (fullscreenElement() === shell) await exitFullscreen(); } catch (_) { /* The browser may already be exiting. */ }
         if (!dialog.open) opener?.focus({ preventScroll: true });
@@ -347,35 +347,29 @@
         fullscreenButton.disabled = true;
         try {
             if (fullscreenElement() === shell) await exitFullscreen();
-            else if (expandedReading) expandedReading = false;
             else if (enterFullscreen) {
                 await enterFullscreen.call(shell);
                 if (!dialog.open && fullscreenElement() === shell) await exitFullscreen();
-            } else expandedReading = true;
+            }
         } catch (_) {
-            // iPhone browsers may expose the API but reject non-video content.
-            // Keep an expanded, compact reader available in the browser viewport.
-            if (dialog.open && fullscreenElement() !== shell) expandedReading = true;
+            // Never substitute an expanded browser view for native fullscreen.
+            if (fullscreenElement() !== shell) {
+                fullscreenButton.hidden = true;
+                if (dialog.open) viewButton.focus();
+            }
         } finally {
             updateFullscreen();
             fullscreenButton.disabled = false;
         }
     }
     const updateFullscreen = () => {
-        const active = fullscreenElement() === shell || expandedReading;
+        const active = fullscreenElement() === shell;
         shell.classList.toggle('is-fullscreen', active);
         fullscreenButton.setAttribute('aria-pressed', String(active));
         fullscreenButton.setAttribute('aria-label', active ? 'Exit fullscreen' : 'Enter fullscreen');
         fullscreenButton.querySelector('.reader-tool-label').textContent = active ? 'Exit full screen' : 'Full screen';
         fitPages();
     };
-    dialog.addEventListener('cancel', event => {
-        if (expandedReading) {
-            event.preventDefault();
-            expandedReading = false;
-            updateFullscreen();
-        }
-    });
     document.addEventListener('fullscreenchange', updateFullscreen);
     document.addEventListener('webkitfullscreenchange', updateFullscreen);
     find('.reader-jump').addEventListener('submit', event => { event.preventDefault(); zoom = false; showPage(pageInput.value); pageInput.blur(); });
