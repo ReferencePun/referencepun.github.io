@@ -1,5 +1,6 @@
 /* A sequence of photographic spreads, with type and imagery sharing the page. */
 .home-page {
+    --site-paper: none;
     /* Opening layout controls. Save this file and refresh the local preview. */
     --opening-space-above: 48px; /* Increase to move the whole opening down. */
     --opening-text-x: -50px;     /* Negative = left; positive = right, for the quote and credit. */

@@ -1,13 +1,16 @@
-.photography-page { padding-top: 28px; }
+.photography-page { padding-top: 21px; padding-bottom: 12px; }
 
 .photography-switcher {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
-    margin: 0 0 28px;
+    margin: 0 0 21px;
 }
 
 .photography-switcher--bottom { margin-bottom: 0; overflow-anchor: none; }
+
+#photography-gallery .portfolio-grid { margin-bottom: 36px; }
+.photography-page + .site-footer { margin-top: clamp(49.5px, 4.5vw, 85.5px); }
 
 /* Flat white borders across both collections; preserve each full composition. */
 #photography-gallery .portfolio-item {
@@ -44,11 +47,11 @@
 }
 
 @media (max-width: 768px) {
-    .photography-page { padding-top: 24px; }
+    .photography-page { padding-top: 18px; }
 
     .photography-switcher {
         gap: 8px;
-        margin: 0 0 24px;
+        margin: 0 0 18px;
     }
 
     .photography-switcher--bottom { margin-bottom: 0; }
