@@ -73,6 +73,16 @@ async function run() {
             assert.equal(await row.locator('.when-closed').isVisible(), true);
         }
 
+        await page.locator('#video summary').click();
+        await page.waitForFunction(() => getComputedStyle(document.querySelector('#video summary')).backgroundColor !== 'rgba(0, 0, 0, 0)');
+        assert.equal(await page.locator('#video').evaluate(el => getComputedStyle(el).backgroundColor), 'rgba(0, 0, 0, 0)');
+        await page.locator('#video .service-details p').first().click();
+        assert.equal(await page.locator('#video').getAttribute('open'), null);
+        assert.equal(await page.locator('#video summary').evaluate(el => el === document.activeElement), true);
+        await page.locator('#video summary').click();
+        await page.keyboard.press('Escape');
+        assert.equal(await page.locator('#video').getAttribute('open'), null);
+
         assert.equal(await page.locator('.service-price dt').allTextContents().then(t => t.filter(x => x === 'Founding Rate').length), 3);
         assert.deepEqual((await page.locator('.service-price dd').allTextContents()).map(s => s.trim()), ['$2,000/mo', '$2,400', '$2,000/mo', '$2,400', '$2,000', '$2,400', '$500/mo', '$600']);
         assert.match(await page.locator('#photography table').textContent(), /\$2,500\/mo.*\$3,000/);

@@ -36,7 +36,8 @@
 }
 .services-page strong { font-weight: 500; }
 .service-offering { border-bottom: 1px solid var(--services-rule); }
-.service-offering[open] { background-color: rgba(65, 54, 36, .045); }
+.service-offering[open] > .service-row { background-color: rgba(65, 54, 36, .045); }
+.service-offering[open] > .service-details { cursor: pointer; }
 .services-page summary { list-style: none; cursor: pointer; }
 .services-page summary::-webkit-details-marker { display: none; }
 .services-page summary:focus-visible { outline: 2px solid #746b5e; outline-offset: 5px; }
@@ -232,7 +233,7 @@
 .services-page details[open] > summary .when-closed { display: none; }
 .service-row { transition: background-color .16s ease; }
 @media (hover: hover) {
-    summary.service-row:hover { background-color: rgba(65, 54, 36, .025); }
+    .service-offering:not([open]) > summary.service-row:hover { background-color: rgba(65, 54, 36, .025); }
     summary.service-row:hover .service-toggle { color: #292927; }
 }
 .services-process { padding-block: var(--services-section-space); }
