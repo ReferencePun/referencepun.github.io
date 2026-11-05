@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     form.noValidate = true;
     if (directDelivery) {
         form.action = endpoint;
-        byId('inquiry-delivery-note').textContent = "Your inquiry will be sent to Dylan Forsberg. You'll receive a reply by email.";
     }
     document.querySelectorAll('[data-inquiry-link]').forEach(link => {
         link.classList.remove('active');

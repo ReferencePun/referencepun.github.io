@@ -284,7 +284,6 @@
 .service-terms .service-details p:last-child { margin-bottom: 0; }
 .services-inquiries { padding-bottom: var(--services-section-space); }
 .inquiry-panel { min-width: 0; }
-.inquiry-panel > #inquiry-delivery-note { margin: 0 0 16px; color: var(--services-muted); font-size: 17px; }
 #inquiry-form { scroll-margin-top: calc(var(--services-header-height, 95px) + 24px); }
 .services-body .site-footer { margin-top: 0; }
 @media (max-width: 1050px) and (min-width: 761px) {
