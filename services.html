@@ -22,7 +22,7 @@
     <link rel="canonical" href="https://dylanforsberg.com/services.html">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css?v=f6756365407e">
-    <link rel="stylesheet" href="css/services.css?v=65e0943338f8">
+    <link rel="stylesheet" href="css/services.css?v=d59ce80d02be">
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap">
 
@@ -55,7 +55,7 @@
                     <li><a href="transmission.html">Transmission Magazine</a></li>
                     <li><a href="video.html">Video</a></li>
                     <li><a href="info.html">Info</a></li>
-                    <li><a href="#project-inquiry" data-inquiry-link>Inquire</a></li>
+                    <li><a href="#inquiry-form" data-inquiry-link>Inquire</a></li>
                 </ul>
             </nav>
 
@@ -84,7 +84,10 @@
         <div class="services-overview" aria-label="Services and starting prices">
             <details class="service-offering" id="photography">
                 <summary class="service-row">
-                    <h3 class="service-name">Photography<span class="disclosure-mark" aria-hidden="true"></span></h3>
+                    <div class="service-heading">
+                        <h3 class="service-name">Photography</h3>
+                        <span class="service-toggle"><span class="when-closed">Details</span><span class="when-open">Hide details</span><span class="disclosure-mark" aria-hidden="true"></span></span>
+                    </div>
                     <p class="service-description">Portraiture, fashion, editorial, commercial, and lifestyle photography.</p>
                     <dl class="service-prices">
                         <div class="service-price"><dt>Founding Rate</dt><dd>$2,000<span>/mo</span></dd></div>
@@ -103,7 +106,10 @@
 </details>
             <details class="service-offering" id="video">
                 <summary class="service-row">
-                    <h3 class="service-name">Video Production<span class="disclosure-mark" aria-hidden="true"></span></h3>
+                    <div class="service-heading">
+                        <h3 class="service-name">Video Production</h3>
+                        <span class="service-toggle"><span class="when-closed">Details</span><span class="when-open">Hide details</span><span class="disclosure-mark" aria-hidden="true"></span></span>
+                    </div>
                     <p class="service-description">Cinematic video production for businesses, brands, and individuals.</p>
                     <dl class="service-prices">
                         <div class="service-price"><dt>Founding Rate</dt><dd>$2,000<span>/mo</span></dd></div>
@@ -121,7 +127,10 @@
 </details>
             <details class="service-offering" id="websites">
                 <summary class="service-row">
-                    <h3 class="service-name">Website Development<span class="disclosure-mark" aria-hidden="true"></span></h3>
+                    <div class="service-heading">
+                        <h3 class="service-name">Website Development</h3>
+                        <span class="service-toggle"><span class="when-closed">Details</span><span class="when-open">Hide details</span><span class="disclosure-mark" aria-hidden="true"></span></span>
+                    </div>
                     <p class="service-description">Custom-designed websites tailored to your brand and business needs.</p>
                     <dl class="service-prices">
                         <div class="service-price"><dt>Partner Rate</dt><dd>$2,000<span></span></dd></div>
@@ -140,7 +149,10 @@
 </details>
             <details class="service-offering" id="social">
                 <summary class="service-row">
-                    <h3 class="service-name">Social Media Content<span class="disclosure-mark" aria-hidden="true"></span></h3>
+                    <div class="service-heading">
+                        <h3 class="service-name">Social Media Content</h3>
+                        <span class="service-toggle"><span class="when-closed">Details</span><span class="when-open">Hide details</span><span class="disclosure-mark" aria-hidden="true"></span></span>
+                    </div>
                     <p class="service-description">Twenty custom social media visuals created through AI-assisted imagery, digital editing, and design.</p>
                     <dl class="service-prices">
                         <div class="service-price"><dt>Founding Rate</dt><dd>$500<span>/mo</span></dd></div>
@@ -176,14 +188,15 @@
                     <div><h4>Deliver</h4><p>Our team handles post-production and delivers the finished content digitally on the agreed date.</p></div>
                 </li>
             </ol>
-            <p class="process-note">The process is designed to require minimal involvement from the client.</p>
         </section>
 
-        <div class="services-further-details">
-            <details class="service-terms" id="campaigns">
-                <summary><h3>Creative Direction &amp; Custom Productions</h3><span class="disclosure-mark" aria-hidden="true"></span></summary>
-                <div class="service-details"><p>For projects requiring a more developed creative approach, we offer additional services including:</p>
-                <ul>
+        <section class="services-creative services-editorial" id="campaigns" aria-labelledby="campaigns-heading">
+            <div class="editorial-intro">
+                <h3 id="campaigns-heading">Creative Direction &amp; Custom&nbsp;Productions</h3>
+                <p>For projects requiring a more developed creative approach, we offer additional services including:</p>
+                <p>Custom projects and additional creative services are quoted individually.</p>
+            </div>
+            <ul class="creative-services">
                     <li>Concept development and campaign strategy</li>
                     <li>Creative direction and art direction</li>
                     <li>Scriptwriting and storyboarding</li>
@@ -191,36 +204,39 @@
                     <li>Multi-location and multi-day productions</li>
                     <li>Advanced editing and retouching</li>
                     <li>Brand identity and visual development</li>
-                </ul>
-                <p>Custom projects and additional creative services are quoted individually.</p></div>
-            </details>
-            <details class="service-terms" id="additional">
-                <summary><h3>Additional Expenses</h3><span class="disclosure-mark" aria-hidden="true"></span></summary>
+                            </ul>
+        </section>
+
+        <section class="services-information services-editorial" aria-labelledby="additional-information-heading">
+            <h3 id="additional-information-heading">Additional Information</h3>
+            <div class="administrative-details">
+                <details class="service-terms" id="additional">
+                <summary><h4>Production Expenses</h4><span class="service-toggle"><span class="when-closed">Details</span><span class="when-open">Hide details</span><span class="disclosure-mark" aria-hidden="true"></span></span></summary>
                 <div class="service-details"><p>Starting rates assume a client-provided creative brief.</p>
                 <p>Location and studio rentals, permits, travel, talent, styling, specialized equipment, licensing fees, and other production expenses are additional when required.</p>
                 <p>All additional expenses are quoted and approved in advance.</p></div>
             </details>
-            <details class="service-terms" id="partnerships">
-                <summary><h3>Monthly Partnerships</h3><span class="disclosure-mark" aria-hidden="true"></span></summary>
+<details class="service-terms" id="partnerships">
+                <summary><h4>Monthly Partnerships</h4><span class="service-toggle"><span class="when-closed">Details</span><span class="when-open">Hide details</span><span class="disclosure-mark" aria-hidden="true"></span></span></summary>
                 <div class="service-details"><p>Monthly partnerships begin with a three-month commitment and automatically renew for successive three-month terms unless canceled at least 30 days before the end of the current term.</p>
                 <p>Founding Client Rates are guaranteed for the initial contract term. Any proposed pricing changes for subsequent terms will be communicated in advance, with the opportunity to decline renewal.</p>
                 <p>Services are billed monthly in advance. Standalone projects are available without an ongoing commitment.</p>
                 <p>All projects are subject to an agreed scope of work and service agreement.</p></div>
             </details>
-        </div>
+            </div>
+        </section>
 
-        <section class="services-inquiries" id="project-inquiry" aria-labelledby="inquiries-heading">
+        <section class="services-inquiries services-editorial" id="project-inquiry" aria-labelledby="inquiries-heading">
             <div class="inquiry-intro">
                 <h3 id="inquiries-heading">Have a project in mind?</h3>
                 <p>Tell me a little about what you're looking for, and I'll get back to you by email.</p>
                 <p class="inquiry-direct">Or email <a href="mailto:Dylan.Forsberg@gmail.com">Dylan.Forsberg@gmail.com</a> directly.</p>
             </div>
-            <details class="inquiry-disclosure" id="inquiry-details">
-                <summary>Send an Inquiry<span class="disclosure-mark" aria-hidden="true"></span></summary>
-                <p id="inquiry-delivery-note">The form prepares an email draft for you to review and send from your email app.</p>
+            <div class="inquiry-panel">
+                <p id="inquiry-delivery-note">Your inquiry will be sent to Dylan Forsberg. You'll receive a reply by email.</p>
                 <noscript><p>Please email <a href="mailto:Dylan.Forsberg@gmail.com">Dylan.Forsberg@gmail.com</a> with your name, service of interest, and project details.</p></noscript>
                 <!-- Set data-form-endpoint only after completing docs/inquiries.md. No secret belongs here. -->
-                <form id="inquiry-form" method="post" action="mailto:Dylan.Forsberg@gmail.com" data-form-endpoint="" aria-describedby="inquiry-delivery-note" hidden>
+                <form id="inquiry-form" method="post" action="https://formspree.io/f/xvkkywde" data-form-endpoint="https://formspree.io/f/xvkkywde" aria-labelledby="inquiries-heading" aria-describedby="inquiry-delivery-note">
                     <p class="form-help">Fields marked * are required.</p>
                     <div class="inquiry-fields">
                         <div class="inquiry-field">
@@ -238,8 +254,8 @@
                             <input id="inquiry-business" name="organization" autocomplete="organization" maxlength="160">
                         </div>
                         <div class="inquiry-field">
-                            <label for="inquiry-service">Service of Interest</label>
-                            <select id="inquiry-service" name="service">
+                            <label for="inquiry-service">Service of Interest *</label>
+                            <select id="inquiry-service" name="service" required aria-describedby="inquiry-service-error">
                                 <option value="">Select a service</option>
                                 <option>Photography</option>
                                 <option>Video Production</option>
@@ -248,6 +264,7 @@
                                 <option>Creative Direction / Custom Production</option>
                                 <option>Other</option>
                             </select>
+                            <span class="field-error" id="inquiry-service-error" hidden></span>
                         </div>
                         <div class="inquiry-field inquiry-field-wide">
                             <label for="inquiry-description">Project Description *</label>
@@ -259,47 +276,23 @@
                             <input id="inquiry-timeline" name="timeline" maxlength="200" placeholder="For example, early spring">
                         </div>
                         <div class="inquiry-field">
-                            <label for="inquiry-communication">Preferred Communication <span>(optional)</span></label>
-                            <select id="inquiry-communication" name="communication">
-                                <option selected>Email</option>
-                                <option>Phone call</option>
-                            </select>
+                            <label for="inquiry-phone">Phone <span>(optional)</span></label>
+                            <input id="inquiry-phone" name="phone" type="tel" autocomplete="tel" maxlength="60">
                         </div>
-                        <fieldset id="inquiry-call-fields" class="inquiry-field-wide inquiry-call-fields" hidden disabled>
-                            <legend>Arrange a call</legend>
-                            <div class="inquiry-fields">
-                                <div class="inquiry-field">
-                                    <label for="inquiry-phone">Phone Number <span>(optional)</span></label>
-                                    <input id="inquiry-phone" name="phone" type="tel" autocomplete="tel" maxlength="60">
-                                </div>
-                                <div class="inquiry-field">
-                                    <label for="inquiry-call-times">Convenient Calling Times <span>(optional)</span></label>
-                                    <input id="inquiry-call-times" name="calling_times" maxlength="200" placeholder="Include your time zone">
-                                </div>
-                            </div>
-                        </fieldset>
                     </div>
                     <div class="inquiry-honeypot" aria-hidden="true" inert>
                         <label for="inquiry-website">Leave this field blank</label>
                         <input id="inquiry-website" name="_gotcha" tabindex="-1" autocomplete="off">
                     </div>
+                    <input type="hidden" name="communication" value="Email">
                     <input type="hidden" name="subject" value="">
                     <input type="hidden" name="message" value="">
                     <p class="form-status" id="inquiry-status" role="status" aria-live="polite" tabindex="-1"></p>
                     <div class="inquiry-actions">
-                        <button type="submit" id="inquiry-submit">Prepare Email Draft</button>
-                        <button type="button" id="inquiry-fallback" hidden>Use an Email Draft Instead</button>
-                    </div>
-                    <div class="inquiry-draft" id="inquiry-draft" hidden>
-                        <p id="inquiry-draft-help">Your draft is ready. It has not been sent. Open it in your email app, then review and send it.</p>
-                        <a id="inquiry-open-draft" href="mailto:Dylan.Forsberg@gmail.com">Open Email Draft</a>
-                        <p class="form-help">If your email app doesn't open, copy the draft below and email it to Dylan.Forsberg@gmail.com.</p>
-                        <label for="inquiry-draft-text">Email draft</label>
-                        <textarea id="inquiry-draft-text" rows="10" readonly></textarea>
-                        <button type="button" id="inquiry-copy">Copy Draft</button>
+                        <button type="submit" id="inquiry-submit" disabled>Submit Inquiry</button>
                     </div>
                 </form>
-            </details>
+            </div>
         </section>
     </main>
 
@@ -309,6 +302,6 @@
     </footer>
 
     <script src="js/main.js?v=d733a5d11232"></script>
-    <script src="js/inquiries.js?v=ceb86b8d2c4b" defer></script>
+    <script src="js/inquiries.js?v=3ab75d3687cb" defer></script>
 </body>
 </html>
