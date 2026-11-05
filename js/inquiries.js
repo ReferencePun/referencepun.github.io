@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', event => {
             if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
             event.preventDefault();
-            const services = { photography: 'Photography', video: 'Video Production', websites: 'Website Development', social: 'Social Media Content' };
+            const services = { photography: 'Photography', video: 'Video Production', websites: 'Website Design & Development', social: 'Social Media Content', campaigns: 'Creative Direction & Custom Productions' };
             const service = services[link.dataset.inquiryService];
             if (service) {
                 byId('inquiry-service').value = service;

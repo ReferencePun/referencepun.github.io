@@ -50,12 +50,12 @@ async function run() {
         });
         await page.goto(`${base}/services.html`);
         assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex, nofollow');
-        assert.equal(await page.locator('.service-offering').count(), 4);
-        assert.equal(await page.locator('main details').count(), 6);
-        assert.equal(await page.locator('.administrative-details details').count(), 2);
+        assert.equal(await page.locator('.service-offering').count(), 5);
+        assert.equal(await page.locator('main details').count(), 5);
+        assert.equal(await page.locator('.administrative-details, .services-information, section.services-creative').count(), 0);
         assert.equal(await page.locator('#campaigns').isVisible(), true);
-        assert.equal(await page.locator('#campaigns').evaluate(el => el.tagName), 'SECTION');
-        assert.equal(await page.locator('.creative-services li').count(), 7);
+        assert.equal(await page.locator('#campaigns').evaluate(el => el.tagName), 'DETAILS');
+        assert.equal(await page.locator('#campaigns li').count(), 7);
         assert.equal(await page.locator('#inquiry-form').isVisible(), true);
         assert.equal(await page.locator('#inquiry-details, #inquiry-draft, #inquiry-communication').count(), 0);
         assert.equal(await page.locator('#inquiry-submit').textContent(), 'Send Inquiry');
@@ -63,7 +63,7 @@ async function run() {
         assert.equal(await page.getByRole('combobox', { name: 'Service of Interest *', exact: true }).getAttribute('required'), '');
         assert.equal(await page.locator('.inquiry-fields input, .inquiry-fields select, .inquiry-fields textarea').count(), 7);
         assert.doesNotMatch(await page.locator('main').textContent(), /The process is designed to require minimal involvement/);
-        for (const id of ['photography', 'video', 'websites', 'social']) {
+        for (const id of ['photography', 'video', 'websites', 'social', 'campaigns']) {
             const row = page.locator(`#${id} summary`);
             assert.equal(await row.locator('.when-closed').isVisible(), true);
             await row.focus(); await page.keyboard.press('Enter');
@@ -73,14 +73,12 @@ async function run() {
             assert.equal(await row.locator('.when-closed').isVisible(), true);
         }
 
-        for (const id of ['additional', 'partnerships']) {
-            const row = page.locator(`#${id} summary`);
-            await row.focus(); await page.keyboard.press('Enter');
-            await page.waitForFunction(id => document.querySelector(`#${id} summary`).getAttribute('aria-expanded') === 'true', id);
-            await page.keyboard.press('Space');
-            await page.waitForFunction(id => document.querySelector(`#${id} summary`).getAttribute('aria-expanded') === 'false', id);
-        }
-        assert.match(await page.locator('#partnerships').textContent(), /automatically renew for successive three-month terms unless canceled at least 30 days/);
+        assert.match(await page.locator('.services-pricing-notes').textContent(), /renew in three-month terms unless canceled with the required notice/);
+        assert.match(await page.locator('.services-pricing-notes').textContent(), /quoted separately and approved in advance/);
+        assert.equal(await page.locator('.service-custom-price').textContent(), 'Custom Quote');
+        assert.match(await page.locator('#photography').textContent(), /retouching, hair and makeup, wardrobe styling/);
+        assert.match(await page.locator('#video').textContent(), /usable footage/);
+        assert.match(await page.locator('#websites').textContent(), /Hosting, domains, subscriptions, and third-party services/);
         assert.match(await page.locator('.services-commitment').textContent(), /three-month commitment/);
         assert.match(await page.locator('#video').textContent(), /standard post-production.*complex visual effects/i);
 
@@ -132,7 +130,7 @@ async function run() {
             await page.locator('main details').evaluateAll(items => items.forEach(el => { el.open = false; }));
             await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
             const heights = await page.locator('.service-row').evaluateAll(rows => rows.map(row => row.getBoundingClientRect().height));
-            for (const id of ['photography', 'video', 'websites', 'social']) {
+            for (const id of ['photography', 'video', 'websites', 'social', 'campaigns']) {
                 await page.locator(`#${id} summary`).click();
                 const expanded = await page.locator('.service-row').evaluateAll(rows => rows.map(row => row.getBoundingClientRect().height));
                 assert.ok(expanded.every((height, i) => Math.abs(height - heights[i]) < 1), `Service heading changed height at ${width} after opening ${id}`);
@@ -143,7 +141,7 @@ async function run() {
             await page.setViewportSize({ width, height: 900 });
             await page.emulateMedia({ reducedMotion: reduced });
             await page.locator('#inquiry-name').fill('Keep this name');
-            for (const [id, service] of Object.entries({ photography: 'Photography', video: 'Video Production', websites: 'Website Development', social: 'Social Media Content' })) {
+            for (const [id, service] of Object.entries({ photography: 'Photography', video: 'Video Production', websites: 'Website Design & Development', social: 'Social Media Content', campaigns: 'Creative Direction & Custom Productions' })) {
                 await page.locator(`#${id}`).evaluate(el => { el.open = true; });
                 await page.locator(`#${id} [data-inquiry-service]`).click();
                 assert.equal(await page.locator('#inquiry-service').inputValue(), service);

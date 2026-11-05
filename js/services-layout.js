@@ -15,7 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const available = window.innerHeight - headerHeight - parseFloat(getComputedStyle(page).paddingTop)
                 - intro.getBoundingClientRect().height - parseFloat(introStyle.marginBottom)
                 - parseFloat(getComputedStyle(opening).paddingBottom) - (count - 1);
-            page.style.setProperty('--services-row-min-height', `${Math.max(0, available / count)}px`);
+            const naturalHeight = Math.max(...Array.from(page.querySelectorAll('.service-row'), row => {
+                const style = getComputedStyle(row);
+                return Math.max(...Array.from(row.children, child => child.getBoundingClientRect().height))
+                    + parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+            }));
+            page.style.setProperty('--services-row-min-height', `${Math.max(naturalHeight, available / count)}px`);
         };
         alignOpening();
         const observer = new ResizeObserver(alignOpening);
@@ -25,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.fonts.ready.then(alignOpening);
     }
 
-    document.querySelectorAll('details.service-offering, details.service-terms').forEach(offering => {
+    document.querySelectorAll('details.service-offering').forEach(offering => {
         const summary = offering.querySelector('summary');
         const panel = offering.querySelector('.service-details');
         if (!summary || !panel) return;

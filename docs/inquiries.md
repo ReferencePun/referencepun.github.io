@@ -1,6 +1,6 @@
 # Services page inquiries
 
-The page remains at `/services.html`, with `noindex, nofollow` and no incoming navigation links from other pages. Its own **Inquire** navigation link scrolls to the visible inquiry form. Each primary service disclosure also has an **Inquire about this service** link that preselects the corresponding service without clearing other fields. Links scroll to the page bottom when the entire form and footer fit; on shorter screens they align the start of the form beneath the sticky header. Scrolling respects reduced motion.
+The page remains at `/services.html`, with `noindex, nofollow` and no incoming navigation links from other pages. Its own **Inquire** navigation link scrolls to the visible inquiry form. Each of the five service disclosures also has an **Inquire about this service** link that preselects the corresponding service without clearing other fields. Links scroll to the page bottom when the entire form and footer fit; on shorter screens they align the start of the form beneath the sticky header. Scrolling respects reduced motion.
 
 ## Direct email delivery
 
