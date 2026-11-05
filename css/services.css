@@ -1,60 +1,158 @@
-/* A private-link rate sheet using the portfolio's typography and shared chrome. */
+/* Compact service overview; full rates and terms remain available on disclosure. */
 .services-page {
-    max-width: 1380px;
-    padding-top: clamp(40px, 5vw, 80px);
+    --services-rule: #d3cec5;
+    --services-muted: #615b53;
+    --services-gap: clamp(24px, 3vw, 48px);
+    max-width: 1600px;
+    padding-top: clamp(32px, 3.5vw, 56px);
     color: #292927;
 }
-
-.services-intro { margin-bottom: clamp(40px, 5vw, 72px); }
-.services-intro h2 {
-    margin: 0 0 18px;
-    font-size: clamp(48px, 7vw, 104px);
-    line-height: 1.05;
+.services-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: var(--services-gap);
+    align-items: center;
+    margin-bottom: clamp(28px, 3vw, 48px);
+}
+.services-title h2 {
+    margin: 0 0 8px;
+    font-size: clamp(44px, 4.8vw, 72px);
+    line-height: 1.04;
     letter-spacing: -.035em;
 }
-.services-intro p { margin: 0; font-size: clamp(21px, 2vw, 28px); line-height: 1.4; color: #66615a; font-style: italic; }
-.services-intro .services-terms { max-width: 780px; margin-top: 24px; font-size: clamp(20px, 1.6vw, 23px); font-style: normal; color: inherit; }
-.services-terms strong { font-weight: 500; }
-.service-section {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-    gap: clamp(32px, 5vw, 80px);
-    border-top: 1px solid #d9d4cb;
-    padding-block: clamp(32px, 3.5vw, 52px);
+.services-tagline {
+    margin: 0;
+    font-size: clamp(18px, 1.45vw, 22px);
+    font-style: italic;
+    line-height: 1.3;
 }
-.service-section:last-child { padding-bottom: 0; }
-.service-section h3 { margin: 0; font-size: clamp(30px, 3vw, 42px); line-height: 1.12; letter-spacing: -.02em; text-wrap: balance; }
-.service-details { min-width: 0; font-size: clamp(20px, 1.6vw, 23px); line-height: 1.45; }
+.services-terms {
+    margin: 0;
+    padding-left: var(--services-gap);
+    border-left: 1px solid var(--services-rule);
+    font-size: clamp(18px, 1.4vw, 21px);
+    line-height: 1.3;
+}
+.services-page strong { font-weight: 500; }
+.service-offering { border-bottom: 1px solid var(--services-rule); }
+.services-page summary { list-style: none; cursor: pointer; }
+.services-page summary::-webkit-details-marker { display: none; }
+.services-page summary:focus-visible { outline: 2px solid #746b5e; outline-offset: 5px; }
+.service-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: var(--services-gap);
+    align-items: center;
+    padding-block: clamp(22px, 2vw, 30px);
+}
+.service-name {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    font-size: clamp(28px, 2.6vw, 40px);
+    line-height: 1.08;
+    letter-spacing: -.025em;
+}
+.disclosure-mark {
+    position: relative;
+    display: inline-block;
+    flex: 0 0 12px;
+    width: 12px;
+    height: 12px;
+    color: #8c8275;
+}
+.disclosure-mark::before, .disclosure-mark::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+}
+.disclosure-mark::before { top: 5.5px; left: 0; width: 12px; height: 1px; }
+.disclosure-mark::after { top: 0; left: 5.5px; width: 1px; height: 12px; }
+.services-page details[open] > summary .disclosure-mark::after { display: none; }
+.services-page summary:hover .disclosure-mark { color: #292927; }
+.service-description {
+    margin: 0;
+    max-width: 36ch;
+    font-size: clamp(18px, 1.4vw, 21px);
+    font-style: italic;
+    line-height: 1.3;
+}
+.service-prices { display: grid; grid-template-columns: 1fr 1fr; align-items: center; margin: 0; }
+.service-price + .service-price { padding-left: clamp(16px, 2vw, 30px); border-left: 1px solid var(--services-rule); }
+.service-price dt { margin: 0 0 3px; color: var(--services-muted); font-size: 11px; font-weight: 500; letter-spacing: .14em; line-height: 1.4; text-transform: uppercase; }
+.service-price dd { margin: 0; white-space: nowrap; font-size: clamp(26px, 2.3vw, 35px); line-height: 1.1; letter-spacing: -.025em; font-variant-numeric: lining-nums tabular-nums; }
+.service-price dd span { font-size: .72em; }
+.service-details { min-width: 0; font-size: clamp(18px, 1.4vw, 21px); line-height: 1.45; }
+.service-offering > .service-details { margin-left: calc((100% - 2 * var(--services-gap)) * 1.05 / 3.1 + var(--services-gap)); padding: 8px 0 32px; }
 .service-details p { margin: 0 0 16px; }
 .service-details > :last-child { margin-bottom: 0; }
-.service-details strong, .service-details h4 { font-weight: 500; }
-.service-details h4 { margin: 28px 0 10px; font-size: inherit; line-height: inherit; }
-.service-details h4:first-child { margin-top: 0; }
 .service-details a { color: inherit; text-underline-offset: .15em; overflow-wrap: anywhere; }
 .service-details ul { padding-left: 1.1em; margin: 0 0 24px; }
-.service-details li + li { margin-top: 4px; }
+.service-details li + li { margin-top: 6px; }
 .service-details table { width: 100%; border-collapse: collapse; margin: 0 0 24px; font-size: inherit; }
-.service-details th, .service-details td { padding: 12px 0; border-bottom: 1px solid #e0dbd2; text-align: left; font-weight: 400; vertical-align: top; }
-.service-details thead th { padding-top: 0; color: #66615a; font-size: .85em; }
-.service-details th:first-child { padding-right: 20px; }
-.service-details th:nth-child(2), .service-details td:nth-child(2) { padding-right: 20px; }
+.service-details th, .service-details td { padding: 12px 0; border-bottom: 1px solid var(--services-rule); text-align: left; font-weight: 400; vertical-align: top; }
+.service-details thead th { padding-top: 0; color: var(--services-muted); font-size: .85em; }
+.service-details th:first-child, .service-details td:nth-child(2), .service-details th:nth-child(2) { padding-right: 16px; }
 .service-details th:last-child, .service-details td:last-child { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.service-details .service-package { font-size: 1.15em; }
-.service-details .partnership-rates th:not(:first-child),
-.service-details .partnership-rates td { text-align: right; padding-left: 12px; padding-right: 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
-@media (max-width: 700px) {
-    .service-section { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-    .service-section h3 { text-wrap: pretty; }
-    .service-details th:first-child { padding-right: 14px; }
-    .service-details th:nth-child(2), .service-details td:nth-child(2) { padding-right: 14px; }
-    .service-details table { font-size: 18px; }
-    .service-details .partnership-rates { font-size: 18px; }
-    .service-details .partnership-rates th:first-child { padding-right: 6px; }
-    .service-details .partnership-rates th:not(:first-child),
-    .service-details .partnership-rates td { padding-left: 6px; }
+.service-details .partnership-rates th:not(:first-child), .service-details .partnership-rates td { text-align: right; padding-left: 12px; padding-right: 0; white-space: nowrap; }
+.services-process { display: grid; grid-template-columns: minmax(0, .58fr) minmax(0, 3fr); column-gap: var(--services-gap); row-gap: 24px; padding-block: clamp(32px, 3vw, 48px); }
+.process-heading h3 { margin: 0 0 12px; font-size: clamp(30px, 2.7vw, 40px); font-style: italic; line-height: 1.1; }
+.process-heading p { margin: 0; color: var(--services-muted); font-size: 16px; line-height: 1.3; }
+.process-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; padding: 0; margin: 0; }
+.process-steps li { display: flex; align-items: baseline; gap: 14px; padding-inline: clamp(18px, 2vw, 30px); border-left: 1px solid var(--services-rule); }
+.process-steps li:last-child { padding-right: 0; }
+.process-number { font-size: 17px; color: var(--services-muted); font-variant-numeric: lining-nums; }
+.process-steps h4 { margin: 0 0 6px; font-size: clamp(24px, 2vw, 30px); line-height: 1.1; letter-spacing: -.02em; }
+.process-steps p { margin: 0; font-size: 18px; line-height: 1.3; }
+.process-note { grid-column: 2; margin: 0; padding-left: clamp(18px, 2vw, 30px); font-size: 17px; color: var(--services-muted); }
+.services-further-details { margin-top: 16px; border-top: 1px solid var(--services-rule); }
+.service-terms { border-bottom: 1px solid var(--services-rule); }
+.service-terms summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 22px; }
+.service-terms h3 { margin: 0; font-size: clamp(22px, 1.8vw, 27px); line-height: 1.2; }
+.service-terms .service-details { max-width: 800px; padding-bottom: 28px; }
+.services-inquiries { display: flex; justify-content: space-between; gap: 24px; margin-top: 40px; }
+.services-inquiries h3 { margin: 0; font-size: 28px; line-height: 1.2; }
+.services-inquiries .service-details { text-align: right; }
+.services-inquiries p { margin-bottom: 4px; }
+@media (max-width: 1050px) {
+    .service-row { column-gap: 24px; }
+    .service-name { font-size: 29px; gap: 10px; }
+    .service-price dd { font-size: 27px; }
+    .service-price + .service-price { padding-left: 14px; }
+    .services-process { grid-template-columns: minmax(0, 1fr); }
+    .process-heading { display: flex; align-items: baseline; gap: 24px; }
+    .process-heading h3 { margin: 0; }
+    .process-heading p { max-width: 45ch; }
+    .process-steps li:first-child { padding-left: 0; border-left: 0; }
+    .process-note { grid-column: 1; padding-left: 0; }
 }
-@media (max-width: 360px) {
-    .service-details .partnership-rates th:first-child { padding-right: 4px; }
-    .service-details .partnership-rates th:not(:first-child),
-    .service-details .partnership-rates td { padding-left: 4px; }
+@media (max-width: 760px) {
+    .services-intro { grid-template-columns: minmax(0, 1fr); gap: 24px; margin-bottom: 12px; }
+    .services-title h2 { font-size: clamp(42px, 8vw, 58px); }
+    .services-tagline { max-width: 38ch; }
+    .services-terms { padding-left: 18px; max-width: 48ch; }
+    .service-row { grid-template-columns: minmax(0, 1fr); gap: 12px; padding-block: 26px; }
+    .service-name { justify-content: space-between; font-size: 32px; }
+    .service-description { max-width: 36ch; font-size: 19px; }
+    .service-prices { margin-top: 8px; }
+    .service-price + .service-price { padding-left: 24px; }
+    .service-price dd { font-size: 30px; }
+    .service-price dt { font-size: 11px; }
+    .service-offering > .service-details { margin-left: 0; padding-bottom: 26px; }
+    .service-details table { font-size: 18px; }
+    .service-details th:first-child, .service-details th:nth-child(2), .service-details td:nth-child(2) { padding-right: 10px; }
+    .service-details .partnership-rates th:not(:first-child), .service-details .partnership-rates td { padding-left: 8px; }
+    .services-process { gap: 24px; }
+    .process-heading { display: block; }
+    .process-heading h3 { margin-bottom: 10px; }
+    .process-steps { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .process-steps li, .process-steps li:first-child { border-left: 1px solid var(--services-rule); padding: 0 0 0 18px; gap: 18px; }
+    .process-steps h4 { font-size: 26px; }
+    .process-steps p { max-width: 42ch; }
+    .process-note { padding-left: 0; }
+    .services-further-details { margin-top: 0; }
+    .services-inquiries { display: block; margin-top: 32px; }
+    .services-inquiries h3 { margin-bottom: 12px; }
+    .services-inquiries .service-details { text-align: left; }
 }
