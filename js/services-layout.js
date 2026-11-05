@@ -2,6 +2,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const price = document.querySelector('#social .service-price:last-child dd');
     const note = document.querySelector('.service-quote');
+    const header = document.querySelector('body > header');
+    const page = document.querySelector('.services-page');
     if (!price || !note) return;
 
     function alignNote() {
@@ -17,4 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.fonts.addEventListener('loadingdone', alignNote);
     new ResizeObserver(alignNote).observe(price.closest('.service-prices'));
     window.addEventListener('resize', alignNote, { passive: true });
+
+    if (header && page) {
+        const alignOpening = () => page.style.setProperty('--services-header-height', `${header.getBoundingClientRect().height}px`);
+        alignOpening();
+        new ResizeObserver(alignOpening).observe(header);
+    }
 });
