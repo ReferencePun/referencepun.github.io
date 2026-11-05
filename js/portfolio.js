@@ -394,7 +394,7 @@ const portfolioImages = [
     {
         src: 'images/portfolio/F1040012fix1.jpg',
         alt: 'Lindsey Wixson',
-        caption: 'lindsey Wixson 1'
+        caption: 'Lindsey Wixson 1'
     },
     {
         src: 'images/portfolio/F1010033l.jpg',
