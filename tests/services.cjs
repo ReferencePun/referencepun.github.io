@@ -73,8 +73,9 @@ async function run() {
             assert.equal(await row.locator('.when-closed').isVisible(), true);
         }
 
-        assert.match(await page.locator('.services-pricing-notes').textContent(), /renew in three-month terms unless canceled with the required notice/);
+        assert.match(await page.locator('.services-pricing-notes').textContent(), /automatically renew in three-month terms unless canceled at least 30 days before renewal/);
         assert.match(await page.locator('.services-pricing-notes').textContent(), /quoted separately and approved in advance/);
+        assert.match(await page.locator('.services-pricing-notes').textContent(), /Starting rates assume client-provided creative direction/);
         assert.equal(await page.locator('.service-custom-price').textContent(), 'Custom Quote');
         assert.match(await page.locator('#photography').textContent(), /retouching, hair and makeup, wardrobe styling/);
         assert.match(await page.locator('#video').textContent(), /usable footage/);
@@ -83,7 +84,7 @@ async function run() {
         assert.match(await page.locator('#video').textContent(), /standard post-production.*complex visual effects/i);
 
         await page.locator('#video summary').click();
-        await page.waitForFunction(() => getComputedStyle(document.querySelector('#video summary')).backgroundColor !== 'rgba(0, 0, 0, 0)');
+        await page.waitForFunction(() => getComputedStyle(document.querySelector('#video summary'), '::before').backgroundColor !== 'rgba(0, 0, 0, 0)');
         assert.equal(await page.locator('#video').evaluate(el => getComputedStyle(el).backgroundColor), 'rgba(0, 0, 0, 0)');
         await page.locator('#video .service-details p').first().click();
         assert.equal(await page.locator('#video').getAttribute('open'), null);
@@ -136,6 +137,14 @@ async function run() {
                 assert.ok(expanded.every((height, i) => Math.abs(height - heights[i]) < 1), `Service heading changed height at ${width} after opening ${id}`);
                 await page.locator(`#${id} summary`).click();
             }
+        }
+        for (const [width, height] of [[1100, 740], [1280, 650], [1280, 720], [1366, 768], [1440, 780], [1440, 900], [1536, 864], [1710, 984], [1920, 1080]]) {
+            await page.setViewportSize({ width, height });
+            await page.locator('main details').evaluateAll(items => items.forEach(el => { el.open = false; }));
+            await page.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); });
+            const lastRow = await page.locator('#campaigns summary').boundingBox();
+            assert.ok(lastRow.y + lastRow.height <= height - 16, `Creative Direction is cut off at ${width} × ${height}`);
+            if (width === 1710 || (width === 1440 && height === 780)) await page.screenshot({ path: `.qa/services-first-screen-${process.env.BROWSER_ENGINE || 'chromium'}-${width}-${height}.png`, animations: 'disabled' });
         }
         for (const [width, reduced] of [[1440, 'no-preference'], [393, 'reduce']]) {
             await page.setViewportSize({ width, height: 900 });
