@@ -78,6 +78,7 @@
     font-style: italic;
     line-height: 1.3;
 }
+.service-quote { margin: 0; font-size: clamp(18px, 1.4vw, 21px); line-height: 1.4; }
 .service-prices { display: grid; grid-template-columns: 1fr 1fr; align-items: center; margin: 0; }
 .service-price + .service-price { padding-left: clamp(16px, 2vw, 30px); border-left: 1px solid var(--services-rule); }
 .service-price dt { margin: 0 0 3px; color: var(--services-muted); font-size: 11px; font-weight: 500; letter-spacing: .14em; line-height: 1.4; text-transform: uppercase; }
@@ -228,17 +229,17 @@
 .services-page details[open] > summary .when-closed { display: none; }
 .service-row { transition: background-color .16s ease; }
 @media (hover: hover) {
-    .service-row:hover { background-color: rgba(65, 54, 36, .025); }
-    .service-row:hover .service-toggle { color: #292927; }
+    summary.service-row:hover { background-color: rgba(65, 54, 36, .025); }
+    summary.service-row:hover .service-toggle { color: #292927; }
 }
 .services-process { padding-block: var(--services-section-space); }
 .process-steps { align-items: stretch; }
 .services-editorial { display: grid; grid-template-columns: var(--services-name-column) minmax(0, 1fr); gap: var(--services-gap); padding-block: var(--services-section-space); border-top: 1px solid var(--services-rule); margin: 0; }
 .services-editorial h3 { font-size: clamp(28px, 2.3vw, 35px); line-height: 1.13; letter-spacing: -.02em; margin: 0 0 16px; }
-.editorial-intro p { margin: 0 0 16px; font-size: clamp(18px, 1.4vw, 21px); line-height: 1.4; }
-.editorial-intro p:last-child { margin-bottom: 0; }
 .creative-services { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 30px; align-content: start; list-style: none; margin: 0; padding: 3px 0 0; font-size: clamp(18px, 1.4vw, 21px); line-height: 1.35; }
 .creative-services li { border-bottom: 1px solid var(--services-rule); padding-bottom: 12px; }
+.service-creative-details .creative-services { margin: 0; padding: 0; }
+.service-creative-details .creative-services li { margin: 0; }
 .services-information h3 { font-size: clamp(25px, 2vw, 30px); }
 .service-terms summary { padding-block: 17px; min-height: 52px; }
 .service-terms h4 { font-size: clamp(21px, 1.65vw, 25px); }

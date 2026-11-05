@@ -50,9 +50,9 @@ async function run() {
         });
         await page.goto(`${base}/services.html`);
         assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex, nofollow');
-        assert.equal(await page.locator('.service-offering').count(), 4);
-        assert.equal(await page.locator('main details').count(), 6);
-        assert.equal(await page.locator('.administrative-details details').count(), 2);
+        assert.equal(await page.locator('.service-offering').count(), 5);
+        assert.equal(await page.locator('main details').count(), 7);
+        assert.equal(await page.locator('.administrative-details details').count(), 4);
         assert.equal(await page.locator('#campaigns').isVisible(), true);
         assert.equal(await page.locator('#campaigns').evaluate(el => el.tagName), 'SECTION');
         assert.equal(await page.locator('.creative-services li').count(), 7);
@@ -63,7 +63,7 @@ async function run() {
         assert.equal(await page.getByRole('combobox', { name: 'Service of Interest *', exact: true }).getAttribute('required'), '');
         assert.equal(await page.locator('.inquiry-fields input, .inquiry-fields select, .inquiry-fields textarea').count(), 7);
         assert.doesNotMatch(await page.locator('main').textContent(), /The process is designed to require minimal involvement/);
-        for (const id of ['photography', 'video', 'websites', 'social', 'additional', 'partnerships']) {
+        for (const id of ['photography', 'video', 'websites', 'content-delivery', 'scope', 'additional', 'partnerships']) {
             const row = page.locator(`#${id} summary`);
             assert.equal(await row.locator('.when-closed').isVisible(), true);
             await row.focus(); await page.keyboard.press('Enter');
