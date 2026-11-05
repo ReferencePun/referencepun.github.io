@@ -37,6 +37,7 @@
 }
 .services-page strong { font-weight: 500; }
 .service-offering { border-bottom: 1px solid var(--services-rule); }
+.service-offering:last-child { border-bottom: 0; }
 .service-offering[open] > .service-row, .service-terms[open] > summary { background-color: rgba(65, 54, 36, .045); }
 .service-offering[open] > .service-details, .service-terms[open] > .service-details { cursor: pointer; }
 .services-page summary { list-style: none; cursor: pointer; }
@@ -246,8 +247,8 @@
         min-height: calc(100svh - var(--services-header-height, 95px) - var(--services-top-space));
         padding-bottom: clamp(20px, 2vw, 32px);
     }
-    .services-overview { display: grid; flex: 1; grid-auto-rows: auto; align-content: stretch; }
-    .services-overview > .service-offering:not([open]) > .service-row { height: 100%; }
+    .services-overview { flex: 1; }
+    .services-overview > .service-offering > .service-row { min-height: var(--services-row-min-height, 0px); }
 }
 @media (min-width: 1100px) and (max-height: 950px) {
     .services-page { --services-top-space: clamp(24px, 4svh, 38px); }
@@ -260,8 +261,9 @@
 .creative-services li { border-bottom: 1px solid var(--services-rule); padding-bottom: 12px; }
 /* Flat full-width color bands keep the established text grid. */
 .services-band { background-color: var(--section-background); box-shadow: 0 0 0 100vmax var(--section-background); clip-path: inset(0 -100vmax); }
-.services-creative { --section-background: #f2efe9; border-top: 0; }
-.services-inquiries.services-band { --section-background: #eae5dc; border-top: 0; padding-block: var(--services-section-space); }
+.services-process, .services-creative, .services-information { --section-background: #f2efe9; }
+.services-creative { border-top: 0; }
+.services-inquiries { border-top: 0; padding-block: var(--services-section-space); }
 .services-creative h3 span { display: block; }
 .creative-intro p { max-width: 38ch; margin: 0 0 16px; font-size: clamp(18px, 1.4vw, 21px); line-height: 1.4; }
 .creative-intro > :last-child { margin-bottom: 0; }
@@ -271,8 +273,8 @@
 .service-inquiry a { display: inline-flex; align-items: center; min-height: 44px; font-size: 18px; text-decoration: underline; text-underline-offset: .18em; }
 .service-inquiry a:focus-visible { outline: 2px solid #746b5e; outline-offset: 3px; }
 .service-offering > .service-detail-columns { row-gap: 16px; }
-.services-process { padding-block: 30px; }
-.services-information { border-top: 0; }
+.services-process { padding-block: 30px; border-top: 2px solid var(--services-rule); }
+.services-information { border-top: 0; border-bottom: 2px solid var(--services-rule); }
 .services-information h3 { font-size: clamp(25px, 2vw, 30px); }
 .service-terms summary { padding-block: 17px; min-height: 52px; }
 .service-terms h4 { font-size: clamp(21px, 1.65vw, 25px); }
@@ -280,7 +282,7 @@
 .service-terms .service-details { font-size: 18px; line-height: 1.4; padding-bottom: 22px; }
 .service-terms .service-details p { margin-bottom: 12px; }
 .service-terms .service-details p:last-child { margin-bottom: 0; }
-.services-inquiries { padding-bottom: 0; }
+.services-inquiries { padding-bottom: var(--services-section-space); }
 .inquiry-panel { min-width: 0; }
 .inquiry-panel > #inquiry-delivery-note { margin: 0 0 16px; color: var(--services-muted); font-size: 17px; }
 #inquiry-form { scroll-margin-top: calc(var(--services-header-height, 95px) + 24px); }

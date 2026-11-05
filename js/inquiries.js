@@ -33,7 +33,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (location.hash !== '#inquiry-form') history.pushState(null, '', '#inquiry-form');
             requestAnimationFrame(() => {
-                form.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+                const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+                const headerBottom = document.querySelector('body > header').getBoundingClientRect().bottom;
+                const formTop = form.getBoundingClientRect().top + window.scrollY;
+                const bottom = document.documentElement.scrollHeight;
+                // Show the whole form and footer together whenever they fit.
+                // On small screens, keep the beginning of the form accessible.
+                if (bottom - formTop <= window.innerHeight - headerBottom - 20) {
+                    window.scrollTo({ top: bottom, behavior });
+                } else {
+                    form.scrollIntoView({ block: 'start', behavior });
+                }
                 byId('inquiry-name').focus({ preventScroll: true });
             });
         });

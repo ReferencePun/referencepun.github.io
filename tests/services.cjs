@@ -127,6 +127,18 @@ async function run() {
                 assert.equal(header, true, `Header collision at ${width}`);
             }
         }
+        for (const width of [1280, 1440, 1710]) {
+            await page.setViewportSize({ width, height: 980 });
+            await page.locator('main details').evaluateAll(items => items.forEach(el => { el.open = false; }));
+            await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+            const heights = await page.locator('.service-row').evaluateAll(rows => rows.map(row => row.getBoundingClientRect().height));
+            for (const id of ['photography', 'video', 'websites', 'social']) {
+                await page.locator(`#${id} summary`).click();
+                const expanded = await page.locator('.service-row').evaluateAll(rows => rows.map(row => row.getBoundingClientRect().height));
+                assert.ok(expanded.every((height, i) => Math.abs(height - heights[i]) < 1), `Service heading changed height at ${width} after opening ${id}`);
+                await page.locator(`#${id} summary`).click();
+            }
+        }
         for (const [width, reduced] of [[1440, 'no-preference'], [393, 'reduce']]) {
             await page.setViewportSize({ width, height: 900 });
             await page.emulateMedia({ reducedMotion: reduced });
@@ -141,6 +153,10 @@ async function run() {
                     const r = document.querySelector('#inquiry-name').getBoundingClientRect();
                     return document.activeElement.id === 'inquiry-name' && r.top >= document.querySelector('header').getBoundingClientRect().bottom && r.bottom < innerHeight;
                 });
+                if (width === 1440) {
+                    await page.waitForFunction(() => Math.abs(document.documentElement.scrollHeight - scrollY - innerHeight) < 2);
+                    assert.ok(await page.locator('#inquiry-form').evaluate(el => el.getBoundingClientRect().bottom <= innerHeight), 'Full inquiry form fits at the page bottom');
+                }
             }
             await page.locator('#inquiry-name').fill('');
         }

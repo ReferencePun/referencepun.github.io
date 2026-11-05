@@ -4,10 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const page = document.querySelector('.services-page');
     if (!page) return;
 
-    if (header && page) {
-        const alignOpening = () => page.style.setProperty('--services-header-height', `${header.getBoundingClientRect().height}px`);
+    const opening = page.querySelector('.services-opening');
+    const intro = page.querySelector('.services-intro');
+    if (header && opening && intro) {
+        const alignOpening = () => {
+            const headerHeight = header.getBoundingClientRect().height;
+            page.style.setProperty('--services-header-height', `${headerHeight}px`);
+            const introStyle = getComputedStyle(intro);
+            const count = page.querySelectorAll('.service-offering').length;
+            const available = window.innerHeight - headerHeight - parseFloat(getComputedStyle(page).paddingTop)
+                - intro.getBoundingClientRect().height - parseFloat(introStyle.marginBottom)
+                - parseFloat(getComputedStyle(opening).paddingBottom) - (count - 1);
+            page.style.setProperty('--services-row-min-height', `${Math.max(0, available / count)}px`);
+        };
         alignOpening();
-        new ResizeObserver(alignOpening).observe(header);
+        const observer = new ResizeObserver(alignOpening);
+        observer.observe(header);
+        observer.observe(intro);
+        window.addEventListener('resize', alignOpening, { passive: true });
+        document.fonts.ready.then(alignOpening);
     }
 
     document.querySelectorAll('details.service-offering, details.service-terms').forEach(offering => {
