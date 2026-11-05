@@ -50,20 +50,20 @@ async function run() {
         });
         await page.goto(`${base}/services.html`);
         assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex, nofollow');
-        assert.equal(await page.locator('.service-offering').count(), 5);
-        assert.equal(await page.locator('main details').count(), 4);
-        assert.equal(await page.locator('.services-information, #scope, #partnerships').count(), 0);
+        assert.equal(await page.locator('.service-offering').count(), 4);
+        assert.equal(await page.locator('main details').count(), 6);
+        assert.equal(await page.locator('.administrative-details details').count(), 2);
         assert.equal(await page.locator('#campaigns').isVisible(), true);
-        assert.equal(await page.locator('#campaigns').evaluate(el => el.tagName), 'DETAILS');
+        assert.equal(await page.locator('#campaigns').evaluate(el => el.tagName), 'SECTION');
         assert.equal(await page.locator('.creative-services li').count(), 7);
         assert.equal(await page.locator('#inquiry-form').isVisible(), true);
         assert.equal(await page.locator('#inquiry-details, #inquiry-draft, #inquiry-communication').count(), 0);
-        assert.equal(await page.locator('#inquiry-submit').textContent(), 'Submit Inquiry');
+        assert.equal(await page.locator('#inquiry-submit').textContent(), 'Send Inquiry');
         assert.equal(await page.getByRole('form', { name: 'Have a project in mind?' }).count(), 1);
         assert.equal(await page.getByRole('combobox', { name: 'Service of Interest *', exact: true }).getAttribute('required'), '');
         assert.equal(await page.locator('.inquiry-fields input, .inquiry-fields select, .inquiry-fields textarea').count(), 7);
         assert.doesNotMatch(await page.locator('main').textContent(), /The process is designed to require minimal involvement/);
-        for (const id of ['photography', 'video', 'websites', 'campaigns']) {
+        for (const id of ['photography', 'video', 'websites', 'social']) {
             const row = page.locator(`#${id} summary`);
             assert.equal(await row.locator('.when-closed').isVisible(), true);
             await row.focus(); await page.keyboard.press('Enter');
@@ -72,6 +72,17 @@ async function run() {
             await page.keyboard.press('Space');
             assert.equal(await row.locator('.when-closed').isVisible(), true);
         }
+
+        for (const id of ['additional', 'partnerships']) {
+            const row = page.locator(`#${id} summary`);
+            await row.focus(); await page.keyboard.press('Enter');
+            await page.waitForFunction(id => document.querySelector(`#${id} summary`).getAttribute('aria-expanded') === 'true', id);
+            await page.keyboard.press('Space');
+            await page.waitForFunction(id => document.querySelector(`#${id} summary`).getAttribute('aria-expanded') === 'false', id);
+        }
+        assert.match(await page.locator('#partnerships').textContent(), /automatically renew for successive three-month terms unless canceled at least 30 days/);
+        assert.match(await page.locator('.services-commitment').textContent(), /three-month commitment/);
+        assert.match(await page.locator('#video').textContent(), /standard post-production.*complex visual effects/i);
 
         await page.locator('#video summary').click();
         await page.waitForFunction(() => getComputedStyle(document.querySelector('#video summary')).backgroundColor !== 'rgba(0, 0, 0, 0)');
@@ -87,7 +98,7 @@ async function run() {
         assert.deepEqual((await page.locator('.service-price dd').allTextContents()).map(s => s.trim()), ['$2,000/mo', '$2,400', '$2,000/mo', '$2,400', '$2,000', '$2,400', '$500/mo', '$600']);
         assert.match(await page.locator('#photography table').textContent(), /\$2,500\/mo.*\$3,000/);
         assert.match(await page.locator('#websites table').textContent(), /\$3,000.*\$3,600/);
-        assert.deepEqual(await page.locator('#video tbody tr').allTextContents(), ['Short-formUp to 30 seconds1', 'Medium-formUp to 2 minutes2', 'Long-formUp to 4 minutes4']);
+        assert.deepEqual(await page.locator('#video tbody tr').allTextContents(), ['Short-formUp to 1 minute1', 'Medium-formUp to 2 minutes2', 'Long-formUp to 4 minutes4']);
         const summary = page.locator('.service-row').first();
         await summary.focus(); await page.keyboard.press('Enter');
         assert.equal(await page.locator('#photography').getAttribute('open'), '');
@@ -105,7 +116,7 @@ async function run() {
                 const overflow = await page.evaluate(() => [...document.querySelectorAll('main table, .service-prices, .inquiry-fields')].filter(el => el.getClientRects().length && el.getBoundingClientRect().right > innerWidth + 1).length);
                 assert.equal(overflow, 0, `Content overflow at ${width}, open=${open}`);
                 assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Page overflow at ${width}`);
-                if ([393, 1440].includes(width)) { await page.evaluate(() => document.activeElement?.blur()); await page.mouse.move(0, 0); await page.screenshot({ path: `.qa/services-inquiries-${process.env.BROWSER_ENGINE || 'chromium'}-${width}-${open ? 'open' : 'closed'}.png`, fullPage: true }); }
+                if ([393, 1440].includes(width)) { await page.evaluate(() => { document.activeElement?.blur(); window.scrollTo(0, 0); }); await page.mouse.move(0, 0); await page.screenshot({ path: `.qa/services-inquiries-${process.env.BROWSER_ENGINE || 'chromium'}-${width}-${open ? 'open' : 'closed'}.png`, fullPage: true, animations: 'disabled' }); }
             }
             if (width > 1000) {
                 const header = await page.evaluate(() => {
@@ -116,16 +127,34 @@ async function run() {
                 assert.equal(header, true, `Header collision at ${width}`);
             }
         }
+        for (const [width, reduced] of [[1440, 'no-preference'], [393, 'reduce']]) {
+            await page.setViewportSize({ width, height: 900 });
+            await page.emulateMedia({ reducedMotion: reduced });
+            await page.locator('#inquiry-name').fill('Keep this name');
+            for (const [id, service] of Object.entries({ photography: 'Photography', video: 'Video Production', websites: 'Website Development', social: 'Social Media Content' })) {
+                await page.locator(`#${id}`).evaluate(el => { el.open = true; });
+                await page.locator(`#${id} [data-inquiry-service]`).click();
+                assert.equal(await page.locator('#inquiry-service').inputValue(), service);
+                assert.equal(await page.locator('#inquiry-name').inputValue(), 'Keep this name');
+                assert.equal(await page.locator(`#${id}`).getAttribute('open'), '', 'Inquiry link must not collapse its section');
+                await page.waitForFunction(() => {
+                    const r = document.querySelector('#inquiry-name').getBoundingClientRect();
+                    return document.activeElement.id === 'inquiry-name' && r.top >= document.querySelector('header').getBoundingClientRect().bottom && r.bottom < innerHeight;
+                });
+            }
+            await page.locator('#inquiry-name').fill('');
+        }
+        await page.emulateMedia({ reducedMotion: 'reduce' });
         await page.setViewportSize({ width: 393, height: 852 });
         await page.locator('#mobile-menu').click();
-        await page.locator('[data-inquiry-link]').click();
+        await page.locator('header [data-inquiry-link]').click();
         assert.equal(await page.locator('#mobile-menu').getAttribute('aria-expanded'), 'false');
         assert.equal(await page.locator('#inquiry-form').isVisible(), true);
         await page.waitForFunction(() => document.activeElement.id === 'inquiry-name');
         const navLanding = await page.locator('#inquiry-name').boundingBox();
         const headerBottom = await page.locator('header').evaluate(el => el.getBoundingClientRect().bottom);
         assert.ok(navLanding.y >= headerBottom && navLanding.y < 852, 'Inquire lands on the form clear of the sticky header');
-        assert.equal(await page.locator('[data-inquiry-link]').getAttribute('aria-current'), null);
+        assert.equal(await page.locator('header [data-inquiry-link]').getAttribute('aria-current'), null);
         assert.equal(await page.locator('input[name=communication]').inputValue(), 'Email');
         await page.locator('#inquiry-submit').click();
         assert.equal(await page.locator('#inquiry-name').getAttribute('aria-invalid'), 'true');

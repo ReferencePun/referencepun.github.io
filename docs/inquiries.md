@@ -1,10 +1,10 @@
 # Services page inquiries
 
-The page remains at `/services.html`, with `noindex, nofollow` and no incoming navigation links from other pages. Its own **Inquire** navigation link scrolls to the visible inquiry form.
+The page remains at `/services.html`, with `noindex, nofollow` and no incoming navigation links from other pages. Its own **Inquire** navigation link scrolls to the visible inquiry form. Each primary service disclosure also has an **Inquire about this service** link that preselects the corresponding service without clearing other fields. Scrolling respects reduced motion and clears the sticky header.
 
 ## Direct email delivery
 
-**Submit Inquiry** sends the completed form directly to an activated Formspree endpoint using HTTPS POST. Visitors do not need to open an email application. Formspree handles spam verification, confirmation, and delivery to the verified receiving address.
+**Send Inquiry** sends the completed form directly to an activated Formspree endpoint using HTTPS POST. Visitors do not need to open an email application. Formspree handles spam verification, confirmation, and delivery to the verified receiving address.
 
 The form requires name, email, service of interest, and project description. Business / Organization, Preferred Timeline, and Phone are optional. Phone accepts international formats and is included as a backup contact in the notification. Email remains the reply method.
 

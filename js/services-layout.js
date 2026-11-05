@@ -1,24 +1,8 @@
 // Align the catalogue and keep its disclosures easy to open and close.
 document.addEventListener('DOMContentLoaded', () => {
-    const price = document.querySelector('#social .service-price:last-child dd');
-    const note = document.querySelector('.service-quote');
     const header = document.querySelector('body > header');
     const page = document.querySelector('.services-page');
-    if (!price || !note) return;
-
-    function alignNote() {
-        const text = document.createRange();
-        text.selectNodeContents(price);
-        const right = text.getBoundingClientRect().right;
-        const left = note.getBoundingClientRect().left;
-        if (right > left) note.style.maxWidth = `${right - left}px`;
-    }
-
-    alignNote();
-    document.fonts.ready.then(alignNote);
-    document.fonts.addEventListener('loadingdone', alignNote);
-    new ResizeObserver(alignNote).observe(price.closest('.service-prices'));
-    window.addEventListener('resize', alignNote, { passive: true });
+    if (!page) return;
 
     if (header && page) {
         const alignOpening = () => page.style.setProperty('--services-header-height', `${header.getBoundingClientRect().height}px`);
@@ -26,11 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
         new ResizeObserver(alignOpening).observe(header);
     }
 
-    document.querySelectorAll('details.service-offering').forEach(offering => {
+    document.querySelectorAll('details.service-offering, details.service-terms').forEach(offering => {
         const summary = offering.querySelector('summary');
         const panel = offering.querySelector('.service-details');
+        if (!summary || !panel) return;
+        panel.id ||= `${offering.id}-details`;
+        summary.setAttribute('aria-controls', panel.id);
+        const syncExpanded = () => summary.setAttribute('aria-expanded', String(offering.open));
+        syncExpanded();
+        offering.addEventListener('toggle', syncExpanded);
         const close = () => {
             offering.open = false;
+            syncExpanded();
             summary.focus({ preventScroll: true });
             const top = summary.getBoundingClientRect().top;
             const visibleTop = (header?.getBoundingClientRect().bottom || 0) + 16;

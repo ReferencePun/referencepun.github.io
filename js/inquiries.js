@@ -21,8 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-inquiry-link]').forEach(link => {
         link.classList.remove('active');
         link.removeAttribute('aria-current');
-        link.addEventListener('click', () => {
-            requestAnimationFrame(() => byId('inquiry-name').focus({ preventScroll: true }));
+        link.addEventListener('click', event => {
+            if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            event.preventDefault();
+            const services = { photography: 'Photography', video: 'Video Production', websites: 'Website Development', social: 'Social Media Content' };
+            const service = services[link.dataset.inquiryService];
+            if (service) {
+                byId('inquiry-service').value = service;
+                byId('inquiry-service').dispatchEvent(new Event('input', { bubbles: true }));
+                byId('inquiry-service').dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            if (location.hash !== '#inquiry-form') history.pushState(null, '', '#inquiry-form');
+            requestAnimationFrame(() => {
+                form.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+                byId('inquiry-name').focus({ preventScroll: true });
+            });
         });
     });
     function setStatus(message, isError = false) {
