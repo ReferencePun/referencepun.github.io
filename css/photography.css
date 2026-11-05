@@ -30,7 +30,7 @@
     border-radius: 0;
     background: var(--site-background) var(--site-paper);
     color: #666660;
-    font: 400 clamp(22px, 1.5vw, 26px)/1.15 'Cormorant Garamond', Times, serif;
+    font: 400 clamp(22px, 1.5vw, 26px)/1.15 var(--font-text);
     cursor: pointer;
 }
 

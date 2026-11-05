@@ -312,3 +312,5 @@
 @media (prefers-reduced-motion: reduce) {
     .film-play-icon { transition: none; }
 }
+
+.film-choice-title, .film-placeholder { font-family: var(--font-display); }

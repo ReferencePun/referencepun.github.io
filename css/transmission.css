@@ -71,7 +71,7 @@
     display: block;
     margin: 0 0 5px;
     color: #666058;
-    font: 400 clamp(10px, .75vw, 13px)/1.5 Arial, sans-serif;
+    font: 400 clamp(12px, .85vw, 14px)/1.5 var(--font-text);
     text-transform: uppercase;
     letter-spacing: .16em;
 }
