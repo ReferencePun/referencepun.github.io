@@ -64,6 +64,12 @@
     pointer-events: none;
     transition: background-color .16s ease;
 }
+/* Expanded headings fill the page without widening the row or its text grid. */
+.service-offering[open] > .service-row::before {
+    inset-inline: 0;
+    box-shadow: 0 0 0 100vmax rgba(65, 54, 36, .045);
+    clip-path: inset(0 -100vmax);
+}
 .service-name {
     display: flex;
     align-items: center;
