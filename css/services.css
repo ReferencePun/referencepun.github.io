@@ -240,6 +240,11 @@
 .creative-services li { border-bottom: 1px solid var(--services-rule); padding-bottom: 12px; }
 .service-creative-details .creative-services { margin: 0; padding: 0; }
 .service-creative-details .creative-services li { margin: 0; }
+.services-creative .service-heading { display: block; position: relative; }
+.services-creative .service-name, .services-creative .service-name span { display: block; }
+.services-creative .service-name span:first-child { padding-right: 82px; }
+.services-creative[open] .service-name span:first-child { padding-right: 112px; }
+.services-creative .service-toggle { position: absolute; top: .5em; right: 0; }
 .services-information h3 { font-size: clamp(25px, 2vw, 30px); }
 .service-terms summary { padding-block: 17px; min-height: 52px; }
 .service-terms h4 { font-size: clamp(21px, 1.65vw, 25px); }
