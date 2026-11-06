@@ -45,7 +45,9 @@ Review, test, and commit the restoration. This does not deploy it. The archive a
 
 Photography founding rates apply to the monthly partnership's one session per month; the catalogue and package table use the amounts without `/mo`, as specified in the brief. Website fees are one-time charges; partner rates require an active monthly agreement.
 
-Content Essentials includes a session of up to four hours and a target of up to twelve videos of thirty seconds or less, subject to preparation, filming conditions, and usable footage. Cinematic Production includes a session of up to eight hours and eight editing credits: short ≤30 seconds/1 credit, medium ≤1 minute/2 credits, long ≤2 minutes/4 credits. Credits apply only to Cinematic Production. Neither package includes subjective editing revisions; production errors that materially fail agreed specifications are corrected.
+Both video packages now include one full-day shoot of up to eight hours and 8–12 finished videos in a mix of lengths. Content Essentials uses standard editing; Cinematic Production uses more advanced editing, color grading, and sound design. This follows the November 6 clarification that editing is the difference between the packages. The previous short-form-only and editing-credit models are superseded. Lengths and deliverables are agreed before filming based on the project and usable footage. Prices are unchanged.
+
+The expanded service panels have been reduced to prices, package choices, and key inclusions. Technical specifications and detailed exclusions are retained below for the complete pricing package.
 
 ## Design and behavior
 
@@ -61,10 +63,73 @@ Content Essentials includes a session of up to four hours and a target of up to 
 
 Run the existing static-site publication check and browser suite with `npm test` while the local HTTP server is running (default `http://127.0.0.1:4174`). There is no application build step for this static page; `npm run site:config` generates the publishing configuration if tracked assets change.
 
-`tests/services.cjs` checks the archived file digests and old pricing, every new package price, cinematic credits, responsive comparisons, keyboard accordions, stable summary heights, complete first-screen layout, inquiry preselection, validation, mocked submission and rejection, and no-JavaScript fallback. It verifies the inquiry section is byte-for-byte unchanged from V1.
+`tests/services.cjs` checks the archived file digests and old pricing, every new package price, video deliverable limits, responsive comparisons, keyboard accordions, stable summary heights, complete first-screen layout, inquiry preselection, validation, mocked submission and rejection, and no-JavaScript fallback. It verifies the inquiry section is byte-for-byte unchanged from V1.
 
 Screenshots are saved locally under `.qa/` (not published or committed). Reference captures include `services-v2-desktop.png`, `services-v2-tablet.png`, `services-v2-video-desktop.png`, and the mobile package images. The full test captures include open/closed pages and smaller laptop viewports.
 
 Verification completed in Chromium and WebKit across 320–1920px layouts, including the archive, package comparisons, first-screen fit, keyboard controls, and mocked inquiry delivery. The public homepage, photography, video, and magazine suites also passed. The publication check remains within the host limit at 849.2 MB. The V2 commit changes no unrelated page or portal files; independently ongoing portal work is outside this pricing update.
 
 Real email delivery is not re-tested by sending an inquiry; provider submissions are mocked. Live payments are not touched. Publish only after explicit authorization.
+
+## Details retained for the complete pricing package
+
+These are internal reference notes, not a completed client agreement. The `docs` directory is excluded from publication. Public descriptions have been shortened without changing prices. The video quantities and session duration were separately updated at the user's explicit request on November 6: both packages now include a full-day shoot and 8–12 videos, differing in editing treatment.
+
+### Photography
+
+- Monthly partnerships include one shoot per month; standalone sessions are also available.
+- Digital Half Day: up to four hours, including standard color and exposure adjustments.
+- Digital Full Day: up to eight hours, including standard color and exposure adjustments.
+- Film Full Day: up to eight hours, including standard processing and scanning.
+- Final selections and delivery dates are agreed before production. No fixed photograph count is promised.
+- Selected photographs are delivered digitally. Prints are separately available.
+- Detailed retouching, beauty services, hair, makeup, wardrobe styling, additional locations, talent, specialized equipment, and other production expenses are separately quoted and approved.
+
+### Both video packages
+
+- One full-day filming session of up to eight hours.
+- 8–12 finished videos in a mix of lengths. Formats, lengths, and final deliverables are agreed before filming based on the project and usable footage.
+- Captions, appropriate licensed music, and digital delivery.
+- The filming allocation and number of videos are the same in both packages. Editing treatment is the distinction.
+- Preparation, filming conditions, and usable footage affect the agreed output. Do not promise unspecified video lengths or unlimited editing work.
+- Original scripts, extensive creative direction, additional shoot days, larger crews, and work outside the approved brief are separately quoted.
+- Neither package includes subjective editing revision rounds. Production errors that materially fail the agreed specifications are corrected. Confirm these conditions in the proposal and agreement.
+- The previous eight-credit system and twelve-short-videos limit are obsolete, not additional restrictions on these packages. Historical copy remains in Git at `0d30f59`.
+
+### Content Essentials — editing
+
+- Founding: $1,500/month. Standalone: $1,800.
+- Simple cuts and transitions, basic color correction, and audio cleanup.
+- Standard or automated captions, simple titles, licensed music, and a consistent editing style.
+- Excludes specialist cinematic editing, elaborate sound design, advanced visual effects, extensive custom animation, and ongoing social account management.
+
+### Cinematic Production — editing
+
+- Founding: $2,500/month. Standalone: $3,000.
+- Individualized editing, enhanced color grading, advanced pacing, and sound design.
+- Specialist editors where appropriate.
+- Complex visual effects, extensive animation, and requirements beyond the approved brief are separately quoted.
+
+### Website Design & Development
+
+- Development is a one-time project fee. Partner rates require an active monthly service agreement.
+- Landing Page: one responsive page with a standard contact form or call-to-action and limited, predefined features.
+- Squarespace: up to four pages, custom platform styling, responsive layouts, and basic contact functionality.
+- Custom Starter: up to four custom-coded pages, reusable components, responsive layouts, and standard contact functionality.
+- These three packages use client-provided copy and images.
+- Advanced Custom: more elaborate design, additional pages, custom interactions, integrations, complex content structures, and specialized development, quoted for each project.
+- Hosting, domains, platform subscriptions, and third-party services are separate. Complex integrations and extensive content development are separately quoted.
+- Optional maintenance, content updates, and technical support are available.
+- Confirm pages, features, delivery dates, and the review process in the proposal; no unlimited revisions are promised.
+
+### Social Media Content
+
+- Both packages include twenty visuals based on supplied brand direction, delivered digitally and ready to publish.
+- Standard Visuals uses efficient, repeatable production with AI-assisted images or templates and consistent styling. It excludes extensive individual art direction, elaborate compositing, and custom campaigns.
+- Custom Visuals provides more individual creative treatment, AI-assisted imagery where appropriate, digital editing and composition, and greater variety.
+- Scheduling and publishing are available for a separate monthly fee.
+- Account management, community engagement, analytics, advertising management, and daily account monitoring are excluded.
+
+### Creative Direction & Custom Productions
+
+All services are quoted individually: concept development and campaign strategy; creative and art direction; scripts and storyboards; expanded crews and equipment; multi-day and multi-location production; advanced editing and retouching; brand identity and visual development.
