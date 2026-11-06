@@ -1,0 +1,12 @@
+{
+  "commit": "e90ba764e5cd4b6479df28a40a6f4faa4c5c08bf",
+  "sha256": {
+    "css/style.css": "f6756365407e8ec07ee600dff35d014043da850f229c3bd250d22b4b98b4a46b",
+    "css/services.css": "a52fd5c3175ba77b04121f510f944649833e0720887eb971de08b29f162ebcd5",
+    "js/main.js": "d733a5d112323add6ddd110b34875f2d2bd04346e04fd1ce60459391b642e4a5",
+    "js/services-layout.js": "438bf93807ff51b1c7a18d1aa00077e8331308c7ba526c361e37ac99a1115ad8",
+    "js/inquiries.js": "d6a07b9b6bdac2580355fc151679dcedf005040f29ee18a0c9c06088cdcba7ad",
+    "images/paper-grain.svg": "7de161c3216e7a9aebe23cd41f07f75078759134d1308746bf077073ce7ff2f8",
+    "services-v1.html": "793e5675582bfe830b68c946d68800749bf1f3acf8c4553cb00254bb4fdbd29c"
+  }
+}

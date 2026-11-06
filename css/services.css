@@ -113,6 +113,7 @@
 .service-offering > .service-details { margin-left: calc((100% - 2 * var(--services-gap)) * 1.05 / 3.1 + var(--services-gap)); padding: 8px 0 32px; }
 .service-details p { margin: 0 0 16px; }
 .service-details > :last-child { margin-bottom: 0; }
+.service-price dd { white-space: normal; }
 .service-details a { color: inherit; text-underline-offset: .15em; overflow-wrap: anywhere; }
 .service-details ul { padding-left: 1.1em; margin: 0 0 24px; }
 .service-details li + li { margin-top: 6px; }
@@ -185,6 +186,14 @@
 .service-detail-column { min-width: 0; }
 .service-detail-column + .service-detail-column { border-left: 1px solid var(--services-rule); padding-left: var(--services-gap); }
 .service-detail-column h4 { margin: 0 0 14px; font-size: 24px; line-height: 1.2; }
+.service-detail-column h5 { margin: 24px 0 8px; font-size: 21px; font-weight: 500; line-height: 1.2; }
+.service-detail-note { grid-column: 1 / -1; border-top: 1px solid var(--services-rule); padding-top: 20px; }
+.service-detail-note > :last-child { margin-bottom: 0; }
+.package-prices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0 0 24px; }
+.package-prices > div + div { border-left: 1px solid var(--services-rule); padding-left: 24px; }
+.package-prices dt { color: var(--services-muted); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+.package-prices dd { margin: 4px 0 0; font-size: 30px; line-height: 1.1; font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+.package-prices dd span { font-size: .72em; }
 .service-detail-column > :last-child { margin-bottom: 0; }
 .process-steps li { align-items: start; }
 .process-number { line-height: 1.7; }
@@ -302,6 +311,7 @@
 #inquiry-form { scroll-margin-top: calc(var(--services-header-height, 95px) + 24px); }
 .services-body .site-footer { margin-top: 0; }
 @media (max-width: 1050px) and (min-width: 761px) {
+    .service-price .price-from { display: block; margin-bottom: 3px; }
     .services-editorial { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 24px; }
 }
 @media (max-width: 760px) {

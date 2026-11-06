@@ -4,6 +4,17 @@ const { chromium, webkit } = require('playwright');
 const base = process.env.SITE_URL || 'http://127.0.0.1:4174';
 
 async function run() {
+    const { createHash } = require('node:crypto');
+    const archive = JSON.parse(fs.readFileSync('docs/services-v1-manifest.json', 'utf8'));
+    for (const [asset, expected] of Object.entries(archive.sha256)) {
+        const file = asset === 'services-v1.html' ? asset : `archive/services-v1/${asset}`;
+        assert.equal(createHash('sha256').update(fs.readFileSync(file)).digest('hex'), expected, `Frozen V1 changed: ${file}`);
+    }
+    const v1 = fs.readFileSync('services-v1.html', 'utf8');
+    const v2 = fs.readFileSync('services.html', 'utf8');
+    const formSection = html => html.slice(html.indexOf('<section class="services-inquiries'), html.indexOf('</main>')).trim();
+    assert.equal(formSection(v2), formSection(v1), 'Preserve the inquiry form and endpoint exactly');
+    assert.equal(v2.includes('href="services-v1.html"'), false, 'Archive stays unlinked');
     const engine = process.env.BROWSER_ENGINE === 'webkit' ? webkit : chromium;
     const browser = await engine.launch({ headless: true, ...(process.env.BROWSER_PATH ? { executablePath: process.env.BROWSER_PATH } : {}) });
     const context = await browser.newContext();
@@ -27,6 +38,13 @@ async function run() {
         await page.locator('#inquiry-service').selectOption('Photography');
     };
     try {
+        await page.goto(`${base}/services-v1.html`);
+        await page.locator('#video summary').click();
+        assert.equal(await page.locator('#video').getAttribute('open'), '');
+        assert.match(await page.locator('#video table').textContent(), /Up to 4 minutes/);
+        assert.deepEqual(await page.locator('.service-price dd').allTextContents(), ['$2,000/mo', '$2,400', '$2,000/mo', '$2,400', '$2,000', '$2,400', '$500/mo', '$600']);
+        await page.locator('#video [data-inquiry-service]').click();
+        assert.equal(await page.locator('#inquiry-service').inputValue(), 'Video Production');
         // Delivery remains disabled until a verified public endpoint is configured.
         const html = await (await context.request.get(`${base}/services.html`)).text();
         const unconfiguredHTML = html.replace(/data-form-endpoint="[^"]*"/, 'data-form-endpoint=""');
@@ -77,11 +95,14 @@ async function run() {
         assert.match(await page.locator('.services-pricing-notes').textContent(), /quoted separately and approved in advance/);
         assert.match(await page.locator('.services-pricing-notes').textContent(), /Starting rates assume client-provided creative direction/);
         assert.equal(await page.locator('.service-custom-price').textContent(), 'Custom Quote');
-        assert.match(await page.locator('#photography').textContent(), /retouching, hair and makeup, wardrobe styling/);
+        assert.match(await page.locator('#photography').textContent(), /retouching, beauty services, hair and makeup, wardrobe styling/);
         assert.match(await page.locator('#video').textContent(), /usable footage/);
-        assert.match(await page.locator('#websites').textContent(), /Hosting, domains, subscriptions, and third-party services/);
+        assert.match(await page.locator('#websites').textContent(), /Hosting, domains, platform subscriptions, and third-party services/);
         assert.match(await page.locator('.services-commitment').textContent(), /three-month commitment/);
-        assert.match(await page.locator('#video').textContent(), /standard post-production.*complex visual effects/i);
+        assert.match(await page.locator('#video').textContent(), /Neither package includes subjective editing revision rounds/);
+        assert.match(await page.locator('#video').textContent(), /correct errors attributable to our production/);
+        assert.match(await page.locator('.services-pricing-notes').textContent(), /Founding rates are guaranteed for the initial term; proposed rate changes are communicated before renewal/);
+        assert.doesNotMatch(await page.locator('main').textContent(), /20%|eight minutes of finished content/);
 
         await page.locator('#video summary').click();
         await page.waitForFunction(() => getComputedStyle(document.querySelector('#video summary'), '::before').backgroundColor !== 'rgba(0, 0, 0, 0)');
@@ -94,10 +115,39 @@ async function run() {
         assert.equal(await page.locator('#video').getAttribute('open'), null);
 
         assert.equal(await page.locator('.service-price dt').allTextContents().then(t => t.filter(x => x === 'Founding Rate').length), 3);
-        assert.deepEqual((await page.locator('.service-price dd').allTextContents()).map(s => s.trim()), ['$2,000/mo', '$2,400', '$2,000/mo', '$2,400', '$2,000', '$2,400', '$500/mo', '$600']);
-        assert.match(await page.locator('#photography table').textContent(), /\$2,500\/mo.*\$3,000/);
-        assert.match(await page.locator('#websites table').textContent(), /\$3,000.*\$3,600/);
-        assert.deepEqual(await page.locator('#video tbody tr').allTextContents(), ['Short-formUp to 1 minute1', 'Medium-formUp to 2 minutes2', 'Long-formUp to 4 minutes4']);
+        assert.deepEqual((await page.locator('.service-price dd').allTextContents()).map(s => s.trim()), ['From $1,500', 'From $1,800', 'From $1,500/mo', 'From $1,800', 'From $1,000', 'From $1,200', 'From $200/mo', 'From $240']);
+        const tableRows = selector => page.locator(selector + ' tbody tr').evaluateAll(rows => rows.map(row => [...row.cells].map(cell => cell.textContent.trim())));
+        assert.deepEqual(await tableRows('#photography table'), [
+            ['Digital — Half Day', '$1,500', '$1,800'], ['Digital — Full Day', '$2,000', '$2,400'], ['Film — Full Day', '$2,500', '$3,000']
+        ]);
+        assert.deepEqual(await tableRows('#websites table'), [
+            ['Landing Page', '$1,000', '$1,200'], ['Squarespace Website', '$1,500', '$1,800'],
+            ['Custom Starter Website', '$2,000', '$2,400'], ['Advanced Custom Website', '$3,000+', 'Custom Quote']
+        ]);
+        assert.deepEqual(await tableRows('#cinematic-production table'), [
+            ['Short-form', 'Up to 30 seconds', '1'], ['Medium-form', 'Up to 1 minute', '2'], ['Long-form', 'Up to 2 minutes', '4']
+        ]);
+        for (const [id, heading, prices] of [
+            ['content-essentials', 'Content Essentials', ['$1,500/mo', '$1,800']],
+            ['cinematic-production', 'Cinematic Production', ['$2,500/mo', '$3,000']],
+            ['standard-visuals', 'Standard Visuals', ['$200/mo', '$240']],
+            ['custom-visuals', 'Custom Visuals', ['$500/mo', '$600']]
+        ]) {
+            assert.equal(await page.locator(`#${id} h4`).textContent(), heading);
+            assert.deepEqual(await page.locator(`#${id} dd`).allTextContents(), prices);
+        }
+        assert.match(await page.locator('#photography').textContent(), /Standard processing and scanning are included/);
+        assert.equal(await page.locator('#content-essentials table').count(), 0, 'Cinematic credits must not apply to Essentials');
+        assert.match(await page.locator('#content-essentials').textContent(), /Up to 12 short-form videos per month, each up to 30 seconds/);
+        assert.match(await page.locator('#content-essentials').textContent(), /client preparation, filming conditions, and sufficient usable footage/);
+        assert.match(await page.locator('#content-essentials').textContent(), /up to 4 hours/);
+        assert.match(await page.locator('#cinematic-production').textContent(), /up to 8 hours/);
+        assert.match(await page.locator('#cinematic-production').textContent(), /1 long \+ 1 medium \+ 2 short/);
+        assert.match(await page.locator('#standard-visuals').textContent(), /20 simple social media visuals/);
+        assert.match(await page.locator('#custom-visuals').textContent(), /20 custom-developed social media visuals/);
+        assert.match(await page.locator('#websites').textContent(), /One-time development fees/);
+        assert.match(await page.locator('.services-process').textContent(), /For photography and video projects/);
+        assert.match(await page.locator('.services-process').textContent(), /up to 4 or 8 hours, depending on the selected package/);
         const summary = page.locator('.service-row').first();
         await summary.focus(); await page.keyboard.press('Enter');
         assert.equal(await page.locator('#photography').getAttribute('open'), '');
@@ -112,9 +162,18 @@ async function run() {
             await page.evaluate(() => document.fonts.ready);
             for (const open of [false, true]) {
                 await page.locator('main details').evaluateAll((items, value) => items.forEach(el => el.open = value), open);
-                const overflow = await page.evaluate(() => [...document.querySelectorAll('main table, .service-prices, .inquiry-fields')].filter(el => el.getClientRects().length && el.getBoundingClientRect().right > innerWidth + 1).length);
+                const overflow = await page.evaluate(() => [...document.querySelectorAll('main table, .service-prices, .package-prices, .inquiry-fields')].filter(el => el.getClientRects().length && el.getBoundingClientRect().right > innerWidth + 1).length);
                 assert.equal(overflow, 0, `Content overflow at ${width}, open=${open}`);
                 assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Page overflow at ${width}`);
+                if (open) {
+                    for (const id of ['video', 'social']) {
+                        const packages = await page.locator(`#${id} .service-package`).evaluateAll(els => els.map(el => { const r = el.getBoundingClientRect(); return { top: r.top, bottom: r.bottom, left: r.left, right: r.right }; }));
+                        if (width <= 760) assert.ok(packages[1].top >= packages[0].bottom, `Packages stack on mobile: ${id}`);
+                        else assert.ok(Math.abs(packages[0].top - packages[1].top) < 1 && packages[1].left >= packages[0].right, `Packages compare side by side: ${id}`);
+                    }
+                    const cellsFit = await page.locator('main td, .package-prices dd').evaluateAll(els => els.every(el => el.scrollWidth <= el.clientWidth + 1));
+                    assert.ok(cellsFit, `Readable package prices at ${width}`);
+                }
                 if ([393, 1440].includes(width)) { await page.evaluate(() => { document.activeElement?.blur(); window.scrollTo(0, 0); }); await page.mouse.move(0, 0); await page.screenshot({ path: `.qa/services-inquiries-${process.env.BROWSER_ENGINE || 'chromium'}-${width}-${open ? 'open' : 'closed'}.png`, fullPage: true, animations: 'disabled' }); }
             }
             if (width > 1000) {
