@@ -91,17 +91,17 @@ async function run() {
             assert.equal(await row.locator('.when-closed').isVisible(), true);
         }
 
-        assert.match(await page.locator('.services-pricing-notes').textContent(), /automatically renew in three-month terms unless canceled at least 30 days before renewal/);
-        assert.match(await page.locator('.services-pricing-notes').textContent(), /quoted separately and approved in advance/);
-        assert.match(await page.locator('.services-pricing-notes').textContent(), /Starting rates assume client-provided creative direction/);
+        assert.match(await page.locator('.services-pricing-notes').textContent(), /automatically renew every three months\. Cancel at least 30 days before renewal/);
+        assert.match(await page.locator('.services-pricing-notes').textContent(), /quoted and approved in advance/);
+        assert.match(await page.locator('.services-pricing-notes').textContent(), /Rates assume you provide creative direction/);
         assert.equal(await page.locator('.service-custom-price').textContent(), 'Custom Quote');
-        assert.match(await page.locator('#photography').textContent(), /retouching, beauty services, hair and makeup, wardrobe styling/);
+        assert.match(await page.locator('#photography').textContent(), /Retouching, hair, makeup, styling/);
         assert.match(await page.locator('#video').textContent(), /usable footage/);
-        assert.match(await page.locator('#websites').textContent(), /Hosting, domains, platform subscriptions, and third-party services/);
+        assert.match(await page.locator('#websites').textContent(), /Hosting, domains, subscriptions, and third-party services/);
         assert.match(await page.locator('.services-commitment').textContent(), /three-month commitment/);
-        assert.match(await page.locator('#video').textContent(), /Neither package includes subjective editing revision rounds/);
-        assert.match(await page.locator('#video').textContent(), /correct errors attributable to our production/);
-        assert.match(await page.locator('.services-pricing-notes').textContent(), /Founding rates are guaranteed for the initial term; proposed rate changes are communicated before renewal/);
+        assert.match(await page.locator('#video').textContent(), /Editing revisions aren’t included/);
+        assert.match(await page.locator('#video').textContent(), /correct production errors that fail the agreed brief/);
+        assert.match(await page.locator('.services-pricing-notes').textContent(), /Founding rates are fixed for the first term; changes are shared before renewal/);
         assert.doesNotMatch(await page.locator('main').textContent(), /20%|eight minutes of finished content/);
 
         await page.locator('#video summary').click();
@@ -136,18 +136,18 @@ async function run() {
             assert.equal(await page.locator(`#${id} h4`).textContent(), heading);
             assert.deepEqual(await page.locator(`#${id} dd`).allTextContents(), prices);
         }
-        assert.match(await page.locator('#photography').textContent(), /Standard processing and scanning are included/);
+        assert.match(await page.locator('#photography').textContent(), /including standard processing and scanning/);
         assert.equal(await page.locator('#content-essentials table').count(), 0, 'Cinematic credits must not apply to Essentials');
         assert.match(await page.locator('#content-essentials').textContent(), /Up to 12 short-form videos per month, each up to 30 seconds/);
-        assert.match(await page.locator('#content-essentials').textContent(), /client preparation, filming conditions, and sufficient usable footage/);
+        assert.match(await page.locator('#content-essentials').textContent(), /preparation, filming conditions, and usable footage/);
         assert.match(await page.locator('#content-essentials').textContent(), /up to 4 hours/);
         assert.match(await page.locator('#cinematic-production').textContent(), /up to 8 hours/);
         assert.match(await page.locator('#cinematic-production').textContent(), /1 long \+ 1 medium \+ 2 short/);
-        assert.match(await page.locator('#standard-visuals').textContent(), /20 simple social media visuals/);
-        assert.match(await page.locator('#custom-visuals').textContent(), /20 custom-developed social media visuals/);
-        assert.match(await page.locator('#websites').textContent(), /One-time development fees/);
+        assert.match(await page.locator('#standard-visuals').textContent(), /20 simple visuals/);
+        assert.match(await page.locator('#custom-visuals').textContent(), /20 custom visuals/);
+        assert.match(await page.locator('#websites').textContent(), /One-time fees/);
         assert.match(await page.locator('.services-process').textContent(), /For photography and video projects/);
-        assert.match(await page.locator('.services-process').textContent(), /up to 4 or 8 hours, depending on the selected package/);
+        assert.match(await page.locator('.services-process').textContent(), /up to 4 or 8 hours, depending on your package/);
         const summary = page.locator('.service-row').first();
         await summary.focus(); await page.keyboard.press('Enter');
         assert.equal(await page.locator('#photography').getAttribute('open'), '');
