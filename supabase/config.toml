@@ -1,0 +1,10 @@
+project_id = "dylan-client-portal"
+
+# JWTs are verified inside portal-api using Supabase Auth getUser/getClaims.
+# This supports projects using asymmetric signing keys as well as legacy keys.
+[functions.portal-api]
+verify_jwt = false
+[functions.stripe-webhook]
+verify_jwt = false
+[functions.portal-jobs]
+verify_jwt = false

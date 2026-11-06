@@ -8,7 +8,10 @@
     "test": "node scripts/build-publish-config.cjs --check && node tests/gallery.cjs && node tests/home.cjs && node tests/photography.cjs && node tests/video.cjs && node tests/magazines.cjs && node tests/services.cjs",
     "images:about": "node scripts/build-about-images.cjs",
     "site:config": "node scripts/build-publish-config.cjs",
-    "test:publish": "node scripts/build-publish-config.cjs --check"
+    "test:publish": "node scripts/build-publish-config.cjs --check",
+    "portal:build": "npm --prefix portal run build",
+    "portal:test": "npm --prefix portal test",
+    "portal:test:browser": "node portal/tests/browser.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1",
