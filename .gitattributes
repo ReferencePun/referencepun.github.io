@@ -1,0 +1,2 @@
+# esbuild preserves whitespace inside dependency template strings.
+client/portal.js linguist-generated=true whitespace=-blank-at-eol

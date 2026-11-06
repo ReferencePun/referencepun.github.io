@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://js.stripe.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.stripe.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.stripe.com https://api.stripe.com; frame-src https://*.stripe.com https://js.stripe.com https://hooks.stripe.com; object-src 'none'; base-uri 'none'; form-action 'self'"
+    />
+    <title>Client Portal — Dylan Forsberg</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/style.css?v=f6756365407e" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+    />
+    <link rel="stylesheet" href="/client/portal.css" />
+    <script type="module" src="/client/portal.js"></script>
+  </head>
+  <body class="client-body">
+    <a class="skip-link" href="#client-main">Skip to content</a>
+    <header class="client-header">
+      <a class="client-logo" href="/">Dylan Forsberg</a>
+      <div>
+        <span>Private client portal</span
+        ><button id="sign-out" hidden>Sign out</button>
+      </div>
+    </header>
+    <main id="client-main" class="client-main">
+      <div id="portal-message" role="status" aria-live="polite"></div>
+      <div id="portal-content">
+        <section class="login-panel">
+          <p class="eyebrow">Client access</p>
+          <h1>A private space<br />for your project.</h1>
+          <p>Review proposals, agreements, and billing in one place.</p>
+          <p>Loading secure access…</p>
+        </section>
+      </div>
+      <noscript
+        ><p>
+          Please enable JavaScript to use the secure portal. You can also email
+          <a href="mailto:Dylan.Forsberg@gmail.com">Dylan.Forsberg@gmail.com</a
+          >.
+        </p></noscript
+      >
+    </main>
+    <footer class="client-footer">
+      <span>© 2026 Dylan Forsberg. All rights reserved.</span
+      ><a href="mailto:Dylan.Forsberg@gmail.com">Dylan.Forsberg@gmail.com</a>
+    </footer>
+  </body>
+</html>
